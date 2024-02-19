@@ -14,6 +14,7 @@ npm add -D vitepress
 ```json
 {
   "scripts": {
+    "dev": "vitepress dev docs",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs"
   }
