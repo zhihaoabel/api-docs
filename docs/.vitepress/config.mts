@@ -2,7 +2,7 @@ import {defineConfig} from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  lang: 'en-US',
+  lang: 'zh-Hans',
   title: 'Onerway API',
   description: "Onerway面向商户开发者的接口文档",
 
@@ -12,19 +12,19 @@ export default defineConfig({
     ['link', {href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet'}],
     ['meta', {name: 'theme-color', content: '#5f67ee'}],
     ['meta', {name: 'og:type', content: 'website'}],
-    ['meta', {name: 'og:locale', content: 'en'}],
+    ['meta', {name: 'og:locale', content: 'zh-CN'}],
     ['meta', {name: 'og:site_name', content: 'VitePress'}],
   ],
 
   locales: {
     root: {
-      lang: 'zh-CN',
+      lang: 'zh-Hans',
       label: '简体中文',
     },
-    zh: {
+    en: {
       lang: 'en',
       label: 'English',
-      link: 'en'
+      link: '/en'
     },
   },
 
@@ -36,7 +36,7 @@ export default defineConfig({
     logo: '/american-express.svg',
     siteTitle: 'Onerway',
 
-    i18nRouting: true,
+    // i18nRouting: true,
 
     // https://vitepress.dev/reference/default-theme-config
     nav: [
