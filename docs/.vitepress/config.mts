@@ -18,13 +18,13 @@ export default defineConfig({
 
   locales: {
     root: {
-      lang: 'en',
-      label: 'English',
+      lang: 'zh-CN',
+      label: '简体中文',
     },
     zh: {
-      lang: 'zh-CN',
-      link: '/cn',
-      label: '简体中文',
+      lang: 'en',
+      label: 'English',
+      link: 'en'
     },
   },
 
