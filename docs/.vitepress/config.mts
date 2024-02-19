@@ -21,8 +21,9 @@ export default defineConfig({
       lang: 'en',
       label: 'English',
     },
-    'zh-CN': {
+    zh: {
       lang: 'zh-CN',
+      link: '/cn',
       label: '简体中文',
     },
   },
@@ -42,21 +43,21 @@ export default defineConfig({
       {
         text: '参考',
         items: [
-          {text: 'Overview', link: '/pages/overview'},
-          {text: '签名', link: '/pages/markdown-examples'},
-          {text: 'Onerway APIs', link: '/pages/api-examples'},
+          {text: 'Overview', link: '/overview'},
+          {text: '签名', link: '/markdown-examples'},
+          {text: 'Onerway APIs', link: '/api-examples'},
         ],
       },
     ],
 
     sidebar: {
-      '/pages/': [
+      '/': [
         {
           text: '',
           items: [
-            {text: 'Overview', link: '/pages/overview'},
-            {text: '签名', link: '/pages/markdown-examples'},
-            {text: 'Onerway APIs', link: '/pages/api-examples'},
+            {text: 'Overview', link: '/overview'},
+            {text: '签名', link: '/markdown-examples'},
+            {text: 'Onerway APIs', link: '/api-examples'},
           ],
         },
       ],

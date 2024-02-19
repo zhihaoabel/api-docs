@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: 概述
-      link: /pages/overview
+      link: /overview
     - theme: alt
       text: 接口示例
-      link: /pages/api-examples
+      link: /api-examples
   image:
     src: /vitepress-logo-large.webp
     alt: Onerway Logo
@@ -20,7 +20,7 @@ features:
   - icon: ⚡️
     title: 概述
     details: Onerway 文档概述
-    link: /pages/overview
+    link: /overview
   - icon: 🎆
     title: 签名
     details: 接口签名与验签
