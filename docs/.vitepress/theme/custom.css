@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.medium-zoom-overlay {
+    z-index: 20;
+}
+
+.medium-zoom-image {
+    z-index: 21;
+}
+
+.medium-zoom-image--opened {
+    z-index: 999999;
+}
+
+.vp-doc table {
+    margin: 0;
+}
+
+.vp-doc th, .vp-doc td {
+    border: 0;
+    color: var(--vp-c-text-1);
+}
+
+.vp-doc tr {
+    border: 0 2px  solid var(--vp-c-border);
+    background-color: var(--vp-c-bg) !important;
+}
+
+/*设置标题背景色*/
+.el-table th.el-table__cell {
+    background-color: var(--vp-c-bg-soft) !important;
+}
+
+.vp-doc .el-table {
+    margin: 20px 0;
+}

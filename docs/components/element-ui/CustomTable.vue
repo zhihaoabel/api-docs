@@ -1,27 +1,29 @@
-<script setup>
-import {columns} from "element-plus/es/components/table-v2/src/common";
+<script lang="ts" setup>
+import defaultProps from 'vue';
 
-export default {
-  props: {
-    tableData: {
-      type: Array,
-      required: true
-    },
-    columns: {
-      type: Array,
-      required: true
-    }
-  }
-}
+withDefaults(defineProps<{
+  tableData?: Array<Record<any, any>>
+  columns?: Array<{ label: string, prop: string, width: number }>
+  striped?: boolean
+  bordered?: boolean
+}>(), {
+  striped: true,
+  bordered: false
+})
 </script>
 
 <template>
-  <div class="custom-table">
-    <el-table :data="tableData">
-      <el-table-column v-for="(column, index) in columns" :key="index" :label="column.label"
-                       :prop="column.prop"></el-table-column>
-    </el-table>
-  </div>
+  <el-table :border="bordered" :data="tableData" :stripe="striped" style="width: 100%">
+    <el-table-column v-for="column in columns" :key="column.label" :label="column.label"
+                     :prop="column.prop" :width="column.width">
+      <template #default="{ row }">
+        <a v-if="row[column.prop].startsWith('http') || row[column.prop].startsWith('https')" :href="row[column.prop]">{{
+            row[column.prop]
+          }}</a>
+        <span v-else>{{ row[column.prop] }}</span>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <style lang="scss" scoped>

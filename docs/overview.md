@@ -3,6 +3,55 @@ outline: deep
 ---
 
 <script setup>
+import CustomTable from "./components/element-ui/CustomTable.vue";
+
+const requestTableData = [
+   {
+       env: 'Sandbox',
+       url: 'https://sandbox-v3-acquiring.pacypay.com/${endpoint}',
+   },
+   {
+        env: 'Production',
+        url: 'https://v3-acq.pacypay.com/${endpoint}',
+   },
+];
+const requestColumns = [
+    {
+        prop: 'env',
+        label: 'Environment',
+        width: 180,
+    },
+    {
+        prop: 'url',
+        label: 'Request URL',
+    },
+];
+
+const storeInfoColumns = [
+    {
+      prop: 'field',
+      label: '关键信息',
+    },
+    {
+      prop: 'method',
+      label: '获取方法',
+    }
+];
+
+const storeInfoTableData = [
+    {
+      field: '商户号（merchantNo）',
+      method: '登入客户端 >> 账户中心 >> 账户信息 >> 商户号',
+    },
+    {
+      field: '秘钥（Secret Key）',
+      method: '登入客户端 >> 账户中心 >> 账户信息 >> Secret Key',
+    },
+    {
+      field: '店铺ID（appId）',
+      method: '登入客户端 >> 交易管理 >> 应用列表 >> 在“我的应用/网站”中找到需要接入的应用名称所对应的店铺ID',
+    },
+];
 
 </script>
 
@@ -26,21 +75,14 @@ API，使用 SHA256 创建数字签名，接受 JSON 编码的请求体，并返
 在您通过邮件收到我们沙盒账户信息后，您可以通过邮件中的链接登入我们的客户端。并获取Onerway API 所需要的关键信息
 （商户号、秘钥、店铺ID）。
 
-| 关键信息            | 获取方法                                                    |
-|-----------------|---------------------------------------------------------|
-| 商户号（merchantNo） | 登入客户端 >> 账户中心 >> 账户信息 >> 商户号                            |
-| 秘钥（Secret Key）  | 登入客户端 >> 账户中心 >> 账户信息 >> Secret Key                     |
-| 店铺ID（appId）     | 登入客户端 >> 交易管理 >> 应用列表 >> 在“我的应用/网站”中找到需要接入的应用名称所对应的店铺ID |
+<CustomTable :columns="storeInfoColumns" :data="storeInfoTableData"></CustomTable>
 
 然后，您可以通过沙盒环境来进行集成，我们鼓励在上线项目之前在沙盒环境中测试API调用。
 
 生产环境和沙箱环境的请求地址仅是域名有所不同。您可以首先在沙箱环境中测试 Onerway API，这不会影响生产环境中的数据。一旦测试完成，请通过更改请求域名
 和其他配置参数（商户号、秘钥、店铺ID）切换到生产环境。
 
-| Environment | Request URL                                          |
-|-------------|------------------------------------------------------|
-| Sandbox     | https://sandbox-v3-acquiring.pacypay.com/${endpoint} |
-| Production  | https://v3-acq.pacypay.com/${endpoint}               |
+<CustomTable :columns="requestColumns" :data="requestTableData"></CustomTable>
 
 ## 以下部分展示了典型的Onerway API 请求和响应的示例：
 
