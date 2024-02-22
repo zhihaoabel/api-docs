@@ -24,7 +24,7 @@
 }
 
 .vp-doc tr {
-    border: 0 2px  solid var(--vp-c-border);
+    border: 0 2px solid var(--vp-c-border);
     background-color: var(--vp-c-bg) !important;
 }
 
@@ -35,4 +35,19 @@
 
 .vp-doc .el-table {
     margin: 20px 0;
+}
+
+/*给表格添加hover效果*/
+.vp-doc .original-table tr:hover {
+    background-color: var(--vp-c-bg-soft) !important;
+}
+
+/*设置表格的边框颜色*/
+.vp-doc .original-table th, .vp-doc .original-table td {
+    border: 1px solid var(--vp-c-default-3);
+}
+
+/*交错颜色*/
+.vp-doc .original-table.striped tr:nth-child(2n) {
+    background-color: var(--vp-c-bg-soft) !important;
 }

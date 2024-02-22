@@ -3,27 +3,26 @@ outline: deep
 ---
 
 <script setup>
-import CustomTable from "./components/element-ui/CustomTable.vue";
 
 const requestTableData = [
    {
-       env: 'Sandbox',
-       url: 'https://sandbox-v3-acquiring.pacypay.com/${endpoint}',
+      env: 'Sandbox',
+      url: 'https://sandbox-v3-acquiring.pacypay.com/${endpoint}',
    },
    {
-        env: 'Production',
-        url: 'https://v3-acq.pacypay.com/${endpoint}',
+      env: 'Production',
+      url: 'https://v3-acq.pacypay.com/${endpoint}',
    },
 ];
 const requestColumns = [
     {
-        prop: 'env',
-        label: 'Environment',
-        width: 180,
+      prop: 'env',
+      label: 'Environment',
+      width: 180,
     },
     {
-        prop: 'url',
-        label: 'Request URL',
+      prop: 'url',
+      label: 'Request URL',
     },
 ];
 
@@ -66,7 +65,7 @@ API，使用 SHA256 创建数字签名，接受 JSON 编码的请求体，并返
 
 要与Onerway集成，您首先需要向我们提供一个邮箱和一个准备用来测试集成的网站域名，我们会为您创建沙盒环境账户，并通过您提供的邮箱将账户信息发送给您。
 
-::: tip
+::: tip Note
 
 邮箱会用来创建沙盒账户
 您提供用来测试集成的网站域名，我们会添加白名单，仅仅只有添加了白名单的域名才能访问Onerway API
