@@ -474,3 +474,6 @@ fabric.properties
 # vitepress
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# node
+node_modules/**
