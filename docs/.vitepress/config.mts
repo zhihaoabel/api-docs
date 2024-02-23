@@ -45,7 +45,8 @@ export default defineConfig({
         items: [
           {text: 'Overview', link: '/overview'},
           {text: '签名', link: '/markdown-examples'},
-          {text: 'Onerway APIs', link: '/api-examples'},
+          {text: 'Onerway APIs', link: '/api-examples'},         
+          {text: '收银台支付', link: '/public/api-Cashier'},
         ],
       },
     ],
@@ -58,6 +59,14 @@ export default defineConfig({
             {text: 'Overview', link: '/overview'},
             {text: '签名', link: '/markdown-examples'},
             {text: 'Onerway APIs', link: '/api-examples'},
+            {text: '收银台支付',  items: [
+              {text: '收银台', link: '/public/api-Cashier'},
+              {text: '本地支付', link: '/public/api-Cashier-Lpms'},
+              {text: '聚合收银台', link: '/public/api-Cashier-All'},
+              {text: '订阅', link: '/public/api-Cashier-sub'},
+            ],
+            
+            },
           ],
         },
       ],
