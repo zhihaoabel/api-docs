@@ -145,7 +145,7 @@ function ASCII_HASH($params , $PrivateKey){
            $strs = '';
            foreach ($params as $k=>$val){
     
-               //剔除为”NO“的参数
+               //剔除为"NO"的参数
                if((!empty($val) && $k != 'sign' && $k != 'paymentMethod' && $k != 'originTransactionId' && $k != 'originMerchantTxnId' && $k != 'customsDeclarationAmount' && $k != 'customsDeclarationCurrency' && $k != 'walletTypeName' && $k != 'periodValue' && $k != 'tokenExpireTime') || $val == '0')
                {
                    $strs .= $val ;
