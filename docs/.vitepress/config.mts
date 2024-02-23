@@ -38,7 +38,7 @@ export default defineConfig({
         logo: '/american-express.svg',
         siteTitle: 'Onerway',
 
-        // i18nRouting: true,
+        i18nRouting: true,
 
         // https://vitepress.dev/reference/default-theme-config
         nav: [
@@ -75,7 +75,7 @@ export default defineConfig({
                           {text: '本地支付', link: '/public/api-Cashier-Lpms'},
                           {text: '聚合收银台', link: '/public/api-Cashier-All'},
                           {text: '订阅', link: '/public/api-Cashier-sub'},
-                        ],
+                        ],}
                     ],
                 },
             ],
