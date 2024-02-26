@@ -7,6 +7,7 @@ export default defineConfig({
     lang: 'zh-Hans',
     title: 'Onerway API',
     description: "Onerway面向商户开发者的接口文档",
+    base: '/apis/',
 
     head: [
         ['link', {rel: 'icon', href: '/american-express.svg'}],
