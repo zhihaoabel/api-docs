@@ -38,16 +38,16 @@
 }
 
 /*给表格添加hover效果*/
-.vp-doc .original-table tr:hover {
+.vp-doc .bordered-table tr:hover {
     background-color: var(--vp-c-bg-soft) !important;
 }
 
 /*设置表格的边框颜色*/
-.vp-doc .original-table th, .vp-doc .original-table td {
+.vp-doc .bordered-table th, .vp-doc .bordered-table td {
     border: 1px solid var(--vp-c-default-3);
 }
 
 /*交错颜色*/
-.vp-doc .original-table.striped tr:nth-child(2n) {
+.vp-doc .bordered-table.striped-table tr:nth-child(2n) {
     background-color: var(--vp-c-bg-soft) !important;
 }
