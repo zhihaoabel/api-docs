@@ -5,60 +5,6 @@ outline: deep
 
 </script>
 
-<style>
-
-
-
-/* Table Head */
-#box thead th {
-background-color: rgb(156, 186, 95);
-color: #fff;
-border-bottom-width: 0;
-}
- 
- 
-/* Column Style */
-#box td {
-color: #000;
-}
-/* Heading and Column Style */
-#box tr, #table-5 th {
-border-width: 1px;
-border-style: solid;
-border-color: rgb(156, 186, 95);
-}
- 
- 
-/* Padding and font style */
-#box td, #table-5 th {
-padding: 5px 10px;
-font-size: 12px;
-font-family: Verdana;
-font-weight: bold;
-}
-
-
- .box table td
-{
-}
-
-
-
-.box table th{
-       background-color: transparent;
-       min-width:80px;
-}
-
-.box table tr{
-    background-color: transparent;
-    min-width:80px;
-}
-
-.box tr:nth-child(2n) {
-    background-color: transparent;
-}
-
-</style>
 
 
 # 本地支付
@@ -86,12 +32,6 @@ Content-Type: application/json; charset=UTF-8 错误
 请求参数
 
 
-<div class="box">
-
-<!-- | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
-|-------------|--------|----|-----|-----|--------------------------|
-| productType | String | 16 | Yes | Yes | 产品类型，请参阅 ProductTypeEnum | -->
-
 
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
@@ -99,7 +39,6 @@ Content-Type: application/json; charset=UTF-8 错误
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
     
-</div>
 
 
 ::: warning   收银台支付的本地支付，请求参数可参考收银台信用卡支付，只需将productType：CARD 改为 productType：LPMS 即可；如您信用卡和本地支付需要同时使用，则需改为productType：ALL 打开聚合收银台

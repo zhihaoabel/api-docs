@@ -54,7 +54,7 @@ Content-Type: application/json; charset=UTF-8 错误
 | sign                  | String | /   | Yes | No  | 签名字符串。                                                                  |
 
 
-
+ 
 
 ::: warning  注意: 
 billingInformation、shippingInformation 、txnOrderMsg 订阅复购可不传 

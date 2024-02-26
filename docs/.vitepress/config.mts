@@ -76,6 +76,9 @@ export default defineConfig({
                           {text: '聚合收银台', link: '/public/api-Cashier-All'},
                           {text: '订阅', link: '/public/api-Cashier-sub'},
                         ],},
+                        {text: '两方支付', items: [
+                            {text: '两方接口支付', link: ''},
+                          ],},
                     ],
                 },
             ],
