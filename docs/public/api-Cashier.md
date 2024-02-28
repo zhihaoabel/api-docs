@@ -26,6 +26,12 @@ Content-Type: application/json; charset=UTF-8 错误
     <br>Content-Type: application/json 正确 
 :::
 
+####  接入流程 <br>
+1. 请求收银台下单接口
+2. 获取接口响应redirectUrl
+3. 重定向到获取的redirectUrl
+4. 完成下单
+5. 处理异步通知并返回 transactionId
 
 
 ## 收银台支付

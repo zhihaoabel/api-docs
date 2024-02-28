@@ -77,7 +77,7 @@ export default defineConfig({
                           {text: '订阅', link: '/public/api-Cashier-sub'},
                         ],},
                         {text: '两方支付', items: [
-                            {text: '两方接口支付', link: ''},
+                            {text: '两方接口支付', link: '/public/api-direct'},
                           ],},
                     ],
                 },
