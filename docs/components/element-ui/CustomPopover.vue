@@ -1,0 +1,53 @@
+<template>
+  <el-popover
+      :placement="placement"
+      :title="title"
+      :width="width"
+      :trigger="trigger"
+      :content="content"
+  >
+    <template #reference>
+      <span class="reference-text">{{reference}}</span>
+    </template>
+    <slot/>
+  </el-popover>
+</template>
+
+<script>
+export default {
+  name: "CustomPopover",
+  components: {},
+  props: {
+    placement: {
+      default: 'right',
+    },
+    title: {
+      default: 'Title',
+    },
+    width: {
+      default: 200,
+    },
+    trigger: {
+      default: 'click',
+    },
+    content: {
+      default: 'this is content, this is content, this is content',
+    },
+    reference: {
+      default: 'Click to activate',
+    },
+  },
+  created() {
+  },
+  data() {
+    return {
+      content: {},
+    }
+  },
+  methods: {},
+  computed: {},
+}
+</script>
+
+<style scoped lang="scss">
+</style>

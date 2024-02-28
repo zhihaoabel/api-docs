@@ -51,3 +51,41 @@
 .vp-doc .bordered-table.striped-table tr:nth-child(2n) {
     background-color: var(--vp-c-bg-soft) !important;
 }
+
+.vp-doc td, th {
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: fade;
+}
+
+.vp-doc thead th {
+    white-space: nowrap;
+}
+
+/*原生markdown表格上下间距*/
+.vp-doc .custom-table {
+    margin: 20px 0;
+}
+
+/*表格中示例样式*/
+.vp-doc .custom-table th .custom-example, .vp-doc .custom-table td .custom-example {
+    color: var(--vp-c-success-3);
+}
+
+/*表格中注意样式*/
+.vp-doc .custom-table th .custom-note, .vp-doc .custom-table td .custom-note {
+    color: var(--vp-c-danger-1);
+    margin-bottom: 15px;
+}
+
+/*表格中枚举类型样式*/
+.vp-doc .custom-table th .reference-text, .vp-doc .custom-table td .reference-text {
+    cursor: pointer;
+    padding: 2px;
+    color: var(--vp-c-success-1);
+    border-bottom: 2px solid var(--vp-c-success-2);
+
+    &:hover {
+        color: var(--vp-c-success-3);
+    }
+}
