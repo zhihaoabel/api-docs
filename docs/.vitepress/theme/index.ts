@@ -6,7 +6,7 @@ import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import './custom.css'
 import mediumZoom from "medium-zoom"
-import ElementPlus from 'element-plus'
+import ElementPlus, {ElCollapseTransition} from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 

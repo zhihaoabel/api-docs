@@ -4,6 +4,7 @@ outline: deep
 
 <script lang="ts" setup>
 import CustomTable from "./components/element-ui/CustomTable.vue";
+import { ElIcon } from 'element-plus';
 
 const tableData = [
    {
@@ -55,8 +56,8 @@ const columns = [
 
 [//]: # (![]&#40;./fetch-secret.png&#41;{data-zoomable})
 
-2. 需要签名的数据：**首先剔除请求参数中“签名”列为“NO”的参数**
-   。剩下所有非空请求参数，根据参数名称的ASCII码排序，然后以vaule1vaule2vaule3...的方式将值拼接起来，再在字符串末尾加上商户秘钥；
+2. 需要签名的数据：**首先获取请求参数中“签名”列为“YES”的参数**
+   。所有非空请求参数，根据参数名称的ASCII码排序，然后以vaule1vaule2vaule3...的方式将值拼接起来，再在字符串末尾加上商户秘钥；
 
 3. 将上述字符串转换为`UTF-8`格式；
 
@@ -64,8 +65,9 @@ const columns = [
 
 5. 将字节转换为十六进制；
 
+
 ::: warning 注意
-请按签名为YES的字段进行签名，不要通过剔除签名为NO的字段进行签名
+异步通知有单独的签名方式
 :::
 
 ### 签名示例
@@ -75,16 +77,16 @@ const columns = [
 ```json
 // 未排序的参数
 {
+  "test3": "test3value",
   "test2": "test2value",
   "test1": "0",
-  "test3": "test3value",
   "test5": "",
   "test4": "test4value",
   "test6": null
 }
 ```
 
-### 1. **首先排除`签名`列为`NO`以及值为空的参数**
+### 1. **首先获取`签名`列为`YES`以及值为不空的参数**
 
 即剔除掉`test2`，`test5`，`test6`
 
