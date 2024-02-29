@@ -1,6 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/*
+Note, Example
+ */
+:root {
+    --custom-note-border: transparent;
+    --custom-note-text: var(--vp-c-green-1);
+    --custom-note-bg: var(--vp-c-green-soft);
+}
 
 .medium-zoom-overlay {
     z-index: 20;
@@ -48,7 +56,7 @@
 }
 
 /*交错颜色*/
-.vp-doc .bordered-table.striped-table tr:nth-child(2n) {
+.vp-doc .striped-table tr:nth-child(2n) {
     background-color: var(--vp-c-bg-soft) !important;
 }
 
@@ -75,17 +83,19 @@
 /*表格中注意样式*/
 .vp-doc .custom-table th .custom-note, .vp-doc .custom-table td .custom-note {
     color: var(--vp-c-danger-1);
-    margin-bottom: 15px;
 }
 
 /*表格中枚举类型样式*/
 .vp-doc .custom-table th .reference-text, .vp-doc .custom-table td .reference-text {
     cursor: pointer;
-    padding: 2px;
+    padding: 1px;
     color: var(--vp-c-success-1);
     border-bottom: 2px solid var(--vp-c-success-2);
 
-    &:hover {
-        color: var(--vp-c-success-3);
-    }
+}
+
+/*表格中枚举类型悬浮样式*/
+.vp-doc .custom-table th .reference-text, .vp-doc .custom-table td .reference-text:hover {
+    color: var(--vp-c-success-3);
+    border-bottom: 2px solid var(--vp-c-success-3);
 }

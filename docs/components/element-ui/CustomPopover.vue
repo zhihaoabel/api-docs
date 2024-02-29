@@ -9,6 +9,11 @@
     <template #reference>
       <span class="reference-text">{{reference}}</span>
     </template>
+    <div class="reference-link my-3">
+      <el-link v-if="link" :type="linkType" :href="link">
+        Reference
+      </el-link>
+    </div>
     <slot/>
   </el-popover>
 </template>
@@ -36,6 +41,10 @@ export default {
     reference: {
       default: 'Click to activate',
     },
+    link: '',
+    linkType: {
+      default: 'primary'
+    }
   },
   created() {
   },

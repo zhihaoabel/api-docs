@@ -6,6 +6,7 @@ withDefaults(defineProps<{
   columns?: Array<{ label: string, prop: string, width: number }>
   striped?: boolean
   bordered?: boolean
+  width?: number
 }>(), {
   striped: true,
   bordered: false
@@ -13,7 +14,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <el-table :border="bordered" :data="tableData" :stripe="striped" style="width: 100%">
+  <el-table :border="bordered" :data="tableData" :stripe="striped" style="width: 100%; min-width: 250px;">
     <el-table-column v-for="column in columns" :key="column.label" :label="column.label"
                      :prop="column.prop" :width="column.width">
       <template #default="{ row }">
@@ -27,5 +28,9 @@ withDefaults(defineProps<{
 </template>
 
 <style lang="scss" scoped>
-
+el-table {
+  white-space: nowrap;
+  word-break: break-word;
+  word-wrap: break-word;
+}
 </style>

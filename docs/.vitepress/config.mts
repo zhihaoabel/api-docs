@@ -48,7 +48,6 @@ export default defineConfig({
                 items: [
                     {text: 'Overview', link: '/overview'},
                     {text: '签名', link: '/sign'},
-                    {text: 'Onerway APIs', link: '/api-examples'},
                     {text: 'SDK', link: '/js-sdk',},
                     {text: '收银台支付', link: '/public/api-Cashier'},
                 ],
@@ -61,7 +60,6 @@ export default defineConfig({
                 items: [
                     {text: '概述', link: '/overview'},
                     {text: '签名', link: '/sign'},
-                    {text: 'API Examples', link: '/api-examples'},
                 ],
             },
             {
@@ -90,10 +88,12 @@ export default defineConfig({
             },
             {
                 text: '通知',
-                items: [
-                    {text: '异步通知', link: '/notify'},
-                ],
+                link: '/notify',
             },
+            {
+                text: '枚举',
+                link: '/enums',
+            }
         ],
 
         socialLinks: [

@@ -1,6 +1,7 @@
 <template>
   <span class="custom-note">
-    {{leadingText}}<span v-html="data"></span>
+    <span class="leading-text" >{{leadingText}}</span>
+    <span v-html="data"></span>
   </span>
 </template>
 
@@ -20,7 +21,7 @@ export default {
   data() {
     return {
       content: {},
-      leadingText: '注意：',
+      leadingText: '注意',
     }
   },
   methods: {},
@@ -29,5 +30,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.leading-text {
+  color: var(--vp-badge-danger-text);
+  background-color: var(--vp-badge-danger-bg);
+  display: inline-block;
+  border: 2px solid var(--vp-badge-danger-border);
+  border-radius: 12px;
+  padding: 0 10px;
+  margin: 0 5px 0 0;
+  line-height: 22px;
+  font-size: 12px;
+  font-weight: 500;
+  transform: translateY(+2px);
+}
 </style>
