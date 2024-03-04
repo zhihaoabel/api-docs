@@ -7,6 +7,7 @@ import './style.css'
 import './custom.css'
 import mediumZoom from "medium-zoom"
 import ElementPlus, {ElCollapseTransition} from 'element-plus'
+import {TopRight} from "@element-plus/icons-vue";
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
@@ -21,6 +22,7 @@ export default {
     enhanceApp({app, router, siteData}) {
         // ...
         app.use(ElementPlus)
+        app.component('TopRight', TopRight);
     },
     setup() {
         const route = useRoute();

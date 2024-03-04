@@ -5,6 +5,9 @@
       :width="width"
       :trigger="trigger"
       :content="content"
+      :ref="popoverRef"
+      :virtual-ref="virtualRef"
+      virtual-triggering
   >
     <template #reference>
       <span class="reference-text">{{reference}}</span>
@@ -21,9 +24,12 @@
 <script>
 
 import {TopRight, View} from "@element-plus/icons-vue";
+import { ref, unref } from 'vue';
+
+const popoverRef = ref()
 
 export default {
-  name: "CustomPopover",
+  name: "CustomVirtualPopover",
   components: {View, TopRight},
   props: {
     placement: {
@@ -46,11 +52,17 @@ export default {
     },
     link: '',
     linkType: {
-      default: 'primary'
+      default: 'primary',
     },
     target: {
-      default: '_self'
-    }
+      default: '_self',
+    },
+    popoverRef: {
+      default: 'popoverRef',
+    },
+    virtualRef: {
+      default: 'virtualRef',
+    },
   },
   created() {
   },
