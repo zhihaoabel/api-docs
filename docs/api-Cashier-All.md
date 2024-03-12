@@ -5,25 +5,6 @@ outline: deep
 
 </script>
 
-<style>
-
-    table {
-    width: 100%; /*表格宽度*/
-    max-width: 65em; /*表格最大宽度，避免表格过宽*/
-    border: 1px solid #red; /*表格外边框设置*/
-    margin: 15px auto; /*外边距*/
-    border-collapse: collapse; /*使用单一线条的边框*/
-    empty-cells: show; /*单元格无内容依旧绘制边框*/
-}
-table th,
-table td {
-  height: 35px; /*统一每一行的默认高度*/
-  border: 1px solid #dedede; /*内部边框样式*/
-  padding: 0 10px; /*内边距*/
-}
- 
- </style>
-
 # 聚合收银台
 
 聚合收银台：指用户从原始交易网站或应用程序重定向到另一个专门处理支付的页面时同时本地支付以及信用卡支付的收银台。
@@ -36,8 +17,6 @@ table td {
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
-
-<Badge text="译文" type="error" vertical="middle"/>:qqq
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
