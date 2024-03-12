@@ -151,65 +151,62 @@ Content-Type: application/json; charset=UTF-8 错误
 
 
 
-## 以下部分展示了订阅支付的请求示例：
+## 以下部分展示了两方支付的请求示例：
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
+https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction<Badge type="tip">POST</Badge>
 
 ```json
 {
-  "merchantNo": "800252",
-  "merchantTxnId": "164604252511",
-  "merchantTxnTime":"2022-02-28 15:30:30",
-  "merchantTxnTimeZone":"+08:00",
-  "productType":"CARD",
-  "subProductType":"SUBSCRIBE",
-  "txnType": "SALE",	
+  "merchantNo": "800037",
+  "merchantTxnId": "1640229747000",
+  "merchantTxnTime": "2021-12-22 15:30:30",
+  "merchantTxnTimeZone": "+08:00",
+  "productType": "CARD",
+  "subProductType": "DIRECT",
+  "txnType": "SALE",
   "orderAmount": "20",
   "orderCurrency": "USD",
-  "shippingInformation":"{\"firstName\":\"da\",\"lastName\":\"xiong\",\"phone\":\"8522847000\",\"email\":\"shipping@example.com\",\"postalCode\":\"123456\",\"address\":\"HHHEEII\",\"country\":\"KR\",\"province\":\"BABA\",\"city\":\"BALALA\",\"street\":\"1010\",\"number\":\"20-1202\",\"identityNumber\":\"11112223333\",\"birthDate\":\"2020/12/28\"}",
-  "billingInformation":"{\"firstName\":\"José\",\"lastName\":\"Silva\",\"phone\":\"8522847035\",\"email\":\"jose@example.com\",\"postalCode\":\"61919-230\",\"address\":\"Rua E\",\"country\":\"KR\",\"province\":\"CE\",\"city\":\"Maracanaú\",\"street\":\"1040\",\"identityNumber\":\"853.513.468-93\",\"birthDate\":\"2000/12/20\"}",
-  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"appId\":1755154682941415424}",
-  "sign":""  //这里的sign字符串需要通过签名获得
+  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":1458672763818790912,\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",
+  "cardInfo": "{\"cardNumber\":\"4000027891380961\",\"cvv\":\"789\",\"month\":\"12\",\"year\":\"2022\",\"holderName\":\"test sandbox\"}",
+  "shippingInformation": "{\"firstName\":\"ShippingFirstName\",\"lastName\":\"ShippingLastName\",\"phone\":\"188888888888\",\"email\":\"shipping@test.com\",\"postalCode\":\"888888\",\"address\":\"ShippingAddress\",\"country\":\"CN\",\"province\":\"SH\",\"city\":\"SH\",\"street\":\"lujiazui\",\"number\":\"1\",\"identityNumber\":\"110000\"}",
+  "billingInformation": "{\"firstName\":\"billingFirstName\",\"lastName\":\"billingLastName\",\"phone\":\"18600000000\",\"email\":\"billing@test.com\",\"postalCode\":\"430000\",\"address\":\"BillingAddress\",\"country\":\"CN\",\"province\":\"HK\",\"city\":\"HK\",\"street\":\"jianshazui\",\"number\":\"2\",\"identityNumber\":\"220000\"}",
+  "sign": "..."
 }
+
 
 ```
 
 ::: warning  此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-## 以下部分展示了订阅支付响应示例：
+## 以下部分展示了两方支付响应示例：
 
 ### Response
 
 ```json
 
 {
-    "respCode": "20000",
-    "respMsg": "Success",
-    "data": {
-        "transactionId": "1759879333348245504",
-        "merchantTxnId": "164604252511",
-        "merchantNo": "800252",
-        "responseTime": "",
-        "txnTime": "",
-        "orderAmount": "20.00",
-        "orderCurrency": "USD",
-        "txnAmount": "",
-        "txnCurrency": null,
-        "txnTimeZone": null,
-        "status": "U",
-        "reason": null,
-        "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=19d6513ee000463783532f576c10dbcb",
-        "sign": "64cf0651986e86e109e6e2804b74bdeecb94cd7cb310c15711f7138867b0cac7",
-        "contractId": "",
-        "tokenId": null,
-        "eci": null,
-        "transactionOrderNo": null,
-        "periodValue": null,
-        "lpmsType": null,
-        "qrCode": null
-    }
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "transactionId": "1473856517125345280",
+    "responseTime": "2021-12-23 11:22:31",
+    "txnTime": "2021-12-23 11:22:31",
+    "txnTimeZone": "+08:00",
+    "orderAmount": "20.00",
+    "orderCurrency": "USD",
+    "txnAmount": "20.00",
+    "txnCurrency": "USD",
+    "status": "S",
+    "redirectUrl": null,
+    "periodValue": null,
+    "contractId": null,
+    "tokenId": null,
+    "eci": null,
+    "sign": "..."
+  }
 }
+
 

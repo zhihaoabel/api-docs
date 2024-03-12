@@ -32,14 +32,10 @@ Content-Type: application/json; charset=UTF-8 错误
 请求参数
 
 
-
-| 名称 | 内容                                                          |
-|----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
-| Request Method | POST                                                          |
-| Content-Type   | application/json                                              |
+| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
+|-------------|--------|----|-----|-----|--------------------------|
+| productType | String | 16 | Yes | Yes | 产品类型，请参阅 ProductTypeEnum |                                       |
     
-
 
 ::: warning   收银台支付的本地支付，请求参数可参考收银台信用卡支付，只需将productType：CARD 改为 productType：LPMS 即可；如您信用卡和本地支付需要同时使用，则需改为productType：ALL 打开聚合收银台
 :::
