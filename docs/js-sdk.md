@@ -37,29 +37,6 @@ const form = reactive({
    notifyUrl: localStorage.getItem('notifyUrl') || '',
 });
 
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
-
 const ProductTypeEnumTable = {
    columns: [
       {
@@ -1045,7 +1022,337 @@ const LpmsTypeEnum =  {
         },
     ],
 };
-
+const TxnStatusEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'S',
+            desc: '交易成功',
+        },
+        {
+            code: 'F',
+            desc: '交易失败 / 审核不通过',
+        },
+        {
+            code: 'P',
+            desc: '交易结果未知（处理中）',
+        },
+        {
+            code: 'R',
+            desc: '需要3ds验证',
+        },
+        {
+            code: 'N',
+            desc: '交易被取消',
+        },
+        {
+            code: 'I',
+            desc: '退款待审核/取消待处理',
+        },
+        {
+            code: 'U',
+            desc: '待付款，仅在收银台支付中出现',
+        },
+    ],
+};
+const EFTBankNameEnum = {
+    columns: [
+        {
+            prop: 'bankName',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            bankName: 'banco_agrario',
+        },
+        {
+            bankName: 'banco_av_villas',
+        },
+        {
+            bankName: 'banco_bbva_colombia_s.a.',
+        },
+        {
+            bankName: 'banco_caja_social',
+        },
+        {
+            bankName: 'banco_colpatria',
+        },
+        {
+            bankName: 'banco_cooperativo_coopcentral',
+        },
+        {
+            bankName: 'banco_corpbanca_s.a',
+        },
+        {
+            bankName: 'banco_davivienda',
+        },
+        {
+            bankName: 'banco_de_bogota',
+        },
+        {
+            bankName: 'banco_de_occidente',
+        },
+        {
+            bankName: 'banco_falabella_',
+        },
+        {
+            bankName: 'banco_gnb_sudameris',
+        },
+        {
+            bankName: 'banco_pichincha_s.a.',
+        },
+        {
+            bankName: 'banco_procredit',
+        },
+        {
+            bankName: 'bancolombia',
+        },
+        {
+            bankName: 'bancoomeva_s.a.',
+        },
+        {
+            bankName: 'citibank_',
+        },
+        {
+            bankName: 'itau',
+        },
+        {
+            bankName: 'nequi',
+        },
+    ],
+};
+const Przelewy24BankNameEnum = {
+    columns: [
+        {
+            prop: 'bankName',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            bankName: 'Santander-Pretzel24',
+        },
+        {
+            bankName: 'P_ac_ z Inteligo',
+        },
+        {
+            bankName: 'P_ac_ z iPKO (PKO BP)',
+        },
+        {
+            bankName: 'BNP Paribas',
+        },
+        {
+            bankName: 'Bank PEKAO S.A.',
+        },
+        {
+            bankName: 'Credit Agricole',
+        },
+        {
+            bankName: 'ING Bank _l_ski',
+        },
+        {
+            bankName: 'Konto Inteligo',
+        },
+        {
+            bankName: 'Bank PKO BP (iPKO)',
+        },
+        {
+            bankName: 'Santander',
+        },
+        {
+            bankName: 'Toyota Bank',
+        },
+        {
+            bankName: 'Bank PEKAO S.A.',
+        },
+        {
+            bankName: 'Volkswagen Bank',
+        },
+        {
+            bankName: 'Bank Millennium',
+        },
+        {
+            bankName: 'P_ac_ z Alior Bankiem',
+        },
+        {
+            bankName: 'Nest Bank',
+        },
+        {
+            bankName: 'Credit Agricole',
+        },
+        {
+            bankName: 'P_ac_ z BO_',
+        },
+        {
+            bankName: 'P_ac_ z ING',
+        },
+        {
+            bankName: 'P_ac_ z CitiHandlowy',
+        },
+        {
+            bankName: 'Alior - Raty',
+        },
+        {
+            bankName: 'P_ac_ z Plus Bank',
+        },
+        {
+            bankName: 'mBank - Raty',
+        },
+        {
+            bankName: 'e-transfer Pocztowy24',
+        },
+        {
+            bankName: 'Banki Sp_dzielcze',
+        },
+        {
+            bankName: 'Bank Nowy BFG S.A.',
+        },
+        {
+            bankName: 'Getin Bank',
+        },
+        {
+            bankName: 'BLIK',
+        },
+        {
+            bankName: 'Noble Pay',
+        },
+        {
+            bankName: 'P_ac_ z IdeaBank',
+        },
+        {
+            bankName: 'EnvelopeBank',
+        },
+        {
+            bankName: 'NestPrzelew',
+        },
+        {
+            bankName: 'BNP Paribas P_ac_ z Pl@net',
+        },
+        {
+            bankName: 'mBank - mTransfer',
+        },
+        {
+            bankName: 'P24now',
+        },
+        {
+            bankName: 'mBank (Us_ugaITP)',
+        },
+        {
+            bankName: 'ING Bank ÅlÄski (Us_uga ITP)',
+        },
+        {
+            bankName: 'BNP Paribas (Us_uga ITP)',
+        },
+        {
+            bankName: 'PKO BP (Us_uga ITP)',
+        },
+        {
+            bankName: 'Santander (Us_uga ITP)',
+        },
+        {
+            bankName: 'Inteligo (Us_uga ITP)',
+        },
+        {
+            bankName: 'mBank - Raty',
+        },
+    ],
+};
+const LanguageEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'zh-cn',
+            desc: '中文简体',
+        },
+        {
+            code: 'en',
+            desc: '英语',
+        },
+        {
+            code: 'de',
+            desc: '德语',
+        },
+        {
+            code: 'es',
+            desc: '西班牙语',
+        },
+        {
+            code: 'fr',
+            desc: '法语',
+        },
+        {
+            code: 'it',
+            desc: '意大利语',
+        },
+        {
+            code: 'nl',
+            desc: '荷兰语',
+        },
+        {
+            code: 'ko',
+            desc: '韩语',
+        },
+        {
+            code: 'zh-tw',
+            desc: '繁体',
+        },
+        {
+            code: 'ja',
+            desc: '日语',
+        },
+        {
+            code: 'th',
+            desc: '泰语',
+        },
+        {
+            code: 'ar',
+            desc: '阿拉伯语',
+        },
+        {
+            code: 'ru',
+            desc: '俄语',
+        },
+        {
+            code: 'sv',
+            desc: '瑞典语',
+        },
+        {
+            code: 'fi',
+            desc: '芬兰语',
+        },
+        {
+            code: 'pt',
+            desc: '葡萄牙语',
+        },
+        {
+            code: 'pl',
+            desc: '波兰语',
+        },
+        {
+            code: 'no',
+            desc: '挪威语',
+        },
+    ],
+};
 
 const Subscription ={
     columns: [
@@ -1223,8 +1530,7 @@ const TxnOrderMsg = {
         },
         {
             prop: 'desc',
-            label: '描述',
-            width: 250
+            label: '描述'
         },
     ],
     data: [
@@ -1458,7 +1764,7 @@ const TransactionAddress =  {
             length: '64',
             required: 'No',
             sign: 'No',
-            desc: '州。 当国家是美国 (US) 或加拿大 (CA) 时必填。 请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美美属萨摩亚是 AS</span></span>',
+            desc: '州。 当国家是美国 (US)，</br>中国 (CN) 或加拿大 (CA) 时必填。</br>请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美属萨摩亚是 AS</span></span>',
         },
         {
             name: 'city',
@@ -1498,7 +1804,7 @@ const TransactionAddress =  {
             length: '64',
             required: 'No',
             sign: 'No',
-            desc: '出生日期，格式为 yyyy/MM/dd',
+            desc: '出生日期。</br>格式为 <code>yyyy/MM/dd</code>',
         },
     ],
 };
@@ -1538,7 +1844,7 @@ const LpmsInfo = {
             length: '64',
             required: 'Yes',
             sign: 'No',
-            desc: `本地支付方式。 请参阅 <a class="plain-link" href="#">哈哈</a>`,
+            desc: `本地支付方式。 请参阅 <a class="plain-link" href="./enums#lpmstypeenum">LpmsTypeEnum</a>`,
         },
         {
             name: 'bankName',
@@ -1546,7 +1852,7 @@ const LpmsInfo = {
             length: '128',
             required: 'No',
             sign: 'No',
-            desc: '银行名称，某些本地支付方式需要。lpmsType为EFT时请参阅 EFTBankNameEnum。 lpmsType为Przelewy24时请参阅 Przelewy24BankNameEnum',
+            desc: '银行名称。某些本地支付方式需要。</br> lpmsType为`EFT`时</br>请参阅 EFTBankNameEnum。</br> lpmsType为Przelewy24时</br>请参阅 Przelewy24BankNameEnum',
         },
         {
             name: 'iBan',
@@ -1630,7 +1936,7 @@ function updateRequest() {
 2. 引入JS SDK
 3. 初始化SDK
 4. 调用下单接口
-5. 从下单接口响应中获取transactionId，拉起JS SDK收银台
+5. 从下单接口响应中获取`transactionId`，拉起JS SDK收银台
 
 ### 引入JS SDK
 
@@ -1674,7 +1980,7 @@ const Pacypay = require('./pacypay.js')
 | 名称                    | 类型     | 长度  | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                                        |
 |-----------------------|--------|-----|-----|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | merchantNo            | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                                                                                                               |
-| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号，**不同的订单号视为不同的交易**                                                                                                                                                                                                                                                            |
+| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号。<CMNote data="不同的订单号视为不同的交易"></CMNote>                                                                                                                                                                                                                                       |
 | merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间 格式为 <br/> `yyyy-MM-dd HH:mm:ss`<br/><CMExample data="2024-2-28 15:05:34"></CMExample>                                                                                                                                                                                         |
 | merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。 <br/> <CMExample data="+08:00"></CMExample>                                                                                                                                                                                                                                  |
 | merchantTxnOriginalId | String | 128 | No  | Yes | 商户原始订单号。标记商户网站上唯一订单号，可重复，同一笔订单只能支付成功一次                                                                                                                                                                                                                                                    |
@@ -1689,29 +1995,29 @@ const Pacypay = require('./pacypay.js')
 | originTransactionId   | String | 20  | No  | Yes | 来源于Onerway的原始交易订单号，常用于退款等反向交易时通过此ID查找对应的交易订单号                                                                                                                                                                                                                                             |
 | risk3dsStrategy       | String | 16  | No  | Yes | 3ds风险控制策略。 请参阅 <br/><CustomPopover title="Risk3dsStrategyEnum" width="auto" reference="Risk3dsStrategyEnum" link="/apis/enums.html#risk3dsstrategyenum" ><CustomTable :data="Risk3dsStrategyEnumTable.data" :columns="Risk3dsStrategyEnumTable.columns"></CustomTable></CustomPopover>    |
 | subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 json 字符串。 请参阅对象 <br/><CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/js-sdk.html#subscription" ><CustomTable :data="Subscription.data" :columns="Subscription.columns"></CustomTable></CustomPopover>                              |
-| mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集，risk3dsStrategy为EXTERNAL时需要。 格式为 json 字符串。 请参阅对象 <CustomPopover title="MpiInfo" width="auto" reference="MpiInfo" link="/apis/js-sdk.html#mpiinfo" ><CustomTable :data="MpiInfo.data" :columns="MpiInfo.columns"></CustomTable></CustomPopover>                             |
+| mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集。`risk3dsStrategy` 为 `EXTERNAL` 时需要。 格式为 json 字符串。 请参阅对象 <CustomPopover title="MpiInfo" width="auto" reference="MpiInfo" link="/apis/js-sdk.html#mpiinfo" ><CustomTable :data="MpiInfo.data" :columns="MpiInfo.columns"></CustomTable></CustomPopover>                      |
 | txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TxnOrderMsg" width="auto" reference="TxnOrderMsg" link="/apis/js-sdk.html#txnordermsg" ><CustomTable :data="TxnOrderMsg.data" :columns="TxnOrderMsg.columns"></CustomTable></CustomPopover>                                    |
 | billingInformation    | String | /   | No  | Yes | 交易账单信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/js-sdk.html#transactionaddress" ><CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable></CustomPopover> |
 | shippingInformation   | String | /   | No  | Yes | 交易邮寄信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/js-sdk.html#transactionaddress" ><CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable></CustomPopover> |
-| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，productType为LPMS时必填，格式为json字符串。 请参阅对象 <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/js-sdk.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable></CustomPopover>                                         |
+| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType` 为 `LPMS` 时必填，格式为json字符串。 请参阅对象 <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/js-sdk.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable></CustomPopover>                                  |
 | sign                  | String | /   | Yes | No  | 签名字符串。                                                                                                                                                                                                                                                                                    |
 
 </div>
 
-<el-button ref="buttonRef" v-click-outside="onClickOutside">Click me</el-button>
-
 ###### Subscription
 
-<el-popover ref="popoverRef" :virtual-ref="buttonRef" trigger="click" virtual-triggering>
-    <div class="custom-table bordered-table">
-        <CustomTable :data="Subscription.data" :columns="Subscription.columns">
-        </CustomTable>
-    </div>
-</el-popover>
-
 <div class="custom-table bordered-table">
-    <CustomTable :data="Subscription.data" :columns="Subscription.columns">
-    </CustomTable>
+
+| 名称             | 类型     | 长度  | 必填  | 签名 |   | 描述                                                     |
+|----------------|--------|-----|-----|----|:--|--------------------------------------------------------|
+| requestType    | String | 1   | Yes | No |   | 订阅请求类型。<br/>枚举如下：**0 - 首购 1 - 复购**                     |
+| merchantCustId | String | 50  | No  | No |   | 商户客户id。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| expireDate     | String | 10  | No  | No |   | 过期日期。<br/><CMNote data="requestType为0时必填。"></CMNote>   |
+| frequencyType  | String | 1   | No  | No |   | 订阅频率类型。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| frequencyPoint | String | 2   | No  | No |   | 订阅频率点数。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| contractId     | String | 20  | No  | No |   | 订阅合同id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
+| tokenId        | String | 300 | No  | No |   | 订阅令牌id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
+
 </div>
 
 
@@ -1728,8 +2034,25 @@ const Pacypay = require('./pacypay.js')
 
 <div class="custom-table bordered-table">
 
-<CustomTable :data="TxnOrderMsg.data" :columns="TxnOrderMsg.columns"></CustomTable>
+| 名称             | 类型      | 长度   | 必填  | 签名 | 描述                                                                                                                                                                                                                                                                                                                    |
+|----------------|---------|------|-----|----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| returnUrl      | String  | 256  | Yes | No | 商户的回跳地址                                                                                                                                                                                                                                                                                                               |
+| products       | String  | 1024 | Yes | No | 产品信息列表。 格式为 json 字符串。<br/><CMExample data='<br/>[{"name":"iphone11",<br/>"price":"5300.00","num":"2",<br/>"currency":"CNY"}, {"name":"macBook","price":"1234.00",<br/>"num":"1","currency":"USD",<br/>"type":"discount"}]'></CMExample><br/><CMNote data="type字段的枚举如下：discount shipping_fee不传type 就是商品信息本身"></CMNote> |
+| transactionIp  | String  | 64   | Yes | No | 持卡人交易IP                                                                                                                                                                                                                                                                                                               |
+| appId          | String  | 20   | Yes | No | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用id                                                                                                                                                                                                                                                                                |
+| javaEnabled    | Boolean | /    | Yes | No | 持卡人浏览器是否开启java                                                                                                                                                                                                                                                                                                        |
+| colorDepth     | String  | 64   | Yes | No | 持卡人屏幕色深                                                                                                                                                                                                                                                                                                               |
+| screenHeight   | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                                                                                                             |
+| screenWidth    | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                                                                                                             |
+| timeZoneOffset | String  | 64   | Yes | No | 持卡人浏览器的时区                                                                                                                                                                                                                                                                                                             |
+| accept         | String  | 2048 | Yes | No | 持卡人浏览器的 Accept 请求头                                                                                                                                                                                                                                                                                                    |
+| userAgent      | String  | 2048 | Yes | No | 持卡人的浏览器类型                                                                                                                                                                                                                                                                                                             |
+| contentLength  | String  | 64   | Yes | No | 持卡人浏览器内容长度头部以外的内容长度                                                                                                                                                                                                                                                                                                   |
+| language       | String  | 64   | Yes | No | 持卡人浏览器的语言                                                                                                                                                                                                                                                                                                             |
+| periodValue    | String  | /    | No  | No | 分期付款期数。对应咨询分期期数接口返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                                                                                                       |
+| notifyUrl      | String  | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                                                                                                             |
 
+[//]: # (todo: periodValue描述分期接口链接待补充)
 </div>
 
 ##### TransactionAddress
@@ -1744,7 +2067,12 @@ const Pacypay = require('./pacypay.js')
 
 <div class="custom-table bordered-table">
 
-<CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable>
+| 名称            | 类型     | 长度  | 必填  | 签名 | 描述                                                                                                                                                                                                                                                                                                                                                                          |
+|---------------|--------|-----|-----|----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| lpmsType      | String | 64  | Yes | No | 本地支付方式。 请参阅 [LpmsTypeEnum  ](./enums#lpmstypeenum)                                                                                                                                                                                                                                                                                                                          |
+| bankName      | String | 128 | No  | No | 银行名称，某些本地支付方式需要。`lpmsType` 为`EFT`时请参阅 <br/><CustomPopover title="EFTBankNameEnum" width="auto" reference="EFTBankNameEnum" link="/apis/enums.html#eftbanknameenum"><CustomTable :data="EFTBankNameEnum.data" :columns="EFTBankNameEnum.columns"></CustomTable></CustomPopover>。<br/>`lpmsType` 为 `Przelewy24` 时请参阅 [Przelewy24BankNameEnum](./enums#przelewy24banknameenum) |
+| iBan          | String | 64  | No  | No | 银行账户，部分地区转账时需要                                                                                                                                                                                                                                                                                                                                                              |
+| prepaidNumber | String | /   | No  | No | 预付费卡号，部分支付方式需要                                                                                                                                                                                                                                                                                                                                                              |
 
 </div>
 
@@ -1833,37 +2161,213 @@ const Pacypay = require('./pacypay.js')
 #### 响应参数
 <div class="custom-table">
 
-| 名称       | 类型     | 签名 | 描述                                      |
-|----------|--------|----|-----------------------------------------|
-| respCode | String | No | 来自 Onerway 的响应码                         |
-| respMsg  | String | No | 来自 Onerway 的响应信息                        |
-| data     | Map    | No | 响应数据。 请参阅对象 [TxnInfo](./js-sdk#txninfo) |
+| 名称       | 类型     | 签名 | 描述                                |
+|----------|--------|----|-----------------------------------|
+| respCode | String | No | 来自 Onerway 的响应码                   |
+| respMsg  | String | No | 来自 Onerway 的响应信息                  |
+| data     | Map    | No | 响应数据。 请参阅对象 [data](./js-sdk#data) |
 
 </div>
 
-##### TxnInfo
+##### data
 
 <div class="custom-table bordered-table">
 
-| 名称            | 签名  | 类型     | 描述                                                                                                  |
-|---------------|-----|--------|-----------------------------------------------------------------------------------------------------|
-| transactionId | Yes | String | Onerway创建的交易订单号，商户下单时的订单号                                                                           |
-| responseTime  | Yes | String | 接口响应时间，格式为yyyy-MM-dd HH:mm:ss                                                                       |
-| txnTime       | Yes | String | 交易完成时间，格式为yyyy-MM-dd HH:mm:ss                                                                       |
-| txnTimeZone   | Yes | String | 交易完成时区，例如：+08:00                                                                                    |
-| orderAmount   | Yes | String | 交易订单金额                                                                                              |
-| orderCurrency | Yes | String | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码 |
-| txnAmount     | Yes | String | 订单金额转换成结算币种后的金额                                                                                     |
-| txnCurrency   | Yes | String | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码   |
-| status        | Yes | String | 交易处理结果。 请参阅 TxnStatusEnum                                                                           |
-| redirectUrl   | Yes | String | 当交易状态为R时，商户需要重定向到该URL完成部分交易，包括3ds验证、本地支付收银等                                                         |
-| periodValue   | No  | String | 分期付款期数                                                                                              |
-| contractId    | Yes | String | 订阅合同id，首购时返回                                                                                        |
-| tokenId       | Yes | String | 订阅令牌id ，首购时返回                                                                                       |
-| eci           | Yes | String | 责任转移                                                                                                |
-| sign          | No  | String | 签名字符串。                                                                                              |
+| 名称            | 签名  | 类型     | 描述                                                                                                                                                                                                                                         |
+|---------------|-----|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| transactionId | Yes | String | Onerway创建的交易订单号，商户下单时的订单号                                                                                                                                                                                                                  |
+| responseTime  | Yes | String | 接口响应时间，格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
+| txnTime       | Yes | String | 交易完成时间，格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
+| txnTimeZone   | Yes | String | 交易完成时区，例如：+08:00                                                                                                                                                                                                                           |
+| orderAmount   | Yes | String | 交易订单金额                                                                                                                                                                                                                                     |
+| orderCurrency | Yes | String | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                        |
+| txnAmount     | Yes | String | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                            |
+| txnCurrency   | Yes | String | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                          |
+| status        | Yes | String | 交易处理结果。 请参阅 <br/><CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum"><CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable></CustomPopover> |
+| redirectUrl   | Yes | String | 当交易状态为R时，商户需要重定向到该URL完成部分交易，包括3ds验证、本地支付收银等                                                                                                                                                                                                |
+| periodValue   | No  | String | 分期付款期数                                                                                                                                                                                                                                     |
+| contractId    | Yes | String | 订阅合同id，首购时返回                                                                                                                                                                                                                               |
+| tokenId       | Yes | String | 订阅令牌id ，首购时返回                                                                                                                                                                                                                              |
+| eci           | Yes | String | 责任转移                                                                                                                                                                                                                                       |
+| sign          | No  | String | 签名字符串。                                                                                                                                                                                                                                     |
 
 </div>
+
+### 拉起JS SDK收银台
+
+```ts
+new Pacypay(transactionId, options);
+```
+
+### 参考代码
+
+```js
+const transactionId = '1544197674849067008'; //当前交易ID 
+const pacypay = new Pacypay(transactionId, {
+    locale: 'zh-cn', // en zh-cn ar de es fi fr it ja ko nl no pl pt ru sv th zh-tw
+    environment: 'sandbox', // sandbox、production
+    config: {
+        subProductType: 'DIRECT', // DIRECT-直接支付，TOKEN-token绑卡并支付（必须和下单接口中subProductType值保持一致）
+        checkoutTheme: 'light', // light、dark
+        customCssURL: '', // 自定义样式链接地址，配置该值后，checkoutTheme 则无效
+        variables: {
+          "colorBackground": "black", // 主题背景色
+          "colorPrimary": "red", // 主题色，如输入框高亮、光标颜色
+          "colorText": "white", // 字体颜色
+          "colorDanger": "#FF1493", // 错误提示颜色
+          "borderRadius": "2px", // 输入框角度
+          "fontSizeBase": "16px", // 基础字体大小，会按照该基准进行缩放
+          "fontFamily": "Arial, sans-serif", // 字体样式
+        },
+        // 如果想自定义所有样式则只用配置styles. checkoutTheme,customCssURL,variables都可以不传
+        // 详情请看styles属性说明
+        styles: {
+          ".pacypay-checkout__button--pay": { // 支付按钮样式
+          "background-color": "red",
+        },
+      }
+    },
+    onPaymentCompleted: function (res) {
+            //成功支付后回调方法
+        const txtInfo = res.data; // 返回交易结果详情
+        const respCode = res.respCode; // 响应码
+        const respMsg = res.respMsg; // 响应信息
+        if(respCode === '20000') { // respCode 为 20000 表示交易正常
+          switch (txtInfo.status) { // 交易状态判断
+          case 'S': // status 为 'S' 表示成功
+          // 支付最终状态以异步通知结果为准
+          break;
+          case 'R': // status 为 'R' 表示需要3ds验证
+          // 当交易状态为 R 时，商户需要重定向到该URL完成部分交易，包括3ds验证
+          window.location.href = txtInfo.redirectUrl;
+          break;
+         }
+        } else {
+          // 交易失败
+          }
+        },
+        onError: function (err) {
+            //支付异常回调方法 
+            console.log(err);
+        }
+});
+```
+
+#### 字段说明
+
+<div class="custom-table">
+
+| 属性            | 类型     | 必填  | 说明                                    |          
+|---------------|--------|-----|---------------------------------------|
+| transactionId | string | Yes | 商户通过 [下单接口](./js-sdk#调用下单接口) 获取到的交易ID |
+| options       | object | No  | 详见以下 [options](./js-sdk#options) 说明   |
+
+</div>
+
+##### options
+
+<div class="custom-table">
+
+| 属性                 | 类型       | 必填 | 说明                                                                                                                                                                                                                            |
+|--------------------|----------|----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| locale             | string   | No | 语言类型。请参阅 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"></CustomTable></CustomPopover> |
+| environment        | string   | No | 环境类型。`sandbox`，默认为`production`                                                                                                                                                                                                |
+| config             | object   | No | 配置项。详见以下[config](./js-sdk#config)说明                                                                                                                                                                                           |
+| onPaymentCompleted | function | No | 请求成功完成回调方法                                                                                                                                                                                                                    |
+| onError            | function | No | 请求异常回调方法                                                                                                                                                                                                                      |
+
+</div>
+
+##### config
+
+<div class="custom-table">
+
+| 属性                        | 类型      | 必填 | 说明                                                        |
+|---------------------------|---------|----|-----------------------------------------------------------|
+| checkoutTheme             | string  | No | 主题类型。`light`、`dark`                                       |
+| customCssURL              | string  | No | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                         |
+| variables                 | object  | No | 自定义主题色。详见以下 [variables](./js-sdk#variables) 说明            |
+| styles                    | object  | No | 自定义样式。详见以下 [styles](./js-sdk#styles) 说明                   |
+| showPayButton             | boolean | No | 默认为 `true`。如果设为 false 可自定义支付按钮，请参阅 [补充说明](./js-sdk#补充说明)  |
+| buttonSeparation          | boolean | No | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`:绑卡与支付一步完成；          |
+| displayBillingInformation | boolean | No | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息 |
+
+</div>
+
+##### variables
+
+<div class="custom-table">
+
+| 属性              | 类型     | 必填 | 说明                |
+|-----------------|--------|----|-------------------|
+| colorBackground | string | No | 主题背景色             |
+| colorPrimary    | string | No | 主题色，如输入框高亮、光标颜色   |
+| colorText       | string | No | 字体颜色              |
+| colorDanger     | string | No | 错误提示颜色            |
+| borderRadius    | string | No | 输入框角度             |
+| fontSizeBase    | string | No | 基础字体大小，会按照该基准进行缩放 |
+| fontFamily      | string | No | 字体样式              |
+
+</div>
+
+##### styles
+
+<div class="custom-table bordered-table">
+
+| 属性	                                            | 类型	     | 必填	 | 说明            |
+|------------------------------------------------|---------|-----|---------------|
+| .pacypay-checkout__payment-method	             | object	 | 否	  | 收银台支付方式容器     |
+| .pacypay-checkout_payment-method_header	       | object	 | 否	  | 标题栏           |
+| .pacypay-checkout_payment-methodheader_title	  | object	 | 否	  | 标题栏名称         |
+| .pacypay-checkout_payment-methodimage_wrapper	 | object	 | 否	  | 标题栏图片容器       |
+| .pacypay-checkout_payment-method_brands	       | object	 | 否	  | 标题栏右侧银行卡类型容器  |
+| .pacypay-checkout_payment-method_image	        | object	 | 否	  | 标题栏图片         |
+| .pacypay-checkout_payment-method_brand	        | object	 | 否	  | 标题栏右侧银行卡图片    |
+| .pacypay-checkout_payment-method_name	         | object	 | 否	  | 标题栏标题名称       |
+| .pacypay-checkout_payment-method_details	      | object	 | 否	  | 表单内容容器        |
+| .pacypay-checkout__field-wrapper	              | object	 | 否	  | 表单项容器         |
+| .pacypay-checkout__field	                      | object	 | 否	  | 标题栏右侧银行卡图片    |
+| .pacypay-checkout_payment-method_brand	        | object	 | 否	  | 表单项           |
+| .pacypay-checkout__field--cardNumber	          | object	 | 否	  | 表单项--卡号       |
+| .pacypay-checkout__field--expire	              | object	 | 否	  | 表单项--到期时间     |
+| .pacypay-checkout__field--cvv	                 | object	 | 否	  | 表单项--CVV      |
+| .pacypay-checkout__field--lastName	            | object	 | 否	  | 表单项--name     |
+| .pacypay-checkout__label-text	                 | object	 | 否	  | 表单项标题         |
+| .pacypay-checkout__label-text--require	        | object	 | 否	  | 表单项标题必填标识     |
+| .pacypay-checkout__input	                      | object	 | 否	  | 表单项输入框        |
+| .pacypay-checkout__error-text	                 | object	 | 否	  | 表单项错误提示文案     |
+| .pacypay-checkout__button	                     | object	 | 否	  | 按钮            |
+| .pacypay-checkout__button--pay	                | object	 | 否	  | 支付按钮          |
+| .pacypay-checkout_button_text	                 | object	 | 否	  | 按钮文案          |
+| .pacypay-checkout__loading	                    | object	 | 否	  | 按钮 Loading 容器 |
+| .pacypay-checkout__spinner	                    | object	 | 否	  | 按钮 Loading 动画 |
+
+</div>
+
+#### 补充说明
+
+当showPayButton为false的时候，在自定义支付按钮处，请调用以下方法进行支付
+
+```js 
+pacypay.submit();
+// 若绑卡时不显示账单信息（displayBillingInformation： false），需要传入账单参数  // [!code warning]
+pacypay.submit({
+    billingInformation: {
+        "firstName": "ZZ",
+        "lastName": "ZZ",
+        "phone": "188888888888",
+        "email": "shipping@test.com",
+        "postalCode": "888888",
+        "address": "ShippingAddress",
+        "country": "CN",
+        "province": "SH",
+        "city": "SH",
+        "street": "lujiazui",
+        "number": "1",
+        "identityNumber": "110000"
+    }
+});
+```
 
 <style lang="css">
 
