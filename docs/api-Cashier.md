@@ -68,12 +68,12 @@ billingInformation、shippingInformation 、txnOrderMsg 订阅复购可不传
 
 #### TxnOrderMsg
 
-| 名称        | 类型     | 长度   | 必填  | 签名 | 描述                                                                                                                                                                                                                                 |
-|-----------|--------|------|-----|----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| returnUrl | String | 256  | Yes | No | 商户的回跳地址                                                                                                                                                                                                                            |
-| products  | String | 1024 | Yes | No | 产品信息列表。 格式为 json 字符串。 例如：[{"name":"iphone11","price":"5300.00","num":"2","currency":"CNY"}, {"name":"macBook","price":"1234.00","num":"1","currency":"USD","type":"discount"}]，其中type字段的枚举如下：<br>discount<br>shipping_fee <br>不传 type 就是商品信息本身 |
-| appId     | String | 20   | Yes | No | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用id                                                                                                                                                                                             |
-| notifyUrl | String | 256  | No  | No | 通知地址。详见通知          
+| 名称        | 类型     | 长度   | 必填  | 签名 | 描述                                                                                                                                                                                                                                               |
+|-----------|--------|------|-----|----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| returnUrl | String | 256  | Yes | No | 商户的回跳地址                                                                                                                                                                                                                                          |
+| products  | String | 1024 | Yes | No | 产品信息列表。 格式为 json 字符串。例如：<br/>[{"name":"iphone11","price":"5300.00",<br/>"num":"2","currency":"CNY"}, {"name":"macBook","price":"1234.00",<br/>"num":"1","currency":"USD","type":"discount"}]，其中type字段的枚举如下：<br>discount<br>shipping_fee <br>不传 `type` 就是商品信息本身 |
+| appId     | String | 20   | Yes | No | 商户应用程序 ID。 <br/>商户注册网站时，OnerWay会为商户创建一个应用id                                                                                                                                                                                                           |
+| notifyUrl | String | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                                        
 
 
 ::: warning  注意
