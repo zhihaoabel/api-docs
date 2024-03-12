@@ -55,38 +55,58 @@ export default defineConfig({
             },
         ],
 
-        sidebar: {
-            '/': [
-                {
-                    text: '',
-                    items: [
-                        {text: 'Overview', link: '/overview'},
-                        {text: '签名', link: '/sign'},
-                        {text: 'Onerway APIs', link: '/api-examples'},
-                        {
-                            text: 'SDK',
-                            items: [
-                                {text: 'JS', link: '/js-sdk'},
-                                {text: 'Android', link: '/android-sdk'},
-                                {text: 'IOS', link: '/ios-sdk'},
-                            ],
-                        },
-                        {text: '收银台支付',  items: [
-                          {text: '收银台', link: '/api-Cashier'},
-                          {text: '本地支付', link: '/api-Cashier-Lpms'},
-                          {text: '聚合收银台', link: '/api-Cashier-All'},
-                          {text: '订阅', link: '/api-Cashier-sub'},
-                        ],},
-                        {text: '两方支付', items: [
+        sidebar: [
+            {
+                text: '',
+                items: [
+                    {text: '概述', link: '/overview'},
+                    {text: '签名', link: '/sign'},
+                    {text: 'API Examples', link: '/api-examples'},
+                ],
+            },
+            {
+                text: '支付产品',
+                items: [
+                    {
+                        text: '收银台支付',
+                        items: [
+                            {text: '收银台', link: '/api-Cashier'},
+                            {text: '本地支付', link: '/api-Cashier-Lpms'},
+                            {text: '聚合收银台', link: '/api-Cashier-All'},
+                            {text: '订阅', link: '/api-Cashier-sub'},
+                        ],
+                        collapsed: true,
+                    },
+                    {
+                        text: 'SDK支付',
+                        items: [
+                            {text: 'JS', link: '/js-sdk'},
+                            {text: 'Android', link: '/android-sdk'},
+                            {text: 'IOS', link: '/ios-sdk'},
+                        ],
+                        collapsed: true,
+                    },
+                    {
+                        text: '两方支付',
+                        items: [
                             {text: '两方支付', link: '/api-direct'},
                             {text: '本地支付', link: '/api-direct-lpms'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
                             {text: '订阅', link: '/api-direct-sub'},
-                          ],},
-                    ],
-                },
-            ],
-        },
+                        ],
+                        collapsed: true,
+                    },
+                ],
+            },
+            {
+                text: '通知',
+                link: '/notify',
+            },
+            {
+                text: '枚举',
+                link: '/enums',
+            }
+        ],
 
         socialLinks: [
             {icon: 'github', link: 'https://github.com/vuejs/vitepress'}

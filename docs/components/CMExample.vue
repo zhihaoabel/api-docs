@@ -1,5 +1,6 @@
 <template>
   <span class="custom-example">
+    <span class="leading-text" >{{leadingText}}</span>
     <span v-html="data"></span>
   </span>
 </template>
@@ -20,6 +21,7 @@ export default {
   data() {
     return {
       content: {},
+      leadingText: '例如',
     }
   },
   methods: {},
