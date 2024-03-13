@@ -4,7 +4,7 @@ outline: deep
 
 <script lang="ts" setup>
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
-import {requestGen, secret} from "./util/utils"; 
+import {requestGen, secret} from "./util/utils";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
