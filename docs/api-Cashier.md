@@ -8,11 +8,12 @@ outline: deep
 
 # 收银台支付
 
-
 收银台信用卡支付：指用户从原始交易网站或应用程序重定向到另一个专门处理信用卡支付的页面。
 
-
 请求地址、请求方式、请求头 可以参考：
+
+
+<div class="table-request-top" >
 
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
@@ -20,23 +21,39 @@ outline: deep
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
+</div>
+
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
     <br>Content-Type: application/json 正确 
 :::
 
-####  接入流程 <br>
-1. 请求收银台下单接口
+####  接入流程 <br><br>
+
+<div style="height: 200px;">
+  <el-steps direction="vertical" :active="5">
+    <el-step title="请求收银台下单接口" process-status="success"></el-step>
+    <el-step title="获取接口响应redirectUrl" process-status="success" ></el-step>
+    <el-step title="重定向到获取的redirectUrl" process-status="success"></el-step>
+    <el-step title="完成下单" process-status="success"></el-step>
+    <el-step title="处理异步通知，更新订单状态。并返回异步通知中的transactionId" process-status="success"></el-step>
+  </el-steps>
+</div>
+
+<!-- 1. 请求收银台下单接口
 2. 获取接口响应redirectUrl
 3. 重定向到获取的redirectUrl
 4. 完成下单
-5. 处理异步通知并返回 transactionId
+5. 处理异步通知，更新订单状态。并返回异步通知中的transactionId -->
 
 
 ## 收银台支付
 
 #### 请求参数
+
+
+<div class="custom-table bordered-table">
 
 | 名称	 | 类型   | 长度  | 必填	  | 签名  | 描述  |
 |-------------|---------------|--------------|--------------|--------------|--------------|
@@ -54,41 +71,45 @@ Content-Type: application/json; charset=UTF-8 错误
 | mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集，risk3dsStrategy为EXTERNAL时需要。 格式为 json 字符串。 请参阅对象 MpiInfo |
 | txnOrderMsg           | String | /   | YES  | Yes | 交易业务信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TxnOrderMsg                        |
 | cardInfo              | String | /   | No  | Yes | 交易卡信息。 格式为 json 字符串。 请参阅对象 TxnCardInfo                                  |
-| billingInformation    | String | /   | Yes  | Yes | 交易账单信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TransactionAddress                 |
-| shippingInformation   | String | /   | Yes  | Yes | 交易邮寄信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TransactionAddress               |
+| billingInformation    | String | /   | Yes  | Yes | 交易账单信息。 格式为 json 字符串。 请参阅对象 TransactionAddress                 |
+| shippingInformation   | String | /   | Yes  | Yes | 交易邮寄信息。 格式为 json 字符串。 请参阅对象 TransactionAddress               |
 | lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，productType为LPMS时必填，格式为json字符串。 请参阅对象 LpmsInfo                 |
 | sign                  | String | /   | Yes | No  | 签名字符串。                                                                  |
 
 
- 
-
-::: warning  注意: 
-billingInformation、shippingInformation 、txnOrderMsg 订阅复购可不传 
-:::
+</div>
 
 #### TxnOrderMsg
+
+
+<div class="custom-table bordered-table">
 
 | 名称        | 类型     | 长度   | 必填  | 签名 | 描述                                                                                                                                                                                                                                               |
 |-----------|--------|------|-----|----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | returnUrl | String | 256  | Yes | No | 商户的回跳地址                                                                                                                                                                                                                                          |
-| products  | String | 1024 | Yes | No | 产品信息列表。 格式为 json 字符串。例如：<br/>[{"name":"iphone11","price":"5300.00",<br/>"num":"2","currency":"CNY"}, {"name":"macBook","price":"1234.00",<br/>"num":"1","currency":"USD","type":"discount"}]，其中type字段的枚举如下：<br>discount<br>shipping_fee <br>不传 `type` 就是商品信息本身 |
+| products  | String | 1024 | Yes | No | 产品信息列表。|
 | appId     | String | 20   | Yes | No | 商户应用程序 ID。 <br/>商户注册网站时，OnerWay会为商户创建一个应用id                                                                                                                                                                                                           |
 | notifyUrl | String | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                                        
 
+</div>
 
 ::: warning  注意
-products 必须为JSON字符串格式 否则签名将会报错 
+products 必须为JSON字符串格式 。例如：其中type字段的枚举如下：<br>discount<br>shipping_fee 
 :::
 
 #### TxnCardInfo
 
+<div class="custom-table bordered-table">
 
 | 名称         | 类型     | 长度 | 必填 | 签名 | 描述    |
 |------------|--------|----|----|----|-------|
 | holderName | String | 48 | No | No | 持卡人姓名 |
 
+</div>
 
 #### TransactionAddress
+
+<div class="custom-table bordered-table">
 
 | 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                                        |
 |----------------|--------|-----|-----|----|-----------------------------------------------------------|
@@ -109,6 +130,7 @@ products 必须为JSON字符串格式 否则签名将会报错
 | birthDate      | String | 64  | No  | No  | 出生日期，格式为 yyyy/MM/dd                                       |
 
 
+</div>
 
 ::: warning  注意
 销售虚拟商品的商户 必须提前与我们沟通。
@@ -118,14 +140,21 @@ products 必须为JSON字符串格式 否则签名将会报错
 
  #### 响应参数
 
+ <div class="custom-table bordered-table">
+
 | 名称       | 类型     | 签名 | 描述                  |
 |----------|--------|----|---------------------|
 | respCode | String | No | 来自 Onerway 的响应码     |
 | respMsg  | String | No | 来自 Onerway 的响应信息    |
 | data     | Map    | No | 响应数据。 请参阅对象 TxnInfo |
 
+</div>
+
 
  #### TxnInfo
+
+
+ <div class="custom-table bordered-table">
 
 | 名称            | 类型     | 签名  | 描述                                                |
 |---------------|--------|-----|---------------------------------------------------|
@@ -144,9 +173,14 @@ products 必须为JSON字符串格式 否则签名将会报错
 | redirectUrl   | String | Yes | 当交易状态为U时，需要将商户重定向到这里才能打开收银页面（url需要经过URLDecoder解码） |
 | sign          | String | No  | 签名字符串。                                            |
 
+</div>
 
 
-## 以下部分展示了收银台接口的请求示例：
+## 以下部分展示了收银台接口的请求响应示例：
+
+
+  <el-tabs v-model="activeName" >
+    <el-tab-pane label="请求参数" name="first">
 
 ### Request
 
@@ -168,15 +202,15 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
   "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"appId\":1755154682941415424}",
   "sign":""  //这里的sign字符串需要通过签名获得
 }
-
 ```
-
 ::: warning  此示例仅限参考 请勿拿此示例直接请求。
 :::
-
-## 以下部分展示了收银台接口的响应示例：
+</el-tab-pane>
+    <el-tab-pane label="响应参数" name="second">
 
 ### Response
+
+响应参数
 
 ```json
 
@@ -207,5 +241,17 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+```
+</el-tab-pane>
+  </el-tabs>
 
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+  };
+</script>
 

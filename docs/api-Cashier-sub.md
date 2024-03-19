@@ -10,12 +10,16 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+
+<div class="table-request-top">
+
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
+</div>
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
@@ -26,12 +30,14 @@ Content-Type: application/json; charset=UTF-8 错误
 ## 订阅支付
 请求参数
 
+<div class="custom-table bordered-table">
+
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
 | subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅 SubProductTypeEnum |
 | subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 json 字符串。 请参阅对象 Subscription                           |
 
-
+</div>
 
 ::: warning   订阅请求参数可参考收银台信用卡支付，只需将"subProductType":"DIRECT",改为 subProductType："SUBSCRIBE" 即可
 :::
@@ -40,7 +46,13 @@ Content-Type: application/json; charset=UTF-8 错误
 
 ## 以下部分展示了订阅支付的请求示例：
 
+
+
+  <el-tabs v-model="activeName" >
+    <el-tab-pane label="请求参数" name="first">
+
 ### Request
+
 
 https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
 
@@ -68,9 +80,11 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 ::: warning  此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-## 以下部分展示了订阅支付响应示例：
+</el-tab-pane>
+    <el-tab-pane label="响应参数" name="second">
 
 ### Response
+
 
 ```json
 
@@ -101,4 +115,20 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+```
+
+</el-tab-pane>
+  </el-tabs>
+
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+  };
+</script>
+
+
 

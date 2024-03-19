@@ -13,12 +13,17 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+
+
+<div class="table-request-top">
+
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
+</div>
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
@@ -31,11 +36,14 @@ Content-Type: application/json; charset=UTF-8 错误
 
 请求参数
 
+<div class="custom-table bordered-table">
 
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
 | productType | String | 16 | Yes | Yes | 产品类型，请参阅 ProductTypeEnum |                                       |
     
+</div>
+
 
 ::: warning   收银台支付的本地支付，请求参数可参考收银台信用卡支付，只需将productType：CARD 改为 productType：LPMS 即可；如您信用卡和本地支付需要同时使用，则需改为productType：ALL 打开聚合收银台
 :::
@@ -44,6 +52,9 @@ Content-Type: application/json; charset=UTF-8 错误
 
 ##### LpmsInfo
 
+
+<div class="custom-table bordered-table">
+
 | 名称            | 类型     | 长度  | 必填  | 签名 | 描述                                                                                               |
 |---------------|--------|-----|-----|----|--------------------------------------------------------------------------------------------------|
 | lpmsType      | String | 64  | Yes | No | 本地支付方式。 请参阅 LpmsTypeEnum                                                                         |
@@ -51,9 +62,14 @@ Content-Type: application/json; charset=UTF-8 错误
 | iBan          | String | 64  | No  | No | 银行账户，部分地区转账时需要                                                                                   |
 | prepaidNumber | String | /   | No  | No | 预付费卡号，部分支付方式需要                                                                                   |
 
+</div>
+
+## 以下部分展示了本地支付的请求响应示例：
 
 
-## 以下部分展示了本地支付的请求示例：
+
+  <el-tabs v-model="activeName" >
+    <el-tab-pane label="请求参数" name="first">
 
 ### Request
 
@@ -77,13 +93,14 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 }
 
 ```
-
 ::: warning  此示例仅限参考 请勿拿此示例直接请求。
 :::
-
-## 以下部分展示了本地支付的响应示例：
+</el-tab-pane>
+    <el-tab-pane label="响应参数" name="second">
 
 ### Response
+
+响应参数
 
 ```json
 
@@ -114,3 +131,17 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+```
+</el-tab-pane>
+  </el-tabs>
+
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+  };
+</script>
+

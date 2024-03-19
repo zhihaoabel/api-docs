@@ -90,12 +90,27 @@ export default defineConfig({
                             {text: '两方支付', link: '/api-direct'},
                             {text: '本地支付', link: '/api-direct-lpms'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
+
+
                             {text: '订阅', link: '/api-direct-sub'},
+                            {text: '预授权请款/撤销', link: '/api-direct-auth'},
+
                         ],
                         collapsed: true,
                     },
+                   
+
                 ],
             },
+            {
+                text: '交易查询',
+                items: [
+                    {text: '交易订单查询', link: '/api-orderInquiry'}, 
+                    {text: '查询拒付单', link: '/api-refusalQuery'},
+                ],
+                collapsed: true,
+            },
+
             {
                 text: '通知',
                 link: '/notify',
@@ -103,6 +118,10 @@ export default defineConfig({
             {
                 text: '枚举',
                 link: '/enums',
+            },
+            {
+                text: '退款',
+                link: '/refund',
             }
         ],
 

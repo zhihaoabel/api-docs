@@ -24,6 +24,7 @@ Note, Example
 
 .vp-doc table {
     margin: 0;
+    
 }
 
 .vp-doc th, .vp-doc td {
@@ -143,4 +144,26 @@ a.plain-link:hover {
 .vp-doc :not(pre, h1, h2, h3, h4, h5, h6) > .custom-code {
     font-size: var(--vp-code-font-size);
     color: var(--vp-code-color);
+}
+
+
+.table-request-top{
+    background-color: #f4faff;
+    /* border-radius: 10px; */
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+}
+
+.table-request-top td {
+    background-color: #f4faff;
+}
+
+.table-request-top th{
+    background-color: #f4faff;
+    border-bottom: 1px solid #e6e6e6;
+
+}
+
+.table-request-top table{
+    border-radius: 5px;
 }

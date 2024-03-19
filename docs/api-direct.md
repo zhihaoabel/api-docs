@@ -53,8 +53,8 @@ Content-Type: application/json; charset=UTF-8 错误
 | mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集，risk3dsStrategy为EXTERNAL时需要。 格式为 json 字符串。 请参阅对象 MpiInfo                      |
 | txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TxnOrderMsg                                             |
 | cardInfo              | String | /   | No  | Yes | 交易卡信息，productType为CARD时，除订阅复购、Token支付、Google Pay、Apple Pay外必填。 格式为 json 字符串。 请参象 TxnCardInfo |
-| billingInformation    | String | /   | No  | Yes | 交易账单信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TransactionAddress                                      |
-| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TransactionAddress                                      |
+| billingInformation    | String | /   | No  | Yes | 交易账单信息。 格式为 json 字符串。 请参阅对象 TransactionAddress                                      |
+| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息。 格式为 json 字符串。 请参阅对象 TransactionAddress                                      |
 | lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，productType为LPMS时，除协议代扣外必填，格式为json字符串。 请参阅对象 LpmsInfo                               |
 | tokenInfo             | String | /   | No  | Yes | token信息，subProductType为TOKEN或AUTO_DEBIT时必填，格式为json字符串。 请参阅对象 TokenInfo                       |
 | sign                  | String | /   | Yes | No  | 签名字符串。                                                                                       |
@@ -135,7 +135,7 @@ Content-Type: application/json; charset=UTF-8 错误
 | txnTime       | String | Yes | 交易完成时间，格式为yyyy-MM-dd HH:mm:ss               |
 | txnTimeZone   | String | Yes | 交易完成时区，例如：+08:00                            |
 | orderAmount   | String | Yes | 交易订单金额                                      |
-| orderCurrency | String | Yes | 交易订单币种。 请参阅 ISO 4217 货币代码                   |
+| orderCurrency | String | Yes | 交易订单币种。 请参阅 ISO 4217 货币代码       |
 | txnAmount     | String | Yes | 订单金额转换成结算币种后的金额                             |
 | txnCurrency   | String | Yes | 结算币种。 请参阅 ISO 4217 货币代码                     |
 | status        | String | Yes | 交易处理结果。 请参阅 TxnStatusEnum                   |
