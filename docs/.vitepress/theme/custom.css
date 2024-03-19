@@ -144,3 +144,14 @@ a.plain-link:hover {
     font-size: var(--vp-code-font-size);
     color: var(--vp-code-color);
 }
+
+#table-hover-container {
+    display: none; /* 初始状态隐藏 */
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 300px; /* 示例最大高度 */
+    overflow: auto; /* 启用滚动 */
+}

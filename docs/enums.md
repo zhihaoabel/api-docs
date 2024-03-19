@@ -8,15 +8,24 @@ outline: deep
 
 # 通用参数枚举
 
+<script>
+
+</script>
+
+<div id="table-hover-container">
+    <!-- 完整表格内容将被动态插入这里 -->
+
+</div>
+
 ## ProductTypeEnum
 
 <div class="custom-table bordered-table">
 
-| 代码        | 描述      |
-| ----------- | --------- |
-| DIRECT      | 直接支付  |
-| SUBSCRIBE   | 订阅支付  |
-| INSTALLMENT | 分期支付  |
+| 代码          | 描述      |
+|-------------|---------|
+| DIRECT      | 直接支付    |
+| SUBSCRIBE   | 订阅支付    |
+| INSTALLMENT | 分期支付    |
 | TOKEN       | token支付 |
 
 </div>
@@ -25,11 +34,11 @@ outline: deep
 
 <div class="custom-table bordered-table">
 
-| 代码        | 描述      |
-| ----------- | --------- |
-| DIRECT      | 直接支付  |
-| SUBSCRIBE   | 订阅支付  |
-| INSTALLMENT | 分期支付  |
+| 代码          | 描述      |
+|-------------|---------|
+| DIRECT      | 直接支付    |
+| SUBSCRIBE   | 订阅支付    |
+| INSTALLMENT | 分期支付    |
 | TOKEN       | token支付 |
 | AUTO_DEBIT  | 代扣      |
 
@@ -39,15 +48,15 @@ outline: deep
 
 <div class="custom-table bordered-table">
 
-| 代码      | 描述                                                       |
-| --------- | ---------------------------------------------------------- |
-| SALE      | 支付                                                       |
-| REFUND    | 退款，仅用于交易查询、异步通知                             |
+| 代码        | 描述                            |
+|-----------|-------------------------------|
+| SALE      | 支付                            |
+| REFUND    | 退款，仅用于交易查询、异步通知               |
 | BIND_CARD | 绑定支付方式（包括卡和本地支付），仅用于交易查询、异步通知 |
-| AUTH      | 预授权                                                     |
-| PRE_AUTH  | 预授权                                                     |
-| CAPTURE   | 预授权请款                                                 |
-| VOID      | 预授权撤销                                                 |
+| AUTH      | 预授权                           |
+| PRE_AUTH  | 预授权                           |
+| CAPTURE   | 预授权请款                         |
+| VOID      | 预授权撤销                         |
 
 </div>
 
@@ -55,13 +64,13 @@ outline: deep
 
 <div class="custom-table bordered-table">
 
-| 代码             | 描述                               |
-| ---------------- | ---------------------------------- |
-| WEB              | 终端是通过PC浏览器打开的网站       |
+| 代码               | 描述                  |
+|------------------|---------------------|
+| WEB              | 终端是通过PC浏览器打开的网站     |
 | WAP              | 终端是通过移动浏览器打开的HTML页面 |
-| MINI_PROGRAM     | 终端是小程序                       |
-| IN_APP           | 终端是APP                          |
-| OFFICIAL_ACCOUNT | 终端是公众号                       |
+| MINI_PROGRAM     | 终端是小程序              |
+| IN_APP           | 终端是APP              |
+| OFFICIAL_ACCOUNT | 终端是公众号              |
 
 </div>
 
@@ -73,10 +82,10 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码    | 描述 |
-| ------- | ---- |
-| IOS     | IOS  |
-| ANDROID | 安卓 |
+| 代码      | 描述  |
+|---------|-----|
+| IOS     | IOS |
+| ANDROID | 安卓  |
 
 </div>
 
@@ -84,12 +93,12 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码         | 描述             |
-| ------------ | ---------------- |
-| TXN          | 交易类通知       |
+| 代码           | 描述       |
+|--------------|----------|
+| TXN          | 交易类通知    |
 | REFUND_AUDIT | 退款审核结果通知 |
-| CANCEL       | 取消交易通知     |
-| CHARGEBACK   | 拒付通知         |
+| CANCEL       | 取消交易通知   |
+| CHARGEBACK   | 拒付通知     |
 
 </div>
 
@@ -97,15 +106,15 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码 | 描述                         |
-| ---- | ---------------------------- |
-| S    | 交易成功                     |
-| F    | 交易失败 / 审核不通过        |
-| P    | 交易结果未知（处理中）       |
-| R    | 需要3ds验证                  |
-| N    | 交易被取消                   |
-| I    | 退款待审核/取消待处理        |
-| U    | 待付款，仅在收银台支付中出现 |
+| 代码 | 描述             |
+|----|----------------|
+| S  | 交易成功           |
+| F  | 交易失败 / 审核不通过   |
+| P  | 交易结果未知（处理中）    |
+| R  | 需要3ds验证        |
+| N  | 交易被取消          |
+| I  | 退款待审核/取消待处理    |
+| U  | 待付款，仅在收银台支付中出现 |
 
 </div>
 
@@ -113,12 +122,12 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码 | 描述   |
-| ---- | ------ |
-| 0    | 处理中 |
-| 1    | 生效   |
-| 2    | 不生效 |
-| 3    | 被取消 |
+| 代码 | 描述  |
+|----|-----|
+| 0  | 处理中 |
+| 1  | 生效  |
+| 2  | 不生效 |
+| 3  | 被取消 |
 
 </div>
 
@@ -126,11 +135,11 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码     | 描述                                   |
-| -------- | -------------------------------------- |
-| INNER    | 内部 3ds                               |
-| EXTERNAL | 外置3ds                                |
-| NONE     | 强制不使用 3ds                         |
+| 代码       | 描述                       |
+|----------|--------------------------|
+| INNER    | 内部 3ds                   |
+| EXTERNAL | 外置3ds                    |
+| NONE     | 强制不使用 3ds                |
 | DEFAULT  | 默认（取决于Onerway判断是否需要走3ds） |
 
 </div>
@@ -139,17 +148,17 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码            | 描述                 |
-| --------------- | -------------------- |
-| GUANGZHOU       | 广州海关             |
-| HANGZHOU        | 杭州海关             |
-| NINGBO          | 宁波海关             |
+| 代码              | 描述         |
+|-----------------|------------|
+| GUANGZHOU       | 广州海关       |
+| HANGZHOU        | 杭州海关       |
+| NINGBO          | 宁波海关       |
 | ZHENGZHOU_BS    | 郑州（保税物流中心） |
-| CHONGQING       | 重庆海关             |
-| SHANGHAI        | 上海海关             |
-| SHENZHEN        | 深圳海关             |
-| ZHENGZHOU_ZH_ZS | 郑州综合保税区       |
-| TIANJIN         | 天津海关             |
+| CHONGQING       | 重庆海关       |
+| SHANGHAI        | 上海海关       |
+| SHENZHEN        | 深圳海关       |
+| ZHENGZHOU_ZH_ZS | 郑州综合保税区    |
+| TIANJIN         | 天津海关       |
 
 </div>
 
@@ -157,8 +166,8 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码    | 描述     |
-| ------- | -------- |
+| 代码      | 描述   |
+|---------|------|
 | ID_CARD | 身份证号 |
 
 </div>
@@ -167,8 +176,8 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码  | 描述               |
-| ----- | ------------------ |
+| 代码    | 描述        |
+|-------|-----------|
 | CUP   | 表示清算渠道为银联 |
 | NUCC  | 表示清算通道为网联 |
 | OTHER | 表示清算通道为其他 |
@@ -179,19 +188,19 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码   | 描述                     |
-| ------ | ------------------------ |
-| NEW    | 表示发生新的拒付         |
-| FA     | 在第一次申诉中           |
-| FAF    | 第一次申诉失败           |
-| FAS    | 第一次申诉成功           |
-| FAT    | 第一次申诉超时           |
-| SA     | 在第二次申诉中           |
-| SAF    | 第二次申诉失败           |
-| SAS    | 第二次申诉成功           |
-| SAT    | 第二次申诉超时           |
-| ACCEPT | 接受拒付                 |
-| REVOKE | 拒付被撤销               |
+| 代码     | 描述           |
+|--------|--------------|
+| NEW    | 表示发生新的拒付     |
+| FA     | 在第一次申诉中      |
+| FAF    | 第一次申诉失败      |
+| FAS    | 第一次申诉成功      |
+| FAT    | 第一次申诉超时      |
+| SA     | 在第二次申诉中      |
+| SAF    | 第二次申诉失败      |
+| SAS    | 第二次申诉成功      |
+| SAT    | 第二次申诉超时      |
+| ACCEPT | 接受拒付         |
+| REVOKE | 拒付被撤销        |
 | DELETE | 被删除（仅用于拒付通知） |
 
 </div>
@@ -200,26 +209,26 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码  | 描述     |
-| ----- | -------- |
+| 代码    | 描述   |
+|-------|------|
 | zh-cn | 中文简体 |
-| en    | 英语     |
-| de    | 德语     |
+| en    | 英语   |
+| de    | 德语   |
 | es    | 西班牙语 |
-| fr    | 法语     |
+| fr    | 法语   |
 | it    | 意大利语 |
-| nl    | 荷兰语   |
-| ko    | 韩语     |
-| zh-tw | 繁体     |
-| ja    | 日语     |
-| th    | 泰语     |
+| nl    | 荷兰语  |
+| ko    | 韩语   |
+| zh-tw | 繁体   |
+| ja    | 日语   |
+| th    | 泰语   |
 | ar    | 阿拉伯语 |
-| ru    | 俄语     |
-| sv    | 瑞典语   |
-| fi    | 芬兰语   |
+| ru    | 俄语   |
+| sv    | 瑞典语  |
+| fi    | 芬兰语  |
 | pt    | 葡萄牙语 |
-| pl    | 波兰语   |
-| no    | 挪威语   |
+| pl    | 波兰语  |
+| no    | 挪威语  |
 
 </div>
 
@@ -227,11 +236,11 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码        | 描述              |
-| ----------- | ----------------- |
+| 代码          | 描述         |
+|-------------|------------|
 | RedirectURL | 需要使用重定向url |
 | QrCode      | 需要使用码信息    |
-| ShowContext | 需要使用文本内容  |
+| ShowContext | 需要使用文本内容   |
 
 </div>
 
@@ -239,14 +248,14 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码 | 描述                                               |
-| ---- | -------------------------------------------------- |
-| 00   | MasterCard使用。ACS服务不可用或者卡片不支持3D验证  |
-| 01   | MasterCard使用。持卡人或发卡行未注册3D安全验证服务 |
-| 02   | MasterCard使用。持卡人3D安全验证通过               |
-| 05   | Visa使用。持卡人3D安全验证通过                     |
-| 06   | Visa使用。持卡人或发卡行未注册3D安全验证服务       |
-| 07   | Visa使用。ACS服务不可用或者卡片不支持3D验证        |
+| 代码 | 描述                               |
+|----|----------------------------------|
+| 00 | MasterCard使用。ACS服务不可用或者卡片不支持3D验证 |
+| 01 | MasterCard使用。持卡人或发卡行未注册3D安全验证服务  |
+| 02 | MasterCard使用。持卡人3D安全验证通过         |
+| 05 | Visa使用。持卡人3D安全验证通过               |
+| 06 | Visa使用。持卡人或发卡行未注册3D安全验证服务        |
+| 07 | Visa使用。ACS服务不可用或者卡片不支持3D验证       |
 
 </div>
 
@@ -254,8 +263,8 @@ ANDROID 安卓
 
 <div class="custom-table bordered-table">
 
-| 代码      | 描述                                         |
-| --------- | -------------------------------------------- |
+| 代码        | 描述                                 |
+|-----------|------------------------------------|
 | GooglePay | 由GooglePay提供token，一般用于Google Pay场景 |
 | ApplePay  | 由ApplePay提供token，一般用于Apple Pay场景   |
 
@@ -264,7 +273,7 @@ ANDROID 安卓
 
 ## LpmsTypeEnum
 
-<div class="custom-table bordered-table">
+<div id="zoom-table" class="custom-table bordered-table">
 
 | 本地支付方式类型          | 名称                  | 国家(ISO标准)                                                                                                                                                                          | 支持币种                                                  | 必填字段                                                                                                    | 单笔限额                                                                                                                                            |
 |-------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
