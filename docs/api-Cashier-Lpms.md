@@ -13,12 +13,17 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+
+
+<div class="table-request-top">
+
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
+</div>
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
@@ -31,11 +36,14 @@ Content-Type: application/json; charset=UTF-8 错误
 
 请求参数
 
+<div class="custom-table bordered-table">
 
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
 | productType | String | 16 | Yes | Yes | 产品类型，请参阅 ProductTypeEnum |                                       |
     
+</div>
+
 
 ::: warning   收银台支付的本地支付，请求参数可参考收银台信用卡支付，只需将productType：CARD 改为 productType：LPMS 即可；如您信用卡和本地支付需要同时使用，则需改为productType：ALL 打开聚合收银台
 :::
@@ -44,6 +52,9 @@ Content-Type: application/json; charset=UTF-8 错误
 
 ##### LpmsInfo
 
+
+<div class="custom-table bordered-table">
+
 | 名称            | 类型     | 长度  | 必填  | 签名 | 描述                                                                                               |
 |---------------|--------|-----|-----|----|--------------------------------------------------------------------------------------------------|
 | lpmsType      | String | 64  | Yes | No | 本地支付方式。 请参阅 LpmsTypeEnum                                                                         |
@@ -51,23 +62,25 @@ Content-Type: application/json; charset=UTF-8 错误
 | iBan          | String | 64  | No  | No | 银行账户，部分地区转账时需要                                                                                   |
 | prepaidNumber | String | /   | No  | No | 预付费卡号，部分支付方式需要                                                                                   |
 
+</div>
 
+## 以下部分展示了本地支付的请求响应示例：
 
-## 以下部分展示了本地支付的请求示例：
-
-### Request
 
 https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
 
-```json
+::: code-group
+
+```json [请求参数]
+
 {
   "merchantNo": "800252",
   "merchantTxnId": "164604252511",
   "merchantTxnTime":"2022-02-28 15:30:30",
   "merchantTxnTimeZone":"+08:00",
-  "productType":"LPMS",
+  "productType":"LPMS",  // [!code error]
   "subProductType":"DIRECT",
-  "txnType": "SALE",	
+  "txnType": "SALE",	 
   "orderAmount": "20",
   "orderCurrency": "USD",
   "shippingInformation":"{\"firstName\":\"da\",\"lastName\":\"xiong\",\"phone\":\"8522847000\",\"email\":\"shipping@example.com\",\"postalCode\":\"123456\",\"address\":\"HHHEEII\",\"country\":\"KR\",\"province\":\"BABA\",\"city\":\"BALALA\",\"street\":\"1010\",\"number\":\"20-1202\",\"identityNumber\":\"11112223333\",\"birthDate\":\"2020/12/28\"}",
@@ -78,14 +91,7 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
-
-## 以下部分展示了本地支付的响应示例：
-
-### Response
-
-```json
+```json [响应参数]
 
 {
     "respCode": "20000",
@@ -114,3 +120,9 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+
+```
+:::
+
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::
