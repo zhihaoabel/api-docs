@@ -51,20 +51,21 @@ Content-Type: application/json; charset=UTF-8 错误
 
 ## 以下部分展示了聚合收银台的请求示例：
 
-  <el-tabs v-model="activeName" >
-    <el-tab-pane label="请求参数" name="first">
-
-### Request
 
 https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
 
-```json
+
+
+::: code-group
+
+```json [请求参数]
+
 {
   "merchantNo": "800252",
   "merchantTxnId": "164604252511",
   "merchantTxnTime":"2022-02-28 15:30:30",
   "merchantTxnTimeZone":"+08:00",
-  "productType":"ALL",
+  "productType":"ALL",  // [!code error]
   "subProductType":"DIRECT",
   "txnType": "SALE",	
   "orderAmount": "20",
@@ -76,16 +77,8 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 }
 
 ```
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
-</el-tab-pane>
-    <el-tab-pane label="响应参数" name="second">
 
-### Response
-
-响应参数
-
-```json
+```json [响应参数]
 
 {
     "respCode": "20000",
@@ -114,17 +107,9 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+
 ```
-</el-tab-pane>
-  </el-tabs>
+:::
 
-<script>
-  export default {
-    data() {
-      return {
-        activeName: 'first'
-      };
-    },
-  };
-</script>
-
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::

@@ -179,20 +179,18 @@ products 必须为JSON字符串格式 。例如：其中type字段的枚举如�
 ## 以下部分展示了收银台接口的请求响应示例：
 
 
-  <el-tabs v-model="activeName" >
-    <el-tab-pane label="请求参数" name="first">
+https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
-### Request
+::: code-group
 
-https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
+```json [请求参数]
 
-```json
 {
   "merchantNo": "800252",
   "merchantTxnId": "164604252511",
   "merchantTxnTime":"2022-02-28 15:30:30",
   "merchantTxnTimeZone":"+08:00",
-  "productType":"CARD",
+  "productType":"CARD",   // [!code error]
   "subProductType":"DIRECT",
   "txnType": "SALE",	
   "orderAmount": "20",
@@ -202,17 +200,10 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
   "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"appId\":1755154682941415424}",
   "sign":""  //这里的sign字符串需要通过签名获得
 }
+
 ```
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
-</el-tab-pane>
-    <el-tab-pane label="响应参数" name="second">
 
-### Response
-
-响应参数
-
-```json
+```json [响应参数]
 
 {
     "respCode": "20000",
@@ -241,17 +232,9 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+
 ```
-</el-tab-pane>
-  </el-tabs>
+:::
 
-<script>
-  export default {
-    data() {
-      return {
-        activeName: 'first'
-      };
-    },
-  };
-</script>
-
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::

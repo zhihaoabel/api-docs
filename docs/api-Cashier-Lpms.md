@@ -67,23 +67,20 @@ Content-Type: application/json; charset=UTF-8 错误
 ## 以下部分展示了本地支付的请求响应示例：
 
 
-
-  <el-tabs v-model="activeName" >
-    <el-tab-pane label="请求参数" name="first">
-
-### Request
-
 https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
 
-```json
+::: code-group
+
+```json [请求参数]
+
 {
   "merchantNo": "800252",
   "merchantTxnId": "164604252511",
   "merchantTxnTime":"2022-02-28 15:30:30",
   "merchantTxnTimeZone":"+08:00",
-  "productType":"LPMS",
+  "productType":"LPMS",  // [!code error]
   "subProductType":"DIRECT",
-  "txnType": "SALE",	
+  "txnType": "SALE",	 
   "orderAmount": "20",
   "orderCurrency": "USD",
   "shippingInformation":"{\"firstName\":\"da\",\"lastName\":\"xiong\",\"phone\":\"8522847000\",\"email\":\"shipping@example.com\",\"postalCode\":\"123456\",\"address\":\"HHHEEII\",\"country\":\"KR\",\"province\":\"BABA\",\"city\":\"BALALA\",\"street\":\"1010\",\"number\":\"20-1202\",\"identityNumber\":\"11112223333\",\"birthDate\":\"2020/12/28\"}",
@@ -93,16 +90,8 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 }
 
 ```
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
-</el-tab-pane>
-    <el-tab-pane label="响应参数" name="second">
 
-### Response
-
-响应参数
-
-```json
+```json [响应参数]
 
 {
     "respCode": "20000",
@@ -131,17 +120,9 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+
 ```
-</el-tab-pane>
-  </el-tabs>
+:::
 
-<script>
-  export default {
-    data() {
-      return {
-        activeName: 'first'
-      };
-    },
-  };
-</script>
-
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::

@@ -48,22 +48,21 @@ Content-Type: application/json; charset=UTF-8 错误
 
 
 
-  <el-tabs v-model="activeName" >
-    <el-tab-pane label="请求参数" name="first">
-
-### Request
-
-
 https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
 
-```json
+
+
+
+::: code-group
+
+```json [请求参数]
 {
   "merchantNo":"800052",
   "merchantTxnId":"1640247522000",
   "merchantTxnTime":"2021-12-22 15:30:30",
   "merchantTxnTimeZone":"+08:00",
   "productType":"CARD",
-  "subProductType":"SUBSCRIBE",
+  "subProductType":"SUBSCRIBE",   // [!code error]
   "txnType":"SALE",
   "orderAmount":"200",
   "orderCurrency":"USD",
@@ -74,19 +73,10 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
   "subscription":"{\"merchantCustId\":\"custId_1640247522000\",\"requestType\":\"0\",\"expireDate\":\"2022-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1}",
   "sign":""  //这里的sign字符串需要通过签名获得
 }
-
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
+```json [响应参数]
 
-</el-tab-pane>
-    <el-tab-pane label="响应参数" name="second">
-
-### Response
-
-
-```json
 
 {
     "respCode": "20000",
@@ -115,20 +105,9 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "qrCode": null
     }
 }
+
 ```
+:::
 
-</el-tab-pane>
-  </el-tabs>
-
-<script>
-  export default {
-    data() {
-      return {
-        activeName: 'first'
-      };
-    },
-  };
-</script>
-
-
-
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::
