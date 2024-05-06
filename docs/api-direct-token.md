@@ -13,11 +13,15 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+<div class="table-request-top"> 
+
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard      |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
+
+</div>
 
 
 ::: warning  注意:
@@ -28,6 +32,8 @@ Content-Type: application/json; charset=UTF-8 错误
 
 #### 请求参数
 
+
+<div class="custom-table bordered-table">
 
 | 名称             | 类型     | 长度  | 必填  | 签名  | 描述                                     |
 |----------------|--------|-----|-----|-----|----------------------------------------|
@@ -40,8 +46,10 @@ Content-Type: application/json; charset=UTF-8 错误
 | transactionIp  | String | 64  | Yes | Yes | 商户客户的交易IP                              |
 | sign           | String | /   | Yes | No  | 签名字符串。                                 |                 |
 
+</div>
 
 
+<div class="custom-table bordered-table">
 
 ##### TxnCardInfo
 
@@ -53,8 +61,13 @@ Content-Type: application/json; charset=UTF-8 错误
 | year       | String | 64  | Yes | No | 卡号年份，例如： 2021 |
 | cvv        | String | 64  | Yes | No | 卡号cvv         |
 
+</div>
+
 
 ##### 响应参数
+
+
+<div class="custom-table bordered-table">
 
 | 名称       | 类型     | 签名 | 描述                    |
 |----------|--------|----|-----------------------|
@@ -62,8 +75,11 @@ Content-Type: application/json; charset=UTF-8 错误
 | respMsg  | String | No | 来自 Onerway 的响应信息      |
 | data     | Map    | No | 响应数据。 请参阅对象 TokenInfo |
 
+</div>
 
 ##### TokenInfo
+
+<div class="custom-table bordered-table">
 
 | 名称            | 类型     | 签名  | 描述              |
 |---------------|--------|-----|-----------------|
@@ -71,14 +87,18 @@ Content-Type: application/json; charset=UTF-8 错误
 | tokenId       | String | Yes | 绑卡令牌id          |
 | sign          | String | No  | 签名字符串。          |
 
+</div>
 
-## 以下部分展示了获取token的请求示例：
+
+## 以下部分展示了获取token的请求以及响应示例：
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard <Badge type="tip">POST</Badge>
 
-```json
+::: code-group
+
+```json[请求参数]
 {
   "merchantNo":"800037",
   "appId":"1458672763818790912",
@@ -89,8 +109,24 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">
   "transactionIp":"127.0.0.1",
   "sign":"..."
 }
+
 ```
 
+```json[响应参数]
+
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "transactionId": "1573856617225345201",
+    "tokenId": "2a6f9b7720403a161860b6cc9e2121e3bf0e2c59bad870501e51233ce7f34f6a",
+    "sign": "..."
+  }
+}
+
+```
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::
 
 ## Token绑卡支付
 
@@ -123,13 +159,15 @@ Content-Type: application/json; charset=UTF-8 错误
 
 
 
-## 以下部分展示了token支付的请求示例：
+## 以下部分展示了token支付的请求响应示例：
 
 ### Request
 
 https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
-```json
+::: code-group
+
+```json[请求参数]
 {
   "//": "token支付",
   "merchantNo":"800037",
@@ -148,19 +186,9 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">
   "sign":"..."
 }
 
-
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
-
-
-
-## 以下部分展示了Token绑卡响应示例：
-
-### Response
-
-```json
+```json[响应参数]
 {
   "//": "token支付",
   "respCode": "20000",
@@ -183,6 +211,8 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">
   }  
 }
 
+```
 
-
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::
 

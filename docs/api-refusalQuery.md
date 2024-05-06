@@ -9,16 +9,25 @@ outline: deep
 
 拒付订单查询是一种用于追踪和了解被拒绝支付的订单的过程。当客户或支付机构拒绝支付某个订单时，商家或相关方面可能需要进行拒付订单查询以获取有关该拒付的详细信息。
 
+  <el-alert
+    title="调用此接口之前，需先联系我们开通查询拒付权限。"
+    type="warning"
+    show-icon>
+  </el-alert>
 
 
 请求地址、请求方式、请求头 可以参考：
+
+
+<div class="table-request-top">
 
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com/v1/chargeback/list    |
 | Request Method | POST                                                          |
-| Content-Type   | application/json                                              |
-
+| Content-Type   | application/json         
+                                     |
+</div>
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
@@ -29,6 +38,9 @@ Content-Type: application/json; charset=UTF-8 错误
 ## 拒付订单查询
 
 #### 请求参数
+
+<div class="custom-table bordered-table">
+
 | 名称                   | 类型     | 长度 | 必填  | 签名  | 描述                                                      |
 |----------------------|--------|----|-----|-----|---------------------------------------------------------|
 | merchantNo           | String | 20 | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                             |
@@ -41,10 +53,12 @@ Content-Type: application/json; charset=UTF-8 错误
 | sign                 | String | /  | Yes | No  | 签名字符串。                                                  |
                             |
 
-
+</div>
 
 
 #### 响应参数
+
+<div class="custom-table bordered-table">
 
 | 名称       | 类型     | 签名 | 描述               |
 |----------|--------|----|------------------|
@@ -52,8 +66,13 @@ Content-Type: application/json; charset=UTF-8 错误
 | respMsg  | String | No | 来自 Onerway 的响应信息 |
 | data     | Map    | No | 响应数据。 请参阅对象 Page |
 
+</div>
+
+
 
 #### Page
+
+<div class="custom-table bordered-table">
 
 | 名称            | 类型     | 签名 | 描述                   |
 |---------------|--------|----|----------------------|
@@ -63,9 +82,15 @@ Content-Type: application/json; charset=UTF-8 错误
 | totalPages    | String | No | 总页数                  |
 | totalElements | String | No | 总条数                  |
 
+</div>
+
 
 
 #### ChargebackInfo
+
+
+
+<div class="custom-table bordered-table">
 
 | 名称                  | 类型     | 签名 | 描述                                |
 |---------------------|--------|----|-----------------------------------|
@@ -87,7 +112,7 @@ Content-Type: application/json; charset=UTF-8 错误
 | appealDueTime       | String | No | 申诉资料提交截止时间，格式为yyyy-MM-dd HH:mm:ss |
 | chargebackCode      | String | No | 拒付代码                              |
 
-
+</div>
 
 
 ## 以下部分展示了拒付订单查询的请求示例：
@@ -96,7 +121,10 @@ Content-Type: application/json; charset=UTF-8 错误
 
 https://sandbox-v3-acquiring.pacypay.com/v1/chargeback/list<Badge type="tip">POST</Badge>
 
-```json
+
+::: code-group
+
+```json [请求参数]
 {
   "chargebackIds":"",
   "current":"1",
@@ -108,19 +136,10 @@ https://sandbox-v3-acquiring.pacypay.com/v1/chargeback/list<Badge type="tip">POS
   "sign":"…"
 }
 
-
-
-
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
 
-## 以下部分展示了拒付订单查询响应示例：
-
-### Response
-
-```json
+```json [响应参数]
 
 
   "respCode":"20000",
@@ -153,3 +172,6 @@ https://sandbox-v3-acquiring.pacypay.com/v1/chargeback/list<Badge type="tip">POS
     "totalElements":1
   }
 }
+
+```
+

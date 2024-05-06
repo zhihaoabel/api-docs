@@ -149,9 +149,9 @@ a.plain-link:hover {
 
 .table-request-top{
     background-color: #f4faff;
-    /* border-radius: 10px; */
     border-radius: 5px;
     border: 1px solid #e6e6e6;
+ 
 }
 
 .table-request-top td {
@@ -161,9 +161,10 @@ a.plain-link:hover {
 .table-request-top th{
     background-color: #f4faff;
     border-bottom: 1px solid #e6e6e6;
-
 }
 
 .table-request-top table{
     border-radius: 5px;
 }
+
+
