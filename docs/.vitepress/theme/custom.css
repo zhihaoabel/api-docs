@@ -145,6 +145,28 @@ a.plain-link:hover {
     color: var(--vp-code-color);
 }
 
+
+.table-request-top{
+    background-color: #f4faff;
+    /* border-radius: 10px; */
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+}
+
+.table-request-top td {
+    background-color: #f4faff;
+}
+
+.table-request-top th{
+    background-color: #f4faff;
+    border-bottom: 1px solid #e6e6e6;
+
+}
+
+.table-request-top table{
+    border-radius: 5px;
+}
+
 #table-hover-container {
     display: none; /* 初始状态隐藏 */
     position: absolute;
