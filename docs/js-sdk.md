@@ -2009,15 +2009,15 @@ const Pacypay = require('./pacypay.js')
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度  | 必填  | 签名 |   | 描述                                                     |
-|----------------|--------|-----|-----|----|:--|--------------------------------------------------------|
-| requestType    | String | 1   | Yes | No |   | 订阅请求类型。<br/>枚举如下：**0 - 首购 1 - 复购**                     |
-| merchantCustId | String | 50  | No  | No |   | 商户客户id。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| expireDate     | String | 10  | No  | No |   | 过期日期。<br/><CMNote data="requestType为0时必填。"></CMNote>   |
-| frequencyType  | String | 1   | No  | No |   | 订阅频率类型。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| frequencyPoint | String | 2   | No  | No |   | 订阅频率点数。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| contractId     | String | 20  | No  | No |   | 订阅合同id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
-| tokenId        | String | 300 | No  | No |   | 订阅令牌id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
+| 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                                     |
+|----------------|--------|-----|-----|----|--------------------------------------------------------|
+| requestType    | String | 1   | Yes | No | 订阅请求类型。<br/>枚举如下：**0 - 首购 1 - 复购**                     |
+| merchantCustId | String | 50  | No  | No | 商户客户id。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| expireDate     | String | 10  | No  | No | 过期日期。<br/><CMNote data="requestType为0时必填。"></CMNote>   |
+| frequencyType  | String | 1   | No  | No | 订阅频率类型。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| frequencyPoint | String | 2   | No  | No | 订阅频率点数。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| contractId     | String | 20  | No  | No | 订阅合同id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
+| tokenId        | String | 300 | No  | No | 订阅令牌id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
 
 </div>
 
@@ -2046,11 +2046,11 @@ const Pacypay = require('./pacypay.js')
 | screenHeight   | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                                                                                                             |
 | screenWidth    | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                                                                                                             |
 | timeZoneOffset | String  | 64   | Yes | No | 持卡人浏览器的时区                                                                                                                                                                                                                                                                                                             |
-| accept         | String  | 2048 | Yes | No | 持卡人浏览器的 Accept 请求头                                                                                                                                                                                                                                                                                                    |
+| accept         | String  | 2048 | Yes | No | 持卡人浏览器的 `Accept` 请求头                                                                                                                                                                                                                                                                                                  |
 | userAgent      | String  | 2048 | Yes | No | 持卡人的浏览器类型                                                                                                                                                                                                                                                                                                             |
 | contentLength  | String  | 64   | Yes | No | 持卡人浏览器内容长度头部以外的内容长度                                                                                                                                                                                                                                                                                                   |
 | language       | String  | 64   | Yes | No | 持卡人浏览器的语言                                                                                                                                                                                                                                                                                                             |
-| periodValue    | String  | /    | No  | No | 分期付款期数。对应咨询分期期数接口返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                                                                                                       |
+| periodValue    | String  | /    | No  | No | 分期付款期数。对应[咨询分期期数接口](https://sandbox-v3-doc.pacypay.com/zh/#6b1f2e)返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                                                      |
 | notifyUrl      | String  | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                                                                                                             |
 
 [//]: # (todo: periodValue描述分期接口链接待补充)
@@ -2176,10 +2176,10 @@ const Pacypay = require('./pacypay.js')
 
 | 名称            | 签名  | 类型     | 描述                                                                                                                                                                                                                                         |
 |---------------|-----|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| transactionId | Yes | String | Onerway创建的交易订单号，商户下单时的订单号                                                                                                                                                                                                                  |
-| responseTime  | Yes | String | 接口响应时间，格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
-| txnTime       | Yes | String | 交易完成时间，格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
-| txnTimeZone   | Yes | String | 交易完成时区，例如：+08:00                                                                                                                                                                                                                           |
+| transactionId | Yes | String | Onerway创建的交易订单号。商户下单时的订单号                                                                                                                                                                                                                  |
+| responseTime  | Yes | String | 接口响应时间。格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
+| txnTime       | Yes | String | 交易完成时间。格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
+| txnTimeZone   | Yes | String | 交易完成时区。<CMExample data="+08:00" />                                                                                                                                                                                                         |
 | orderAmount   | Yes | String | 交易订单金额                                                                                                                                                                                                                                     |
 | orderCurrency | Yes | String | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                        |
 | txnAmount     | Yes | String | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                            |
@@ -2187,10 +2187,10 @@ const Pacypay = require('./pacypay.js')
 | status        | Yes | String | 交易处理结果。 请参阅 <br/><CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum"><CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable></CustomPopover> |
 | redirectUrl   | Yes | String | 当交易状态为R时，商户需要重定向到该URL完成部分交易，包括3ds验证、本地支付收银等                                                                                                                                                                                                |
 | periodValue   | No  | String | 分期付款期数                                                                                                                                                                                                                                     |
-| contractId    | Yes | String | 订阅合同id，首购时返回                                                                                                                                                                                                                               |
-| tokenId       | Yes | String | 订阅令牌id ，首购时返回                                                                                                                                                                                                                              |
+| contractId    | Yes | String | 订阅合同id。首购时返回                                                                                                                                                                                                                               |
+| tokenId       | Yes | String | 订阅令牌id。首购时返回                                                                                                                                                                                                                               |
 | eci           | Yes | String | 责任转移                                                                                                                                                                                                                                       |
-| sign          | No  | String | 签名字符串。                                                                                                                                                                                                                                     |
+| sign          | No  | String | 签名字符串                                                                                                                                                                                                                                      |
 
 </div>
 
@@ -2283,15 +2283,15 @@ const pacypay = new Pacypay(transactionId, {
 
 <div class="custom-table">
 
-| 属性                        | 类型      | 必填 | 说明                                                        |
-|---------------------------|---------|----|-----------------------------------------------------------|
-| checkoutTheme             | string  | No | 主题类型。`light`、`dark`                                       |
-| customCssURL              | string  | No | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                         |
-| variables                 | object  | No | 自定义主题色。详见以下 [variables](./js-sdk#variables) 说明            |
-| styles                    | object  | No | 自定义样式。详见以下 [styles](./js-sdk#styles) 说明                   |
-| showPayButton             | boolean | No | 默认为 `true`。如果设为 false 可自定义支付按钮，请参阅 [补充说明](./js-sdk#补充说明)  |
-| buttonSeparation          | boolean | No | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`:绑卡与支付一步完成；          |
-| displayBillingInformation | boolean | No | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息 |
+| 属性                        | 类型      | 必填 |   | 说明                                                                |
+|---------------------------|---------|----|:--|-------------------------------------------------------------------|
+| checkoutTheme             | string  | No |   | 主题类型。`light`、`dark`                                               |
+| customCssURL              | string  | No |   | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                                 |
+| variables                 | object  | No |   | 自定义主题色。详见以下 [variables](./js-sdk#variables) 说明                    |
+| styles                    | object  | No |   | 自定义样式。详见以下 [styles](./js-sdk#styles) 说明                           |
+| showPayButton             | boolean | No |   | 默认为 `true`。如果设为 `false` 可自定义支付行为和展示账单信息，请参阅 [补充说明](./js-sdk#补充说明) |
+| buttonSeparation          | boolean | No |   | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`:绑卡与支付一步完成；                  |
+| displayBillingInformation | boolean | No |   | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息         |
 
 </div>
 
@@ -2347,7 +2347,7 @@ const pacypay = new Pacypay(transactionId, {
 
 #### 补充说明
 
-当showPayButton为false的时候，在自定义支付按钮处，请调用以下方法进行支付
+当 `showPayButton` 为 `false` 的时候，在自定义支付按钮处，请调用以下方法进行支付
 
 ```js 
 pacypay.submit();

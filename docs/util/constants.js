@@ -1,4 +1,4 @@
-export const ProductTypeEnumTable = {
+export const ProductTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -31,7 +31,7 @@ export const ProductTypeEnumTable = {
             desc: '订单码（用户扫商家的订单码）',
         },
     ]};
-export const SubProductTypeEnumTable = {
+export const SubProductTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -65,7 +65,7 @@ export const SubProductTypeEnumTable = {
         },
     ],
 };
-export const TxnTypeEnumTable = {
+export const TxnTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -108,7 +108,7 @@ export const TxnTypeEnumTable = {
     ],
 
 };
-export const PaymentModeEnumTable = {
+export const PaymentModeEnum = {
     columns: [
         {
             prop: 'code',
@@ -142,7 +142,7 @@ export const PaymentModeEnumTable = {
         },
     ],
 };
-export const OsTypeEnumTable = {
+export const OsTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -164,7 +164,7 @@ export const OsTypeEnumTable = {
         },
     ],
 };
-export const Risk3dsStrategyEnumTable = {
+export const Risk3dsStrategyEnum = {
     columns: [
         {
             prop: 'code',
@@ -1435,6 +1435,36 @@ export const TransactionAddress =  {
             required: 'No',
             sign: 'No',
             desc: '出生日期，格式为 yyyy/MM/dd',
+        },
+    ],
+};
+export const NotifyTypeEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'TXN',
+            desc: '交易类通知（包括支付和退款交易）',
+        },
+        {
+            code: 'REFUND_AUDIT',
+            desc: '退款审核结果通知',
+        },
+        {
+            code: 'CANCEL',
+            desc: '取消交易通知',
+        },
+        {
+            code: 'CHARGEBACK',
+            desc: '拒付通知',
         },
     ],
 };
