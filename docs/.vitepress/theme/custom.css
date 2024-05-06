@@ -24,7 +24,6 @@ Note, Example
 
 .vp-doc table {
     margin: 0;
-    
 }
 
 .vp-doc th, .vp-doc td {
@@ -166,4 +165,15 @@ a.plain-link:hover {
 
 .table-request-top table{
     border-radius: 5px;
+}
+
+#table-hover-container {
+    display: none; /* 初始状态隐藏 */
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 300px; /* 示例最大高度 */
+    overflow: auto; /* 启用滚动 */
 }

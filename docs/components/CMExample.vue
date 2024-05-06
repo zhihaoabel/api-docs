@@ -1,6 +1,6 @@
 <template>
   <span class="custom-example">
-    <span class="leading-text" >{{leadingText}}</span>
+    <span class="leading-text" v-if="leadingText">{{leadingText}}</span>
     <span v-html="data"></span>
   </span>
 </template>
@@ -14,6 +14,10 @@ export default {
       type: String,
       default: () => null
     },
+    leadingText: {
+      type: String,
+      default: '例如'
+    }
   },
   created() {
     this.content = this.data || this.content
@@ -21,7 +25,6 @@ export default {
   data() {
     return {
       content: {},
-      leadingText: '例如',
     }
   },
   methods: {},
