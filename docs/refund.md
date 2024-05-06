@@ -11,12 +11,15 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+<div class="table-request-top">
+
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com//v1/txn/onlineRefund    |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
+</div>
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
@@ -25,6 +28,9 @@ Content-Type: application/json; charset=UTF-8 错误
 
 
 ## 申请退款
+
+
+<div class="custom-table bordered-table">
 
 #### 请求参数
 | 名称                  | 类型     | 长度 | 必填  | 签名  | 描述                                                                   |
@@ -36,14 +42,19 @@ Content-Type: application/json; charset=UTF-8 错误
 | refundAmount        | String | 19 | Yes | Yes | 退款交易金额，该金额的币种应与原交易时发送的订单币种对应                                         |
 | sign                | String | /  | Yes | No  | 签名字符串。                                                               |
 
+</div>
 
 #### 响应参数
+
+<div class="custom-table bordered-table">
 
 | 名称       | 类型     | 签名 | 描述                          |
 |----------|--------|----|-----------------------------|
 | respCode | String | No | 来自 Onerway 的响应码             |
 | respMsg  | String | No | 来自 Onerway 的响应信息            |
 | data     | String | No | Onerway创建的退款交易订单号，申请退款时才会返回 |
+
+</div>
 
 
 ## 以下部分展示了申请退款的请求示例：

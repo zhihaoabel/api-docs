@@ -148,9 +148,9 @@ a.plain-link:hover {
 
 .table-request-top{
     background-color: #f4faff;
-    /* border-radius: 10px; */
     border-radius: 5px;
     border: 1px solid #e6e6e6;
+ 
 }
 
 .table-request-top td {
@@ -160,20 +160,10 @@ a.plain-link:hover {
 .table-request-top th{
     background-color: #f4faff;
     border-bottom: 1px solid #e6e6e6;
-
 }
 
 .table-request-top table{
     border-radius: 5px;
 }
 
-#table-hover-container {
-    display: none; /* 初始状态隐藏 */
-    position: absolute;
-    z-index: 1000;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    max-height: 300px; /* 示例最大高度 */
-    overflow: auto; /* 启用滚动 */
-}
+

@@ -3,6 +3,15 @@ outline: deep
 ---
 <script setup>
 
+import {reactive, ref, watch, onMounted, unref } from 'vue'; 
+import {requestGen, secret} from "./util/utils";
+import CMExample from './components/CMExample.vue';
+import CMNote from './components/CMNote.vue';
+import CustomPopover from './components/element-ui/CustomPopover.vue'; 
+import CustomTable from "./components/element-ui/CustomTable.vue";
+import {TopRight, View} from "@element-plus/icons-vue";
+import { ClickOutside as vClickOutside } from 'element-plus';
+
 </script>
 
 # 两方支付
@@ -16,12 +25,15 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+<div class="table-request-top">
+
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
 | Request URL    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
+</div>
 
 ::: warning  注意:
 Content-Type: application/json; charset=UTF-8 错误 
@@ -33,35 +45,43 @@ Content-Type: application/json; charset=UTF-8 错误
 
 #### 请求参数
 
+
+<div class="custom-table bordered-table">
+
 | 名称                    | 类型     | 长度  | 必填  | 签名  | 描述                                                                                           |
 |-----------------------|--------|-----|-----|-----|----------------------------------------------------------------------------------------------|
 | merchantNo            | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                  |
-| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易                                                                   |
-| merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间。 格式为 yyyy-MM-dd HH:mm:ss                                                         |
-| merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。 例如：+08:00                                                                       |
+| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号，<CMNote data="不同的订单号视为不同的交易"></CMNote>                                             |
+| merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间。 格式为  `yyyy\-MM\-dd HH:mm:ss` <br>  <CMExample data="2024-2-28 15:05:34"></CMExample>                                                      |
+| merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。  <br>  <CMExample data="+08:00"></CMExample>                                                                          |
 | merchantTxnOriginalId | String | 128 | No  | Yes | 商户原始订单号。标记商户网站上唯一订单号，可重复，同一笔订单只能支付成功一次                                                       |
 | productType           | String | 16  | Yes | Yes | 产品类型，请参阅 ProductTypeEnum                                                                     |
 | subProductType        | String | 16  | Yes | Yes | 子产品类型，请参阅 SubProductTypeEnum                                                                 |
 | txnType               | String | 16  | Yes | Yes | 交易类型，请参阅 TxnTypeEnum                                                                         |
-| paymentMode           | String | 16  | No  | Yes | 支付模式。 请参阅 PaymentModeEnum。默认为WEB                                                             |
-| osType                | String | 16  | No  | Yes | 操作系统类型。 请参阅 OsTypeEnum。paymentMode不是WEB时必填                                                   |
+| paymentMode           | String | 16  | No  | Yes | 支付模式。 请参阅 PaymentModeEnum。默认为`WEB`                                                             |
+| osType                | String | 16  | No  | Yes | 操作系统类型。 请参阅 OsTypeEnum。`paymentMode`不是`WEB`时必填                                                   |
 | orderAmount           | String | 19  | Yes | Yes | 交易订单金额                                                                                       |
-| orderCurrency         | String | 8   | Yes | Yes | 交易订单的货币。 请参阅 ISO 4217 货币代码                                                                   |
+| orderCurrency         | String | 8   | Yes | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                          |
 | originTransactionId   | String | 20  | No  | Yes | 来源于Onerway的原始交易订单号，常用于退款等反向交易时通过此ID查找对应的交易订单号                                                |
-| risk3dsStrategy       | String | 16  | No  | Yes | 3ds风险控制策略。 请参阅 Risk3dsStrategyEnum                                                           |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 json 字符串。 请参阅对象 Subscription                                                |
-| mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集，risk3dsStrategy为EXTERNAL时需要。 格式为 json 字符串。 请参阅对象 MpiInfo                      |
-| txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 TxnOrderMsg                                             |
-| cardInfo              | String | /   | No  | Yes | 交易卡信息，productType为CARD时，除订阅复购、Token支付、Google Pay、Apple Pay外必填。 格式为 json 字符串。 请参象 TxnCardInfo |
-| billingInformation    | String | /   | No  | Yes | 交易账单信息。 格式为 json 字符串。 请参阅对象 TransactionAddress                                      |
-| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息。 格式为 json 字符串。 请参阅对象 TransactionAddress                                      |
-| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，productType为LPMS时，除协议代扣外必填，格式为json字符串。 请参阅对象 LpmsInfo                               |
-| tokenInfo             | String | /   | No  | Yes | token信息，subProductType为TOKEN或AUTO_DEBIT时必填，格式为json字符串。 请参阅对象 TokenInfo                       |
+| risk3dsStrategy       | String | 16  | No  | Yes | `3ds`风险控制策略。 请参阅 Risk3dsStrategyEnum                                                           |
+| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json`字符串。 请参阅对象 Subscription                                                |
+| mpiInfo               | String | /   | No  | Yes | `mpi`信息，`3ds`验证结果集，`risk3dsStrategy`为`EXTERNAL`时需要。 格式为 `json` 字符串。 请参阅对象 MpiInfo                      |
+| txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 `json` 字符串。 请参阅对象 TxnOrderMsg                                             |
+| cardInfo              | String | /   | No  | Yes | 交易卡信息，`productType`为`CARD`时，除`订阅复购`、`Token支付`、`Google Pay`、`Apple Pay`外必填。 格式为 `json` 字符串。 请参象 TxnCardInfo |
+| billingInformation    | String | /   | No  | Yes | 交易账单信息。 格式为 `json` 字符串。 请参阅对象 TransactionAddress                                      |
+| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息。 格式为 `json` 字符串。 请参阅对象 TransactionAddress                                      |
+| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType`为`LPMS`时，除协议代扣外必填，格式为`json`字符串。 请参阅对象 LpmsInfo                               |
+| tokenInfo             | String | /   | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象 TokenInfo                       |
 | sign                  | String | /   | Yes | No  | 签名字符串。                                                                                       |
                     
+</div>
 
 #### TxnOrderMsg
 
+
+
+
+<div class="custom-table bordered-table">
 
 | 名称             | 类型      | 长度   | 必填  | 签名 | 描述                                                                                                                                                                                                                               |
 |----------------|---------|------|-----|----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -82,22 +102,31 @@ Content-Type: application/json; charset=UTF-8 错误
 | terminalId     | String  | 64   | No  | No | 商户分配的唯一标识，用于标识商店终端。当 productType 为 PAYMENT_CODE 时必填。                                                                                                                                                                             |
 | notifyUrl      | String  | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                        |                                                                                                                                                                       
 
-
+</div>
 
 
 ####  TxnCardInfo 
 
 
+
+
+
+<div class="custom-table bordered-table">
+
 | 名称         | 类型     | 长度  | 必填  | 签名 | 描述            |
 |------------|--------|-----|-----|----|---------------|
 | holderName | String | 48  | Yes | No | 持卡人姓名         |
 | cardNumber | String | 128 | Yes | No | 持卡人的卡号        |
-| month      | String | 64  | Yes | No | 卡号月份，例如：03    |
-| year       | String | 64  | Yes | No | 卡号年份，例如： 2021 |
+| month      | String | 64  | Yes | No | 卡号月份 <br>  <CMExample data="03"></CMExample>   |
+| year       | String | 64  | Yes | No | 卡号年份，<br>  <CMExample data="2024"></CMExample> |
 | cvv        | String | 64  | Yes | No | 卡号cvv         |
 
+</div>
 
 #### TransactionAddress
+
+
+<div class="custom-table bordered-table">
 
 | 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                                                  |
 |----------------|--------|-----|-----|----|---------------------------------------------------------------------|
@@ -109,16 +138,19 @@ Content-Type: application/json; charset=UTF-8 错误
 | email          | String | 256 | Yes | No | 电子邮件                                                                |
 | postalCode     | String | 32  | Yes | No | 邮政编码  (虚拟商品可不传)                                                     |
 | address        | String | 256 | Yes | No | 地址    (虚拟商品可不传)                                                     |
-| country        | String | 64  | Yes | No | 国家。 请参阅 ISO。 例如： 美国 is US    (虚拟商品可不传)                              |
-| province       | String | 64  | Yes | No | 州。 当国家是美国 \(US\) 或加拿大 \(CA\) 时必填。 请参阅 ISO。 例如：美属萨摩亚 is AS (虚拟商品可不传) |
-| city           | String | 64  | Yes | NO | 城市 (虚拟商品可不传)                                                        |
+| country        | String | 64  | Yes | No | 国家。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>   <CMExample data="美国 is US  (虚拟商品可不传)"></CMExample>                             |
+| province       | String | 64  | Yes  | No | 州。 当国家是美国 \(US\) 或加拿大 \(CA\) 时必填。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美属萨摩亚 is AS  (虚拟商品可不传)"></CMExample>  |
 | street         | String | 64  | No  | No | 街道                                                                  |
 | number         | String | 64  | No  | No | 门牌号                                                                 |
 | identityNumber | String | 64  | No  | No | 证件号码                                                                |
-| birthDate      | String | 64  | No  | No | 出生日期，格式为 yyyy/MM/dd                                                 |
+| birthDate      | String | 64  | No  | No  | 出生日期，格式为 `yyyy/MM/dd`                                       |
 
+</div>
 
 #### 响应参数 
+
+
+<div class="custom-table bordered-table">
 
 | 名称       | 类型     | 签名 | 描述                  |
 |----------|--------|----|---------------------|
@@ -126,13 +158,17 @@ Content-Type: application/json; charset=UTF-8 错误
 | respMsg  | String | No | 来自 Onerway 的响应信息    |
 | data     | Map    | No | 响应数据。 请参阅对象 TxnInfo |
 
+</div>
+
 ####  TxnInfo
+
+<div class="custom-table bordered-table">
 
 | 名称            | 类型     | 签名  | 描述                                          |
 |---------------|--------|-----|---------------------------------------------|
 | transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号                     |
-| responseTime  | String | Yes | 接口响应时间，格式为yyyy-MM-dd HH:mm:ss               |
-| txnTime       | String | Yes | 交易完成时间，格式为yyyy-MM-dd HH:mm:ss               |
+| responseTime  | String | Yes | 接口响应时间，格式为`yyyy-MM-dd HH:mm:ss`               |
+| txnTime       | String | Yes | 交易完成时间，格式为`yyyy-MM-dd HH:mm:ss`               |
 | txnTimeZone   | String | Yes | 交易完成时区，例如：+08:00                            |
 | orderAmount   | String | Yes | 交易订单金额                                      |
 | orderCurrency | String | Yes | 交易订单币种。 请参阅 ISO 4217 货币代码       |
@@ -148,7 +184,7 @@ Content-Type: application/json; charset=UTF-8 错误
 | sign          | String | No  | 签名字符串。                                      |
 
 
-
+</div>
 
 
 ## 以下部分展示了两方支付的请求示例：
@@ -157,7 +193,10 @@ Content-Type: application/json; charset=UTF-8 错误
 
 https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction<Badge type="tip">POST</Badge>
 
-```json
+
+::: code-group
+
+```json [请求参数]
 {
   "merchantNo": "800037",
   "merchantTxnId": "1640229747000",
@@ -175,18 +214,9 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction<Badge type="tip">P
   "sign": "..."
 }
 
-
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
-:::
-
-## 以下部分展示了两方支付响应示例：
-
-### Response
-
-```json
-
+```json [响应参数]
 {
   "respCode": "20000",
   "respMsg": "Success",
@@ -208,5 +238,11 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction<Badge type="tip">P
     "sign": "..."
   }
 }
+
+```
+
+::: warning  此示例仅限参考 请勿拿此示例直接请求。
+:::
+
 
 

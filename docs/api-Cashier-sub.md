@@ -35,11 +35,11 @@ Content-Type: application/json; charset=UTF-8 错误
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
 | subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅 SubProductTypeEnum |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 json 字符串。 请参阅对象 Subscription                           |
+| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象 Subscription                           |
 
 </div>
 
-::: warning   订阅请求参数可参考收银台信用卡支付，只需将"subProductType":"DIRECT",改为 subProductType："SUBSCRIBE" 即可
+::: warning   订阅请求参数可参考收银台信用卡支付，只需将`"subProductType":"DIRECT"`,改为 `subProductType："SUBSCRIBE"` 即可
 :::
 
 
