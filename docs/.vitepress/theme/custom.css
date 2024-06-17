@@ -151,20 +151,66 @@ a.plain-link:hover {
     background-color: #f4faff;
     border-radius: 5px;
     border: 1px solid #e6e6e6;
+    color: #000;
  
 }
 
 .table-request-top td {
     background-color: #f4faff;
+    color: #000;
 }
 
-.table-request-top th{
-    background-color: #f4faff;
-    border-bottom: 1px solid #e6e6e6;
-}
 
 .table-request-top table{
     border-radius: 5px;
+    color: #000;
+} 
+
+
+
+ .table-request-top th{
+    background-color: #f4faff;
+    border-bottom: 1px solid #e6e6e6;
+    color: #000;
+  
 }
 
 
+.custom-block.tip{
+    margin: 30px 0px 50px;
+    color: #4a4e53;
+}
+
+
+.alertbox1 .custom-block.tip {
+
+    border-left: 6px solid #e6a23c;
+    background-color: #fdf6ec;;
+    
+
+}
+
+.alertbox2 .custom-block.tip {
+
+    border-left: 6px solid #50bfff;
+    background-color: #ecf8ff;
+}
+
+.alertbox3 .custom-block.tip {
+
+    border-left: 6px solid #fe6c6f;
+    background-color: #fef0f0;
+
+}
+
+.alertbox4 .custom-block.tip {
+
+    border-left: 6px solid #e6a23c;
+    background-color: #fdf6ec;
+
+}
+
+[data-v-55e263fd] .logo {
+    margin-right: 8px;
+    height: 60px;
+}

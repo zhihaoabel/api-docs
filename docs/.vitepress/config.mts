@@ -36,8 +36,8 @@ export default defineConfig({
     },
 
     themeConfig: {
-        logo: '/american-express.svg',
-        siteTitle: 'Onerway',
+        logo: '/logo.png',
+        siteTitle: '',
 
         i18nRouting: true,
 
@@ -69,8 +69,7 @@ export default defineConfig({
                         text: '收银台支付',
                         items: [
                             {text: '收银台', link: '/api-Cashier'},
-                            {text: '聚合收银台', link: '/api-Cashier-Lpms'},
-                            // {text: '聚合收银台', link: '/api-Cashier-All'},
+                             {text: '聚合收银台', link: '/api-Cashier-All'},
                             {text: '订阅', link: '/api-Cashier-sub'},
                         ],
                         collapsed: true,
@@ -89,6 +88,7 @@ export default defineConfig({
                         items: [
                             {text: '两方支付', link: '/api-direct'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
+                            {text: '获取绑定Token列表', link: '/api-direct-tokenList'},
                             {text: '订阅', link: '/api-direct-sub'},
                             {text: '预授权请款/撤销', link: '/api-direct-auth'},
                             {text: '本地支付',  link: '/api-direct-lpms'},        
@@ -114,6 +114,22 @@ export default defineConfig({
                 ],
                 collapsed: true,
             },
+            {
+                text: '申请退款',
+                items: [
+                    {text: '申请退款', link: '/refund'}, 
+                ],
+                collapsed: true,
+            },
+            {
+                text: '文件下载',
+                items: [
+                    {text: '下载结算文件', link: '/file'}, 
+                ],
+                collapsed: true,
+            },
+
+            
 
             {
                 text: '通知',
@@ -123,10 +139,6 @@ export default defineConfig({
                 text: '枚举',
                 link: '/enums',
             },
-            {
-                text: '退款',
-                link: '/refund',
-            }
         ],
 
         socialLinks: [

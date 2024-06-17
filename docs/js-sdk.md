@@ -12,6 +12,8 @@ import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
 
+
+
 const dialogVisible = ref(false);
 const datetime = new Date().toLocaleString('zh', { hour12: false }).replace(/\//g, '-').replace(/上午|下午/g, '');
 let merchantCustId = localStorage.getItem('merchantCustId') || 'Cust_' + Date.parse(new Date());
@@ -26,6 +28,7 @@ const onClickOutside = () => {
 /*表格属性*/
 const formLabelWidth = '140px';
 const draggable = ref(true);
+
 let reactives = reactive({
     sign: ''
 });

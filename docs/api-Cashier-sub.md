@@ -3,6 +3,18 @@ outline: deep
 ---
 <script setup>
 
+
+  import {reactive, ref, watch, onMounted, unref } from 'vue'; 
+import {requestGen, secret} from "./util/utils";
+import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import CMExample from './components/CMExample.vue';
+import CMNote from './components/CMNote.vue';
+import CustomPopover from './components/element-ui/CustomPopover.vue'; 
+import CustomTable from "./components/element-ui/CustomTable.vue";
+import {TopRight, View} from "@element-plus/icons-vue";
+import { ClickOutside as vClickOutside } from 'element-plus';
+
+
 </script>
 
 # 订阅
@@ -10,22 +22,22 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
+<br>
 
-<div class="table-request-top">
+|   <div style="text-align: left;">名称</div>| 内容                                                          |
+|----------------:|:---------------------------------------------------------------|
+| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
+| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
-| 名称 | 内容                                                          |
-|----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
-| Request Method | POST                                                          |
-| Content-Type   | application/json                                              |
+<br>
 
-</div>
+<div class="alertbox3">
 
-::: warning  注意:
-Content-Type: application/json; charset=UTF-8 错误 
-    <br>Content-Type: application/json 正确 
+::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
+</div>
 
 ## 订阅支付
 请求参数
@@ -34,15 +46,33 @@ Content-Type: application/json; charset=UTF-8 错误
 
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
-| subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅 SubProductTypeEnum |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象 Subscription                           |
+| subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅   <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover> |
+| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象     <CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/api-Cashier-sub.html#subscription" ></CustomPopover>                     |
 
 </div>
 
-::: warning   订阅请求参数可参考收银台信用卡支付，只需将`"subProductType":"DIRECT"`,改为 `subProductType："SUBSCRIBE"` 即可
+<div class="alertbox4">
+
+::: tip 订阅请求参数可参考收银台信用卡支付，只需将`"subProductType":"DIRECT"`,改为 `subProductType："SUBSCRIBE"` 即可
 :::
 
+</div>
 
+
+
+#### Subscription
+
+<div class="custom-table bordered-table">
+
+| 名称             | 类型     | 长度 | 必填  | 签名 | 描述                                  |
+|----------------|--------|----|-----|----|-------------------------------------|
+| requestType    | String | 1  | Yes | No | 订阅请求类型。 枚举如下：  `0 - 首购 `, 收银台仅支持首次购买。   |
+| merchantCustId | String | 50 | No  | No | 商户客户 `id `， `requestType `为 `0 `时必填。            |
+| expireDate     | String | 10 | No  | No | 过期日期， `requestType `为 `0 `时必填，格式为 `yyyy-MM-dd ` |
+| frequencyType  | String | 1  | No  | No | 订阅频率类型， `requestType `为 `0 `时必填。枚举如下： `D - 天  ` |
+| frequencyPoint | String | 2  | No  | No | 订阅频率点数， `requestType `为 `0 `时必填。            |
+
+</div>
 
 ## 以下部分展示了订阅支付的请求示例：
 
@@ -71,7 +101,7 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
   "shippingInformation":"{\"firstName\":\"ShippingFirstName\",\"lastName\":\"ShippingLastName\",\"phone\":\"188888888888\",\"email\":\"shipping@test.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address\",\"country\":\"CN\",\"province\":\"SH\",\"city\":\"SH\",\"street\":\"lujiazui\",\"number\":\"1\",\"identityNumber\":\"110000\"}",
   "billingInformation":"{\"firstName\":\"billingFirstName\",\"lastName\":\"billingLastName\",\"phone\":\"18600000000\",\"email\":\"billing@test.com\",\"postalCode\":\"430000\",\"address\":\"Billing Address\",\"country\":\"CN\",\"province\":\"HK\",\"city\":\"HK\",\"street\":\"jianshazui\",\"number\":\"2\",\"identityNumber\":\"220000\"}",
   "subscription":"{\"merchantCustId\":\"custId_1640247522000\",\"requestType\":\"0\",\"expireDate\":\"2022-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1}",
-  "sign":""  //这里的sign字符串需要通过签名获得
+  "sign":""  //这里的sign字符串需要通过签名获得    // [!code error]
 }
 ```
 
@@ -94,7 +124,7 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
         "txnTimeZone": null,
         "status": "U",
         "reason": null,
-        "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=19d6513ee000463783532f576c10dbcb",
+        "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=19d6513ee000463783532f576c10dbcb",   // [!code error]
         "sign": "64cf0651986e86e109e6e2804b74bdeecb94cd7cb310c15711f7138867b0cac7",
         "contractId": "",
         "tokenId": null,
@@ -109,5 +139,9 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 ```
 :::
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
+<div class="alertbox4">
+
+::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
+
+</div>
