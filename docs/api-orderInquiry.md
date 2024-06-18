@@ -3,6 +3,15 @@ outline: deep
 ---
 <script setup>
 
+import {reactive, ref, watch, onMounted, unref } from 'vue'; 
+import {requestGen, secret} from "./util/utils";
+import CMExample from './components/CMExample.vue';
+import CMNote from './components/CMNote.vue';
+import CustomPopover from './components/element-ui/CustomPopover.vue'; 
+import CustomTable from "./components/element-ui/CustomTable.vue";
+import {TopRight, View} from "@element-plus/icons-vue";
+import { ClickOutside as vClickOutside } from 'element-plus';
+
 </script>
 
 # 交易订单查询
@@ -13,20 +22,22 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
-<div class="table-request-top">
+<br>
 
-| 名称 | 内容                                                          |
-|----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/list    |
-| Request Method | POST                                                          |
-| Content-Type   | application/json                                              |
+|   <div style="text-align: left;">名称</div>| 内容                                                          |
+|----------------:|:---------------------------------------------------------------|
+| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
+| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+
+<br>
+
+<div class="alertbox3">
+
+::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
+:::
 
 </div>
-
-::: warning  注意:
-Content-Type: application/json; charset=UTF-8 错误 
-    <br>Content-Type: application/json 正确 
-:::
 
 
 ## 交易订单查询
@@ -37,12 +48,13 @@ Content-Type: application/json; charset=UTF-8 错误
 
 | 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                         |
 |----------------|--------|----|-----|-----|--------------------------------------------|
-| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                |
-| merchantTxnIds | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔，例如：“554815,684541”     |
-| transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔                   |
+| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时，` OnerWay` 会为商户创建商户号                |
+| merchantTxnIds | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔， <br> <CMExample data="554815,684541"></CMExample>   |
+| transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔    <br> <CMExample data="1787743316310622208,1787743316310622208"></CMExample>                |
 | txnTypes       | String | /  | No  | Yes | 交易类型，可以是多个，用逗号分隔                           |
-| startTime      | String | /  | No  | Yes | 交易开始时间，格式为yyyy-MM-dd HH:mm:ss              |
-| endTime        | String | /  | No  | Yes | 交易结束时间，格式为yyyy-MM-dd HH:mm:ss。 最长间隔为 90 天。 |
+| startTime      | String | /  | No  | Yes | 交易开始时间，格式为`yyyy-MM-dd HH:mm:ss`              |
+| endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。
+|
 | current        | String | /  | Yes | Yes | 查询的当前页码                                    |
 | sign           | String | /  | Yes | No  | 签名字符串。                                     |
 
@@ -55,9 +67,9 @@ Content-Type: application/json; charset=UTF-8 错误
 
 | 名称       | 类型     | 签名 | 描述               |
 |----------|--------|----|------------------|
-| respCode | String | No | 来自 Onerway 的响应码  |
-| respMsg  | String | No | 来自 Onerway 的响应信息 |
-| data     | Map    | No | 响应数据。 请参阅对象 Page |
+| respCode | String | No | 来自 ` Onerway`  的响应码  |
+| respMsg  | String | No | 来自`  Onerway ` 的响应信息 |
+| data     | Map    | No | 响应数据。 请参阅对象  <CustomPopover title="Page" width="auto" reference="Page" link="/apis/api-orderInquiry.html#page" ></CustomPopover> |
 
 </div>
 
@@ -68,7 +80,7 @@ Content-Type: application/json; charset=UTF-8 错误
 
 | 名称            | 类型     | 签名 | 描述                   |
 |---------------|--------|----|----------------------|
-| content       | List   | No | 交易信息列表，请参阅对象 TxnInfo |
+| content       | List   | No | 交易信息列表，请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-orderInquiry.html#txninfo" ></CustomPopover> |
 | current       | String | No | 当前页码                 |
 | size          | String | No | 当前页大小                |
 | totalPages    | String | No | 总页数                  |
@@ -83,30 +95,30 @@ Content-Type: application/json; charset=UTF-8 错误
 
 | 名称                         | 类型     | 签名 | 描述                                                       |
 |----------------------------|--------|----|----------------------------------------------------------|
-| transactionId              | String | No | Onerway创建的交易订单号，对应商户订单号                                  |
-| merchantTxnId              | String | No | 商户创建的商户交易订单号，不同的订单号视为不同的交易                               |
+| transactionId              | String | No | ` Onerway` 创建的交易订单号，对应商户订单号                                  |
+| merchantTxnId              | String | No | 商户创建的商户交易订单号， 不同的订单号视为不同的交易|
 | txnTime                    | String | No | 交易完成时间                                                   |
-| originTransactionId        | String | No | 来自 Onerway 的原交易订单号。                                      |
-| productType                | String | No | 产品类型，请参阅 ProductTypeEnum                                 |
-| subProductType             | String | No | 子产品类型，请参阅 SubProductTypeEnum                             |
-| txnType                    | String | No | 交易类型，请参阅 TxnTypeEnum                                     |
-| status                     | String | No | 交易处理结果。 请参阅 TxnStatusEnum                                |
+| originTransactionId        | String | No | 来自` Onerway`  的原交易订单号。                                      |
+| productType                | String | No | 产品类型，请参阅    <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" ></CustomPopover>                              |
+| subProductType             | String | No | 子产品类型，请参阅      <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover>                        |
+| txnType                    | String | No | 交易类型，请参阅           <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                            |
+| status                     | String | No | 交易处理结果。 请参阅      <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                            |
 | reason                     | String | No | 交易失败原因                                                   |
 | paymentMethod              | String | No | 具体支付方式，包括卡和本地支付类型                                        |
 | walletTypeName             | String | No | 钱包的品牌名称                                                  |
 | orderAmount                | String | No | 交易订单金额                                                   |
-| orderCurrency              | String | No | 交易订单币种。 请参阅 ISO 4217 货币代码                                |
+| orderCurrency              | String | No | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                |
 | txnAmount                  | String | No | 订单金额转换成结算币种后的金额                                          |
-| txnCurrency                | String | No | 结算币种。 请参阅 ISO 4217 货币代码                                  |
+| txnCurrency                | String | No | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                  |
 | settleRate                 | String | No | 汇率 (txnAmount = orderAmount * settleRate)。               |
 | customsDeclarationAmount   | String | No | 可报关金额                                                    |
-| customsDeclarationCurrency | String | No | 可用于报关的金额对应币种。 请参阅 ISO 4217 货币代码                          |
+| customsDeclarationCurrency | String | No | 可用于报关的金额对应币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                          |
 | arn                        | String | No | ARN                                                      |
-| appId                      | String | No | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用id                   |
+| appId                      | String | No | 商户应用程序`ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                   |
 | website                    | String | No | 交易网站                                                     |
-| cardBinCountry             | String | No | 卡bin所属国家                                                 |
+| cardBinCountry             | String | No | 卡`bin`所属国家                                                 |
 | cardNumber                 | String | No | 交易卡号                                                     |
-| userPaymentStatus          | String | No | 用户支付状态，true：已支付，false：未支付，（只有 Sofort 交易可能关注此字段；空值时忽略此字段） |
+| userPaymentStatus          | String | No | 用户支付状态，`true`：已支付，`false`：未支付，<br> <CMNote data="只有 `Sofort` 交易可能关注此字段；空值时忽略此字段"></CMNote>  |
 | holderName                 | String | No | 持卡人姓名                                                    |
 | eci                        | String | No | 责任转移                                                     |
 
@@ -199,4 +211,9 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/list<Badge type="tip">POST</Badg
 
 ```
 
+<div class="alertbox4">
 
+::: tip 此示例仅限参考 请勿拿此示例直接请求。
+:::
+
+</div>

@@ -3,6 +3,18 @@ outline: deep
 ---
 <script setup>
 
+
+import {reactive, ref, watch, onMounted, unref } from 'vue'; 
+import {requestGen, secret} from "./util/utils";
+import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import CMExample from './components/CMExample.vue';
+import CMNote from './components/CMNote.vue';
+import CustomPopover from './components/element-ui/CustomPopover.vue'; 
+import CustomTable from "./components/element-ui/CustomTable.vue";
+import {TopRight, View} from "@element-plus/icons-vue";
+import { ClickOutside as vClickOutside } from 'element-plus';
+
+
 </script>
 
 # 订阅支付
@@ -11,21 +23,22 @@ outline: deep
 
 请求地址、请求方式、请求头 可以参考：
 
-<div class="table-request-top">
+<br>
 
-| 名称 | 内容                                                          |
-|----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard      |
-| Request Method | POST                                                          |
-| Content-Type   | application/json                                              |
+|   <div style="text-align: left;">名称</div>| 内容                                                          |
+|----------------:|:---------------------------------------------------------------|
+| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
+| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+
+<br>
+
+<div class="alertbox3">
+
+::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
+:::
 
 </div>
-
-
-::: warning  注意:
-Content-Type: application/json; charset=UTF-8 错误 
-    <br>Content-Type: application/json 正确 
-:::
 
 
 ## 订阅支付
@@ -41,9 +54,29 @@ Content-Type: application/json; charset=UTF-8 错误
 </div>
 
 
-::: warning   两方支付的本地支付，请求参数可参考两方支付信用卡支付，只需将`subProductType` 值改为` SUBSCRIBE` 即可；
+
+<div class="alertbox4">
+
+::: tip   两方支付的本地支付，请求参数可参考两方支付信用卡支付，只需将`subProductType` 值改为` SUBSCRIBE` 即可；
 :::
 
+</div>
+
+#### Subscription
+
+<div class="custom-table bordered-table">
+
+| 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                  |
+|----------------|--------|-----|-----|----|-------------------------------------|
+| requestType    | String | 1   | Yes | No | 订阅请求类型。 枚举如下：`0 - 首购 1 - 复购`          |
+| merchantCustId | String | 50  | No  | No | 商户客户`id`，`requestType`为`0`时必填。            |
+| expireDate     | String | 10  | No  | No | 过期日期，`requestType`为`0`时必填，格式为`yyyy-MM-dd `|
+| frequencyType  | String | 1   | No  | No | 订阅频率类型，`requestType`为`0`时必填。枚举如下：`D - 天 ` |
+| frequencyPoint | String | 2   | No  | No | 订阅频率点数，`requestType`为`0`时必填。            |
+| contractId     | String | 20  | No  | No | 订阅合同`id`，`requestType`为`1`时必填。            |
+| tokenId        | String | 300 | No  | No | 订阅令牌`id`，`requestType`为`1`时必填。            |
+
+</div>
 
 ## 以下部分展示了订阅支付的请求示例：
 
@@ -152,9 +185,11 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">
 
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
+<div class="alertbox4">
+
+::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-
+</div>
 
 

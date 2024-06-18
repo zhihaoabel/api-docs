@@ -3,6 +3,19 @@ outline: deep
 ---
 <script setup>
 
+
+
+import {reactive, ref, watch, onMounted, unref } from 'vue'; 
+import {requestGen, secret} from "./util/utils";
+import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import CMExample from './components/CMExample.vue';
+import CMNote from './components/CMNote.vue';
+import CustomPopover from './components/element-ui/CustomPopover.vue'; 
+import CustomTable from "./components/element-ui/CustomTable.vue";
+import {TopRight, View} from "@element-plus/icons-vue";
+import { ClickOutside as vClickOutside } from 'element-plus';
+
+
 </script>
 
 # 本地支付
@@ -12,21 +25,22 @@ outline: deep
 请求地址、请求方式、请求头 可以参考：
 
 
-<div class="table-request-top">
+<br>
 
-| 名称 | 内容                                                          |
-|----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction |
-| Request Method | POST                                                          |
-| Content-Type   | application/json                                              |
+|   <div style="text-align: left;">名称</div>| 内容                                                          |
+|----------------:|:---------------------------------------------------------------|
+| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
+| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
-</div>
+<br>
 
-::: warning  注意:
-Content-Type: application/json; charset=UTF-8 错误 
-    <br>Content-Type: application/json 正确 
+<div class="alertbox3">
+
+::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
+</div>
 
 ## 本地支付
 
@@ -37,29 +51,34 @@ Content-Type: application/json; charset=UTF-8 错误
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
 | productType | String | 16 | Yes | Yes | LPMS  |
-| lpmsInfo | String | / | No | Yes | 本地支付方式信息，productType为LPMS时，除协议代扣外必填，格式为json字符串。 请参阅对象 LpmsInfo |
+| lpmsInfo | String | / | No | Yes | 本地支付方式信息，`productType`为`LPMS`时，除协议代扣外必填，格式为`json`字符串。 请参阅对象   <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/enums.html#lpmsinfo" ></CustomPopover> |
 
 
 </div>
 
-::: warning   两方支付的本地支付，请求参数可参考两方支付信用卡支付，需将 productType：CARD 改为 productType：LPMS ,lpmsInfo 传需要对接的本地支付。
+
+<div class="alertbox4">
+
+::: tip   两方支付的本地支付，请求参数可参考两方支付信用卡支付，需将 `productType：CARD` 改为 `productType：LPMS` ,`lpmsInfo` 传需要对接的本地支付。
 :::
 
+</div>
 
 
 ##### LpmsInfo
 
+
 <div class="custom-table bordered-table">
+
 
 | 名称            | 类型     | 长度  | 必填  | 签名 | 描述                                                                                               |
 |---------------|--------|-----|-----|----|--------------------------------------------------------------------------------------------------|
-| lpmsType      | String | 64  | Yes | No | 本地支付方式。 请参阅 LpmsTypeEnum                                                                         |
-| bankName      | String | 128 | No  | No | 银行名称，某些本地支付方式需要。lpmsType为EFT时请参阅 EFTBankNameEnum。 lpmsType为Przelewy24时请参阅 Przelewy24BankNameEnum |
+| lpmsType      | String | 64  | Yes | No | 本地支付方式。 请参阅 LpmsTypeEnum    <CustomPopover title="EFTBankNameEnum" width="auto" reference="eftbanknameenum" link="/apis/enums.html#lpmstypeenum" ></CustomPopover>                                                                       |
+| bankName      | String | 128 | No  | No | 银行名称，某些本地支付方式需要。`lpmsType`为`EFT`时请参阅    <CustomPopover title="EFTBankNameEnum" width="auto" reference="eftbanknameenum" link="/apis/enums.html#eftbanknameenum" ></CustomPopover>      。 `lpmsType`为Przelewy24时请参阅    <CustomPopover title="Przelewy24BankNameEnum" width="auto" reference="Przelewy24BankNameEnum" link="/apis/enums.html#przelewy24banknameenum" ></CustomPopover> |
 | iBan          | String | 64  | No  | No | 银行账户，部分地区转账时需要                                                                                   |
 | prepaidNumber | String | /   | No  | No | 预付费卡号，部分支付方式需要                                                                                   |
 
 </div>
-
 ## 以下部分展示了本地支付的请求响应示例：
 
 ### Request
@@ -115,8 +134,13 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">
 
 ```
 
-::: warning  此示例仅限参考 请勿拿此示例直接请求。
+<div class="alertbox4">
+
+::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
+
+</div>
+
 
 
 

@@ -8,7 +8,7 @@ outline: deep
 
 
 # 本地支付
-收银台本地支付:指用户从原始交易网站或应用程序重定向到另一个专门处理支付的页面时只展示本地支付的收银台。
+支付:指用户从原始交易网站或应用程序重定向到另一个专门处理支付的页面时只展示本地支付的收银台。
 
 
 请求地址、请求方式、请求头 可以参考：
@@ -45,7 +45,7 @@ Content-Type: application/json; charset=UTF-8 错误
 </div>
 
 
-::: warning   收银台支付的本地支付，请求参数可参考收银台信用卡支付，只需将 `productType：CARD` 改为 `productType：LPMS` 即可；如您信用卡和本地支付需要同时使用，则需改为`productType：ALL` 打开聚合收银台
+::: warning   聚合收银台，请求参数可参考收银台信用卡支付，只需将 `productType：CARD` 改为 `ALL` 即可
 :::
 
 
@@ -126,3 +126,5 @@ https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Bad
 
 ::: warning  此示例仅限参考 请勿拿此示例直接请求。
 :::
+
+
