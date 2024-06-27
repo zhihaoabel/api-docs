@@ -26,7 +26,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -78,7 +78,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 
 
-https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 
 

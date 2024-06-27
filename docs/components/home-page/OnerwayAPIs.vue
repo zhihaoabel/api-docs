@@ -86,7 +86,7 @@ export default {
       envTable: {
         header: ['Environment', 'Request URL'],
         body: [
-          ['Sandbox', 'https://sandbox-v3-acquiring.pacypay.com/<endpoint>'],
+          ['Sandbox', 'https://sandbox-acq.onerway.com/<endpoint>'],
           ['Production', 'https://v3-acq.pacypay.com/<endpoint>']
         ]
       }

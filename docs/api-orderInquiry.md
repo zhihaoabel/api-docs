@@ -26,7 +26,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -48,9 +48,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 | 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                         |
 |----------------|--------|----|-----|-----|--------------------------------------------|
-| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时，` OnerWay` 会为商户创建商户号                |
-| merchantTxnIds | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔， <br> <CMExample data="554815,684541"></CMExample>   |
-| transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔    <br> <CMExample data="1787743316310622208,1787743316310622208"></CMExample>                |
+| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时，` OnerWay`会为商户创建商户号                |
+| merchantTxnIds | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔， <br> <CMExample data="554815,684541"></CMExample>  |
+| transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔    <br> <CMExample data="1787743316310622208,1787743316310622208"></CMExample>               |
 | txnTypes       | String | /  | No  | Yes | 交易类型，可以是多个，用逗号分隔                           |
 | startTime      | String | /  | No  | Yes | 交易开始时间，格式为`yyyy-MM-dd HH:mm:ss`              |
 | endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。
@@ -128,7 +128,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/list<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/list<Badge type="tip">POST</Badge>
 
 
 

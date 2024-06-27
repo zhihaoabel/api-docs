@@ -19,7 +19,7 @@ outline: deep
 
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
+| Request URL    | https://sandbox-acq.onerway.com/txn/payment |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
@@ -67,7 +67,7 @@ Content-Type: application/json; charset=UTF-8 错误
 ## 以下部分展示了本地支付的请求响应示例：
 
 
-https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 ::: code-group
 
