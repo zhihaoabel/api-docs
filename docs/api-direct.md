@@ -15,7 +15,22 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 </script>
 
 
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
 
+  
+</script>
 
 
 # 两方支付
