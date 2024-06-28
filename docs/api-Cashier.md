@@ -2,14 +2,11 @@
 outline: deep
 ---
 
-
-
-
 <script lang="ts" setup>
 
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
-import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import {ProductTypeEnum as ProductTypeEnumTable, SubProductTypeEnum as SubProductTypeEnumTable,TxnTypeEnum as TxnTypeEnumTable} from "./util/constants";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
@@ -17,27 +14,8 @@ import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
 
+let activeName = ref('first');
 
-
-</script>
-
-
-<script lang="ts">
-  export default {
-    data() {
-      return {
-        activeName: 'first'
-      };
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
-    }
-  };
-
-  
-  
 </script>
 
 # 收银台支付

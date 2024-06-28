@@ -1935,7 +1935,7 @@ function updateRequest() {
 
 ## 接入流程
 
-1. 下载[JS SDK](https://v3-doc.pacypay.com/javascripts/pacypay-v1.0.5.zip)
+1. 下载[JS SDK](https://sandbox-v3-doc.pacypay.com/javascripts/onerway-v1.1.1.zip)
 2. 引入JS SDK
 3. 初始化SDK
 4. 调用下单接口
@@ -1945,16 +1945,15 @@ function updateRequest() {
 
 1. 引入方式一
 
-   在需要调用JS SDK的页面中引入[JS SDK](https://v3-doc.pacypay.com/javascripts/pacypay-v1.0.5.zip)
+在需要调用JS SDK的页面中引入[JS SDK](https://sandbox-v3-doc.pacypay.com/javascripts/onerway-v1.1.1.zip)
 
  ```html
-
 <script src="pacypay.js"></script>
  ```
 
 2. 引入方式二
 
-   以 import / require 的方式导入
+以 import / require 的方式导入
 
  ```javascript
 // 以import方式导入
