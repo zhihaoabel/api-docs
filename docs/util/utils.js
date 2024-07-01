@@ -1,4 +1,6 @@
-export let secret = '6f270e90a85d458e8310157ad4605ac0';
+export let secret = '59c5b49a58c74340b28ecc68004e815a';
+export let merchantNo = '800209';
+export let appId = '1739545982264549376';
 
 /**
  * 给请求体字段排序
@@ -91,12 +93,16 @@ const hash = async (message, confusion) => {
     return encryptedMessage;
 };
 
-export const requestGen = async (requestBody, filter = []) => {
+export const requestGen = async (requestBody, filter = [], secret) => {
     let sortedRequest = sortFields(requestBody);
     const concatenatedFields = concatObjectValues(sortedRequest, filter=['sign']);
 
-    sortedRequest['sign'] = await hash(concatenatedFields);
-
+    sortedRequest['sign'] = await hash(concatenatedFields, secret);
 
     return sortedRequest;
+}
+
+export const concatedStr = async (requestBody, filter = []) => {
+    let sortedRequest = sortFields(requestBody);
+    return concatObjectValues(sortedRequest, filter = ['sign']);
 }

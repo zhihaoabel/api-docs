@@ -4,7 +4,6 @@
       :title="title"
       :width="width"
       :trigger="trigger"
-      :content="content"
   >
     <template #reference>
       <span class="reference-text">{{reference}}</span>
@@ -38,9 +37,6 @@ export default {
     trigger: {
       default: 'click',
     },
-    content: {
-      default: 'this is content, this is content, this is content',
-    },
     reference: {
       default: 'Click to activate',
     },
@@ -56,7 +52,6 @@ export default {
   },
   data() {
     return {
-      content: {},
     }
   },
   methods: {},
