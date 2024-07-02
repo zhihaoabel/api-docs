@@ -40,7 +40,7 @@ const form = reactive({
    merchantNo: localStorage.getItem('merchantNo') || '#{你的商户号}',
    appId: localStorage.getItem('appId') || '#{你的appId}',
    secret: localStorage.getItem('secret') || '',
-   notifyUrl: localStorage.getItem('notifyUrl') || '',
+   notifyUrl: localStorage.getItem('notifyUrl') || '#{你的回调地址}',
 });
 
 const ProductTypeEnumTable = {
@@ -1931,7 +1931,6 @@ watch(() => form.appId, (val) => {
 
 watch(() => form.secret, (val) => {
     localStorage.setItem('secret', val);
-    secretKey = val.toString();
 });
 
 watch(() => form.notifyUrl, (val) => {
