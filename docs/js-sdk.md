@@ -1896,7 +1896,7 @@ const requestBody = {
    txnOrderMsg: {
         returnUrl: "https://www.ronhan.com/",
         notifyUrl: form.notifyUrl,
-        products: "[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]",
+        products: "[{\"name\":\"iphone 11\",\"price\":\"5300.00\",\"num\":\"2\",\"currency\":\"CNY\"},{\"name\":\"macBook\",\"price\":\"1234.00\",\"num\":\"1\",\"currency\":\"USD\"}]",
         transactionIp: "127.0.0.1",
         appId: form.appId,
         javaEnabled:false,
@@ -2177,7 +2177,7 @@ const Pacypay = require('./pacypay.js')
 
 :::
 
-::: details 点击查看拼接的字符串
+::: details 点击查看拼接的字符串（不含密钥）
 
 ```json-vue
 {{reactives.concatString}}
