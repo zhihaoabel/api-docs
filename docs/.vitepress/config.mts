@@ -69,7 +69,7 @@ export default defineConfig({
                         text: '收银台支付',
                         items: [
                             {text: '收银台', link: '/api-Cashier'},
-                             {text: '聚合收银台', link: '/api-Cashier-All'},
+                            {text: '聚合收银台', link: '/api-Cashier-All'},
                             {text: '订阅', link: '/api-Cashier-sub'},
                         ],
                         collapsed: true,
@@ -86,30 +86,31 @@ export default defineConfig({
                     {
                         text: '两方支付',
                         items: [
+                            {text: '分期', link: '/installment'},
                             {text: '两方支付', link: '/api-direct'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
                             {text: '获取绑定Token列表', link: '/api-direct-tokenList'},
                             {text: '订阅', link: '/api-direct-sub'},
                             {text: '预授权请款/撤销', link: '/api-direct-auth'},
-                            {text: '本地支付',  link: '/api-direct-lpms'},        
+                            {text: '本地支付', link: '/api-direct-lpms'},
                         ],
                         collapsed: true,
                     },
-                   
+
                 ],
             },
             {
                 text: '交易查询',
                 items: [
-                    {text: '交易订单查询', link: '/api-orderInquiry'}, 
+                    {text: '交易订单查询', link: '/api-orderInquiry'},
                     {text: '查询拒付单', link: '/api-refusalQuery'},
                 ],
                 collapsed: true,
-            },   
+            },
             {
                 text: '取消交易',
                 items: [
-                    {text: '申请取消交易', link: '/api-cancel-transaction'}, 
+                    {text: '申请取消交易', link: '/api-cancel-transaction'},
                     {text: '取消订阅合同', link: '/api-cancel-sub'},
                 ],
                 collapsed: true,
@@ -117,19 +118,18 @@ export default defineConfig({
             {
                 text: '申请退款',
                 items: [
-                    {text: '申请退款', link: '/refund'}, 
+                    {text: '申请退款', link: '/refund'},
                 ],
                 collapsed: true,
             },
             {
                 text: '文件下载',
                 items: [
-                    {text: '下载结算文件', link: '/file'}, 
+                    {text: '下载结算文件', link: '/file'},
                 ],
                 collapsed: true,
             },
 
-            
 
             {
                 text: '通知',

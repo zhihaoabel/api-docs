@@ -39,14 +39,14 @@ API，使用 SHA256 创建数字签名，接受 JSON 编码的请求体，并返
 
 | Environment | Request URL                                          |
 |-------------|------------------------------------------------------|
-| Sandbox     | https://sandbox-v3-acquiring.pacypay.com/${endpoint} |
+| Sandbox     | https://sandbox-acq.onerway.com/${endpoint} |
 | Production  | https://v3-acq.pacypay.com/${endpoint}               |
 
 ## 以下部分展示了典型的Onerway API 请求和响应的示例：
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
 ```json
 {

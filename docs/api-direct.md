@@ -15,7 +15,22 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 </script>
 
 
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
 
+  
+</script>
 
 
 # 两方支付
@@ -34,7 +49,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction  |
+| Request URL :    | https://sandbox-acq.onerway.com/v1/txn/doTransaction  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -272,7 +287,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ## 以下部分展示了两方支付的请求示例：
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/doTransaction<Badge type="tip">POST</Badge>
 
 
 ::: code-group

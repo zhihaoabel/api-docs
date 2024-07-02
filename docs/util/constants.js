@@ -30,7 +30,8 @@ export const ProductTypeEnum = {
             code: 'ORDER_CODE',
             desc: '订单码（用户扫商家的订单码）',
         },
-    ]};
+    ]
+};
 export const SubProductTypeEnum = {
     columns: [
         {
@@ -194,7 +195,7 @@ export const Risk3dsStrategyEnum = {
         },
     ],
 };
-export const LpmsTypeEnum =  {
+export const LpmsTypeEnum = {
     columns: [
         {
             prop: 'type',
@@ -557,7 +558,7 @@ export const LpmsTypeEnum =  {
             currencies: 'IDR',
             requiredFields: 'email, country',
             limit: '',
-        },{
+        }, {
             type: 'MyBank',
             name: 'MyBank',
             countries: 'IT',
@@ -983,7 +984,7 @@ export const LpmsTypeEnum =  {
         },
     ],
 };
-export const Subscription ={
+export const Subscription = {
     columns: [
         {
             prop: 'name',
@@ -1071,7 +1072,7 @@ export const Subscription ={
         },
     ],
 };
-export const MpiInfo =  {
+export const MpiInfo = {
     columns: [
         {
             prop: 'name',
@@ -1286,7 +1287,7 @@ export const TxnOrderMsg = {
         },
     ],
 };
-export const TransactionAddress =  {
+export const TransactionAddress = {
     columns: [
         {
             prop: 'name',
@@ -1468,3 +1469,248 @@ export const NotifyTypeEnum = {
         },
     ],
 };
+export const LocaleEnum = {
+    columns: [
+        {
+            prop: 'language',
+            label: '语言',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+        {
+            prop: 'supportApplePay',
+            label: '是否支持Apple Pay',
+        },
+        {
+            prop: 'supportGooglePay',
+            label: '是否支持Google Pay',
+        }
+    ],
+    data: [
+        {
+            language: 'ar',
+            desc: '阿拉伯语',
+            supportApplePay: 'YES',
+            supportGooglePay: 'YES',
+        },
+
+        {
+            "language": "ca",
+            "desc": "Català",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "cs",
+            "desc": "Čeština",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "da",
+            "desc": "Dansk",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "de",
+            "desc": "Deutsch",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "el",
+            "desc": "Ελληνικά",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "en",
+            "desc": "English",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "es",
+            "desc": "Español",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "fi",
+            "desc": "Suomi",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "fr",
+            "desc": "Français",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "hr",
+            "desc": "Hrvatski",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "id",
+            "desc": "Bahasa Indonesia",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "it",
+            "desc": "Italiano",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ja",
+            "desc": "日本語",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ko",
+            "desc": "한국어",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ms",
+            "desc": "Bahasa Melayu",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "no",
+            "desc": "Norsk",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "nl",
+            "desc": "Nederlands",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "pl",
+            "desc": "Polski",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "pt",
+            "desc": "Português",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ru",
+            "desc": "Русский",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sk",
+            "desc": "Slovenčina",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sv",
+            "desc": "Svenska",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "th",
+            "desc": "ไทย",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "tr",
+            "desc": "Türkçe",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "uk",
+            "desc": "Українська",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "zh",
+            "desc": "简体中文",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "vi",
+            "desc": "Tiếng Việt",
+            "supportApplePay": "YES",
+            "supportGooglePay": "NO"
+        },
+        {
+            "language": "he",
+            "desc": "עברית",
+            "supportApplePay": "YES",
+            "supportGooglePay": "NO"
+        },
+        {
+            "language": "hi",
+            "desc": "हिन्दी",
+            "supportApplePay": "YES",
+            "supportGooglePay": "NO"
+        },
+        {
+            "language": "hu",
+            "desc": "Magyar",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ro",
+            "desc": "Română",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "zh-TW",
+            "desc": "繁體中文",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "bg",
+            "desc": "Български",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "et",
+            "desc": "Eesti",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sr",
+            "desc": "Српски",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sl",
+            "desc": "Slovenščina",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        }
+    ]
+}

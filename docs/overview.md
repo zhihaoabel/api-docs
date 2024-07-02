@@ -7,7 +7,7 @@ outline: deep
 const requestTableData = [
    {
       env: 'Sandbox',
-      url: 'https://sandbox-v3-acquiring.pacypay.com/${endpoint}',
+      url: 'https://sandbox-acq.onerway.com/${endpoint}',
    },
    {
       env: 'Production',
@@ -87,7 +87,7 @@ API，使用 SHA256 创建数字签名，接受 JSON 编码的请求体，并返
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
 ```json
 {
