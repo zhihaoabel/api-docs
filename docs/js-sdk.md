@@ -1881,7 +1881,7 @@ const LpmsInfo = {
 
 
 const requestBody = {
-   billingInformation: "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+   billingInformation: "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
    merchantCustId: merchantCustId,
    merchantNo: form.merchantNo,
    merchantTxnId: merchantTxnId,
@@ -1890,15 +1890,24 @@ const requestBody = {
    orderAmount: "10",
    orderCurrency: "USD",
    productType: "CARD",
-   shippingInformation: "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+   shippingInformation: "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
    sign: "",
    subProductType: "DIRECT",
    txnOrderMsg: {
-     appId: form.appId,
-     returnUrl: "https://www.ronhan.com",
-     products: "[{\"price\":\"10.00\",\"num\":\"1\",\"name\":\"iphone11\",\"currency\":\"USD\"}]",
-     notifyUrl: form.notifyUrl,
-     transactionIp: "127.0.0.1",
+        returnUrl: "https://www.ronhan.com/",
+        notifyUrl: form.notifyUrl,
+        products: "[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]",
+        transactionIp: "127.0.0.1",
+        appId: form.appId,
+        javaEnabled:false,
+        colorDepth: "24",
+        screenHeight: "1080",
+        screenWidth: "1920",
+        timeZoneOffset: "-480",
+        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        contentLength: "340",
+        language: null
    },
    txnType: "SALE"
 };
@@ -2122,7 +2131,7 @@ const Pacypay = require('./pacypay.js')
 
 ```json-vue [Request.json]
 {
-  "billingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+  "billingInformation": "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
   "merchantCustId": "{{merchantCustId}}",
   "merchantNo": "{{form.merchantNo}}", // [!code highlight]
   "merchantTxnId": {{merchantTxnId}},
@@ -2131,10 +2140,10 @@ const Pacypay = require('./pacypay.js')
   "orderAmount": "10",
   "orderCurrency": "USD",
   "productType": "CARD",
-  "shippingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+  "shippingInformation": "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
   "sign": "{{reactives.sign}}", // [!code highlight]
   "subProductType": "DIRECT",
-  "txnOrderMsg": "{\"appId\":\"{{form.appId}}\",\"returnUrl\":\"https://www.ronhan.com\",\"products\":\"[{\\\"price\\\":\\\"10.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"transactionIp\":\"127.0.0.1\"}", // [!code highlight]
+  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"{{form.appId}}\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":null}", // [!code highlight]
   "txnType": "SALE"
 }
 ```
@@ -2144,7 +2153,7 @@ const Pacypay = require('./pacypay.js')
    "respCode": "20000",
    "respMsg": "Success",
    "data": {
-      "transactionId": "1762730229685944320", // [!code highlight]
+      "transactionId": "#{流水号}", // [!code highlight]
       "responseTime": "{{datetime}}",
       "txnTime": null,
       "txnTimeZone": "+08:00",
@@ -2168,7 +2177,7 @@ const Pacypay = require('./pacypay.js')
 
 :::
 
-::: details
+::: details 点击查看拼接的字符串
 
 ```json-vue
 {{reactives.concatString}}
