@@ -151,7 +151,7 @@
     --custom-block-info-border: var(--vp-c-default-1);
     --custom-block-tip-border: var(--vp-c-important-1);
     --custom-block-warning-border: var(--vp-c-warning-1);
-    --custom-block-danger-border: var(--vp-c-danger-1);
+    --custom-block-danger-border: #fe6c6f;
     --custom-block-details-border: var(--vp-c-success-1);
     --custom-block-details-bg: var(--vp-c-success-soft);
     --custom-block-details-code-bg: var(--vp-c-success-soft);

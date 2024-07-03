@@ -32,8 +32,10 @@ const formLabelWidth = '140px';
 const draggable = ref(true);
 
 let reactives = reactive({
-    sign: '',
-    concatString: '',  /* 拼接的字符串 */
+    directSign: '',
+    tokenSign: '',
+    directConcatString: '',  /* 直接支付拼接的字符串 */
+    tokenConcatString: '',  /* token支付拼接的字符串 */
 });
 
 const form = reactive({
@@ -1879,8 +1881,7 @@ const LpmsInfo = {
     ],
 };
 
-
-const requestBody = {
+const directRequestBody = {
    billingInformation: "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
    merchantCustId: merchantCustId,
    merchantNo: form.merchantNo,
@@ -1912,20 +1913,54 @@ const requestBody = {
    txnType: "SALE"
 };
 
-onMounted( async () => {
-    const request = await requestGen(requestBody, [], form.secret);
+const tokenRequestBody = {
+   billingInformation: "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
+   merchantCustId: merchantCustId,
+   merchantNo: form.merchantNo,
+   merchantTxnId: merchantTxnId,
+   merchantTxnTime: datetime,
+   merchantTxnTimeZone: "+08:00",
+   orderAmount: "10",
+   orderCurrency: "USD",
+   productType: "CARD",
+   shippingInformation: "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
+   sign: "",
+   subProductType: "TOKEN",
+   txnOrderMsg: {
+        returnUrl: "https://www.ronhan.com/",
+        notifyUrl: form.notifyUrl,
+        products: "[{\"name\":\"iphone 11\",\"price\":\"5300.00\",\"num\":\"2\",\"currency\":\"CNY\"},{\"name\":\"macBook\",\"price\":\"1234.00\",\"num\":\"1\",\"currency\":\"USD\"}]",
+        transactionIp: "127.0.0.1",
+        appId: form.appId,
+        javaEnabled:false,
+        colorDepth: "24",
+        screenHeight: "1080",
+        screenWidth: "1920",
+        timeZoneOffset: "-480",
+        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        contentLength: "340",
+        language: null
+   },
+   txnType: "SALE"
+};
 
-    reactives.concatString = await concatedStr(request, []);
-    reactives.sign = request.sign;
+onMounted( async () => {
+    const directRequest = await requestGen(directRequestBody, [], form.secret);
+    const tokenRequest = await requestGen(tokenRequestBody, [], form.secret);
+    reactives.directConcatString = await concatedStr(directRequest, []);
+    reactives.tokenConcatString = await concatedStr(tokenRequest, []);
+    reactives.directSign = directRequest.sign;
+    reactives.tokenSign = tokenRequest.sign;
 });
 
 watch(() => form.merchantNo, (val) => {
-   requestBody.merchantNo = val;
+   directRequestBody.merchantNo = val;
    localStorage.setItem('merchantNo', val);
 });
 
 watch(() => form.appId, (val) => {
-   requestBody.txnOrderMsg.appId = val;
+   directRequestBody.txnOrderMsg.appId = val;
    localStorage.setItem('appId', val);
 });
 
@@ -1934,7 +1969,7 @@ watch(() => form.secret, (val) => {
 });
 
 watch(() => form.notifyUrl, (val) => {
-   requestBody.txnOrderMsg.notifyUrl = val;
+   directRequestBody.txnOrderMsg.notifyUrl = val;
    localStorage.setItem('notifyUrl', val);
 });
 
@@ -1962,7 +1997,6 @@ function updateRequest() {
 在需要调用JS SDK的页面中引入[JS SDK](https://sandbox-v3-doc.pacypay.com/javascripts/onerway-v1.1.1.zip)
 
  ```html
-
 <script src="pacypay.js"></script>
  ```
 
@@ -1983,7 +2017,6 @@ const Pacypay = require('./pacypay.js')
 在所需页面中新增一个id为 `pacypay_checkout`的div元素块，作为收银台嵌入的容器
 
 ```html
-
 <div id='pacypay_checkout'></div>
 
 ```
@@ -2094,96 +2127,6 @@ const Pacypay = require('./pacypay.js')
 
 </div>
 
-#### 请求和响应示例
-
-<div class="custom-dialog">
-  <el-button class="dialog-button" plain @click="dialogVisible = true">自动生成签名</el-button>
-
-  <el-dialog v-model="dialogVisible" draggable=draggable title="商户信息" width="500">
-    <el-form :model="form">
-      <el-form-item label="商户号" :label-width="formLabelWidth">
-        <el-input v-model="form.merchantNo" autocomplete="off" placeholder="Enter your merchantNo"></el-input>
-      </el-form-item>
-      <el-form-item label="App ID" :label-width="formLabelWidth">
-        <el-input v-model="form.appId" autocomplete="off" placeholder="Enter your appId"></el-input>
-      </el-form-item>
-      <el-form-item label="Secret" :label-width="formLabelWidth">
-        <el-input v-model="form.secret" type="password" placeholder="Enter your secret" show-password autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="异步回调通知地址" :label-width="formLabelWidth">
-        <el-input v-model="form.notifyUrl" placeholder="Url for getting notifications" autocomplete="off"></el-input>
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="updateRequest">
-          Confirm
-        </el-button>
-      </div>
-    </template>
-  </el-dialog>
-
-</div>
-
-::: code-group
-
-```json-vue [Request.json]
-{
-  "billingInformation": "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
-  "merchantCustId": "{{merchantCustId}}",
-  "merchantNo": "{{form.merchantNo}}", // [!code highlight]
-  "merchantTxnId": {{merchantTxnId}},
-  "merchantTxnTime": "{{datetime}}",
-  "merchantTxnTimeZone": "+08:00",
-  "orderAmount": "10",
-  "orderCurrency": "USD",
-  "productType": "CARD",
-  "shippingInformation": "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
-  "sign": "{{reactives.sign}}", // [!code highlight]
-  "subProductType": "DIRECT",
-  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"{{form.appId}}\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":null}", // [!code highlight]
-  "txnType": "SALE"
-}
-```
-
-```json-vue [Response.json]
-{
-   "respCode": "20000",
-   "respMsg": "Success",
-   "data": {
-      "transactionId": "#{流水号}", // [!code highlight]
-      "responseTime": "{{datetime}}",
-      "txnTime": null,
-      "txnTimeZone": "+08:00",
-      "orderAmount": "10.00",
-      "orderCurrency": "USD",
-      "txnAmount": null,
-      "txnCurrency": null,
-      "status": "U",
-      "redirectUrl": null,
-      "contractId": null,
-      "tokenId": null,
-      "eci": null,
-      "periodValue": null,
-      "codeForm": null,
-      "presentContext": null,
-      "redirectType": null,
-      "sign": "a2dde1fd7bc46dc1b87d3bd14707dd85c6750569bbe60025d9821c3bbf13cbab"
-   }
-}
-```
-
-:::
-
-::: details 点击查看拼接的字符串（不含密钥）
-
-```json-vue
-{{reactives.concatString}}
-```
-
-:::
-
 #### 响应参数
 
 <div class="custom-table">
@@ -2219,6 +2162,161 @@ const Pacypay = require('./pacypay.js')
 | sign          | No  | String | 签名字符串                                                                                                                                                                                                                                      |
 
 </div>
+
+#### 请求和响应示例
+
+::: tip 自动生成签名
+点击 <el-button class="dialog-button my-3" plain @click="dialogVisible = true">自动生成签名</el-button> 按钮，填入商户号, appId, 密钥即可自动生成签名
+:::
+
+<div class="custom-dialog">
+
+  <el-dialog v-model="dialogVisible" draggable=draggable title="商户信息" width="500">
+    <el-form :model="form">
+      <el-form-item label="商户号" :label-width="formLabelWidth">
+        <el-input v-model="form.merchantNo" autocomplete="off" placeholder="Enter your merchantNo"></el-input>
+      </el-form-item>
+      <el-form-item label="App ID" :label-width="formLabelWidth">
+        <el-input v-model="form.appId" autocomplete="off" placeholder="Enter your appId"></el-input>
+      </el-form-item>
+      <el-form-item label="Secret" :label-width="formLabelWidth">
+        <el-input v-model="form.secret" type="password" placeholder="Enter your secret" show-password autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="异步回调通知地址" :label-width="formLabelWidth">
+        <el-input v-model="form.notifyUrl" placeholder="Url for getting notifications" autocomplete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="updateRequest">
+          Confirm
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+</div>
+
+##### 直接下单请求示例
+
+::: code-group
+
+```json-vue [直接下单请求.json]
+{
+  "billingInformation": "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
+  "merchantCustId": "{{merchantCustId}}",
+  "merchantNo": "{{form.merchantNo}}", // [!code highlight]
+  "merchantTxnId": {{merchantTxnId}},
+  "merchantTxnTime": "{{datetime}}",
+  "merchantTxnTimeZone": "+08:00",
+  "orderAmount": "10",
+  "orderCurrency": "USD",
+  "productType": "CARD",
+  "shippingInformation": "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
+  "sign": "{{reactives.directSign}}", // [!code highlight]
+  "subProductType": "DIRECT",
+  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"{{form.appId}}\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":null}", // [!code highlight]
+  "txnType": "SALE"
+}
+```
+
+```json-vue [直接下单响应.json]
+{
+   "respCode": "20000",
+   "respMsg": "Success",
+   "data": {
+      "transactionId": "#{流水号}", // [!code highlight]
+      "responseTime": "{{datetime}}",
+      "txnTime": null,
+      "txnTimeZone": "+08:00",
+      "orderAmount": "10.00",
+      "orderCurrency": "USD",
+      "txnAmount": null,
+      "txnCurrency": null,
+      "status": "U",
+      "redirectUrl": null,
+      "contractId": null,
+      "tokenId": null,
+      "eci": null,
+      "periodValue": null,
+      "codeForm": null,
+      "presentContext": null,
+      "redirectType": null,
+      "sign": "a2dde1fd7bc46dc1b87d3bd14707dd85c6750569bbe60025d9821c3bbf13cbab"
+   }
+}
+```
+
+:::
+
+::: details 点击查看拼接的字符串（不含密钥）
+
+```json-vue
+{{reactives.directConcatString}}
+```
+
+:::
+
+##### TOKEN下单请求示例
+
+::: code-group
+
+```json-vue [Token下单请求.json]
+{
+  "billingInformation": "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
+  "merchantCustId": "{{merchantCustId}}",
+  "merchantNo": "{{form.merchantNo}}", // [!code highlight]
+  "merchantTxnId": {{merchantTxnId}},
+  "merchantTxnTime": "{{datetime}}",
+  "merchantTxnTimeZone": "+08:00",
+  "orderAmount": "10",
+  "orderCurrency": "USD",
+  "productType": "CARD",
+  "shippingInformation": "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
+  "sign": "{{reactives.tokenSign}}", // [!code highlight]
+  "subProductType": "TOKEN",
+  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"{{form.appId}}\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":null}", // [!code highlight]
+  "txnType": "SALE"
+}
+```
+
+```json-vue [Token下单响应.json]
+{
+   "respCode": "20000",
+   "respMsg": "Success",
+   "data": {
+      "transactionId": "#{流水号}", // [!code highlight]
+      "responseTime": "{{datetime}}",
+      "txnTime": null,
+      "txnTimeZone": "+08:00",
+      "orderAmount": "10.00",
+      "orderCurrency": "USD",
+      "txnAmount": null,
+      "txnCurrency": null,
+      "status": "U",
+      "redirectUrl": null,
+      "contractId": null,
+      "tokenId": null,
+      "eci": null,
+      "periodValue": null,
+      "codeForm": null,
+      "presentContext": null,
+      "redirectType": null,
+      "sign": "a2dde1fd7bc46dc1b87d3bd14707dd85c6750569bbe60025d9821c3bbf13cbab"
+   }
+}
+```
+
+:::
+
+::: details 点击查看拼接的字符串（不含密钥）
+
+```json-vue
+{{reactives.tokenConcatString}}
+```
+
+:::
 
 ### 拉起JS SDK收银台
 
