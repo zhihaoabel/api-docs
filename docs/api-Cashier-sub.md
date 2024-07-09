@@ -20,27 +20,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 # 订阅
 订阅支付是指客户与商家之间建立的一种协议，允许商家根据预先设定的时间表自动收取客户的付款。
 
-请求地址、请求方式、请求头 可以参考：
 
-<br>
+## 订阅首购
 
-|   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
-
-<br>
-
-<div class="alertbox3">
-
-::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
-:::
-
-</div>
-
-## 订阅支付
-请求参数
 
 <div class="custom-table bordered-table">
 
@@ -53,28 +35,41 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="alertbox4">
 
-::: tip 订阅请求参数可参考收银台信用卡支付，只需将`"subProductType":"DIRECT"`,改为 `subProductType："SUBSCRIBE"` 即可
+::: tip 基于收银台支付接口，订阅首购需要设置以下参数： `subProductType` 、 `subscription`
 :::
 
 </div>
 
+#### SubProductType
+
+<div class="custom-table bordered-table">
+
+| 代码             | 描述     | 
+|----------------|--------|
+| DIRECT    | 直接支付 | 
+| SUBSCRIBE | 订阅支付 |
+| INSTALLMENT     | 分期支付 |
+| TOKEN  | token支付 |
+| AUTO_DEBIT | 代扣 |
+
+</div>
 
 
 #### Subscription
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名 | 描述                                  |
-|----------------|--------|----|-----|----|-------------------------------------|
-| requestType    | String | 1  | Yes | No | 订阅请求类型。 枚举如下：  `0 - 首购 `, 收银台仅支持首次购买。   |
-| merchantCustId | String | 50 | No  | No | 商户客户 `id `， `requestType `为 `0 `时必填。            |
-| expireDate     | String | 10 | No  | No | 过期日期， `requestType `为 `0 `时必填，格式为 `yyyy-MM-dd ` |
-| frequencyType  | String | 1  | No  | No | 订阅频率类型， `requestType `为 `0 `时必填。枚举如下： `D - 天  ` |
-| frequencyPoint | String | 2  | No  | No | 订阅频率点数， `requestType `为 `0 `时必填。            |
+| 名称             | 类型     | 长度 | 必填  | 签名 | 描述                                         |
+|----------------|--------|----|-----|----|--------------------------------------------|
+| requestType    | String | 1  | YES | YES | 订阅类型：`0 - 首购`, 收银台仅支持首次购买。                   |
+| merchantCustId | String | 50 | YES  | YES | 顾客ID           |
+| expireDate     | String | 10 | YES  | YES | 过期日期， 格式为 `yyyy-MM-dd ` |
+| frequencyType  | String | 1  | YES  | YES | 订阅频率类型，仅支持按天订阅，所以写死为`D` |
+| frequencyPoint | String | 2  | YES  | YES | 订阅频率点数，表示多少天进行一次扣款|
 
 </div>
 
-## 以下部分展示了订阅支付的请求示例：
+## 订阅首购请求示例：
 
 
 
@@ -87,21 +82,21 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 ```json [请求参数]
 {
-  "merchantNo":"800052",
-  "merchantTxnId":"1640247522000",
-  "merchantTxnTime":"2021-12-22 15:30:30",
-  "merchantTxnTimeZone":"+08:00",
-  "productType":"CARD",
-  "subProductType":"SUBSCRIBE",   // [!code error]
-  "txnType":"SALE",
-  "orderAmount":"200",
-  "orderCurrency":"USD",
-  "txnOrderMsg":"{\"returnUrl\":\"https://www.ronhan.com/\",\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":1458672763818790912,\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",
-  "cardInfo":"{\"cardNumber\":\"4000027891380961\",\"cvv\":\"789\",\"month\":\"12\",\"year\":\"2022\",\"holderName\":\"CL BRW2\"}",
-  "shippingInformation":"{\"firstName\":\"ShippingFirstName\",\"lastName\":\"ShippingLastName\",\"phone\":\"188888888888\",\"email\":\"shipping@test.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address\",\"country\":\"CN\",\"province\":\"SH\",\"city\":\"SH\",\"street\":\"lujiazui\",\"number\":\"1\",\"identityNumber\":\"110000\"}",
-  "billingInformation":"{\"firstName\":\"billingFirstName\",\"lastName\":\"billingLastName\",\"phone\":\"18600000000\",\"email\":\"billing@test.com\",\"postalCode\":\"430000\",\"address\":\"Billing Address\",\"country\":\"CN\",\"province\":\"HK\",\"city\":\"HK\",\"street\":\"jianshazui\",\"number\":\"2\",\"identityNumber\":\"220000\"}",
-  "subscription":"{\"merchantCustId\":\"custId_1640247522000\",\"requestType\":\"0\",\"expireDate\":\"2022-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1}",
-  "sign":""  //这里的sign字符串需要通过签名获得    // [!code error]
+  "billingInformation": "{\"country\":\"BE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\"}",
+  "merchantCustId": 1720494168000,
+  "merchantNo": "800209",
+  "merchantTxnId": 1720494168000,
+  "merchantTxnTime": "2024-01-30 07:10:51",
+  "merchantTxnTimeZone": "+08:00",
+  "orderAmount": "10",
+  "orderCurrency": "EUR",
+  "productType": "SUBSCRIBE",  // [!code error]
+  "shippingInformation": "{\"country\":\"BE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\"}",
+  "sign": "a215ea01c96ce585dcba264e447b994da204f47b7f28be55ede2fb48c647685c",  // [!code error]
+  "subProductType": "SUBSCRIBE",
+  "subscription": "{\"merchantCustId\":1720494168000,\"requestType\":\"0\",\"expireDate\":\"2024-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1,\"tokenId\":\"\",\"contractId\":\"\"}",  // [!code error]
+  "txnOrderMsg": "{\"returnUrl\":\"https://docs.onerway.com/\",\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"CNY\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"1739545982264549376\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",
+  "txnType": "SALE"
 }
 ```
 
@@ -109,31 +104,31 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 
 {
-    "respCode": "20000",
-    "respMsg": "Success",
-    "data": {
-        "transactionId": "1759879333348245504",
-        "merchantTxnId": "164604252511",
-        "merchantNo": "800052",
-        "responseTime": "",
-        "txnTime": "",
-        "orderAmount": "20.00",
-        "orderCurrency": "USD",
-        "txnAmount": "",
-        "txnCurrency": null,
-        "txnTimeZone": null,
-        "status": "U",
-        "reason": null,
-        "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=19d6513ee000463783532f576c10dbcb",   // [!code error]
-        "sign": "64cf0651986e86e109e6e2804b74bdeecb94cd7cb310c15711f7138867b0cac7",
-        "contractId": "",
-        "tokenId": null,
-        "eci": null,
-        "transactionOrderNo": null,
-        "periodValue": null,
-        "lpmsType": null,
-        "qrCode": null
-    }
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "transactionId": "1810509885683929088",
+    "merchantTxnId": "1720494168000",
+    "merchantNo": "800209",
+    "responseTime": "",
+    "txnTime": "",
+    "orderAmount": "10.00",
+    "orderCurrency": "EUR",
+    "txnAmount": "",
+    "txnCurrency": null,
+    "txnTimeZone": null,
+    "status": "U",
+    "reason": null,
+    "redirectUrl": "https://sandbox-checkout.onerway.com/aggregate?key=1d251d6ca8384d318b610e3353ed2338",   // [!code error]
+    "sign": "38c5441f75090e0bbd2b9490ea3b946c77e8617ac058ce81b9ce3321bc7bf5ce",
+    "contractId": "",
+    "tokenId": null,
+    "eci": null,
+    "transactionOrderNo": null,
+    "periodValue": null,
+    "lpmsType": null,
+    "qrCode": null
+  }
 }
 
 ```
@@ -141,7 +136,64 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 <div class="alertbox4">
 
-::: tip 此示例仅限参考 请勿拿此示例直接请求。
+::: tip 若请求成功，商家需要获取响应参数中的redirectUrl，然后进行重定向打开。
 :::
+
+</div>
+
+## 订阅首购成功
+
+
+::: code-group
+
+```json [异步通知响应]
+{
+    "notifyType": "TXN",
+    "transactionId": "1810553728219353088",
+    "txnType": "SALE",
+    "merchantNo": "800209",
+    "merchantTxnId": "1720504619000",
+    "responseTime": "2024-07-09 13:57:19",
+    "txnTime": "2024-07-09 13:57:01",
+    "txnTimeZone": "+08:00",
+    "orderAmount": "100.00",
+    "orderCurrency": "USD",
+    "txnAmount": "",
+    "status": "S",
+    "contractId": "1810553728324210688",  // [!code error]
+    "tokenId": "7d827950f927d1be3f47c87819a8ba0d8f24b75112d70a7292e92696793081d7",  // [!code error]
+    "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",
+    "sign": "36e8dbce8f436df4dbb08490276bda68b101f1241897f4910a93af9d383e9d64",
+    "paymentMethod": "VISA"
+}
+
+```
+:::
+
+#### 响应参数
+
+
+<div class="custom-table bordered-table">
+
+| 名称	 | 类型     | 签名 | 描述                                                                                                                                                                                              |
+|-------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| notifyType  | String | Yes | 通知类型。请参阅  <CustomPopover title="NotifyTypeEnum" width="auto" reference="NotifyTypeEnum" link="/apis/enums.html#notifytypeenum" ></CustomPopover>                                                |                                           |
+| transactionId         | String | Yes | Onerway创建的交易订单号，对应商户订单号                                                                                                                                                                         |
+| txnType       | String | Yes | 交易类型，  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                                                            |
+| merchantNo   | String |  Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                     |
+| merchantTxnId | String |  Yes | 顾客每次付款的订单号。                                                                                                                                                                                     |
+| responseTime           | String | Yes | 接口响应时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                               |
+| txnTime        | String | Yes | 交易完成时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                               |
+| txnTimeZone               | String | Yes | 交易完成时区，<br/>例如`+08:00`                                                                                                                                                                          |
+| orderAmount           | String | Yes | 订单金额，以“元”为单位，如有小数，保留两位小数。                                                                                                                                                                       |
+| orderCurrency         | String | Yes | 交易订单的货币。 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                                                                 |
+| status          | String | Yes | 交易处理结果。 请参阅 <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                                                 |
+| contractId               | String | Yes | 订阅合同ID：唯一值，用来区分是哪笔订阅。通常会与tokenId成对保存。订阅首购成功后返回，需要复购中使用 |
+| tokenId           | String | Yes | tokenId：用来完成订阅复购的重要参数。订阅首购成功后返回，需要复购中使用                  |
+| reason              | String | Yes | 交易失败的原因                      |
+| sign    | String | Yes | 签名字符串。              |
+| paymentMethod   | String | Yes |    具体支付方式，包括卡和本地支付类型           |
+                               
+
 
 </div>
