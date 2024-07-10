@@ -52,7 +52,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | merchantTxnId       | String | 64 | No  | Yes | 商户创建的商户退款交易订单号，不同的订单号视为不同的交易                                         |
 | originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway` 的原始交易订单号。 当`refundType`为`0`时为传原交易订单号，当`refundType`为`1`时传原退款交易订单号。 |
 | refundAmount        | String | 19 | Yes | Yes | 退款交易金额，<CMNote data="该金额的币种应与原交易时发送的订单币种对应"></CMNote>                                             |
-| sign                | String | /  | Yes | No  | 签名字符串。                                                               |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                               |
 
 </div>
 

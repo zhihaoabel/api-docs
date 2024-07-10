@@ -77,7 +77,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | chargebackArn              | String | 128  | Yes | 拒付ARN                                                  |
 | chargebackCode             | String | 32   | Yes | 拒付代码                                                   |
 | chargebackReason           | String | 1024 | Yes | 拒付原因                                                   |
-| sign                       | String | /    | No  | 签名字符串。                                                 |
+| sign                       | String | /    | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                 |
 
 
 </div>

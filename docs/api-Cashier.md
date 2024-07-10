@@ -87,8 +87,8 @@ let activeName = ref('first');
 | cardInfo              | String | /   | No  | Yes | 交易卡信息。 格式为 `json` 字符串。 请参阅对象           <CustomPopover title="TxnCardInfo" width="auto" reference="TxnCardInfo" link="/apis/api-Cashier.html#txncardinfo" ></CustomPopover>                                                                                  |
 | billingInformation    | String | /   | Yes  | Yes | 账单信息格式为 json 字符串。 请参阅对象  <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-Cashier.html#transactionaddress" ></CustomPopover>                                                                           |
 | shippingInformation   | String | /   | Yes  | Yes | 账单信息格式为 json 字符串。 请参阅对象  <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-Cashier.html#transactionaddress" ></CustomPopover>                                                                           |
-| lpmsInfo              | String | /   | No  | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象  <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/api-Cashier.html#lpmsinfo" ></CustomPopover>                                                                                                |
-| sign                  | String | /   | Yes | No  | 签名字符串，请求参阅“签名”                                                                                                                                                                                                                                              |
+| lpmsInfo              | String | /   | No  | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象  <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/sign.html" ></CustomPopover>                                                                                                                |
+| sign                  | String | /   | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                                                                     |
 
 
 </div>
@@ -261,7 +261,7 @@ let activeName = ref('first');
 | status        | String | Yes | 交易处理结果。 请参阅  <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover> |
 | reason        | String | Yes | 交易失败的原因                                                                                                                                         |
 | redirectUrl   | String | Yes | 收银台地址，商家拿到这个地址后，需要重定向打开。                                                                                                                        |
-| sign          | String | No  | 签名字符串。                                                                                                                                          |
+| sign          | String | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                                                                          |
 
 </div>
 
