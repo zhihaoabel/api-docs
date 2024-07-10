@@ -2052,7 +2052,7 @@ const Pacypay = require('./pacypay.js')
 | billingInformation    | String | /   | No  | Yes | 交易账单信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
 | shippingInformation   | String | /   | No  | Yes | 交易邮寄信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
 | lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType` 为 `LPMS` 时必填，格式为json字符串。 请参阅对象 <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/js-sdk.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable></CustomPopover>                                                      |
-| sign                  | String | /   | Yes | No  | 签名字符串。                                                                                                                                                                                                                                                                                                        |
+| sign                  | String | /   | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                                                                                                                                                                                                                                        |
 
 </div>
 
@@ -2159,7 +2159,7 @@ const Pacypay = require('./pacypay.js')
 | contractId    | Yes | String | 订阅合同id。首购时返回                                                                                                                                                                                                                               |
 | tokenId       | Yes | String | 订阅令牌id。首购时返回                                                                                                                                                                                                                               |
 | eci           | Yes | String | 责任转移                                                                                                                                                                                                                                       |
-| sign          | No  | String | 签名字符串                                                                                                                                                                                                                                      |
+| sign          | No  | String | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                                                                                                                                                                    |
 
 </div>
 
@@ -2609,7 +2609,7 @@ pacypay.submit({
 | orderAmount         | String | 19 | Yes | Yes | 修改后的交易订单金额。                                                                                                                                                                                                                                                                                          |
 | billingInformation  | String | /  | No  | Yes | 交易账单信息。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
 | shippingInformation | String | /  | No  | Yes | 交易邮寄信息。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
-| sign                | String | /  | Yes | No  | 签名字符串。                                                                                                                                                                                                                                                                                               |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                                                                                                                                                                                                                            |
 
 </div>
 
@@ -2632,7 +2632,7 @@ pacypay.submit({
 | 名称            | 类型     | 签名  | 描述                      |
 |---------------|--------|-----|-------------------------|
 | transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号 |
-| sign          | String | No  | 签名字符串。                  |
+| sign          | String | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                  |
 
 </div>
 

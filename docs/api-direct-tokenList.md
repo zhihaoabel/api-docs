@@ -49,7 +49,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时， `OnerWa `y会为商户创建商户号                                                                |
 | appId          | String | 20 | No  | Yes | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用 `id `。不传时，默认查询商户号下所有绑定的 `token `信息。传入时，查询指定 `appId `下的绑定的 `toke `n信息。 |
 | merchantCustId | String | 50 | Yes | Yes | 客户在商户的唯一标识                                                                                 |
-| sign           | String | /  | Yes | No  | 签名字符串。                                                                                     |                                   |
+| sign           | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                    |                                   |
 
 </div>
 

@@ -139,8 +139,8 @@ $PrivateKey 商户秘钥;
 参数类型字符串;  
 */
 //ASCII码排序加密
-    function ASCII_HASH($params){
-        $PrivateKey = trim($this->config->get('payment_pacypayment_secret'));
+    function ASCII_HASH($params , $payment_pacypayment_secret){
+        $PrivateKey = $payment_pacypayment_secret;
         if(!empty($params)){
         $p =  ksort($params);
         $badkey = array('originTransactionId','originMerchantTxnId','customsDeclarationAmount','customsDeclarationCurrency','paymentMethod','walletTypeName','periodValue','tokenExpireTime','sign');

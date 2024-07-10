@@ -62,7 +62,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | merchantNo | String | 20 | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号 |
 | date       | String | 8  | Yes | Yes | 结算日期，格式为`yyyyMMdd`           |
 | currency   | String | 8  | Yes | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码     |
-| sign       | String | /  | Yes | No  | 签名字符串。                      |
+| sign       | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                      |
 </div>
 
 
