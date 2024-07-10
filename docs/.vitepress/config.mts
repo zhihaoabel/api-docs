@@ -7,10 +7,10 @@ export default defineConfig({
     lang: 'zh-Hans',
     title: 'Onerway API',
     description: "Onerway面向商户开发者的接口文档",
-    base: '/apis/',
+    base: '/apis',
 
     head: [
-        ['link', {rel: 'icon', href: '/apis/onerway.png'}],
+        ['link', {rel: 'icon', href: '/apis/favicon.ico'}],
         ['link', {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: ''}],
         ['link', {href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet'}],
         ['meta', {name: 'theme-color', content: '#5f67ee'}],
