@@ -10,7 +10,7 @@ export default defineConfig({
     base: '/apis/',
 
     head: [
-        ['link', {rel: 'icon', href: '/american-express.svg'}],
+        ['link', {rel: 'icon', href: '/apis/onerway.png'}],
         ['link', {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: ''}],
         ['link', {href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet'}],
         ['meta', {name: 'theme-color', content: '#5f67ee'}],
@@ -36,7 +36,7 @@ export default defineConfig({
     },
 
     themeConfig: {
-        logo: '/logo.png',
+        logo: '/onerway.png',
         siteTitle: '',
 
         i18nRouting: true,
@@ -46,7 +46,7 @@ export default defineConfig({
             {
                 text: '参考',
                 items: [
-                    {text: 'Overview', link: '/overview'},
+                    {text: 'Overview', link: '/index'},
                     {text: '签名', link: '/sign'},
                     {text: 'SDK', link: '/js-sdk',},
                     {text: '收银台支付', link: '/public/api-Cashier'},
@@ -58,7 +58,7 @@ export default defineConfig({
             {
                 text: '',
                 items: [
-                    {text: '概述', link: '/overview'},
+                    {text: '概述', link: '/index'},
                     {text: '签名', link: '/sign'},
                 ],
             },
@@ -129,8 +129,6 @@ export default defineConfig({
                 ],
                 collapsed: true,
             },
-
-
             {
                 text: '通知',
                 link: '/notify',
