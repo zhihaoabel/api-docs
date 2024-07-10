@@ -22,7 +22,7 @@ outline: deep
 | orderAmount   | String | 19 | Yes | Yes | 交易订单金额                                 |
 | orderCurrency | String | 8  | Yes | Yes | 交易订单币种。 请参阅 ISO 4217 货币代码              |
 | cardInfo      | String | /  | Yes | Yes | 交易卡信息，格式为 json 字符串。 请参阅对象 CardInfo     |
-| sign          | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                 |
+| sign          | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                     |
 
 </div>
 

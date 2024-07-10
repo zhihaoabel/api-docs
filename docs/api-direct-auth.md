@@ -57,7 +57,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | txnType             | String | 16 | Yes | Yes | 交易类型，请参阅  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>  。此接口仅支持`CAPTURE`和`VOID` |
 | merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权请款或撤销的交易订单号，不同的订单号视为不同的交易       |
 | originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。                  |
-| sign                | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                 |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                     |
 
 
 </div>
@@ -96,7 +96,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | contractId    | String | Yes | 订阅合同id，首购时返回                                |
 | tokenId       | String | Yes | 订阅令牌id ，首购时返回                               |
 | eci           | String | Yes | 责任转移                                        |
-| sign          | String | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                      |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                          |
 
 
 </div>
