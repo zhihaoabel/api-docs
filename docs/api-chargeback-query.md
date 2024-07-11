@@ -104,25 +104,25 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称                  | 类型     | 签名 | 描述                                |
+| 名称                  | 类型     | 必填 | 描述                                |
 |---------------------|--------|----|-----------------------------------|
-| merchantNo          | String | No | 商户号。 商户注册时，` OnerWay` 会为商户创建商户号       |
-| merchantTxnId       | String | No | 商户创建的商户交易订单号，不同的订单号视为不同的交易        |
-| originTransactionId | String | No | 来自 ` Onerway`  的原交易订单号。               |
-| txnAmount           | String | No | 以结算币种计的原交易金额                      |
-| txnCurrency         | String | No | 原交易结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
-| txnTime             | String | No | 原交易完成时间                           |
-| paymentMethod       | String | No | 具体支付方式，包括卡和本地支付类型                 |
-| chargebackId        | String | No | ` Onerway` 创建的拒付交易订单号                 |
-| importTime          | String | No | ` onerway`  接收拒付交易的时间                 |
-| chargebackAmount    | String | No | 发生的拒付金额                           |
-| chargebackCurrency  | String | No | 拒付金额的币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
-| chargebackDate      | String | No | 拒付发生的日期                           |
-| chargebackStatus    | String | No | 拒付交易状态。 请参阅  <CustomPopover title="ChargebackStatusEnum" width="auto" reference="ChargebackStatusEnum" link="/apis/enums.html#chargebackstatusenum" ></CustomPopover> |
-| chargebackReason    | String | No | 拒付原因                              |
-| chargebackArn       | String | No | ARN                               |
-| appealDueTime       | String | No | 申诉资料提交截止时间，格式为`yyyy-MM-dd HH:mm:ss` |
-| chargebackCode      | String | No | 拒付代码                              |
+| merchantNo          | String | Yes | 商户号。 商户注册时，` OnerWay` 会为商户创建商户号       |
+| merchantTxnId       | String | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易        |
+| originTransactionId | String | Yes | 来自 ` Onerway`  的原交易订单号。               |
+| txnAmount           | String | Yes | 以结算币种计的原交易金额                      |
+| txnCurrency         | String | Yes | 原交易结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
+| txnTime             | String | Yes | 原交易完成时间                           |
+| paymentMethod       | String | Yes | 具体支付方式，包括卡和本地支付类型                 |
+| chargebackId        | String | Yes | ` Onerway` 创建的拒付交易订单号                 |
+| importTime          | String | Yes | ` onerway`  接收拒付交易的时间                 |
+| chargebackAmount    | String | Yes | 发生的拒付金额                           |
+| chargebackCurrency  | String | Yes | 拒付金额的币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
+| chargebackDate      | String | Yes | 拒付发生的日期                           |
+| chargebackStatus    | String | Yes | 拒付交易状态。 请参阅  <CustomPopover title="ChargebackStatusEnum" width="auto" reference="ChargebackStatusEnum" link="/apis/enums.html#chargebackstatusenum" ></CustomPopover> |
+| chargebackReason    | String | Yes | 拒付原因                              |
+| chargebackArn       | String | Yes | ARN                               |
+| appealDueTime       | String | Yes | 申诉资料提交截止时间，格式为`yyyy-MM-dd HH:mm:ss` |
+| chargebackCode      | String | Yes | 拒付代码                              |
 
 </div>
 
