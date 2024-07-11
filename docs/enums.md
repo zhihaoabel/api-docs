@@ -553,3 +553,15 @@ ANDROID 安卓
 | 280      | mBank - Raty                   |
 
 </div>
+
+## StoreProductTypeEnum
+
+<div class="custom-table bordered-table">
+
+| productType  | 描述      |
+|--------------|---------|
+|              | 不传默认为商品 |
+| discount     | 折扣      |
+| shipping_fee | 运费      |
+
+</div>
