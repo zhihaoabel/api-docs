@@ -255,7 +255,7 @@ let activeName = ref('first');
 | status        | String | Yes | 交易处理结果。 请参阅  <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover> |
 | reason        | String | Yes | 交易失败的原因                                                                                                                                         |
 | redirectUrl   | String | Yes | 收银台地址，商家拿到这个地址后，需要重定向打开。                                                                                                                        |
-| sign          | String | No  | 签名字符串。                                                                                                                                          |
+| sign          | String | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                                                                          |
 
 </div>
 

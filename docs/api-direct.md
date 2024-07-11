@@ -94,7 +94,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | shippingInformation   | String | /   | No  | Yes | 交易邮寄信息。 格式为 `json` 字符串。 请参阅对象    <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-direct.html#transactionaddress" ></CustomPopover>                                         |
 | lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType`为`LPMS`时，除协议代扣外必填，格式为`json`字符串。 请参阅对象     <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/api-direct-lpms.html#lpmsinfo" ></CustomPopover>                               |
 | tokenInfo             | String | /   | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象        <CustomPopover title="tokenInfo" width="auto" reference="tokenInfo" link="/apis/api-direct-token.html#tokeninfo" ></CustomPopover>                   |
-| sign                  | String | /   | Yes | No  | 签名字符串。                                                                                       |
+| sign                  | String | /   | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                                                                       |
                     
 </div>
 
@@ -279,7 +279,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | tokenId       | String | Yes | 订阅令牌id ，首购时返回                               |
 | eci           | String | Yes | 责任转移                                        |
 | codeForm      | Map    | No  | 码的信息。请参阅对象 CodeForm                         |
-| sign          | String | No  | 签名字符串。                                      |
+| sign          | String | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                      |
 
 
 </div>

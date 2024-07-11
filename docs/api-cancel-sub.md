@@ -48,7 +48,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |------------|--------|----|-----|-----|-----------------------------|
 | contractId | String | 20 | Yes | Yes | 订阅合同`id`                      |
 | merchantNo | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号 |
-| sign       | String | /  | Yes | No  | 签名字符串。                      |
+| sign       | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                      |
 
 
 </div>
