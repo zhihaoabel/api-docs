@@ -8,6 +8,14 @@ outline: deep
 
 # Android-SDK收银台
 
+## 接入流程
+1. 引入[SDK](https://v3-doc.pacypay.com/android/pacypay-v1.0.1.aar)
+2. 创建收银台配置和支付回调
+3. 创建收银台对象
+4. 调用下单接口
+5. 从下单接口响应中获取`transactionId`，调用收银台支付方法
+
+
 ### 引入SDK
 
 a. 将[SDK](https://v3-doc.pacypay.com/android/pacypay-v1.0.1.aar)添加到您的app/libs目录下
@@ -22,7 +30,7 @@ dependencies {
 
 ### 初始化SDK
 
-### 1. 创建收银台配置
+#### 1. 创建收银台配置
 
 ```java
 PacypayConfig config = new PacypayConfig.Builder()
@@ -33,7 +41,7 @@ PacypayConfig config = new PacypayConfig.Builder()
                 .build();
 ```
 
-### 2. 创建收银台支付回调
+#### 2. 创建收银台支付回调
 
 ```java
 PaymentHandler handler = new PaymentHandler() {
@@ -59,16 +67,16 @@ PaymentHandler handler = new PaymentHandler() {
 };
 ```
 
-### 3. 创建收银台对象(在 onCreate 中创建此对象)
+#### 3. 创建收银台对象(在 onCreate 中创建此对象)
 
 ```java
 PacypayCheckout checkout = new PacypayCheckout(componentActivity, config, handler);
 ```
 
-### 4. 调用[下单接口](./js-sdk.md#调用下单接口)
+#### 4. 调用[下单接口](./js-sdk.md#调用下单接口)
 
 
-### 5. 调用收银台支付方法
+#### 5. 调用收银台支付方法
 
 ```java
 // transationId: 商户通过接口获取到的交易 ID

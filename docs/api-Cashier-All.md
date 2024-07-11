@@ -39,7 +39,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="alertbox4">
 
-::: tip  在收银台支付的基础上，需要将'productType' 设置为：'ALL'
+::: tip  聚合收银台请求参数可参考收银台信用卡支付，只需将`productType：CARD` 改为 `productType：ALL`即可
 :::
 
 </div>
@@ -203,6 +203,3 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 :::
 
 </div>
-
-
-
