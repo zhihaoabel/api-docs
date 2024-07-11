@@ -56,7 +56,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。
 |
 | current        | String | /  | Yes | Yes | 查询的当前页码                                    |
-| sign           | String | /  | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                     |
+| sign           | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                         |
 
 </div>
 
@@ -78,13 +78,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 <div class="custom-table bordered-table">
 
 
-| 名称            | 类型     | 签名 | 描述                   |
-|---------------|--------|----|----------------------|
-| content       | List   | No | 交易信息列表，请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-orderInquiry.html#txninfo" ></CustomPopover> |
-| current       | String | No | 当前页码                 |
-| size          | String | No | 当前页大小                |
-| totalPages    | String | No | 总页数                  |
-| totalElements | String | No | 总条数                  |
+| 名称            | 类型     | 必填  | 描述                   |
+|---------------|--------|-----|----------------------|
+| content       | List   | Yes | 交易信息列表，请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-orderInquiry.html#txninfo" ></CustomPopover> |
+| current       | String | Yes  | 当前页码                 |
+| size          | String | Yes  | 当前页大小                |
+| totalPages    | String | Yes  | 总页数                  |
+| totalElements | String | Yes  | 总条数                  |
 
 </div>
 
@@ -93,34 +93,34 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称                         | 类型     | 签名 | 描述                                                       |
+| 名称                         | 类型     | 必填 | 描述                                                       |
 |----------------------------|--------|----|----------------------------------------------------------|
-| transactionId              | String | No | ` Onerway` 创建的交易订单号，对应商户订单号                                  |
-| merchantTxnId              | String | No | 商户创建的商户交易订单号， 不同的订单号视为不同的交易|
-| txnTime                    | String | No | 交易完成时间                                                   |
-| originTransactionId        | String | No | 来自` Onerway`  的原交易订单号。                                      |
-| productType                | String | No | 产品类型，请参阅    <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" ></CustomPopover>                              |
-| subProductType             | String | No | 子产品类型，请参阅      <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover>                        |
-| txnType                    | String | No | 交易类型，请参阅           <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                            |
-| status                     | String | No | 交易处理结果。 请参阅      <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                            |
-| reason                     | String | No | 交易失败原因                                                   |
-| paymentMethod              | String | No | 具体支付方式，包括卡和本地支付类型                                        |
-| walletTypeName             | String | No | 钱包的品牌名称                                                  |
-| orderAmount                | String | No | 交易订单金额                                                   |
-| orderCurrency              | String | No | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                |
-| txnAmount                  | String | No | 订单金额转换成结算币种后的金额                                          |
-| txnCurrency                | String | No | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                  |
-| settleRate                 | String | No | 汇率 (txnAmount = orderAmount * settleRate)。               |
-| customsDeclarationAmount   | String | No | 可报关金额                                                    |
-| customsDeclarationCurrency | String | No | 可用于报关的金额对应币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                          |
-| arn                        | String | No | ARN                                                      |
-| appId                      | String | No | 商户应用程序`ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                   |
-| website                    | String | No | 交易网站                                                     |
-| cardBinCountry             | String | No | 卡`bin`所属国家                                                 |
-| cardNumber                 | String | No | 交易卡号                                                     |
-| userPaymentStatus          | String | No | 用户支付状态，`true`：已支付，`false`：未支付，<br> <CMNote data="只有 `Sofort` 交易可能关注此字段；空值时忽略此字段"></CMNote>  |
-| holderName                 | String | No | 持卡人姓名                                                    |
-| eci                        | String | No | 责任转移                                                     |
+| transactionId              | String | Yes | ` Onerway` 创建的交易订单号，对应商户订单号                                  |
+| merchantTxnId              | String | Yes | 商户创建的商户交易订单号， 不同的订单号视为不同的交易|
+| txnTime                    | String | Yes | 交易完成时间                                                   |
+| originTransactionId        | String | Yes | 来自` Onerway`  的原交易订单号。                                      |
+| productType                | String | Yes | 产品类型，请参阅    <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" ></CustomPopover>                              |
+| subProductType             | String | Yes | 子产品类型，请参阅      <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover>                        |
+| txnType                    | String | Yes | 交易类型，请参阅           <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                            |
+| status                     | String | Yes | 交易处理结果。 请参阅      <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                            |
+| reason                     | String | Yes | 交易失败原因                                                   |
+| paymentMethod              | String | Yes | 具体支付方式，包括卡和本地支付类型                                        |
+| walletTypeName             | String | Yes | 钱包的品牌名称                                                  |
+| orderAmount                | String | Yes | 交易订单金额                                                   |
+| orderCurrency              | String | Yes | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                |
+| txnAmount                  | String | Yes | 订单金额转换成结算币种后的金额                                          |
+| txnCurrency                | String | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                  |
+| settleRate                 | String | Yes | 汇率 (txnAmount = orderAmount * settleRate)。               |
+| customsDeclarationAmount   | String | Yes | 可报关金额                                                    |
+| customsDeclarationCurrency | String | Yes | 可用于报关的金额对应币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                          |
+| arn                        | String | Yes | ARN                                                      |
+| appId                      | String | Yes | 商户应用程序`ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                   |
+| website                    | String | Yes | 交易网站                                                     |
+| cardBinCountry             | String | Yes | 卡`bin`所属国家                                                 |
+| cardNumber                 | String | Yes | 交易卡号                                                     |
+| userPaymentStatus          | String | Yes | 用户支付状态，`true`：已支付，`false`：未支付，<br> <CMNote data="只有 `Sofort` 交易可能关注此字段；空值时忽略此字段"></CMNote>  |
+| holderName                 | String | Yes | 持卡人姓名                                                    |
+| eci                        | String | Yes | 责任转移                                                     |
 
 </div>
 

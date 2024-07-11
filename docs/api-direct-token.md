@@ -53,7 +53,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | email          | String | 256 | Yes | Yes | 商户客户的邮箱                                |
 | country        | String | 64  | Yes | Yes | 商户客户的国家。请参考 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美国 is US     "></CMExample>      |
 | transactionIp  | String | 64  | Yes | Yes | 商户客户的交易`IP  `                            |
-| sign           | String | /   | Yes | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>                                |                 |
+| sign           | String | /   | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                    |                 |
 
 </div>
 
@@ -94,7 +94,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |---------------|--------|-----|-----------------|
 | transactionId | String | Yes | Onerway创建的交易订单号 |
 | tokenId       | String | Yes | 绑卡令牌id          |
-| sign          | String | No  | 签名字符串，请参阅   <CustomPopover title="Sign" width="auto" reference="Sign" link="/apis/sign.html" ></CustomPopover>          |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)              |
 
 </div>
 

@@ -123,9 +123,9 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
  <div class="custom-table bordered-table">
 
 
-| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                  |
-|-------------|--------|----|-----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| lpmsInfo | String | /  | Yes | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象   <CustomPopover title="LpmsTypeEnum" width="auto" reference="LpmsTypeEnum" link="/apis/enums.html#lpmstypeenum" ></CustomPopover> |
+| 名称          | 类型     | 长度 | 签名  | 描述                                                                                                                                                                  |
+|-------------|--------|----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| lpmsInfo | String | /  | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象   <CustomPopover title="LpmsTypeEnum" width="auto" reference="LpmsTypeEnum" link="/apis/enums.html#lpmstypeenum" ></CustomPopover> |
 
 
 </div>
