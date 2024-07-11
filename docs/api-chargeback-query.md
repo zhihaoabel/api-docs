@@ -86,13 +86,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 签名 | 描述                   |
-|---------------|--------|----|----------------------|
-| content       | List   | No | 交易信息列表，请参阅对象  <CustomPopover title="ChargebackInfo" width="auto" reference="ChargebackInfo" link="/apis/api-refusalQuery.html#chargebackinfo" ></CustomPopover> |
-| current       | String | No | 当前页码                 |
-| size          | String | No | 当前页大小                |
-| totalPages    | String | No | 总页数                  |
-| totalElements | String | No | 总条数                  |
+| 名称            | 类型     | 必填  | 描述                   |
+|---------------|--------|-----|----------------------|
+| content       | List   | Yes | 交易信息列表，请参阅对象  <CustomPopover title="ChargebackInfo" width="auto" reference="ChargebackInfo" link="/apis/api-refusalQuery.html#chargebackinfo" ></CustomPopover> |
+| current       | String | Yes  | 当前页码                 |
+| size          | String | Yes  | 当前页大小                |
+| totalPages    | String | Yes  | 总页数                  |
+| totalElements | String | Yes  | 总条数                  |
 
 </div>
 

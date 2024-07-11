@@ -70,10 +70,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称         | 类型     | 签名 | 描述                              |
-|------------|--------|----|---------------------------------|
-| merchantNo | String | No | 商户号。 商户注册时，OnerWay会为商户创建商户号     |
-| tokenInfos | List   | No | token明细列表。请参阅对象 TokenDetailInfo    <CustomPopover title="TokenDetailInfo" width="auto" reference="TokenDetailInfo" link="/apis/api-direct-tokenList.html#tokendetailinfo" ></CustomPopover> |
+| 名称         | 类型     | 必填  | 描述                              |
+|------------|--------|-----|---------------------------------|
+| merchantNo | String | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号     |
+| tokenInfos | List   | Yes | token明细列表。请参阅对象 TokenDetailInfo    <CustomPopover title="TokenDetailInfo" width="auto" reference="TokenDetailInfo" link="/apis/api-direct-tokenList.html#tokendetailinfo" ></CustomPopover> |
 
 </div>
 
@@ -82,15 +82,15 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 签名 | 描述                                     |
+| 名称            | 类型     | 必填 | 描述                                     |
 |---------------|--------|----|----------------------------------------|
-| id            | String | No | 绑定信息`id`（可用于解绑操作）                        |
-| tokenId       | String | No | 绑卡令牌`id `                                |
-| appId         | String | No | 商户应用程序 `ID`。 商户注册网站时，OnerWay会为商户创建一个应用id |
-| cardNumber    | String | No | 卡号（格式为：前六****后四）                       |
-| paymentMethod | String | No | 具体支付方式，包括卡和本地支付类型                      |
-| year          | String | No | 卡号年份，例如： 2021                          |
-| month         | String | No | 卡号月份，例如：03                             |
+| id            | String | Yes | 绑定信息`id`（可用于解绑操作）                        |
+| tokenId       | String | Yes | 绑卡令牌`id `                                |
+| appId         | String | Yes | 商户应用程序 `ID`。 商户注册网站时，OnerWay会为商户创建一个应用id |
+| cardNumber    | String | Yes | 卡号（格式为：前六****后四）                       |
+| paymentMethod | String | Yes | 具体支付方式，包括卡和本地支付类型                      |
+| year          | String | Yes | 卡号年份，例如： 2021                          |
+| month         | String | Yes | 卡号月份，例如：03                             |
 </div>
 
 ## 以下部分展示了交易订单查询的请求示例：

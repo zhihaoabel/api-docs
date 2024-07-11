@@ -1713,4 +1713,30 @@ export const LocaleEnum = {
             "supportGooglePay": "YES"
         }
     ]
-}
+};
+export const StoreProductTypeEnum = {
+    columns: [
+        {
+            prop: 'type',
+            label: 'Type',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            type: '',
+            desc: '不传默认为商品',
+        },
+        {
+            type: 'discount',
+            desc: '折扣',
+        },
+        {
+            type: 'shipping_fee',
+            desc: '运费',
+        },
+    ],
+};
