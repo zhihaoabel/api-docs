@@ -30,9 +30,9 @@ outline: deep
 
 <div class="custom-table bordered-table">
 
-| 名称         | 类型     | 长度  | 必填  | 签名 | 描述     |
-|------------|--------|-----|-----|----|--------|
-| cardNumber | String | 128 | Yes | No | 持卡人的卡号 |
+| 名称         | 类型     | 长度  | 必填  | 描述     |
+|------------|--------|-----|-----|--------|
+| cardNumber | String | 128 | Yes | 持卡人的卡号 |
 
 </div>
 
