@@ -59,13 +59,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名 | 描述                                         |
-|----------------|--------|----|-----|----|--------------------------------------------|
-| requestType    | String | 1  | YES | YES | 订阅类型：`0 - 首购`, 收银台仅支持首次购买。                   |
-| merchantCustId | String | 50 | YES  | YES | 顾客ID           |
-| expireDate     | String | 10 | YES  | YES | 过期日期， 格式为 `yyyy-MM-dd ` |
-| frequencyType  | String | 1  | YES  | YES | 订阅频率类型，仅支持按天订阅，所以写死为`D` |
-| frequencyPoint | String | 2  | YES  | YES | 订阅频率点数，表示多少天进行一次扣款|
+| 名称             | 类型     | 长度 | 必填  | 描述                                         |
+|----------------|--------|----|-----|--------------------------------------------|
+| requestType    | String | 1  | YES | 订阅类型：`0 - 首购`, 收银台仅支持首次购买。                   |
+| merchantCustId | String | 50 | YES | 顾客ID           |
+| expireDate     | String | 10 | YES | 过期日期， 格式为 `yyyy-MM-dd ` |
+| frequencyType  | String | 1  | YES | 订阅频率类型，仅支持按天订阅，所以写死为`D` |
+| frequencyPoint | String | 2  | YES | 订阅频率点数，表示多少天进行一次扣款|
 
 </div>
 
@@ -81,54 +81,45 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 ::: code-group
 
 ```json [请求参数]
+
 {
-  "billingInformation": "{\"country\":\"BE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\"}",
-  "merchantCustId": 1720494168000,
-  "merchantNo": "800209",
-  "merchantTxnId": 1720494168000,
-  "merchantTxnTime": "2024-01-30 07:10:51",
-  "merchantTxnTimeZone": "+08:00",
-  "orderAmount": "10",
-  "orderCurrency": "EUR",
-  "productType": "SUBSCRIBE",  // [!code error]
-  "shippingInformation": "{\"country\":\"BE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\"}",
-  "sign": "a215ea01c96ce585dcba264e447b994da204f47b7f28be55ede2fb48c647685c",  // [!code error]
+  "merchantNo": "800079",
+  "merchantTxnId": 860499906,
+  "merchantTxnTime": null,
+  "merchantTxnTimeZone": null,
+  "productType": "CARD",
   "subProductType": "SUBSCRIBE",
-  "subscription": "{\"merchantCustId\":1720494168000,\"requestType\":\"0\",\"expireDate\":\"2024-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1,\"tokenId\":\"\",\"contractId\":\"\"}",  // [!code error]
-  "txnOrderMsg": "{\"returnUrl\":\"https://docs.onerway.com/\",\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"CNY\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"1739545982264549376\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",
-  "txnType": "SALE"
+  "txnType": "SALE",
+  "orderAmount": "200",
+  "orderCurrency": "USD",
+  "subscription": "{\"merchantCustId\":\"1720507855183939880.4680922699\",\"requestType\":\"0\",\"expireDate\":\"2030-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":\"1\"}",
+  "txnOrderMsg": "{\"returnUrl\":\"https:\/\/www.merchant-store-website.com\/\",\"notifyUrl\":\"https:\/\/www.merchant-store-notify.com\/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":1673591020057956352}",
+  "shippingInformation": "{\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"phone\":\"13976448789\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"35802\",\"address\":\"test\",\"country\":\"US\",\"province\":\"AS\",\"city\":\"city\",\"street\":\"Amsterdam Ave\",\"number\":10,\"identityNumber\":\"717.628.937-97\"}",
+  "billingInformation": "{\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"phone\":\"13976448789\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"35802\",\"address\":\"test\",\"country\":\"US\",\"province\":\"AS\",\"city\":\"city\",\"street\":\"Amsterdam Ave\",\"number\":10,\"identityNumber\":\"717.628.937-97\"}",
+  "sign": "07043e0c11d755b3103281fb20a4cfb122a7d109db2b49b3ede7b289410a6e8c"
 }
+
 ```
 
 ```json [响应参数]
 
-
 {
-  "respCode": "20000",
-  "respMsg": "Success",
   "data": {
-    "transactionId": "1810509885683929088",
-    "merchantTxnId": "1720494168000",
-    "merchantNo": "800209",
+    "transactionId": "1810970934312833024",
+    "merchantTxnId": "860499906",
+    "merchantNo": "800079",
     "responseTime": "",
     "txnTime": "",
-    "orderAmount": "10.00",
-    "orderCurrency": "EUR",
+    "orderAmount": "200.00",
+    "orderCurrency": "USD",
     "txnAmount": "",
-    "txnCurrency": null,
-    "txnTimeZone": null,
     "status": "U",
-    "reason": null,
-    "redirectUrl": "https://sandbox-checkout.onerway.com/aggregate?key=1d251d6ca8384d318b610e3353ed2338",   // [!code error]
-    "sign": "38c5441f75090e0bbd2b9490ea3b946c77e8617ac058ce81b9ce3321bc7bf5ce",
-    "contractId": "",
-    "tokenId": null,
-    "eci": null,
-    "transactionOrderNo": null,
-    "periodValue": null,
-    "lpmsType": null,
-    "qrCode": null
-  }
+    "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=b04656a9fb52448ab437a47a5933588c",
+    "sign": "",
+    "contractId": ""
+  },
+  "respCode": "20000",
+  "respMsg": "Success"
 }
 
 ```
@@ -141,29 +132,36 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 </div>
 
-## 订阅首购成功
-
+## 订阅首购成功示例
 
 ::: code-group
 
-```json [异步通知响应]
+```json [同步返回（returnurl）]
+
+https://www.merchant-store-website.com/?transactionId=1810970934312833024&merchantTxnId=860499906&merchantNo=800079&responseTime=2024-07-10%2017:35:43&txnTime=2024-07-10%2017:35:22&txnTimeZone=+08:00&orderAmount=200.00&orderCurrency=USD&txnAmount=200.00&txnCurrency=USD&status=S&reason=Payment%20successful&contractId=1810970934409302016&tokenId=cfcc0dae0138d6644a2d39d074d9832557f3ba194664a4a7355a1cccac7c3776&eci=5
+
+```
+
+```json [异步通知（notifyurl）]
+
 {
     "notifyType": "TXN",
-    "transactionId": "1810553728219353088",
+    "transactionId": "1810970934312833024",
     "txnType": "SALE",
-    "merchantNo": "800209",
-    "merchantTxnId": "1720504619000",
-    "responseTime": "2024-07-09 13:57:19",
-    "txnTime": "2024-07-09 13:57:01",
+    "merchantNo": "800079",
+    "merchantTxnId": "860499906",
+    "responseTime": "2024-07-10 17:35:42",
+    "txnTime": "2024-07-10 17:35:22",
     "txnTimeZone": "+08:00",
-    "orderAmount": "100.00",
+    "orderAmount": "200.00",
     "orderCurrency": "USD",
     "txnAmount": "",
     "status": "S",
-    "contractId": "1810553728324210688",  // [!code error]
-    "tokenId": "7d827950f927d1be3f47c87819a8ba0d8f24b75112d70a7292e92696793081d7",  // [!code error]
-    "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",
-    "sign": "36e8dbce8f436df4dbb08490276bda68b101f1241897f4910a93af9d383e9d64",
+    "contractId": "1810970934409302016",
+    "tokenId": "cfcc0dae0138d6644a2d39d074d9832557f3ba194664a4a7355a1cccac7c3776",
+    "eci": "5",
+    "reason": "{"respCode":"20000","respMsg":"Success"}",
+    "sign": "975a88f47b29c948386f5d4de038bc4751cf37b4a956698ab9c18e8eaff85b72",
     "paymentMethod": "VISA"
 }
 

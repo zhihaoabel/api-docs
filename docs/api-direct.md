@@ -105,24 +105,24 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型      | 长度   | 必填  | 签名 | 描述                                                                                                                                                                                                                               |
-|----------------|---------|------|-----|----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| returnUrl      | String  | 256  | Yes | No | 商户的回跳地址                                                                                                                                                                                                                          |
-| products       | String  | 1024 | Yes | No | 产品信息列表|
-| transactionIp  | String  | 64   | Yes | No | 持卡人交易IP                                                                                                                                                                                                                          |
-| appId          | String  | 20   | Yes | No | 商户应用程序 `ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                                                                                                                                                                                           |
-| javaEnabled    | Boolean | /    | Yes | No | 持卡人浏览器是否开启java                                                                                                                                                                                                                   |
-| colorDepth     | String  | 64   | Yes | No | 持卡人屏幕色深                                                                                                                                                                                                                          |
-| screenHeight   | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                        |
-| screenWidth    | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                        |
-| timeZoneOffset | String  | 64   | Yes | No | 持卡人浏览器的时区                                                                                                                                                                                                                        |
-| accept         | String  | 2048 | Yes | No | 持卡人浏览器的 `Accept` 请求头                                                                                                                                                                                                               |
-| userAgent      | String  | 2048 | Yes | No | 持卡人的浏览器类型                                                                                                                                                                                                                        |
-| contentLength  | String  | 64   | Yes | No | 持卡人浏览器内容长度头部以外的内容长度                                                                                                                                                                                                              |
-| language       | String  | 64   | Yes | No | 持卡人浏览器的语言                                                                                                                                                                                                                        |
-| periodValue    | String  | /    | No  | No | 分期付款期数。对应咨询分期期数接口返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                      |
-| terminalId     | String  | 64   | No  | No | 商户分配的唯一标识，用于标识商店终端。当 `productType` 为 `PAYMENT_CODE` 时必填。                                                                                                                                                                             |
-| notifyUrl      | String  | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                        |                                                                                                                                                                       
+| 名称             | 类型      | 长度   | 必填  | 描述                                                                                                                                                                                                                               |
+|----------------|---------|------|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| returnUrl      | String  | 256  | Yes | 商户的回跳地址                                                                                                                                                                                                                          |
+| products       | String  | 1024 | Yes | 产品信息列表|
+| transactionIp  | String  | 64   | Yes | 持卡人交易IP                                                                                                                                                                                                                          |
+| appId          | String  | 20   | Yes | 商户应用程序 `ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                                                                                                                                                                                           |
+| javaEnabled    | Boolean | /    | Yes | 持卡人浏览器是否开启java                                                                                                                                                                                                                   |
+| colorDepth     | String  | 64   | Yes | 持卡人屏幕色深                                                                                                                                                                                                                          |
+| screenHeight   | String  | 64   | Yes | 持卡人的屏幕分辨率                                                                                                                                                                                                                        |
+| screenWidth    | String  | 64   | Yes | 持卡人的屏幕分辨率                                                                                                                                                                                                                        |
+| timeZoneOffset | String  | 64   | Yes | 持卡人浏览器的时区                                                                                                                                                                                                                        |
+| accept         | String  | 2048 | Yes | 持卡人浏览器的 `Accept` 请求头                                                                                                                                                                                                               |
+| userAgent      | String  | 2048 | Yes | 持卡人的浏览器类型                                                                                                                                                                                                                        |
+| contentLength  | String  | 64   | Yes | 持卡人浏览器内容长度头部以外的内容长度                                                                                                                                                                                                              |
+| language       | String  | 64   | Yes | 持卡人浏览器的语言                                                                                                                                                                                                                        |
+| periodValue    | String  | /    | No  | 分期付款期数。对应咨询分期期数接口返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                      |
+| terminalId     | String  | 64   | No  | 商户分配的唯一标识，用于标识商店终端。当 `productType` 为 `PAYMENT_CODE` 时必填。                                                                                                                                                                             |
+| notifyUrl      | String  | 256  | No  | 通知地址。详见通知                                                                                                                                                                                                                        |                                                                                                                                                                       
 
 </div>
 
@@ -181,13 +181,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称         | 类型     | 长度  | 必填  | 签名 | 描述            |
-|------------|--------|-----|-----|----|---------------|
-| holderName | String | 48  | Yes | No | 持卡人姓名         |
-| cardNumber | String | 128 | Yes | No | 持卡人的卡号        |
-| month      | String | 64  | Yes | No | 卡号月份 <br>  <CMExample data="03"></CMExample>   |
-| year       | String | 64  | Yes | No | 卡号年份，<br>  <CMExample data="2024"></CMExample> |
-| cvv        | String | 64  | Yes | No | 卡号cvv         |
+| 名称         | 类型     | 长度  | 必填  | 描述            |
+|------------|--------|-----|-----|---------------|
+| holderName | String | 48  | Yes | 持卡人姓名         |
+| cardNumber | String | 128 | Yes | 持卡人的卡号        |
+| month      | String | 64  | Yes | 卡号月份 <br>  <CMExample data="03"></CMExample>   |
+| year       | String | 64  | Yes | 卡号年份，<br>  <CMExample data="2024"></CMExample> |
+| cvv        | String | 64  | Yes | 卡号cvv         |
 
 </div>
 
@@ -196,22 +196,22 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                                                  |
-|----------------|--------|-----|-----|----|---------------------------------------------------------------------|
-| firstName      | String | 64  | Yes | No | 名 (虚拟商品可不传)                                                         |
-| lastName       | String | 64  | Yes | No | 姓 (虚拟商品可不传)                                                         |
-| jpFirstName    | String | 64  | No  | no | （日文片假名）名                                                            |
-| jpLastName     | String | 64  | No  | no | （日文片假名）姓                                                            |
-| phone          | String | 32  | Yes | No | 电话号码   (虚拟商品的可不传)                                                   |
-| email          | String | 256 | Yes | No | 电子邮件                                                                |
-| postalCode     | String | 32  | Yes | No | 邮政编码  (虚拟商品可不传)                                                     |
-| address        | String | 256 | Yes | No | 地址    (虚拟商品可不传)                                                     |
-| country        | String | 64  | Yes | No | 国家。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>   <CMExample data="美国 is US  (虚拟商品可不传)"></CMExample>                             |
-| province       | String | 64  | Yes  | No | 州。 当国家是美国 \(US\) 或加拿大 \(CA\) 时必填。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美属萨摩亚 is AS  (虚拟商品可不传)"></CMExample>  |
-| street         | String | 64  | No  | No | 街道                                                                  |
-| number         | String | 64  | No  | No | 门牌号                                                                 |
-| identityNumber | String | 64  | No  | No | 证件号码                                                                |
-| birthDate      | String | 64  | No  | No  | 出生日期，格式为 `yyyy/MM/dd`                                       |
+| 名称             | 类型     | 长度  | 必填  | 描述                                                                  |
+|----------------|--------|-----|-----|---------------------------------------------------------------------|
+| firstName      | String | 64  | Yes | 名 (虚拟商品可不传)                                                         |
+| lastName       | String | 64  | Yes | 姓 (虚拟商品可不传)                                                         |
+| jpFirstName    | String | 64  | No  | （日文片假名）名                                                            |
+| jpLastName     | String | 64  | No  | （日文片假名）姓                                                            |
+| phone          | String | 32  | Yes | 电话号码   (虚拟商品的可不传)                                                   |
+| email          | String | 256 | Yes | 电子邮件                                                                |
+| postalCode     | String | 32  | Yes | 邮政编码  (虚拟商品可不传)                                                     |
+| address        | String | 256 | Yes | 地址    (虚拟商品可不传)                                                     |
+| country        | String | 64  | Yes | 国家。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>   <CMExample data="美国 is US  (虚拟商品可不传)"></CMExample>                             |
+| province       | String | 64  | Yes | 州。 当国家是美国 \(US\) 或加拿大 \(CA\) 时必填。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美属萨摩亚 is AS  (虚拟商品可不传)"></CMExample>  |
+| street         | String | 64  | No  | 街道                                                                  |
+| number         | String | 64  | No  | 门牌号                                                                 |
+| identityNumber | String | 64  | No  | 证件号码                                                                |
+| birthDate      | String | 64  | No  | 出生日期，格式为 `yyyy/MM/dd`                                       |
 
 </div>
 
@@ -220,13 +220,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名 | 描述                                  |
-|----------------|--------|----|-----|----|-------------------------------------|
-| requestType    | String | 1  | Yes | No | 订阅请求类型。 枚举如下：  `0 - 首购 `, 收银台仅支持首次购买。   |
-| merchantCustId | String | 50 | No  | No | 商户客户 `id `， `requestType `为 `0 `时必填。            |
-| expireDate     | String | 10 | No  | No | 过期日期， `requestType `为 `0 `时必填，格式为 `yyyy-MM-dd ` |
-| frequencyType  | String | 1  | No  | No | 订阅频率类型， `requestType `为 `0 `时必填。枚举如下： `D - 天  ` |
-| frequencyPoint | String | 2  | No  | No | 订阅频率点数， `requestType `为 `0 `时必填。            |
+| 名称             | 类型     | 长度 | 必填  | 描述                                  |
+|----------------|--------|----|-----|-------------------------------------|
+| requestType    | String | 1  | Yes | 订阅请求类型。 枚举如下：  `0 - 首购 `, 收银台仅支持首次购买。   |
+| merchantCustId | String | 50 | No  | 商户客户 `id `， `requestType `为 `0 `时必填。            |
+| expireDate     | String | 10 | No  | 过期日期， `requestType `为 `0 `时必填，格式为 `yyyy-MM-dd ` |
+| frequencyType  | String | 1  | No  | 订阅频率类型， `requestType `为 `0 `时必填。枚举如下： `D - 天  ` |
+| frequencyPoint | String | 2  | No  | 订阅频率点数， `requestType `为 `0 `时必填。            |
 
 
 </div>
@@ -236,12 +236,12 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
  <div class="custom-table bordered-table">
 
-| 名称        | 类型     | 长度  | 必填  | 签名 | 描述                                      |
-|-----------|--------|-----|-----|----|-----------------------------------------|
-| eci       | String | 2   | Yes | No | 责任转移                                    |
-| cavv      | String | 128 | Yes | No | 由发卡行创建                                  |
-| xid       | String | 128 | No  | No | `3D-Secure` v1版本`Mpi`交易`id`（与`dsTransID`任选其一填写） |
-| dsTransID | String | 128 | No  | No | `3D-Secure` v2版本Mpi交易`id`（与`xid`任选其一填写）       |
+| 名称        | 类型     | 长度  | 必填  | 描述                                      |
+|-----------|--------|-----|-----|-----------------------------------------|
+| eci       | String | 2   | Yes | 责任转移                                    |
+| cavv      | String | 128 | Yes | 由发卡行创建                                  |
+| xid       | String | 128 | No  | `3D-Secure` v1版本`Mpi`交易`id`（与`dsTransID`任选其一填写） |
+| dsTransID | String | 128 | No  | `3D-Secure` v2版本Mpi交易`id`（与`xid`任选其一填写）       |
 
 </div>
 
@@ -250,11 +250,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称       | 类型     | 签名 | 描述                  |
+| 名称       | 类型     | 必填 | 描述                  |
 |----------|--------|----|---------------------|
-| respCode | String | No | 来自 Onerway 的响应码     |
-| respMsg  | String | No | 来自 Onerway 的响应信息    |
-| data     | Map    | No | 响应数据。 请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-direct.html#txninfo" ></CustomPopover>      |
+| respCode | String | Yes | 来自 Onerway 的响应码     |
+| respMsg  | String | Yes | 来自 Onerway 的响应信息    |
+| data     | Map    | Yes | 响应数据。 请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-direct.html#txninfo" ></CustomPopover>      |
 
 </div>
 
@@ -262,7 +262,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 签名  | 描述                                          |
+| 名称            | 类型     | 必填  | 描述                                          |
 |---------------|--------|-----|---------------------------------------------|
 | transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号                     |
 | responseTime  | String | Yes | 接口响应时间，格式为`yyyy-MM-dd HH:mm:ss`               |

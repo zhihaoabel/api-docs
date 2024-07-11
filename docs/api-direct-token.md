@@ -62,13 +62,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ##### TxnCardInfo
 
-| 名称         | 类型     | 长度  | 必填  | 签名 | 描述            |
-|------------|--------|-----|-----|----|---------------|
-| holderName | String | 48  | Yes | No | 持卡人姓名         |
-| cardNumber | String | 128 | Yes | No | 持卡人的卡号        |
-| month      | String | 64  | Yes | No | 卡号月份，例如： <br>  <CMExample data="03"></CMExample>  |
-| year       | String | 64  | Yes | No | 卡号年份，例如： <br>  <CMExample data="2024"></CMExample>|
-| cvv        | String | 64  | Yes | No | 卡号cvv         |
+| 名称         | 类型     | 长度  | 必填  | 描述            |
+|------------|--------|-----|-----|---------------|
+| holderName | String | 48  | Yes | 持卡人姓名         |
+| cardNumber | String | 128 | Yes | 持卡人的卡号        |
+| month      | String | 64  | Yes | 卡号月份，例如： <br>  <CMExample data="03"></CMExample>  |
+| year       | String | 64  | Yes | 卡号年份，例如： <br>  <CMExample data="2024"></CMExample>|
+| cvv        | String | 64  | Yes | 卡号cvv         |
 
 </div>
 
