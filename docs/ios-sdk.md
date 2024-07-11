@@ -46,7 +46,7 @@ PacypayCheckout(environment: EnvironmentList.TEST,
                 transactionId: transactionId) 
 ```
 
-#### 3.1 内置支付按钮(推荐)
+#### 3.1 内置支付按钮 <Badge text="推荐" type="tip" />
 
 ```swift
 1.初始化sdk

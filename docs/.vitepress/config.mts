@@ -68,9 +68,9 @@ export default defineConfig({
                     {
                         text: '收银台支付',
                         items: [
-                            {text: '收银台', link: '/api-Cashier'},
-                            {text: '聚合收银台', link: '/api-Cashier-All'},
-                            {text: '订阅', link: '/api-Cashier-sub'},
+                            {text: '收银台', link: '/api-cashier'},
+                            {text: '聚合收银台', link: '/api-aggregate-cashier'},
+                            {text: '订阅', link: '/api-cashier-sub'},
                         ],
                         collapsed: true,
                     },
@@ -89,7 +89,7 @@ export default defineConfig({
                             {text: '分期', link: '/installment'},
                             {text: '两方支付', link: '/api-direct'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
-                            {text: '获取绑定Token列表', link: '/api-direct-tokenList'},
+                            {text: '获取绑定Token列表', link: '/api-direct-token-list'},
                             {text: '订阅', link: '/api-direct-sub'},
                             {text: '预授权请款/撤销', link: '/api-direct-auth'},
                             {text: '本地支付', link: '/api-direct-lpms'},
@@ -102,8 +102,8 @@ export default defineConfig({
             {
                 text: '交易查询',
                 items: [
-                    {text: '交易订单查询', link: '/api-orderInquiry'},
-                    {text: '查询拒付单', link: '/api-refusalQuery'},
+                    {text: '交易订单查询', link: '/api-order-inquiry'},
+                    {text: '查询拒付单', link: '/api-chargeback-query'},
                 ],
                 collapsed: true,
             },
