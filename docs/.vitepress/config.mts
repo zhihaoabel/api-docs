@@ -34,6 +34,11 @@ export default defineConfig({
 
     markdown: {
         lineNumbers: true,
+        html: true,
+        breaks: true,
+        config: (md) => {
+
+        }
     },
 
     themeConfig: {
@@ -78,6 +83,43 @@ export default defineConfig({
                     {
                         text: 'SDK支付',
                         items: [
+                            {text: '接入流程', link: '/sdk-flow'},
+                            {
+                                text: '下单',
+                                link: '/sdk-transaction',
+                                items: [
+                                    {
+                                        text: '绑卡支付',
+                                        link: '/sdk-bind'
+                                    },
+                                    {
+                                        text: '订阅支付',
+                                        link: 'sdk-subscription'
+                                    }
+                                ]
+                            },
+                            {
+                                text: 'WebSDK',
+                                link: '/pay',
+                                items: [
+                                    {
+                                        text: '绑卡支付',
+                                        link: '/pay-bind'
+                                    },
+                                    {
+                                        text: '订阅支付',
+                                        link: '/pay-subscription'
+                                    },
+                                    {
+                                        text: 'ApplePay',
+                                        link: '/pay-apple'
+                                    },
+                                    {
+                                        text: 'GooglePay',
+                                        link: '/pay-google'
+                                    },
+                                ]
+                            },
                             {text: 'JS', link: '/js-sdk'},
                             {text: 'Android', link: '/android-sdk'},
                             {text: 'IOS', link: '/ios-sdk'},
