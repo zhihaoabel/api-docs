@@ -76,10 +76,6 @@ outline: deep
 
 ## OsTypeEnum
 
-代码 描述
-IOS IOS
-ANDROID 安卓
-
 <div class="custom-table bordered-table">
 
 | 代码    | 描述 |
