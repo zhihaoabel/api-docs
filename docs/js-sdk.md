@@ -10,7 +10,7 @@ import {LocaleEnum as LocaleEnumTable} from './util/constants';
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
-import CustomTable from "./components/element-ui/CustomTable.vue"; 
+import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
 
