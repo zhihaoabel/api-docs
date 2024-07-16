@@ -2,11 +2,11 @@
 outline: deep
 ---
 <script setup>
-
+ 
 
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
-import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable,Subscription,NotifyTypeEnum,TxnTypeEnum,TxnStatusEnum} from "./util/constants";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 

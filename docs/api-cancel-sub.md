@@ -1,5 +1,5 @@
 ---
-outline: deep
+outline: deep 
 ---
 <script setup>
 
