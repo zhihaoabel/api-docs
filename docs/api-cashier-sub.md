@@ -3,10 +3,10 @@ outline: deep
 ---
 <script setup>
 
-  
+
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
-import {ProductTypeEnum as ProductTypeEnumTable, SubProductTypeEnum as SubProductTypeEnumTable,TxnTypeEnum as TxnTypeEnumTable,SubProductTypeEnum,Subscription,NotifyTypeEnum,TxnTypeEnum,TxnStatusEnum} from "./util/constants";
+import {ProductTypeEnum as ProductTypeEnumTable, SubProductTypeEnum as SubProductTypeEnumTable,TxnTypeEnum as TxnTypeEnumTable} from "./util/constants";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
@@ -28,8 +28,8 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
-| subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅   <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" >  <CustomTable :data="SubProductTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable> </CustomPopover> |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象     <CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/api-Cashier-sub.html#subscription" >   <CustomTable :data="Subscription.data" :columns="Subscription.columns"></CustomTable>  </CustomPopover>                     |
+| subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅   <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover> |
+| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象     <CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/api-Cashier-sub.html#subscription" ></CustomPopover>                     |
 
 </div>
 
@@ -175,9 +175,9 @@ https://www.merchant-store-website.com/?transactionId=1810970934312833024&mercha
 
 | 名称	 | 类型     | 签名 | 描述                                                                                                                                                                                              |
 |-------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| notifyType  | String | Yes | 通知类型。请参阅  <CustomPopover title="NotifyTypeEnum" width="auto" reference="NotifyTypeEnum" link="/apis/enums.html#notifytypeenum" > <CustomTable :data="NotifyTypeEnum.data" :columns="NotifyTypeEnum.columns"></CustomTable> </CustomPopover>                                                |                                           |
+| notifyType  | String | Yes | 通知类型。请参阅  <CustomPopover title="NotifyTypeEnum" width="auto" reference="NotifyTypeEnum" link="/apis/enums.html#notifytypeenum" ></CustomPopover>                                                |                                           |
 | transactionId         | String | Yes | Onerway创建的交易订单号，对应商户订单号                                                                                                                                                                         |
-| txnType       | String | Yes | 交易类型，  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" > <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>                                                            |
+| txnType       | String | Yes | 交易类型，  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                                                            |
 | merchantNo   | String |  Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                     |
 | merchantTxnId | String |  Yes | 顾客每次付款的订单号。                                                                                                                                                                                     |
 | responseTime           | String | Yes | 接口响应时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                               |
@@ -185,7 +185,7 @@ https://www.merchant-store-website.com/?transactionId=1810970934312833024&mercha
 | txnTimeZone               | String | Yes | 交易完成时区，<br/>例如`+08:00`                                                                                                                                                                          |
 | orderAmount           | String | Yes | 订单金额，以“元”为单位，如有小数，保留两位小数。                                                                                                                                                                       |
 | orderCurrency         | String | Yes | 交易订单的货币。 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                                                                 |
-| status          | String | Yes | 交易处理结果。 请参阅 <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" > <CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable> </CustomPopover>                                                 |
+| status          | String | Yes | 交易处理结果。 请参阅 <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                                                 |
 | contractId               | String | Yes | 订阅合同ID：唯一值，用来区分是哪笔订阅。通常会与tokenId成对保存。订阅首购成功后返回，需要复购中使用 |
 | tokenId           | String | Yes | tokenId：用来完成订阅复购的重要参数。订阅首购成功后返回，需要复购中使用                  |
 | reason              | String | Yes | 交易失败的原因                      |

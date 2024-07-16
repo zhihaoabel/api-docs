@@ -5,8 +5,8 @@ outline: deep
 <script setup>
 
 </script>
- 
-# Android-SDK收银台 
+
+# Android-SDK收银台
 
 ## 接入流程
 1. 引入[SDK](https://v3-doc.pacypay.com/android/pacypay-v1.0.1.aar)
