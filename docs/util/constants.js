@@ -1740,3 +1740,261 @@ export const StoreProductTypeEnum = {
         },
     ],
 };
+export const TransactionInformation =  {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'sign',
+            label: '签名',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'firstName',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '名',
+        },
+        {
+            name: 'lastName',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '姓',
+        },
+        {
+            name: 'jpFirstName',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '（日文片假名）名',
+        },
+        {
+            name: 'jpLastName',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '（日文片假名）姓',
+        },
+        {
+            name: 'phone',
+            type: 'String',
+            length: '32',
+            required: 'No',
+            sign: 'No',
+            desc: '电话号码',
+        },
+        {
+            name: 'email',
+            type: 'String',
+            length: '256',
+            required: 'Yes',
+            sign: 'No',
+            desc: '电子邮件',
+        },
+        {
+            name: 'postalCode',
+            type: 'String',
+            length: '32',
+            required: 'No',
+            sign: 'No',
+            desc: '邮政编码',
+        },
+        {
+            name: 'address',
+            type: 'String',
+            length: '256',
+            required: 'No',
+            sign: 'No',
+            desc: '地址',
+        },
+        {
+            name: 'country',
+            type: 'String',
+            length: '64',
+            required: 'Yes',
+            sign: 'No',
+            desc: '国家。 请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美国是 US</span></span>',
+        },
+        {
+            name: 'province',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '州。 当国家是美国 (US)，</br>中国 (CN) 或加拿大 (CA) 时必填。</br>请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美属萨摩亚是 AS</span></span>',
+        },
+        {
+            name: 'city',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '城市',
+        },
+        {
+            name: 'street',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '街道',
+        },
+        {
+            name: 'number',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '门牌号',
+        },
+        {
+            name: 'identityNumber',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '证件号码',
+        },
+        {
+            name: 'birthDate',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '出生日期。</br>格式为 <code>yyyy/MM/dd</code>',
+        },
+    ],
+};
+export const LpmsInfo = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'sign',
+            label: '签名',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'lpmsType',
+            type: 'String',
+            length: '64',
+            required: 'Yes',
+            sign: 'No',
+            desc: `本地支付方式。 请参阅 <a class="plain-link" href="./enums#lpmstypeenum">LpmsTypeEnum</a>`,
+        },
+        {
+            name: 'bankName',
+            type: 'String',
+            length: '128',
+            required: 'No',
+            sign: 'No',
+            desc: '银行名称。某些本地支付方式需要。</br> lpmsType为`EFT`时</br>请参阅 EFTBankNameEnum。</br> lpmsType为Przelewy24时</br>请参阅 Przelewy24BankNameEnum',
+        },
+        {
+            name: 'iBan',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '银行账户，部分地区转账时需要',
+        },
+        {
+            name: 'prepaidNumber',
+            type: 'String',
+            length: '/',
+            required: 'No',
+            sign: 'No',
+            desc: '预付费卡号，部分支付方式需要',
+        },
+    ],
+};
+export const TxnStatusEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'S',
+            desc: '交易成功',
+        },
+        {
+            code: 'F',
+            desc: '交易失败 / 审核不通过',
+        },
+        {
+            code: 'P',
+            desc: '交易结果未知（处理中）',
+        },
+        {
+            code: 'R',
+            desc: '需要3ds验证',
+        },
+        {
+            code: 'N',
+            desc: '交易被取消',
+        },
+        {
+            code: 'I',
+            desc: '退款待审核/取消待处理',
+        },
+        {
+            code: 'U',
+            desc: '待付款，仅在收银台支付中出现',
+        },
+    ],
+};

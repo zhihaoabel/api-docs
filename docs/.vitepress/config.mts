@@ -86,7 +86,7 @@ export default defineConfig({
                             {text: '接入流程', link: '/sdk-flow'},
                             {
                                 text: '下单',
-                                link: '/sdk-transaction',
+                                link: '/sdk-do-transaction',
                                 items: [
                                     {
                                         text: '绑卡支付',
