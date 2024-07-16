@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-<script setup>
+<script setup> 
 
   import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
@@ -37,7 +37,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/v1/settlementFile/download  |
+| Request URL :    | https://sandbox-acq.onerway.com/v1/settlementFile/download  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -62,7 +62,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | merchantNo | String | 20 | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号 |
 | date       | String | 8  | Yes | Yes | 结算日期，格式为`yyyyMMdd`           |
 | currency   | String | 8  | Yes | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码     |
-| sign       | String | /  | Yes | No  | 签名字符串。                      |
+| sign       | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                          |
 </div>
 
 
@@ -142,7 +142,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
- https://sandbox-v3-acquiring.pacypay.com/v1/settlementFile/download<Badge type="tip">POST</Badge>
+ https://sandbox-acq.onerway.com/v1/settlementFile/download<Badge type="tip">POST</Badge>
 
 
 
@@ -153,7 +153,7 @@ public void downLoad(@RequestParam("localFileName") String localFileName,HttpSer
         GetMethod get = null;
         FileOutputStream output = null;
         try {
-            get = new GetMethod("https://sandbox-v3-acquiring.pacypay.com/v1/settlementFile/download");
+            get = new GetMethod("https://sandbox-acq.onerway.com/v1/settlementFile/download");
             get.setRequestHeader("merchantNo", "500010");
             get.setRequestHeader("date", "20211026");
             get.setRequestHeader("currency", "USD");

@@ -7,10 +7,10 @@ export default defineConfig({
     lang: 'zh-Hans',
     title: 'Onerway API',
     description: "Onerway面向商户开发者的接口文档",
-    base: '/apis/',
+    base: '/apis',
 
     head: [
-        ['link', {rel: 'icon', href: '/american-express.svg'}],
+        ['link', {rel: 'icon', href: '/apis/favicon.ico'}],
         ['link', {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: ''}],
         ['link', {href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet'}],
         ['meta', {name: 'theme-color', content: '#5f67ee'}],
@@ -36,7 +36,7 @@ export default defineConfig({
     },
 
     themeConfig: {
-        logo: '/logo.png',
+        logo: '/onerway.png',
         siteTitle: '',
 
         i18nRouting: true,
@@ -46,7 +46,7 @@ export default defineConfig({
             {
                 text: '参考',
                 items: [
-                    {text: 'Overview', link: '/overview'},
+                    {text: 'Overview', link: '/index'},
                     {text: '签名', link: '/sign'},
                     {text: 'SDK', link: '/js-sdk',},
                     {text: '收银台支付', link: '/public/api-Cashier'},
@@ -58,7 +58,7 @@ export default defineConfig({
             {
                 text: '',
                 items: [
-                    {text: '概述', link: '/overview'},
+                    {text: '概述', link: '/index'},
                     {text: '签名', link: '/sign'},
                 ],
             },
@@ -68,9 +68,9 @@ export default defineConfig({
                     {
                         text: '收银台支付',
                         items: [
-                            {text: '收银台', link: '/api-Cashier'},
-                             {text: '聚合收银台', link: '/api-Cashier-All'},
-                            {text: '订阅', link: '/api-Cashier-sub'},
+                            {text: '收银台', link: '/api-cashier'},
+                            {text: '聚合收银台', link: '/api-aggregate-cashier'},
+                            {text: '订阅', link: '/api-cashier-sub'},
                         ],
                         collapsed: true,
                     },
@@ -86,30 +86,31 @@ export default defineConfig({
                     {
                         text: '两方支付',
                         items: [
+                            {text: '分期', link: '/installment'},
                             {text: '两方支付', link: '/api-direct'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
-                            {text: '获取绑定Token列表', link: '/api-direct-tokenList'},
+                            {text: '获取绑定Token列表', link: '/api-direct-token-list'},
                             {text: '订阅', link: '/api-direct-sub'},
                             {text: '预授权请款/撤销', link: '/api-direct-auth'},
-                            {text: '本地支付',  link: '/api-direct-lpms'},        
+                            {text: '本地支付', link: '/api-direct-lpms'},
                         ],
                         collapsed: true,
                     },
-                   
+
                 ],
             },
             {
                 text: '交易查询',
                 items: [
-                    {text: '交易订单查询', link: '/api-orderInquiry'}, 
-                    {text: '查询拒付单', link: '/api-refusalQuery'},
+                    {text: '交易订单查询', link: '/api-order-inquiry'},
+                    {text: '查询拒付单', link: '/api-chargeback-query'},
                 ],
                 collapsed: true,
-            },   
+            },
             {
                 text: '取消交易',
                 items: [
-                    {text: '申请取消交易', link: '/api-cancel-transaction'}, 
+                    {text: '申请取消交易', link: '/api-cancel-transaction'},
                     {text: '取消订阅合同', link: '/api-cancel-sub'},
                 ],
                 collapsed: true,
@@ -117,20 +118,17 @@ export default defineConfig({
             {
                 text: '申请退款',
                 items: [
-                    {text: '申请退款', link: '/refund'}, 
+                    {text: '申请退款', link: '/refund'},
                 ],
                 collapsed: true,
             },
             {
                 text: '文件下载',
                 items: [
-                    {text: '下载结算文件', link: '/file'}, 
+                    {text: '下载结算文件', link: '/file'},
                 ],
                 collapsed: true,
             },
-
-            
-
             {
                 text: '通知',
                 link: '/notify',

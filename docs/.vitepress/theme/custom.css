@@ -8,6 +8,10 @@ Note, Example
     --custom-note-border: transparent;
     --custom-note-text: var(--vp-c-green-1);
     --custom-note-bg: var(--vp-c-green-soft);
+
+    --table-request-top-bg-color: #f4faff;
+    --table-request-top-border-color: #e6e6e6;
+    --table-request-top-color: #000;
 }
 
 .medium-zoom-overlay {
@@ -24,7 +28,6 @@ Note, Example
 
 .vp-doc table {
     margin: 0;
-    
 }
 
 .vp-doc th, .vp-doc td {
@@ -146,71 +149,53 @@ a.plain-link:hover {
     color: var(--vp-code-color);
 }
 
-
-.table-request-top{
-    background-color: #f4faff;
+.table-request-top {
+    background-color: var(--table-request-top-bg-color);
     border-radius: 5px;
-    border: 1px solid #e6e6e6;
-    color: #000;
- 
+    border: 1px solid var(--table-request-top-border-color);
+
+    th {
+        background-color: #f4faff;
+        border-bottom: 1px solid #e6e6e6;
+    }
 }
 
-.table-request-top td {
-    background-color: #f4faff;
-    color: #000;
+.custom-block.info {
+    border-left: 6px solid var(--custom-block-info-border);
 }
 
-
-.table-request-top table{
-    border-radius: 5px;
-    color: #000;
-} 
-
-
-
- .table-request-top th{
-    background-color: #f4faff;
-    border-bottom: 1px solid #e6e6e6;
-    color: #000;
-  
+.custom-block.tip {
+    border-left: 6px solid var(--custom-block-tip-border);
 }
 
-
-.custom-block.tip{
-    margin: 30px 0px 50px;
-    color: #4a4e53;
+.custom-block.warning {
+    border-left: 6px solid var(--custom-block-warning-border);
 }
 
+.custom-block.danger {
+    border-left: 6px solid var(--custom-block-danger-border);
+}
+
+.custom-block.details {
+    border-left: 6px solid var(--custom-block-details-border);
+}
 
 .alertbox1 .custom-block.tip {
-
     border-left: 6px solid #e6a23c;
-    background-color: #fdf6ec;;
-    
-
+    background-color: #fdf6ec;
 }
 
 .alertbox2 .custom-block.tip {
-
     border-left: 6px solid #50bfff;
     background-color: #ecf8ff;
 }
 
 .alertbox3 .custom-block.tip {
-
     border-left: 6px solid #fe6c6f;
     background-color: #fef0f0;
-
 }
 
 .alertbox4 .custom-block.tip {
-
     border-left: 6px solid #e6a23c;
     background-color: #fdf6ec;
-
-}
-
-[data-v-55e263fd] .logo {
-    margin-right: 8px;
-    height: 60px;
 }

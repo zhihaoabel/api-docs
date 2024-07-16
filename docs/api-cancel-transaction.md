@@ -1,10 +1,10 @@
 ---
-outline: deep
+outline: deep 
 ---
 <script setup>
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
-import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import {ProductTypeEnum as ProductTypeEnumTable, SubProductTypeEnum as SubProductTypeEnumTable, TxnTypeEnum as TxnTypeEnumTable} from "./util/constants";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
@@ -28,7 +28,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -52,7 +52,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |---------------------|--------|----|-----|-----|--------------------------------------------|
 | originTransactionId | String | 20 | Yes | Yes | 来源于`Onerway`的原始交易订单号，常用于反向交易时通过此`ID`查找对应的交易订单号 |
 | merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                |
-| sign                | String | /  | Yes | No  | 签名字符串。                                     |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                        |
 
 
 </div>
@@ -88,7 +88,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/cancelTxn<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/cancelTxn<Badge type="tip">POST</Badge>
 
 ::: code-group
 

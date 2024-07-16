@@ -1,4 +1,4 @@
-export const ProductTypeEnumTable = {
+export const ProductTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -30,8 +30,9 @@ export const ProductTypeEnumTable = {
             code: 'ORDER_CODE',
             desc: '订单码（用户扫商家的订单码）',
         },
-    ]};
-export const SubProductTypeEnumTable = {
+    ]
+};
+export const SubProductTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -65,7 +66,7 @@ export const SubProductTypeEnumTable = {
         },
     ],
 };
-export const TxnTypeEnumTable = {
+export const TxnTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -108,7 +109,7 @@ export const TxnTypeEnumTable = {
     ],
 
 };
-export const PaymentModeEnumTable = {
+export const PaymentModeEnum = {
     columns: [
         {
             prop: 'code',
@@ -142,7 +143,7 @@ export const PaymentModeEnumTable = {
         },
     ],
 };
-export const OsTypeEnumTable = {
+export const OsTypeEnum = {
     columns: [
         {
             prop: 'code',
@@ -164,7 +165,7 @@ export const OsTypeEnumTable = {
         },
     ],
 };
-export const Risk3dsStrategyEnumTable = {
+export const Risk3dsStrategyEnum = {
     columns: [
         {
             prop: 'code',
@@ -194,7 +195,7 @@ export const Risk3dsStrategyEnumTable = {
         },
     ],
 };
-export const LpmsTypeEnum =  {
+export const LpmsTypeEnum = {
     columns: [
         {
             prop: 'type',
@@ -557,7 +558,7 @@ export const LpmsTypeEnum =  {
             currencies: 'IDR',
             requiredFields: 'email, country',
             limit: '',
-        },{
+        }, {
             type: 'MyBank',
             name: 'MyBank',
             countries: 'IT',
@@ -983,7 +984,7 @@ export const LpmsTypeEnum =  {
         },
     ],
 };
-export const Subscription ={
+export const Subscription = {
     columns: [
         {
             prop: 'name',
@@ -1071,7 +1072,7 @@ export const Subscription ={
         },
     ],
 };
-export const MpiInfo =  {
+export const MpiInfo = {
     columns: [
         {
             prop: 'name',
@@ -1178,7 +1179,7 @@ export const TxnOrderMsg = {
             length: '1024',
             required: 'Yes',
             sign: 'No',
-            desc: '产品信息列表。 格式为 json 字符串。 例如：[{"name":"iphone11","price":"5300.00","num":"2","currency":"CNY"}, {"name":"macBook","price":"1234.00","num":"1","currency":"USD","type":"discount"}]，其中type字段的枚举如下：discount shipping_fee不传type 就是商品信息本身',
+            desc: ' 顾客购买的商品信息列表，请参考下方Products对象。  ',
         },
         {
             name: 'transactionIp',
@@ -1286,7 +1287,7 @@ export const TxnOrderMsg = {
         },
     ],
 };
-export const TransactionAddress =  {
+export const TransactionAddress = {
     columns: [
         {
             prop: 'name',
@@ -1435,6 +1436,723 @@ export const TransactionAddress =  {
             required: 'No',
             sign: 'No',
             desc: '出生日期，格式为 yyyy/MM/dd',
+        },
+    ],
+};
+export const NotifyTypeEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'TXN',
+            desc: '交易类通知（包括支付和退款交易）',
+        },
+        {
+            code: 'REFUND_AUDIT',
+            desc: '退款审核结果通知',
+        },
+        {
+            code: 'CANCEL',
+            desc: '取消交易通知',
+        },
+        {
+            code: 'CHARGEBACK',
+            desc: '拒付通知',
+        },
+    ],
+};
+export const LocaleEnum = {
+    columns: [
+        {
+            prop: 'language',
+            label: '语言',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+        {
+            prop: 'supportApplePay',
+            label: '是否支持Apple Pay',
+        },
+        {
+            prop: 'supportGooglePay',
+            label: '是否支持Google Pay',
+        }
+    ],
+    data: [
+        {
+            language: 'ar',
+            desc: '阿拉伯语',
+            supportApplePay: 'YES',
+            supportGooglePay: 'YES',
+        },
+
+        {
+            "language": "ca",
+            "desc": "Català",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "cs",
+            "desc": "Čeština",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "da",
+            "desc": "Dansk",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "de",
+            "desc": "Deutsch",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "el",
+            "desc": "Ελληνικά",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "en",
+            "desc": "English",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "es",
+            "desc": "Español",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "fi",
+            "desc": "Suomi",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "fr",
+            "desc": "Français",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "hr",
+            "desc": "Hrvatski",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "id",
+            "desc": "Bahasa Indonesia",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "it",
+            "desc": "Italiano",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ja",
+            "desc": "日本語",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ko",
+            "desc": "한국어",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ms",
+            "desc": "Bahasa Melayu",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "no",
+            "desc": "Norsk",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "nl",
+            "desc": "Nederlands",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "pl",
+            "desc": "Polski",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "pt",
+            "desc": "Português",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ru",
+            "desc": "Русский",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sk",
+            "desc": "Slovenčina",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sv",
+            "desc": "Svenska",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "th",
+            "desc": "ไทย",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "tr",
+            "desc": "Türkçe",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "uk",
+            "desc": "Українська",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "zh",
+            "desc": "简体中文",
+            "supportApplePay": "YES",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "vi",
+            "desc": "Tiếng Việt",
+            "supportApplePay": "YES",
+            "supportGooglePay": "NO"
+        },
+        {
+            "language": "he",
+            "desc": "עברית",
+            "supportApplePay": "YES",
+            "supportGooglePay": "NO"
+        },
+        {
+            "language": "hi",
+            "desc": "हिन्दी",
+            "supportApplePay": "YES",
+            "supportGooglePay": "NO"
+        },
+        {
+            "language": "hu",
+            "desc": "Magyar",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "ro",
+            "desc": "Română",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "zh-TW",
+            "desc": "繁體中文",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "bg",
+            "desc": "Български",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "et",
+            "desc": "Eesti",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sr",
+            "desc": "Српски",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        },
+        {
+            "language": "sl",
+            "desc": "Slovenščina",
+            "supportApplePay": "NO",
+            "supportGooglePay": "YES"
+        }
+    ]
+};
+export const StoreProductTypeEnum = {
+    columns: [
+        {
+            prop: 'type',
+            label: 'Type',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            type: '',
+            desc: '不传默认为商品',
+        },
+        {
+            type: 'discount',
+            desc: '折扣',
+        },
+        {
+            type: 'shipping_fee',
+            desc: '运费',
+        },
+    ],
+};
+
+export const LpmsInfo = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'sign',
+            label: '签名',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'lpmsType',
+            type: 'String',
+            length: '64',
+            required: 'Yes',
+            sign: 'No',
+            desc: `本地支付方式。 请参阅 <a class="plain-link" href="./enums#lpmstypeenum">LpmsTypeEnum</a>`,
+        },
+        {
+            name: 'bankName',
+            type: 'String',
+            length: '128',
+            required: 'No',
+            sign: 'No',
+            desc: '银行名称。某些本地支付方式需要。</br> lpmsType为`EFT`时</br>请参阅 EFTBankNameEnum。</br> lpmsType为Przelewy24时</br>请参阅 Przelewy24BankNameEnum',
+        },
+        {
+            name: 'iBan',
+            type: 'String',
+            length: '64',
+            required: 'No',
+            sign: 'No',
+            desc: '银行账户，部分地区转账时需要',
+        },
+        {
+            name: 'prepaidNumber',
+            type: 'String',
+            length: '/',
+            required: 'No',
+            sign: 'No',
+            desc: '预付费卡号，部分支付方式需要',
+        },
+    ],
+};
+
+
+export const TxnCardInfoCashier = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'holderName',
+            type: 'String',
+            length: '48',
+            required: 'No',
+            desc: `持卡人姓名`,
+        },
+    ],
+};
+
+
+
+export const Products = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'name',
+            type: 'String',
+            length: '256',
+            required: 'Yes',
+            desc: `商品名称。
+`,
+        },
+        {
+            name: 'price',
+            type: 'String',
+            length: '1024',
+            required: 'Yes',
+            desc: `商品单价。`,
+        },
+        {
+            name: 'num',
+            type: 'String',
+            length: '20',
+            required: 'Yes',
+            desc: `商品数量。`,
+        },
+        {
+            name: 'currency',
+            type: 'String',
+            length: '256',
+            required: 'No',
+            desc: `商品价格对应得货币。`,
+        }, {
+            name: 'type',
+            type: 'String',
+            length: '256',
+            required: 'No',
+            desc: `商品类型。请参考 <CustomPopover title="StoreProductTypeEnum" width="auto" reference="StoreProductTypeEnum" link="/apis/enums.html#storeproducttypeenum"><CustomTable :data="StoreProductTypeEnum.data" :columns="StoreProductTypeEnum.columns"></CustomTable></CustomPopover>`,
+        }
+    ],
+};
+
+export  const EFTBankNameEnum = {
+    columns: [
+        {
+            prop: 'bankName',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            bankName: 'banco_agrario',
+        },
+        {
+            bankName: 'banco_av_villas',
+        },
+        {
+            bankName: 'banco_bbva_colombia_s.a.',
+        },
+        {
+            bankName: 'banco_caja_social',
+        },
+        {
+            bankName: 'banco_colpatria',
+        },
+        {
+            bankName: 'banco_cooperativo_coopcentral',
+        },
+        {
+            bankName: 'banco_corpbanca_s.a',
+        },
+        {
+            bankName: 'banco_davivienda',
+        },
+        {
+            bankName: 'banco_de_bogota',
+        },
+        {
+            bankName: 'banco_de_occidente',
+        },
+        {
+            bankName: 'banco_falabella_',
+        },
+        {
+            bankName: 'banco_gnb_sudameris',
+        },
+        {
+            bankName: 'banco_pichincha_s.a.',
+        },
+        {
+            bankName: 'banco_procredit',
+        },
+        {
+            bankName: 'bancolombia',
+        },
+        {
+            bankName: 'bancoomeva_s.a.',
+        },
+        {
+            bankName: 'citibank_',
+        },
+        {
+            bankName: 'itau',
+        },
+        {
+            bankName: 'nequi',
+        },
+    ],
+};
+
+export const Przelewy24BankNameEnum = {
+    columns: [
+        {
+            prop: 'bankName',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            bankName: 'Santander-Pretzel24',
+        },
+        {
+            bankName: 'P_ac_ z Inteligo',
+        },
+        {
+            bankName: 'P_ac_ z iPKO (PKO BP)',
+        },
+        {
+            bankName: 'BNP Paribas',
+        },
+        {
+            bankName: 'Bank PEKAO S.A.',
+        },
+        {
+            bankName: 'Credit Agricole',
+        },
+        {
+            bankName: 'ING Bank _l_ski',
+        },
+        {
+            bankName: 'Konto Inteligo',
+        },
+        {
+            bankName: 'Bank PKO BP (iPKO)',
+        },
+        {
+            bankName: 'Santander',
+        },
+        {
+            bankName: 'Toyota Bank',
+        },
+        {
+            bankName: 'Bank PEKAO S.A.',
+        },
+        {
+            bankName: 'Volkswagen Bank',
+        },
+        {
+            bankName: 'Bank Millennium',
+        },
+        {
+            bankName: 'P_ac_ z Alior Bankiem',
+        },
+        {
+            bankName: 'Nest Bank',
+        },
+        {
+            bankName: 'Credit Agricole',
+        },
+        {
+            bankName: 'P_ac_ z BO_',
+        },
+        {
+            bankName: 'P_ac_ z ING',
+        },
+        {
+            bankName: 'P_ac_ z CitiHandlowy',
+        },
+        {
+            bankName: 'Alior - Raty',
+        },
+        {
+            bankName: 'P_ac_ z Plus Bank',
+        },
+        {
+            bankName: 'mBank - Raty',
+        },
+        {
+            bankName: 'e-transfer Pocztowy24',
+        },
+        {
+            bankName: 'Banki Sp_dzielcze',
+        },
+        {
+            bankName: 'Bank Nowy BFG S.A.',
+        },
+        {
+            bankName: 'Getin Bank',
+        },
+        {
+            bankName: 'BLIK',
+        },
+        {
+            bankName: 'Noble Pay',
+        },
+        {
+            bankName: 'P_ac_ z IdeaBank',
+        },
+        {
+            bankName: 'EnvelopeBank',
+        },
+        {
+            bankName: 'NestPrzelew',
+        },
+        {
+            bankName: 'BNP Paribas P_ac_ z Pl@net',
+        },
+        {
+            bankName: 'mBank - mTransfer',
+        },
+        {
+            bankName: 'P24now',
+        },
+        {
+            bankName: 'mBank (Us_ugaITP)',
+        },
+        {
+            bankName: 'ING Bank ÅlÄski (Us_uga ITP)',
+        },
+        {
+            bankName: 'BNP Paribas (Us_uga ITP)',
+        },
+        {
+            bankName: 'PKO BP (Us_uga ITP)',
+        },
+        {
+            bankName: 'Santander (Us_uga ITP)',
+        },
+        {
+            bankName: 'Inteligo (Us_uga ITP)',
+        },
+        {
+            bankName: 'mBank - Raty',
+        },
+    ],
+};
+
+export const TxnStatusEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'S',
+            desc: '交易成功',
+        },
+        {
+            code: 'F',
+            desc: '交易失败 / 审核不通过',
+        },
+        {
+            code: 'P',
+            desc: '交易结果未知（处理中）',
+        },
+        {
+            code: 'R',
+            desc: '需要3ds验证',
+        },
+        {
+            code: 'N',
+            desc: '交易被取消',
+        },
+        {
+            code: 'I',
+            desc: '退款待审核/取消待处理',
+        },
+        {
+            code: 'U',
+            desc: '待付款，仅在收银台支付中出现',
         },
     ],
 };

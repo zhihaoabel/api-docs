@@ -2,11 +2,11 @@
 outline: deep
 ---
 <script setup>
-
+ 
 
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
-import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable} from "./util/constants";
+import {ProductTypeEnumTable,SubProductTypeEnumTable,TxnTypeEnumTable,Subscription,NotifyTypeEnum,TxnTypeEnum,TxnStatusEnum} from "./util/constants";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
@@ -27,7 +27,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -66,15 +66,15 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                  |
-|----------------|--------|-----|-----|----|-------------------------------------|
-| requestType    | String | 1   | Yes | No | 订阅请求类型。 枚举如下：`0 - 首购 1 - 复购`          |
-| merchantCustId | String | 50  | No  | No | 商户客户`id`，`requestType`为`0`时必填。            |
-| expireDate     | String | 10  | No  | No | 过期日期，`requestType`为`0`时必填，格式为`yyyy-MM-dd `|
-| frequencyType  | String | 1   | No  | No | 订阅频率类型，`requestType`为`0`时必填。枚举如下：`D - 天 ` |
-| frequencyPoint | String | 2   | No  | No | 订阅频率点数，`requestType`为`0`时必填。            |
-| contractId     | String | 20  | No  | No | 订阅合同`id`，`requestType`为`1`时必填。            |
-| tokenId        | String | 300 | No  | No | 订阅令牌`id`，`requestType`为`1`时必填。            |
+| 名称             | 类型     | 长度  | 必填  | 描述                                  |
+|----------------|--------|-----|-----|-------------------------------------|
+| requestType    | String | 1   | Yes | 订阅请求类型。 枚举如下：`0 - 首购 1 - 复购`          |
+| merchantCustId | String | 50  | No  | 商户客户`id`，`requestType`为`0`时必填。            |
+| expireDate     | String | 10  | No  | 过期日期，`requestType`为`0`时必填，格式为`yyyy-MM-dd `|
+| frequencyType  | String | 1   | No  | 订阅频率类型，`requestType`为`0`时必填。枚举如下：`D - 天 ` |
+| frequencyPoint | String | 2   | No  | 订阅频率点数，`requestType`为`0`时必填。            |
+| contractId     | String | 20  | No  | 订阅合同`id`，`requestType`为`1`时必填。            |
+| tokenId        | String | 300 | No  | 订阅令牌`id`，`requestType`为`1`时必填。            |
 
 </div>
 
@@ -82,7 +82,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
 
 ::: code-group

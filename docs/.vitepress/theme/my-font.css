@@ -1,0 +1,75 @@
+body {
+    font-size: 14px;
+}
+
+.vp-doc p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+@media (min-width: 1024px) {
+    .vp-doc p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}
+
+.vp-doc h1 {
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+@media (min-width: 1024px) {
+    .vp-doc h1 {
+        font-size: 24px;
+        line-height: 1.8;
+    }
+}
+
+.vp-doc h2 {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+    .vp-doc h2 {
+        font-size: 20px;
+        line-height: 1.6;
+    }
+}
+
+.vp-doc h3 {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+    .vp-doc h3 {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}
+
+.vp-doc h4 {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+    .vp-doc h4 {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}
+
+.vp-doc h5, .vp-doc h6 {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+    .vp-doc h5, .vp-doc h6 {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+}

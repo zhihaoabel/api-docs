@@ -24,7 +24,7 @@
       然后，您可以通过沙盒环境来进行集成，我们鼓励在上线项目之前在沙盒环境中测试API调用。
     </p>
     <p class="font-sans pb-8">
-      生产环境和沙箱环境的请求地址仅是域名有所不同。您可以首先在沙箱环境中测试 Onerway API，这不会影响生产环境中的数据。一旦测试完成，请通过更改请求域名
+      生产环境和沙盒环境的请求地址仅是域名有所不同。您可以首先在沙盒环境中测试 Onerway API，这不会影响生产环境中的数据。一旦测试完成，请通过更改请求域名
       和其他配置参数（商户号、秘钥、店铺ID）切换到生产环境。
     </p>
     
@@ -86,7 +86,7 @@ export default {
       envTable: {
         header: ['Environment', 'Request URL'],
         body: [
-          ['Sandbox', 'https://sandbox-v3-acquiring.pacypay.com/<endpoint>'],
+          ['Sandbox', 'https://sandbox-acq.onerway.com/<endpoint>'],
           ['Production', 'https://v3-acq.pacypay.com/<endpoint>']
         ]
       }

@@ -1,12 +1,21 @@
 ---
 outline: deep
----
+--- 
 
 <script setup>
 
 </script>
 
 # 通用参数枚举
+
+<script>
+
+</script>
+
+<div id="table-hover-container">
+    <!-- 完整表格内容将被动态插入这里 -->
+
+</div>
 
 ## ProductTypeEnum
 
@@ -264,7 +273,7 @@ ANDROID 安卓
 
 ## LpmsTypeEnum
 
-<div class="custom-table bordered-table">
+<div id="zoom-table" class="custom-table bordered-table">
 
 
 
@@ -542,5 +551,17 @@ ANDROID 安卓
 | 275      | Santander (Us_uga ITP)         |
 | 279      | Inteligo (Us_uga ITP)          |
 | 280      | mBank - Raty                   |
+
+</div>
+
+## StoreProductTypeEnum
+
+<div class="custom-table bordered-table">
+
+| productType  | 描述      |
+|--------------|---------|
+|              | 不传默认为商品 |
+| discount     | 折扣      |
+| shipping_fee | 运费      |
 
 </div>

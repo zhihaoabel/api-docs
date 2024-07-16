@@ -2,7 +2,7 @@
 outline: deep
 ---
 <script setup>
-
+ 
 
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
@@ -31,7 +31,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -57,7 +57,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | txnType             | String | 16 | Yes | Yes | 交易类型，请参阅  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>  。此接口仅支持`CAPTURE`和`VOID` |
 | merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权请款或撤销的交易订单号，不同的订单号视为不同的交易       |
 | originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。                  |
-| sign                | String | /  | Yes | No  | 签名字符串。                                  |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                     |
 
 
 </div>
@@ -96,7 +96,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | contractId    | String | Yes | 订阅合同id，首购时返回                                |
 | tokenId       | String | Yes | 订阅令牌id ，首购时返回                               |
 | eci           | String | Yes | 责任转移                                        |
-| sign          | String | No  | 签名字符串。                                      |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                          |
 
 
 </div>
@@ -107,7 +107,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
 ::: code-group
 

@@ -2,10 +2,10 @@
 outline: deep
 ---
 <script setup>
-
+ 
 </script>
 
-
+ 
 
 # 本地支付
 支付:指用户从原始交易网站或应用程序重定向到另一个专门处理支付的页面时只展示本地支付的收银台。
@@ -19,7 +19,7 @@ outline: deep
 
 | 名称 | 内容                                                          |
 |----------------|---------------------------------------------------------------|
-| Request URL    | https://sandbox-v3-acquiring.pacypay.com/txn/payment |
+| Request URL    | https://sandbox-acq.onerway.com/txn/payment |
 | Request Method | POST                                                          |
 | Content-Type   | application/json                                              |
 
@@ -55,19 +55,19 @@ Content-Type: application/json; charset=UTF-8 错误
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 长度  | 必填  | 签名 | 描述                                                                                               |
-|---------------|--------|-----|-----|----|--------------------------------------------------------------------------------------------------|
-| lpmsType      | String | 64  | Yes | No | 本地支付方式。 请参阅 LpmsTypeEnum                                                                         |
-| bankName      | String | 128 | No  | No | 银行名称，某些本地支付方式需要。`lpmsType`为`EFT`时请参阅 EFTBankNameEnum。 `lpmsType`为`Przelewy24`时请参阅 Przelewy24BankNameEnum |
-| iBan          | String | 64  | No  | No | 银行账户，部分地区转账时需要                                                                                   |
-| prepaidNumber | String | /   | No  | No | 预付费卡号，部分支付方式需要                                                                                   |
+| 名称            | 类型     | 长度  | 必填  | 描述                                                                                               |
+|---------------|--------|-----|-----|--------------------------------------------------------------------------------------------------|
+| lpmsType      | String | 64  | Yes| 本地支付方式。 请参阅 LpmsTypeEnum                                                                         |
+| bankName      | String | 128 | No | 银行名称，某些本地支付方式需要。`lpmsType`为`EFT`时请参阅 EFTBankNameEnum。 `lpmsType`为`Przelewy24`时请参阅 Przelewy24BankNameEnum |
+| iBan          | String | 64  | No | 银行账户，部分地区转账时需要                                                                                   |
+| prepaidNumber | String | /   | No | 预付费卡号，部分支付方式需要                                                                                   |
 
 </div>
 
 ## 以下部分展示了本地支付的请求响应示例：
 
 
-https://sandbox-v3-acquiring.pacypay.com/txn/payment <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 ::: code-group
 

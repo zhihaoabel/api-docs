@@ -63,11 +63,8 @@ const columns = [
 
 4. 将字符串进行 `sha256` 签名 ；
 
-5. 将字节转换为十六进制；
 
-
-::: warning 注意
-异步通知有单独的签名方式
+::: warning 异步通知有单独的签名方式
 :::
 
 ### 签名示例
@@ -140,25 +137,27 @@ $params 需要加签的数据;
 $PrivateKey 商户秘钥;
 参数类型字符串;  
 */
-function ASCII_HASH($params , $PrivateKey){
-    if(!empty($params)){
-       $p =  ksort($params);
-       if($p){
-           $strs = '';
-           foreach ($params as $k=>$val){
-    
-               //剔除为"NO"的参数
-               if((!empty($val) && $k != 'sign' && $k != 'paymentMethod' && $k != 'originTransactionId' && $k != 'originMerchantTxnId' && $k != 'customsDeclarationAmount' && $k != 'customsDeclarationCurrency' && $k != 'walletTypeName' && $k != 'periodValue' && $k != 'tokenExpireTime') || $val == '0')
-               {
-                   $strs .= $val ;
-               }
-           }
-           $strs = $strs.$PrivateKey ;
-           return hash('sha256' , $strs);
-       }
+//ASCII码排序加密
+    function ASCII_HASH($params , $payment_pacypayment_secret){
+        $PrivateKey = $payment_pacypayment_secret;
+        if(!empty($params)){
+        $p =  ksort($params);
+        $badkey = array('originTransactionId','originMerchantTxnId','customsDeclarationAmount','customsDeclarationCurrency','paymentMethod','walletTypeName','periodValue','tokenExpireTime','sign');
+        if($p){
+            $strs = '';
+            foreach ($params as $k=>$val){
+                if((!empty($val) || $val == 0) && $k != 'sign' && $k != 'route' && !in_array($k, $badkey))
+                {
+                    $strs .= $val ;
+                }
+            }
+            $strs = $strs.$PrivateKey ;
+            return hash('sha256' , $strs);
+        }
+        }
+        return 'error';
     }
-    return 'error';
-}
+
 ```
 
 ```java [hash.java]

@@ -1,5 +1,5 @@
 ---
-outline: deep
+outline: deep 
 ---
 <script setup>
 
@@ -24,7 +24,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/txn/payment  |
+| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -48,7 +48,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |------------|--------|----|-----|-----|-----------------------------|
 | contractId | String | 20 | Yes | Yes | 订阅合同`id`                      |
 | merchantNo | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号 |
-| sign       | String | /  | Yes | No  | 签名字符串。                      |
+| sign       | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                          |
 
 
 </div>
@@ -85,7 +85,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/sub/cancel<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/sub/cancel<Badge type="tip">POST</Badge>
 
 ::: code-group
 

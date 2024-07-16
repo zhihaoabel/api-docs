@@ -3,12 +3,14 @@ outline: deep
 ---
 
 <script lang="ts" setup>
+
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
-import {requestGen, secret} from "./util/utils";
+import {concatedStr, requestGen, secret as secretKey} from "./util/utils";
+import {LocaleEnum as LocaleEnumTable} from './util/constants';
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
-import CustomTable from "./components/element-ui/CustomTable.vue";
+import CustomTable from "./components/element-ui/CustomTable.vue"; 
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
 
@@ -30,14 +32,17 @@ const formLabelWidth = '140px';
 const draggable = ref(true);
 
 let reactives = reactive({
-    sign: ''
+    directSign: '',
+    tokenSign: '',
+    directConcatString: '',  /* 直接支付拼接的字符串 */
+    tokenConcatString: '',  /* token支付拼接的字符串 */
 });
 
 const form = reactive({
-   merchantNo: localStorage.getItem('merchantNo') || '',
-   appId: localStorage.getItem('appId') || '',
+   merchantNo: localStorage.getItem('merchantNo') || '#{你的商户号}',
+   appId: localStorage.getItem('appId') || '#{你的appId}',
    secret: localStorage.getItem('secret') || '',
-   notifyUrl: localStorage.getItem('notifyUrl') || '',
+   notifyUrl: localStorage.getItem('notifyUrl') || '#{你的回调地址}',
 });
 
 const ProductTypeEnumTable = {
@@ -1659,7 +1664,7 @@ const TxnOrderMsg = {
          },
     ],
 };
-const TransactionAddress =  {
+const TransactionInformation =  {
     columns: [
         {
             prop: 'name',
@@ -1876,9 +1881,8 @@ const LpmsInfo = {
     ],
 };
 
-
-const requestBody = {
-   billingInformation: "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+const directRequestBody = {
+   billingInformation: "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
    merchantCustId: merchantCustId,
    merchantNo: form.merchantNo,
    merchantTxnId: merchantTxnId,
@@ -1887,40 +1891,85 @@ const requestBody = {
    orderAmount: "10",
    orderCurrency: "USD",
    productType: "CARD",
-   shippingInformation: "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+   shippingInformation: "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
    sign: "",
    subProductType: "DIRECT",
    txnOrderMsg: {
-     appId: form.appId,
-     returnUrl: "https://www.ronhan.com",
-     products: "[{\"price\":\"10.00\",\"num\":\"1\",\"name\":\"iphone11\",\"currency\":\"USD\"}]",
-     notifyUrl: form.notifyUrl,
-     transactionIp: "127.0.0.1",
+        returnUrl: "https://www.ronhan.com/",
+        notifyUrl: form.notifyUrl,
+        products: "[{\"name\":\"iphone 11\",\"price\":\"5300.00\",\"num\":\"2\",\"currency\":\"CNY\"},{\"name\":\"macBook\",\"price\":\"1234.00\",\"num\":\"1\",\"currency\":\"USD\"}]",
+        transactionIp: "127.0.0.1",
+        appId: form.appId,
+        javaEnabled:false,
+        colorDepth: "24",
+        screenHeight: "1080",
+        screenWidth: "1920",
+        timeZoneOffset: "-480",
+        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        contentLength: "340",
+        language: null
+   },
+   txnType: "SALE"
+};
+
+const tokenRequestBody = {
+   billingInformation: "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
+   merchantCustId: merchantCustId,
+   merchantNo: form.merchantNo,
+   merchantTxnId: merchantTxnId,
+   merchantTxnTime: datetime,
+   merchantTxnTimeZone: "+08:00",
+   orderAmount: "10",
+   orderCurrency: "USD",
+   productType: "CARD",
+   shippingInformation: "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
+   sign: "",
+   subProductType: "TOKEN",
+   txnOrderMsg: {
+        returnUrl: "https://www.ronhan.com/",
+        notifyUrl: form.notifyUrl,
+        products: "[{\"name\":\"iphone 11\",\"price\":\"5300.00\",\"num\":\"2\",\"currency\":\"CNY\"},{\"name\":\"macBook\",\"price\":\"1234.00\",\"num\":\"1\",\"currency\":\"USD\"}]",
+        transactionIp: "127.0.0.1",
+        appId: form.appId,
+        javaEnabled:false,
+        colorDepth: "24",
+        screenHeight: "1080",
+        screenWidth: "1920",
+        timeZoneOffset: "-480",
+        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        contentLength: "340",
+        language: null
    },
    txnType: "SALE"
 };
 
 onMounted( async () => {
-   const request = await requestGen(requestBody);
-   reactives.sign = request.sign;
+    const directRequest = await requestGen(directRequestBody, [], form.secret);
+    const tokenRequest = await requestGen(tokenRequestBody, [], form.secret);
+    reactives.directConcatString = await concatedStr(directRequest, []);
+    reactives.tokenConcatString = await concatedStr(tokenRequest, []);
+    reactives.directSign = directRequest.sign;
+    reactives.tokenSign = tokenRequest.sign;
 });
 
 watch(() => form.merchantNo, (val) => {
-   requestBody.merchantNo = val;
+   directRequestBody.merchantNo = val;
    localStorage.setItem('merchantNo', val);
 });
 
 watch(() => form.appId, (val) => {
-   requestBody.txnOrderMsg.appId = val;
+   directRequestBody.txnOrderMsg.appId = val;
    localStorage.setItem('appId', val);
 });
 
 watch(() => form.secret, (val) => {
-   localStorage.setItem('secret', val);
+    localStorage.setItem('secret', val);
 });
 
 watch(() => form.notifyUrl, (val) => {
-   requestBody.txnOrderMsg.notifyUrl = val;
+   directRequestBody.txnOrderMsg.notifyUrl = val;
    localStorage.setItem('notifyUrl', val);
 });
 
@@ -1935,7 +1984,7 @@ function updateRequest() {
 
 ## 接入流程
 
-1. 下载[JS SDK](https://v3-doc.pacypay.com/javascripts/pacypay-v1.0.5.zip)
+1. 下载[JS SDK](https://sandbox-v3-doc.pacypay.com/javascripts/onerway-v1.1.1.zip)
 2. 引入JS SDK
 3. 初始化SDK
 4. 调用下单接口
@@ -1945,16 +1994,15 @@ function updateRequest() {
 
 1. 引入方式一
 
-   在需要调用JS SDK的页面中引入[JS SDK](https://v3-doc.pacypay.com/javascripts/pacypay-v1.0.5.zip)
+在需要调用JS SDK的页面中引入[JS SDK](https://sandbox-v3-doc.pacypay.com/javascripts/onerway-v1.1.1.zip)
 
  ```html
-
 <script src="pacypay.js"></script>
  ```
 
 2. 引入方式二
 
-   以 import / require 的方式导入
+以 import / require 的方式导入
 
  ```javascript
 // 以import方式导入
@@ -1970,41 +2018,41 @@ const Pacypay = require('./pacypay.js')
 
 ```html
 <div id='pacypay_checkout'></div>
+
 ```
 
 ### 调用下单接口 <Badge text="POST" type="tip"></Badge>
 
-`/v1/sdkTxn/doTransaction`
+`https://sandbox-acq.onerway.com/v1/sdkTxn/doTransaction`
 
 #### 请求参数
 
 <div class="custom-table bordered-table">
 
-
-| 名称                    | 类型     | 长度  | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                                        |
-|-----------------------|--------|-----|-----|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| merchantNo            | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                                                                                                               |
-| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号。<CMNote data="不同的订单号视为不同的交易"></CMNote>                                                                                                                                                                                                                                       |
-| merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间 格式为 <br/> `yyyy-MM-dd HH:mm:ss`<br/><CMExample data="2024-2-28 15:05:34"></CMExample>                                                                                                                                                                                         |
-| merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。 <br/> <CMExample data="+08:00"></CMExample>                                                                                                                                                                                                                                  |
-| merchantTxnOriginalId | String | 128 | No  | Yes | 商户原始订单号。标记商户网站上唯一订单号，可重复，同一笔订单只能支付成功一次                                                                                                                                                                                                                                                    |
-| merchantCustId        | String | 50  | No  | Yes | 客户在商户的唯一标识。<br/>                                                                                                                                                                                                                                                                          |
-| productType           | String | 16  | Yes | Yes | 产品类型。请参阅 <br/><CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum"><CustomTable :data="ProductTypeEnumTable.data" :columns="ProductTypeEnumTable.columns"></CustomTable></CustomPopover>                               |
-| subProductType        | String | 16  | Yes | Yes | 子产品类型。请参阅 <br/><CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ><CustomTable :data="SubProductTypeEnumTable.data" :columns="SubProductTypeEnumTable.columns"></CustomTable></CustomPopover>              |
-| txnType               | String | 16  | Yes | Yes | 交易类型。请参阅 <br/><CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ><CustomTable :data="TxnTypeEnumTable.data" :columns="TxnTypeEnumTable.columns"></CustomTable></CustomPopover>                                                  |
-| paymentMode           | String | 16  | No  | Yes | 支付模式。 请参阅 <br/><CustomPopover title="PaymentModeEnum" width="auto" reference="PaymentModeEnum" link="/apis/enums.html#paymentmodeenum" ><CustomTable :data="PaymentModeEnumTable.data" :columns="PaymentModeEnumTable.columns"></CustomTable></CustomPopover>。默认为WEB                      |
-| osType                | String | 16  | No  | Yes | 操作系统类型。 请参阅 <br/><CustomPopover title="OsTypeEnumTable" width="auto" reference="OsTypeEnum" link="/apis/enums.html#ostypeenum" ><CustomTable :data="OsTypeEnumTable.data" :columns="OsTypeEnumTable.columns"></CustomTable></CustomPopover>。<br/><CMNote data="paymentMode不是WEB时必填" />    |
-| orderAmount           | String | 19  | Yes | Yes | 交易订单金额                                                                                                                                                                                                                                                                                    |
-| orderCurrency         | String | 8   | Yes | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                                                      |
-| originTransactionId   | String | 20  | No  | Yes | 来源于Onerway的原始交易订单号，常用于退款等反向交易时通过此ID查找对应的交易订单号                                                                                                                                                                                                                                             |
-| risk3dsStrategy       | String | 16  | No  | Yes | 3ds风险控制策略。 请参阅 <br/><CustomPopover title="Risk3dsStrategyEnum" width="auto" reference="Risk3dsStrategyEnum" link="/apis/enums.html#risk3dsstrategyenum" ><CustomTable :data="Risk3dsStrategyEnumTable.data" :columns="Risk3dsStrategyEnumTable.columns"></CustomTable></CustomPopover>    |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 json 字符串。 请参阅对象 <br/><CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/js-sdk.html#subscription" ><CustomTable :data="Subscription.data" :columns="Subscription.columns"></CustomTable></CustomPopover>                              |
-| mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集。`risk3dsStrategy` 为 `EXTERNAL` 时需要。 格式为 json 字符串。 请参阅对象 <CustomPopover title="MpiInfo" width="auto" reference="MpiInfo" link="/apis/js-sdk.html#mpiinfo" ><CustomTable :data="MpiInfo.data" :columns="MpiInfo.columns"></CustomTable></CustomPopover>                      |
-| txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TxnOrderMsg" width="auto" reference="TxnOrderMsg" link="/apis/js-sdk.html#txnordermsg" ><CustomTable :data="TxnOrderMsg.data" :columns="TxnOrderMsg.columns"></CustomTable></CustomPopover>                                    |
-| billingInformation    | String | /   | No  | Yes | 交易账单信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/js-sdk.html#transactionaddress" ><CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable></CustomPopover> |
-| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/js-sdk.html#transactionaddress" ><CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable></CustomPopover> |
-| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType` 为 `LPMS` 时必填，格式为json字符串。 请参阅对象 <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/js-sdk.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable></CustomPopover>                                  |
-| sign                  | String | /   | Yes | No  | 签名字符串。                                                                                                                                                                                                                                                                                    |
+| 名称                    | 类型     | 长度  | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                                                            |
+|-----------------------|--------|-----|-----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| merchantNo            | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                                                                                                                                   |
+| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号。<CMNote data="不同的订单号视为不同的交易"></CMNote>                                                                                                                                                                                                                                                           |
+| merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间 格式为 <br/> `yyyy-MM-dd HH:mm:ss`<br/><CMExample data="2024-2-28 15:05:34"></CMExample>                                                                                                                                                                                                             |
+| merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。 <br/> <CMExample data="+08:00"></CMExample>                                                                                                                                                                                                                                                      |
+| merchantTxnOriginalId | String | 128 | No  | Yes | 商户原始订单号。标记商户网站上唯一订单号，可重复，同一笔订单只能支付成功一次                                                                                                                                                                                                                                                                        |
+| merchantCustId        | String | 50  | No  | Yes | 客户在商户的唯一标识。<br/>                                                                                                                                                                                                                                                                                              |
+| productType           | String | 16  | Yes | Yes | 产品类型。请参阅 <br/><CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum"><CustomTable :data="ProductTypeEnumTable.data" :columns="ProductTypeEnumTable.columns"></CustomTable></CustomPopover>                                                   |
+| subProductType        | String | 16  | Yes | Yes | 子产品类型。请参阅 <br/><CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ><CustomTable :data="SubProductTypeEnumTable.data" :columns="SubProductTypeEnumTable.columns"></CustomTable></CustomPopover>                                  |
+| txnType               | String | 16  | Yes | Yes | 交易类型。请参阅 <br/><CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ><CustomTable :data="TxnTypeEnumTable.data" :columns="TxnTypeEnumTable.columns"></CustomTable></CustomPopover>                                                                      |
+| paymentMode           | String | 16  | No  | Yes | 支付模式。 请参阅 <br/><CustomPopover title="PaymentModeEnum" width="auto" reference="PaymentModeEnum" link="/apis/enums.html#paymentmodeenum" ><CustomTable :data="PaymentModeEnumTable.data" :columns="PaymentModeEnumTable.columns"></CustomTable></CustomPopover>。默认为WEB                                          |
+| osType                | String | 16  | No  | Yes | 操作系统类型。 请参阅 <br/><CustomPopover title="OsTypeEnumTable" width="auto" reference="OsTypeEnum" link="/apis/enums.html#ostypeenum" ><CustomTable :data="OsTypeEnumTable.data" :columns="OsTypeEnumTable.columns"></CustomTable></CustomPopover>。<br/><CMNote data="paymentMode不是WEB时必填" />                        |
+| orderAmount           | String | 19  | Yes | Yes | 交易订单金额                                                                                                                                                                                                                                                                                                        |
+| orderCurrency         | String | 8   | Yes | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                                                                          |
+| originTransactionId   | String | 20  | No  | Yes | 来源于Onerway的原始交易订单号，常用于退款等反向交易时通过此ID查找对应的交易订单号                                                                                                                                                                                                                                                                 |
+| risk3dsStrategy       | String | 16  | No  | Yes | 3ds风险控制策略。 请参阅 <br/><CustomPopover title="Risk3dsStrategyEnum" width="auto" reference="Risk3dsStrategyEnum" link="/apis/enums.html#risk3dsstrategyenum" ><CustomTable :data="Risk3dsStrategyEnumTable.data" :columns="Risk3dsStrategyEnumTable.columns"></CustomTable></CustomPopover>                        |
+| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 json 字符串。 请参阅对象 <br/><CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/js-sdk.html#subscription" ><CustomTable :data="Subscription.data" :columns="Subscription.columns"></CustomTable></CustomPopover>                                                  |
+| mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集。`risk3dsStrategy` 为 `EXTERNAL` 时需要。 格式为 json 字符串。 请参阅对象 <CustomPopover title="MpiInfo" width="auto" reference="MpiInfo" link="/apis/js-sdk.html#mpiinfo" ><CustomTable :data="MpiInfo.data" :columns="MpiInfo.columns"></CustomTable></CustomPopover>                                          |
+| txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TxnOrderMsg" width="auto" reference="TxnOrderMsg" link="/apis/js-sdk.html#txnordermsg" ><CustomTable :data="TxnOrderMsg.data" :columns="TxnOrderMsg.columns"></CustomTable></CustomPopover>                                                        |
+| billingInformation    | String | /   | No  | Yes | 交易账单信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
+| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息，除订阅复购外必填。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
+| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType` 为 `LPMS` 时必填，格式为json字符串。 请参阅对象 <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/js-sdk.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable></CustomPopover>                                                      |
+| sign                  | String | /   | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                                                                                                            |
 
 </div>
 
@@ -2012,18 +2060,17 @@ const Pacypay = require('./pacypay.js')
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度  | 必填  | 签名 |   | 描述                                                     |
-|----------------|--------|-----|-----|----|:--|--------------------------------------------------------|
-| requestType    | String | 1   | Yes | No |   | 订阅请求类型。<br/>枚举如下：**0 - 首购 1 - 复购**                     |
-| merchantCustId | String | 50  | No  | No |   | 商户客户id。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| expireDate     | String | 10  | No  | No |   | 过期日期。<br/><CMNote data="requestType为0时必填。"></CMNote>   |
-| frequencyType  | String | 1   | No  | No |   | 订阅频率类型。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| frequencyPoint | String | 2   | No  | No |   | 订阅频率点数。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| contractId     | String | 20  | No  | No |   | 订阅合同id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
-| tokenId        | String | 300 | No  | No |   | 订阅令牌id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
+| 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                                     |
+|----------------|--------|-----|-----|----|--------------------------------------------------------|
+| requestType    | String | 1   | Yes | No | 订阅请求类型。<br/>枚举如下：**0 - 首购 1 - 复购**                     |
+| merchantCustId | String | 50  | No  | No | 商户客户id。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| expireDate     | String | 10  | No  | No | 过期日期。<br/><CMNote data="requestType为0时必填。"></CMNote>   |
+| frequencyType  | String | 1   | No  | No | 订阅频率类型。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| frequencyPoint | String | 2   | No  | No | 订阅频率点数。<br/><CMNote data="requestType为0时必填。"></CMNote> |
+| contractId     | String | 20  | No  | No | 订阅合同id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
+| tokenId        | String | 300 | No  | No | 订阅令牌id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
 
 </div>
-
 
 ###### MpiInfo
 
@@ -2049,21 +2096,21 @@ const Pacypay = require('./pacypay.js')
 | screenHeight   | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                                                                                                             |
 | screenWidth    | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                                                                                                                                                                                                                                                             |
 | timeZoneOffset | String  | 64   | Yes | No | 持卡人浏览器的时区                                                                                                                                                                                                                                                                                                             |
-| accept         | String  | 2048 | Yes | No | 持卡人浏览器的 Accept 请求头                                                                                                                                                                                                                                                                                                    |
+| accept         | String  | 2048 | Yes | No | 持卡人浏览器的 `Accept` 请求头                                                                                                                                                                                                                                                                                                  |
 | userAgent      | String  | 2048 | Yes | No | 持卡人的浏览器类型                                                                                                                                                                                                                                                                                                             |
 | contentLength  | String  | 64   | Yes | No | 持卡人浏览器内容长度头部以外的内容长度                                                                                                                                                                                                                                                                                                   |
 | language       | String  | 64   | Yes | No | 持卡人浏览器的语言                                                                                                                                                                                                                                                                                                             |
-| periodValue    | String  | /    | No  | No | 分期付款期数。对应咨询分期期数接口返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                                                                                                       |
+| periodValue    | String  | /    | No  | No | 分期付款期数。对应[咨询分期期数接口](./installment.md)返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                                                                                   |
 | notifyUrl      | String  | 256  | No  | No | 通知地址。详见通知                                                                                                                                                                                                                                                                                                             |
 
 [//]: # (todo: periodValue描述分期接口链接待补充)
 </div>
 
-##### TransactionAddress
+##### TransactionInformation
 
 <div class="custom-table bordered-table">
 
-<CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable>
+<CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable>
 
 </div>
 
@@ -2080,10 +2127,49 @@ const Pacypay = require('./pacypay.js')
 
 </div>
 
+#### 响应参数
+
+<div class="custom-table">
+
+| 名称       | 类型     | 签名 | 描述                                |
+|----------|--------|----|-----------------------------------|
+| respCode | String | No | 来自 Onerway 的响应码                   |
+| respMsg  | String | No | 来自 Onerway 的响应信息                  |
+| data     | Map    | No | 响应数据。 请参阅对象 [data](./js-sdk#data) |
+
+</div>
+
+##### data
+
+<div class="custom-table bordered-table">
+
+| 名称            | 签名  | 类型     | 描述                                                                                                                                                                                                                                         |
+|---------------|-----|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| transactionId | Yes | String | Onerway创建的交易订单号。商户下单时的订单号                                                                                                                                                                                                                  |
+| responseTime  | Yes | String | 接口响应时间。格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
+| txnTime       | Yes | String | 交易完成时间。格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
+| txnTimeZone   | Yes | String | 交易完成时区。<CMExample data="+08:00" />                                                                                                                                                                                                         |
+| orderAmount   | Yes | String | 交易订单金额                                                                                                                                                                                                                                     |
+| orderCurrency | Yes | String | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                        |
+| txnAmount     | Yes | String | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                            |
+| txnCurrency   | Yes | String | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                          |
+| status        | Yes | String | 交易处理结果。 请参阅 <br/><CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum"><CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable></CustomPopover> |
+| redirectUrl   | Yes | String | 当交易状态为R时，商户需要重定向到该URL完成部分交易，包括3ds验证、本地支付收银等                                                                                                                                                                                                |
+| periodValue   | No  | String | 分期付款期数                                                                                                                                                                                                                                     |
+| contractId    | Yes | String | 订阅合同id。首购时返回                                                                                                                                                                                                                               |
+| tokenId       | Yes | String | 订阅令牌id。首购时返回                                                                                                                                                                                                                               |
+| eci           | Yes | String | 责任转移                                                                                                                                                                                                                                       |
+| sign          | No  | String | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                                        |
+
+</div>
+
 #### 请求和响应示例
 
+::: tip 自动生成签名
+点击 <el-button class="dialog-button my-3" plain @click="dialogVisible = true">自动生成签名</el-button> 按钮，填入商户号, appId, 密钥即可自动生成签名
+:::
+
 <div class="custom-dialog">
-  <el-button class="dialog-button" plain @click="dialogVisible = true">自动生成签名</el-button>
 
   <el-dialog v-model="dialogVisible" draggable=draggable title="商户信息" width="500">
     <el-form :model="form">
@@ -2112,11 +2198,13 @@ const Pacypay = require('./pacypay.js')
 
 </div>
 
+##### 直接下单请求示例
+
 ::: code-group
 
-```json-vue [Request.json]
+```json-vue [直接下单请求.json]
 {
-  "billingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
+  "billingInformation": "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
   "merchantCustId": "{{merchantCustId}}",
   "merchantNo": "{{form.merchantNo}}", // [!code highlight]
   "merchantTxnId": {{merchantTxnId}},
@@ -2125,20 +2213,20 @@ const Pacypay = require('./pacypay.js')
   "orderAmount": "10",
   "orderCurrency": "USD",
   "productType": "CARD",
-  "shippingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17712345678\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"1234567890\"}",
-  "sign": "{{reactives.sign}}", // [!code highlight]
+  "shippingInformation": "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
+  "sign": "{{reactives.directSign}}", // [!code highlight]
   "subProductType": "DIRECT",
-  "txnOrderMsg": "{\"appId\":\"{{form.appId}}\",\"returnUrl\":\"https://www.ronhan.com\",\"products\":\"[{\\\"price\\\":\\\"10.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"transactionIp\":\"127.0.0.1\"}", // [!code highlight]
+  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"{{form.appId}}\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":null}", // [!code highlight]
   "txnType": "SALE"
 }
 ```
 
-```json-vue [Response.json]
+```json-vue [直接下单响应.json]
 {
    "respCode": "20000",
    "respMsg": "Success",
    "data": {
-      "transactionId": "1762730229685944320", // [!code highlight]
+      "transactionId": "#{流水号}", // [!code highlight]
       "responseTime": "{{datetime}}",
       "txnTime": null,
       "txnTimeZone": "+08:00",
@@ -2162,40 +2250,73 @@ const Pacypay = require('./pacypay.js')
 
 :::
 
-#### 响应参数
-<div class="custom-table">
+::: details 点击查看拼接的字符串（不含密钥）
 
-| 名称       | 类型     | 签名 | 描述                                |
-|----------|--------|----|-----------------------------------|
-| respCode | String | No | 来自 Onerway 的响应码                   |
-| respMsg  | String | No | 来自 Onerway 的响应信息                  |
-| data     | Map    | No | 响应数据。 请参阅对象 [data](./js-sdk#data) |
+```json-vue
+{{reactives.directConcatString}}
+```
 
-</div>
+:::
 
-##### data
+##### TOKEN下单请求示例
 
-<div class="custom-table bordered-table">
+::: code-group
 
-| 名称            | 签名  | 类型     | 描述                                                                                                                                                                                                                                         |
-|---------------|-----|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| transactionId | Yes | String | Onerway创建的交易订单号，商户下单时的订单号                                                                                                                                                                                                                  |
-| responseTime  | Yes | String | 接口响应时间，格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
-| txnTime       | Yes | String | 交易完成时间，格式为yyyy-MM-dd HH:mm:ss                                                                                                                                                                                                              |
-| txnTimeZone   | Yes | String | 交易完成时区，例如：+08:00                                                                                                                                                                                                                           |
-| orderAmount   | Yes | String | 交易订单金额                                                                                                                                                                                                                                     |
-| orderCurrency | Yes | String | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                        |
-| txnAmount     | Yes | String | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                            |
-| txnCurrency   | Yes | String | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                          |
-| status        | Yes | String | 交易处理结果。 请参阅 <br/><CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum"><CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable></CustomPopover> |
-| redirectUrl   | Yes | String | 当交易状态为R时，商户需要重定向到该URL完成部分交易，包括3ds验证、本地支付收银等                                                                                                                                                                                                |
-| periodValue   | No  | String | 分期付款期数                                                                                                                                                                                                                                     |
-| contractId    | Yes | String | 订阅合同id，首购时返回                                                                                                                                                                                                                               |
-| tokenId       | Yes | String | 订阅令牌id ，首购时返回                                                                                                                                                                                                                              |
-| eci           | Yes | String | 责任转移                                                                                                                                                                                                                                       |
-| sign          | No  | String | 签名字符串。                                                                                                                                                                                                                                     |
+```json-vue [Token下单请求.json]
+{
+  "billingInformation": "{\"firstName\":\"test\",\"lastName\":\"test\",\"phone\":\"18600000000\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"430000\",\"address\":\"Unit 1113, 11/F, Tower 2, Cheung Sha Wan Plaza, 833 Cheung Sha Wan Road, Lai Chi Kok\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"HK\"}",
+  "merchantCustId": "{{merchantCustId}}",
+  "merchantNo": "{{form.merchantNo}}", // [!code highlight]
+  "merchantTxnId": {{merchantTxnId}},
+  "merchantTxnTime": "{{datetime}}",
+  "merchantTxnTimeZone": "+08:00",
+  "orderAmount": "10",
+  "orderCurrency": "USD",
+  "productType": "CARD",
+  "shippingInformation": "{\"firstName\":\"Shipping\",\"lastName\":\"Name\",\"phone\":\"188888888888\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"888888\",\"address\":\"Shipping Address Test\",\"country\":\"CN\",\"province\":\"HB\",\"city\":\"WH\",\"street\":\"833 Cheung Sha Wan Road\",\"number\":\"1\",\"identityNumber\":\"82962612865\"}",
+  "sign": "{{reactives.tokenSign}}", // [!code highlight]
+  "subProductType": "TOKEN",
+  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"notifyUrl\":\"{{form.notifyUrl}}\",\"products\":\"[{\\\"name\\\":\\\"iphone 11\\\",\\\"price\\\":\\\"5300.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"CNY\\\"},{\\\"name\\\":\\\"macBook\\\",\\\"price\\\":\\\"1234.00\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"{{form.appId}}\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":null}", // [!code highlight]
+  "txnType": "SALE"
+}
+```
 
-</div>
+```json-vue [Token下单响应.json]
+{
+   "respCode": "20000",
+   "respMsg": "Success",
+   "data": {
+      "transactionId": "#{流水号}", // [!code highlight]
+      "responseTime": "{{datetime}}",
+      "txnTime": null,
+      "txnTimeZone": "+08:00",
+      "orderAmount": "10.00",
+      "orderCurrency": "USD",
+      "txnAmount": null,
+      "txnCurrency": null,
+      "status": "U",
+      "redirectUrl": null,
+      "contractId": null,
+      "tokenId": null,
+      "eci": null,
+      "periodValue": null,
+      "codeForm": null,
+      "presentContext": null,
+      "redirectType": null,
+      "sign": "a2dde1fd7bc46dc1b87d3bd14707dd85c6750569bbe60025d9821c3bbf13cbab"
+   }
+}
+```
+
+:::
+
+::: details 点击查看拼接的字符串（不含密钥）
+
+```json-vue
+{{reactives.tokenConcatString}}
+```
+
+:::
 
 ### 拉起JS SDK收银台
 
@@ -2204,6 +2325,8 @@ new Pacypay(transactionId, options);
 ```
 
 ### 参考代码
+
+#### 1. 收银台
 
 ```js
 const transactionId = '1544197674849067008'; //当前交易ID 
@@ -2215,46 +2338,88 @@ const pacypay = new Pacypay(transactionId, {
         checkoutTheme: 'light', // light、dark
         customCssURL: '', // 自定义样式链接地址，配置该值后，checkoutTheme 则无效
         variables: {
-          "colorBackground": "black", // 主题背景色
-          "colorPrimary": "red", // 主题色，如输入框高亮、光标颜色
-          "colorText": "white", // 字体颜色
-          "colorDanger": "#FF1493", // 错误提示颜色
-          "borderRadius": "2px", // 输入框角度
-          "fontSizeBase": "16px", // 基础字体大小，会按照该基准进行缩放
-          "fontFamily": "Arial, sans-serif", // 字体样式
+            "colorBackground": "black", // 主题背景色
+            "colorPrimary": "red", // 主题色，如输入框高亮、光标颜色
+            "colorText": "white", // 字体颜色
+            "colorDanger": "#FF1493", // 错误提示颜色
+            "borderRadius": "2px", // 输入框角度
+            "fontSizeBase": "16px", // 基础字体大小，会按照该基准进行缩放
+            "fontFamily": "Arial, sans-serif", // 字体样式
         },
         // 如果想自定义所有样式则只用配置styles. checkoutTheme,customCssURL,variables都可以不传
         // 详情请看styles属性说明
         styles: {
-          ".pacypay-checkout__button--pay": { // 支付按钮样式
-          "background-color": "red",
-        },
-      }
+            ".pacypay-checkout__button--pay": { // 支付按钮样式
+                "background-color": "red",
+            },
+        }
     },
     onPaymentCompleted: function (res) {
-            //成功支付后回调方法
+        //成功支付后回调方法
         const txtInfo = res.data; // 返回交易结果详情
         const respCode = res.respCode; // 响应码
         const respMsg = res.respMsg; // 响应信息
-        if(respCode === '20000') { // respCode 为 20000 表示交易正常
-          switch (txtInfo.status) { // 交易状态判断
-          case 'S': // status 为 'S' 表示成功
-          // 支付最终状态以异步通知结果为准
-          break;
-          case 'R': // status 为 'R' 表示需要3ds验证
-          // 当交易状态为 R 时，商户需要重定向到该URL完成部分交易，包括3ds验证
-          window.location.href = txtInfo.redirectUrl;
-          break;
-         }
+        if (respCode === '20000') { // respCode 为 20000 表示交易正常
+            switch (txtInfo.status) { // 交易状态判断
+                case 'S': // status 为 'S' 表示成功
+                    // 支付最终状态以异步通知结果为准
+                    break;
+                case 'R': // status 为 'R' 表示需要3ds验证
+                    // 当交易状态为 R 时，商户需要重定向到该URL完成部分交易，包括3ds验证
+                    window.location.href = txtInfo.redirectUrl;
+                    break;
+            }
         } else {
-          // 交易失败
-          }
-        },
-        onError: function (err) {
-            //支付异常回调方法 
-            console.log(err);
+            // 交易失败
         }
+    },
+    onError: function (err) {
+        //支付异常回调方法 
+        console.log(err);
+    }
 });
+```
+
+#### 2. ApplePay/GooglePay
+
+```javascript
+const transactionId = '1544197674849067008'; //当前交易ID
+options = {
+    container: 'pacypay_checkout', // 按钮嵌入的容器
+    locale: "zh", // 支持语言
+    environment: 'sandbox', // sandbox、production
+    mode: ['GooglePay'], // GooglePay、ApplePay
+    config: {
+        googlePayButtonType: 'buy', // 'book' | 'buy' | 'checkout' | 'donate' | 'order' | 'pay' | 'plain' | 'subscribe'
+        googlePayButtonColor: 'black', // 'black' | 'white'
+        applePayButtonType: 'buy', // 'add-money' | 'book' | 'buy' | 'check-out' | 'continue' | 'contribute' | 'donate' | 'order' | 'plain' | 'reload' | 'rent' | 'subscribe' | 'support' | 'tip' | 'top-up' | 'pay'
+        applePayButtonColor: 'black',  // 'black' | 'white' | 'white-outline'
+        googlePayEnvironment: 'TEST', // TEST PRODUCTION
+        buttonWidth: '100px', // 按钮宽度
+        buttonHeight: '40px', // 按钮高度
+        buttonRadius: '4px', // 按钮圆角边框
+    },
+    onPaymentCompleted: function (res) { // 成功支付后回调方法
+        const txtInfo = res.data; // 返回交易结果详情
+        const respCode = res.respCode; // 响应码
+        const respMsg = res.respMsg; // 响应信息
+        if (respCode === '20000') { // respCode 为 20000 表示交易正常
+            switch (txtInfo.status) { // 交易状态判断
+                case 'S': // status 为 'S' 表示成功
+                    // 支付最终状态以异步通知结果为准
+                    break
+                case 'F': // status 为 'F' 表示失败
+                    break;
+            }
+        } else {
+            // 交易失败
+        }
+    },
+    onError: function (err) {
+        //支付异常回调方法
+        console.log('res', err);
+    }
+}
 ```
 
 #### 字段说明
@@ -2264,7 +2429,7 @@ const pacypay = new Pacypay(transactionId, {
 | 属性            | 类型     | 必填  | 说明                                    |          
 |---------------|--------|-----|---------------------------------------|
 | transactionId | string | Yes | 商户通过 [下单接口](./js-sdk#调用下单接口) 获取到的交易ID |
-| options       | object | No  | 详见以下 [options](./js-sdk#options) 说明   |
+| options       | object | Yes | 详见以下 [options](./js-sdk#options) 说明   |
 
 </div>
 
@@ -2272,35 +2437,86 @@ const pacypay = new Pacypay(transactionId, {
 
 <div class="custom-table">
 
-| 属性                 | 类型       | 必填 | 说明                                                                                                                                                                                                                            |
-|--------------------|----------|----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| locale             | string   | No | 语言类型。请参阅 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"></CustomTable></CustomPopover> |
-| environment        | string   | No | 环境类型。`sandbox`，默认为`production`                                                                                                                                                                                                |
-| config             | object   | No | 配置项。详见以下[config](./js-sdk#config)说明                                                                                                                                                                                           |
-| onPaymentCompleted | function | No | 请求成功完成回调方法                                                                                                                                                                                                                    |
-| onError            | function | No | 请求异常回调方法                                                                                                                                                                                                                      |
+| 属性                 | 类型       | 必填 | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|--------------------|----------|----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| container          | string   | No | 容器id,默认pacypay_checkout                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| locale             | string   | No | 语言类型。1. 收银台集成：详见 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"> </CustomTable></CustomPopover>。2. ApplePay、GooglePay集成：详见 <CustomPopover title="LocaleEnum" width="auto" reference="LocaleEnum" link="/apis/js-sdk.html#locale" > <CustomTable :data="LocaleEnumTable.data" :columns="LocaleEnumTable.columns"></CustomTable> </CustomPopover> |
+| environment        | string   | No | 环境类型，`sandbox`, 默认为 `production`                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| mode               | array    | No | 支付方式，支持 `ApplePay`、`GooglePay`。集成 `ApplePay`、`GooglePay`时必填                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| config             | object   | No | 配置项，详见以下 [config](./js-sdk#config) 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| onPaymentCompleted | function | No | 请求成功完成回调方法                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| onError            | function | No | 请求异常回调方法                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+</div>
+
+##### locale
+
+<div class="custom-table bordered-table">
+
+| 语言 | 描述     | 是否支持Apple Pay | 是否支持Google Pay |
+|----|--------|---------------|----------------|
+| ar | 阿拉伯语   | 是             | 是              |
+| ca | 加泰罗尼亚语 | 是             | 是              |
+| cs | 捷克语    | 是             | 是              |
+| da | 丹麦语    | 是             | 是              |
+| de | 德语     | 是             | 是              |
+| el | 希腊语    | 是             | 是              |
+| en | 英语     | 是             | 是              |
+| es | 西班牙语   | 是             | 是              |
+| fi | 芬兰语    | 是             | 是              |
+| fr | 法语     | 是             | 是              |
+| hr | 克罗地亚语  | 是             | 是              |
+| id | 印度尼西亚语 | 是             | 是              |
+| it | 意大利语   | 是             | 是              |
+| ja | 日语     | 是             | 是              |
+| ko | 韩语     | 是             | 是              |
+| ms | 马来语    | 是             | 是              |
+| no | 挪威语    | 是             | 是              |
+| nl | 荷兰语    | 是             | 是              |
+| pl | 波兰语    | 是             | 是              |
+| pt | 葡萄牙语   | 是             | 是              |
+| ru | 俄语     | 是             | 是              |
+| sk | 斯洛伐克语  | 是             | 是              |
+| sv | 瑞典语    | 是             | 是              |
 
 </div>
 
 ##### config
 
-<div class="custom-table">
+<div class="custom-table bordered-table">
 
-| 属性                        | 类型      | 必填 | 说明                                                        |
-|---------------------------|---------|----|-----------------------------------------------------------|
-| checkoutTheme             | string  | No | 主题类型。`light`、`dark`                                       |
-| customCssURL              | string  | No | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                         |
-| variables                 | object  | No | 自定义主题色。详见以下 [variables](./js-sdk#variables) 说明            |
-| styles                    | object  | No | 自定义样式。详见以下 [styles](./js-sdk#styles) 说明                   |
-| showPayButton             | boolean | No | 默认为 `true`。如果设为 false 可自定义支付按钮，请参阅 [补充说明](./js-sdk#补充说明)  |
-| buttonSeparation          | boolean | No | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`:绑卡与支付一步完成；          |
-| displayBillingInformation | boolean | No | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息 |
+| 属性                        | 类型      | 必填 |   | 说明                                                                |
+|---------------------------|---------|----|:--|-------------------------------------------------------------------|
+| checkoutTheme             | string  | No |   | 主题类型。`light`、`dark`                                               |
+| customCssURL              | string  | No |   | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                                 |
+| variables                 | object  | No |   | 自定义主题色。详见以下 [variables](./js-sdk#variables) 说明                    |
+| styles                    | object  | No |   | 自定义样式。详见以下 [styles](./js-sdk#styles) 说明                           |
+| showPayButton             | boolean | No |   | 默认为 `true`。如果设为 `false` 可自定义支付行为和展示账单信息，请参阅 [补充说明](./js-sdk#补充说明) |
+| buttonSeparation          | boolean | No |   | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`:绑卡与支付一步完成；                  |
+| displayBillingInformation | boolean | No |   | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息         |
+
+</div>
+
+##### ApplePay/GooglePay
+
+<div class="custom-table bordered-table">
+
+| 属性                   | 类型     | 必填 | 说明                                                                                                                                                                  |
+|----------------------|--------|----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| googlePayButtonType  | string | No | `Google Pay`按钮类型，支持 `book`、`buy`、`checkout`、`donate`、`order`、`pay`、`plain`、`subscribe`                                                                              |
+| googlePayButtonColor | string | No | `Google Pay`按钮主题，支持 `black`、`white`                                                                                                                                 |
+| googlePayEnvironment | string | No | `Google Pay`环境，支持 `TEST`、`PRODUCTION`                                                                                                                               |
+| applePayButtonType   | string | No | `Apple Pay`按钮类型，支持 `add-money`、`book`、`buy`、`check-out`、`continue`、`contribute`、`donate`、`order`、`plain`、`reload`、`rent`、`subscribe`、`support`、`tip`、`top-up`、`pay` |
+| applePayButtonColor  | string | No | `Apple Pay`按钮主题，支持 `black`、`white`、`white-outline`                                                                                                                  |
+| buttonWidth          | string | No | 按钮宽度，例如: `200px`                                                                                                                                                    |
+| buttonHeight         | string | No | 按钮高度，例如: `40px`                                                                                                                                                     |
+| buttonRadius         | string | No | 按钮圆角边框，例如: `4px`                                                                                                                                                    |
 
 </div>
 
 ##### variables
 
-<div class="custom-table">
+<div class="custom-table bordered-table">
 
 | 属性              | 类型     | 必填 | 说明                |
 |-----------------|--------|----|-------------------|
@@ -2350,9 +2566,9 @@ const pacypay = new Pacypay(transactionId, {
 
 #### 补充说明
 
-当showPayButton为false的时候，在自定义支付按钮处，请调用以下方法进行支付
+当 `showPayButton` 为 `false` 的时候，在自定义支付按钮处，请调用以下方法进行支付
 
-```js 
+```javascript 
 pacypay.submit();
 // 若绑卡时不显示账单信息（displayBillingInformation： false），需要传入账单参数  // [!code warning]
 pacypay.submit({
@@ -2372,6 +2588,53 @@ pacypay.submit({
     }
 });
 ```
+
+## 更新订单<Badge text="POST" type="tip"></Badge>
+
+`https://sandbox-acq.onerway.com/v1/sdkTxn/updateOrder`
+
+::: danger 注意
+`TransactionInformation` 中的字段如不需要更新，则不用传这个字段，如果传了null或空字符串，则也会被更新。
+:::
+
+### 请求参数
+
+<div class="custom-table bordered-table">
+
+| 名称                  | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                                                   |
+|---------------------|--------|----|-----|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                                                                                                                          |
+| merchantTxnId       | String | 64 | No  | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易。**和transactionId两个参数中至少传一个**                                                                                                                                                                                                                                              |
+| transactionId       | String | 20 | No  | Yes | Onerway创建的交易订单号。**和merchantTxnId两个参数中至少传一个**                                                                                                                                                                                                                                                         |
+| orderAmount         | String | 19 | Yes | Yes | 修改后的交易订单金额。                                                                                                                                                                                                                                                                                          |
+| billingInformation  | String | /  | No  | Yes | 交易账单信息。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
+| shippingInformation | String | /  | No  | Yes | 交易邮寄信息。 格式为 json 字符串。 请参阅对象 <CustomPopover title="TransactionInformation" width="auto" reference="TransactionInformation" link="/apis/js-sdk.html#transactioninformation" ><CustomTable :data="TransactionInformation.data" :columns="TransactionInformation.columns"></CustomTable></CustomPopover> |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                                                                                                |
+
+</div>
+
+### 响应参数
+
+<div class="custom-table bordered-table">
+
+| 名称       | 类型     | 签名 | 描述                                      |
+|----------|--------|----|-----------------------------------------|
+| respCode | String | No | 来自 Onerway 的响应码                         |
+| respMsg  | String | No | 来自 Onerway 的响应信息                        |
+| data     | Map    | No | 响应数据。 请参阅对象 [data](/js-sdk.html#data-1) |
+
+</div>
+
+#### data
+
+<div class="custom-table bordered-table">
+
+| 名称            | 类型     | 签名  | 描述                      |
+|---------------|--------|-----|-------------------------|
+| transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号 |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                      |
+
+</div>
 
 <style lang="css">
 

@@ -1,6 +1,6 @@
 ---
 outline: deep
----
+--- 
 <script setup>
 
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
@@ -24,7 +24,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/queryTokenList  |
+| Request URL :    | https://sandbox-acq.onerway.com/v1/txn/queryTokenList  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -44,12 +44,12 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                         |
-|----------------|--------|----|-----|-----|--------------------------------------------------------------------------------------------|
-| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时， `OnerWa `y会为商户创建商户号                                                                |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                         |
+|----------------|--------|----|-----|-----|------------------------------------------------------------------------------------------------------------|
+| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时， `OnerWa `y会为商户创建商户号                                                                            |
 | appId          | String | 20 | No  | Yes | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用 `id `。不传时，默认查询商户号下所有绑定的 `token `信息。传入时，查询指定 `appId `下的绑定的 `toke `n信息。 |
-| merchantCustId | String | 50 | Yes | Yes | 客户在商户的唯一标识                                                                                 |
-| sign           | String | /  | Yes | No  | 签名字符串。                                                                                     |                                   |
+| merchantCustId | String | 50 | Yes | Yes | 客户在商户的唯一标识                                                                                                 |
+| sign           | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                         |                                   |
 
 </div>
 
@@ -70,10 +70,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称         | 类型     | 签名 | 描述                              |
-|------------|--------|----|---------------------------------|
-| merchantNo | String | No | 商户号。 商户注册时，OnerWay会为商户创建商户号     |
-| tokenInfos | List   | No | token明细列表。请参阅对象 TokenDetailInfo    <CustomPopover title="TokenDetailInfo" width="auto" reference="TokenDetailInfo" link="/apis/api-direct-tokenList.html#tokendetailinfo" ></CustomPopover> |
+| 名称         | 类型     | 必填  | 描述                              |
+|------------|--------|-----|---------------------------------|
+| merchantNo | String | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号     |
+| tokenInfos | List   | Yes | token明细列表。请参阅对象 TokenDetailInfo    <CustomPopover title="TokenDetailInfo" width="auto" reference="TokenDetailInfo" link="/apis/api-direct-tokenList.html#tokendetailinfo" ></CustomPopover> |
 
 </div>
 
@@ -82,22 +82,22 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 签名 | 描述                                     |
+| 名称            | 类型     | 必填 | 描述                                     |
 |---------------|--------|----|----------------------------------------|
-| id            | String | No | 绑定信息`id`（可用于解绑操作）                        |
-| tokenId       | String | No | 绑卡令牌`id `                                |
-| appId         | String | No | 商户应用程序 `ID`。 商户注册网站时，OnerWay会为商户创建一个应用id |
-| cardNumber    | String | No | 卡号（格式为：前六****后四）                       |
-| paymentMethod | String | No | 具体支付方式，包括卡和本地支付类型                      |
-| year          | String | No | 卡号年份，例如： 2021                          |
-| month         | String | No | 卡号月份，例如：03                             |
+| id            | String | Yes | 绑定信息`id`（可用于解绑操作）                        |
+| tokenId       | String | Yes | 绑卡令牌`id `                                |
+| appId         | String | Yes | 商户应用程序 `ID`。 商户注册网站时，OnerWay会为商户创建一个应用id |
+| cardNumber    | String | Yes | 卡号（格式为：前六****后四）                       |
+| paymentMethod | String | Yes | 具体支付方式，包括卡和本地支付类型                      |
+| year          | String | Yes | 卡号年份，例如： 2021                          |
+| month         | String | Yes | 卡号月份，例如：03                             |
 </div>
 
 ## 以下部分展示了交易订单查询的请求示例：
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/queryTokenList<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/queryTokenList<Badge type="tip">POST</Badge>
 
 
 

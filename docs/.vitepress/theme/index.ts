@@ -5,6 +5,7 @@ import DefaultTheme from 'vitepress/theme'
 // import Home from "../../components/home-page/Home.vue";
 import './style.css'
 import './custom.css'
+import './my-font.css'
 import mediumZoom from "medium-zoom"
 import ElementPlus, {ElCollapseTransition} from 'element-plus'
 import {TopRight} from "@element-plus/icons-vue";

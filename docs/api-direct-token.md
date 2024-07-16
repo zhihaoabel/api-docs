@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-<script setup>
+<script setup> 
 
   import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
@@ -26,7 +26,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard  |
+| Request URL :    | https://sandbox-acq.onerway.com/v1/txn/bindCard  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -53,7 +53,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | email          | String | 256 | Yes | Yes | 商户客户的邮箱                                |
 | country        | String | 64  | Yes | Yes | 商户客户的国家。请参考 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美国 is US     "></CMExample>      |
 | transactionIp  | String | 64  | Yes | Yes | 商户客户的交易`IP  `                            |
-| sign           | String | /   | Yes | No  | 签名字符串。                                 |                 |
+| sign           | String | /   | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                    |                 |
 
 </div>
 
@@ -62,13 +62,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ##### TxnCardInfo
 
-| 名称         | 类型     | 长度  | 必填  | 签名 | 描述            |
-|------------|--------|-----|-----|----|---------------|
-| holderName | String | 48  | Yes | No | 持卡人姓名         |
-| cardNumber | String | 128 | Yes | No | 持卡人的卡号        |
-| month      | String | 64  | Yes | No | 卡号月份，例如： <br>  <CMExample data="03"></CMExample>  |
-| year       | String | 64  | Yes | No | 卡号年份，例如： <br>  <CMExample data="2024"></CMExample>|
-| cvv        | String | 64  | Yes | No | 卡号cvv         |
+| 名称         | 类型     | 长度  | 必填  | 描述            |
+|------------|--------|-----|-----|---------------|
+| holderName | String | 48  | Yes | 持卡人姓名         |
+| cardNumber | String | 128 | Yes | 持卡人的卡号        |
+| month      | String | 64  | Yes | 卡号月份，例如： <br>  <CMExample data="03"></CMExample>  |
+| year       | String | 64  | Yes | 卡号年份，例如： <br>  <CMExample data="2024"></CMExample>|
+| cvv        | String | 64  | Yes | 卡号cvv         |
 
 </div>
 
@@ -94,14 +94,14 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |---------------|--------|-----|-----------------|
 | transactionId | String | Yes | Onerway创建的交易订单号 |
 | tokenId       | String | Yes | 绑卡令牌id          |
-| sign          | String | No  | 签名字符串。          |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)              |
 
 </div>
 
 
 ## 以下部分展示了获取token的请求以及响应示例：
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/bindCard <Badge type="tip">POST</Badge>
 
 ::: code-group
 
@@ -147,7 +147,7 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard <Badge type="tip">POST<
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
 |----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction  |
+| Request URL :    | https://sandbox-acq.onerway.com/v1/txn/doTransaction  |
 | Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
 | Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
 
@@ -183,7 +183,7 @@ https://sandbox-v3-acquiring.pacypay.com/v1/txn/bindCard <Badge type="tip">POST<
 
 ### Request
 
-https://sandbox-v3-acquiring.pacypay.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
 ::: code-group
 
