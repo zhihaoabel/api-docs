@@ -1998,3 +1998,241 @@ export const TxnStatusEnum = {
         },
     ],
 };
+export const TxnCardInfoCashier = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'holderName',
+            type: 'String',
+            length: '48',
+            required: 'No',
+            desc: `持卡人姓名`,
+        },
+    ],
+};
+export const Przelewy24BankNameEnum = {
+    columns: [
+        {
+            prop: 'bankName',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            bankName: 'Santander-Pretzel24',
+        },
+        {
+            bankName: 'P_ac_ z Inteligo',
+        },
+        {
+            bankName: 'P_ac_ z iPKO (PKO BP)',
+        },
+        {
+            bankName: 'BNP Paribas',
+        },
+        {
+            bankName: 'Bank PEKAO S.A.',
+        },
+        {
+            bankName: 'Credit Agricole',
+        },
+        {
+            bankName: 'ING Bank _l_ski',
+        },
+        {
+            bankName: 'Konto Inteligo',
+        },
+        {
+            bankName: 'Bank PKO BP (iPKO)',
+        },
+        {
+            bankName: 'Santander',
+        },
+        {
+            bankName: 'Toyota Bank',
+        },
+        {
+            bankName: 'Bank PEKAO S.A.',
+        },
+        {
+            bankName: 'Volkswagen Bank',
+        },
+        {
+            bankName: 'Bank Millennium',
+        },
+        {
+            bankName: 'P_ac_ z Alior Bankiem',
+        },
+        {
+            bankName: 'Nest Bank',
+        },
+        {
+            bankName: 'Credit Agricole',
+        },
+        {
+            bankName: 'P_ac_ z BO_',
+        },
+        {
+            bankName: 'P_ac_ z ING',
+        },
+        {
+            bankName: 'P_ac_ z CitiHandlowy',
+        },
+        {
+            bankName: 'Alior - Raty',
+        },
+        {
+            bankName: 'P_ac_ z Plus Bank',
+        },
+        {
+            bankName: 'mBank - Raty',
+        },
+        {
+            bankName: 'e-transfer Pocztowy24',
+        },
+        {
+            bankName: 'Banki Sp_dzielcze',
+        },
+        {
+            bankName: 'Bank Nowy BFG S.A.',
+        },
+        {
+            bankName: 'Getin Bank',
+        },
+        {
+            bankName: 'BLIK',
+        },
+        {
+            bankName: 'Noble Pay',
+        },
+        {
+            bankName: 'P_ac_ z IdeaBank',
+        },
+        {
+            bankName: 'EnvelopeBank',
+        },
+        {
+            bankName: 'NestPrzelew',
+        },
+        {
+            bankName: 'BNP Paribas P_ac_ z Pl@net',
+        },
+        {
+            bankName: 'mBank - mTransfer',
+        },
+        {
+            bankName: 'P24now',
+        },
+        {
+            bankName: 'mBank (Us_ugaITP)',
+        },
+        {
+            bankName: 'ING Bank ÅlÄski (Us_uga ITP)',
+        },
+        {
+            bankName: 'BNP Paribas (Us_uga ITP)',
+        },
+        {
+            bankName: 'PKO BP (Us_uga ITP)',
+        },
+        {
+            bankName: 'Santander (Us_uga ITP)',
+        },
+        {
+            bankName: 'Inteligo (Us_uga ITP)',
+        },
+        {
+            bankName: 'mBank - Raty',
+        },
+    ],
+};
+export  const EFTBankNameEnum = {
+    columns: [
+        {
+            prop: 'bankName',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            bankName: 'banco_agrario',
+        },
+        {
+            bankName: 'banco_av_villas',
+        },
+        {
+            bankName: 'banco_bbva_colombia_s.a.',
+        },
+        {
+            bankName: 'banco_caja_social',
+        },
+        {
+            bankName: 'banco_colpatria',
+        },
+        {
+            bankName: 'banco_cooperativo_coopcentral',
+        },
+        {
+            bankName: 'banco_corpbanca_s.a',
+        },
+        {
+            bankName: 'banco_davivienda',
+        },
+        {
+            bankName: 'banco_de_bogota',
+        },
+        {
+            bankName: 'banco_de_occidente',
+        },
+        {
+            bankName: 'banco_falabella_',
+        },
+        {
+            bankName: 'banco_gnb_sudameris',
+        },
+        {
+            bankName: 'banco_pichincha_s.a.',
+        },
+        {
+            bankName: 'banco_procredit',
+        },
+        {
+            bankName: 'bancolombia',
+        },
+        {
+            bankName: 'bancoomeva_s.a.',
+        },
+        {
+            bankName: 'citibank_',
+        },
+        {
+            bankName: 'itau',
+        },
+        {
+            bankName: 'nequi',
+        },
+    ],
+};
