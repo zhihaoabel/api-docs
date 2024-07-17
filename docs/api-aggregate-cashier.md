@@ -32,7 +32,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </div>
 
-::: tip  聚合收银台请求参数可参考收银台信用卡支付，只需将`productType` 由 `CARD` 改为 `ALL`即可
+::: tip  聚合收银台请求参数可参考[收银台信用卡支付](./api-cashier#收银台接口请求、响应示例)，只需将`productType` 由 `CARD` 改为 `ALL`即可
 
 ```json lines
 {

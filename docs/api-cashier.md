@@ -163,7 +163,7 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
   "merchantTxnId": 2099220674,
   "merchantTxnTime": null,
   "merchantTxnTimeZone": null,
-  "productType": "CARD",
+  "productType": "CARD", // [!code error]  随收银台类型变化
   "subProductType": "DIRECT",
   "txnType": "SALE",
   "orderAmount": "200",

@@ -101,23 +101,23 @@ export default defineConfig({
                             },
                             {
                                 text: 'WebSDK',
-                                link: '/pay',
+                                link: '/sdk-pay',
                                 items: [
                                     {
                                         text: '绑卡支付',
-                                        link: '/pay-bind'
+                                        link: '/sdk-pay-bind'
                                     },
                                     {
                                         text: '订阅支付',
-                                        link: '/pay-subscription'
+                                        link: '/sdk-pay-subscribe'
                                     },
                                     {
                                         text: 'ApplePay',
-                                        link: '/pay-apple'
+                                        link: '/sdk-pay-apple'
                                     },
                                     {
                                         text: 'GooglePay',
-                                        link: '/pay-google'
+                                        link: '/sdk-pay-google'
                                     },
                                 ]
                             },

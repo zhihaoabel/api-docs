@@ -108,6 +108,53 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, PaymentModeEnum, OsTyp
 
 </div>
 
+## SDK下单请求及响应示例
+::: code-group
+
+```json-vue [Request]
+{
+    "billingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"8522847035\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"86258406122\"}",
+    "merchantCustId": 1721203699000,
+    "merchantNo": "800209",
+    "merchantTxnId": 1721203699000,
+    "orderAmount": "200",
+    "orderCurrency": "USD",
+    "productType": "CARD", 
+    "shippingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"8522847035\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"86258406122\"}",
+    "sign": "a3edc1176be734cad48cf5c80626e8caf26d166bc78bdd1a8f38589c16369165",
+    "subProductType": "DIRECT",  // [!code error] 随支付类型变化
+    "txnOrderMsg": "{\"returnUrl\":\"https://www.merchant-store-website.com/\",\"notifyUrl\":\"https://www.merchant-store-notify.com/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"1798898582021349376\"}",
+    "txnType": "SALE"
+}
+```
+
+```json-vue [Response]
+{
+    "respCode": "20000",
+    "respMsg": "Success",
+    "data": {
+        "transactionId": "1813485881265627136", // [!code error] 交易流水号, 用于拉起SDK
+        "responseTime": "2024-07-17 16:08:21",
+        "txnTime": null,
+        "txnTimeZone": "+08:00",
+        "orderAmount": "200.00",
+        "orderCurrency": "USD",
+        "txnAmount": null,
+        "txnCurrency": null,
+        "status": "U",
+        "redirectUrl": null,
+        "contractId": null,
+        "tokenId": null,
+        "eci": null,
+        "periodValue": null,
+        "codeForm": null,
+        "presentContext": null,
+        "actionType": null,
+        "sign": "1c54773927d4796a836d117eaa4a2b263b63677f128c96fbbf5bc70078cfe4db"
+    }
+}
+```
+
 <style lang="css">
 
 
