@@ -8,7 +8,7 @@ import CustomPopover from './components/element-ui/CustomPopover.vue';
 import CustomTable from "./components/element-ui/CustomTable.vue";
 import CMNote from './components/CMNote.vue';
 import CMExample from './components/CMExample.vue';
-import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, PaymentModeEnum, OsTypeEnum, Risk3dsStrategyEnum, Subscription, MpiInfo, TxnOrderMsg, TransactionInformation, LpmsInfo, StoreProductTypeEnum, TxnStatusEnum} from "./util/constants";
+import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, PaymentModeEnum, OsTypeEnum, Risk3dsStrategyEnum, Subscription, MpiInfo, TxnOrderMsg, TransactionInformation, LpmsInfo, StoreProductTypeEnum, TxnStatusEnum, EFTBankNameEnum, Przelewy24BankNameEnum} from "./util/constants";
 
 </script>
 
@@ -62,140 +62,27 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, PaymentModeEnum, OsTyp
 
 ### TxnOrderMsg
 
-<div class="custom-table bordered-table">
-
-| 名称        | 类型     | 长度   | 必填  | 描述                                                              |
-|-----------|--------|------|-----|-----------------------------------------------------------------|
-| returnUrl | String | 256  | Yes | 同步返回地址，顾客付款完成后，Onerway的托管页面会通过这个地址重定向回商家的指定页面。                  |
-| products  | String | 1024 | Yes | 顾客购买的商品信息列表，请参考下方[Products](#products)对象。                       |
-| appId     | String | 20   | Yes | 店铺ID，商家在Onerway入驻网站/应用程序时，会生成一个与该网站/应用程序的唯一ID。 该ID在Onerway后台获取。 |
-| notifyUrl | String | 256  | No  | 通知地址。详见[通知](./notify)                                           |
-
-</div>
-
-#### Products
-
-<div class="custom-table bordered-table">
-
-| 名称       | 类型     | 长度   | 必填  | 描述                                                                                                                                                                                                                                                                    |
-|----------|--------|------|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name     | String | 256  | Yes | 商品名称。                                                                                                                                                                                                                                                                 |
-| price    | String | 1024 | Yes | 商品单价。                                                                                                                                                                                                                                                                 |
-| num      | String | 20   | Yes | 商品数量。                                                                                                                                                                                                                                                                 |
-| currency | String | 256  | Yes | 商品价格对应得货币。                                                                                                                                                                                                                                                            |
-| type     | String | 256  | No  | 商品类型。请参考 <CustomPopover title="StoreProductTypeEnum" width="auto" reference="StoreProductTypeEnum" link="/apis/enums.html#storeproducttypeenum"><CustomTable :data="StoreProductTypeEnum.data" :columns="StoreProductTypeEnum.columns"></CustomTable></CustomPopover> |
-
-</div>
-
-::: tip `products` 必须为`JSON`字符串格式
-
-**示例：**
-
-<Badge type="danger">如果type为shipping_fee，折扣金额需要传负数</Badge>
-
-::: code-group
-
-```json [一般情况]
-\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"}]\"
-
-```
-
-```json [有折扣]
-\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\"
-
-```
-
-```json [有运费]
-\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"}]\"
-
-```
-
-```json [有折扣和运费]
-\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\"
-
-```
-
-**要注意的是 price * num = orderAmount（订单交易金额）**
-:::
+<!--@include: ./parts/txn-order-msg.md-->
 
 ### TransactionInformation
 
-<div class="custom-table bordered-table">
-
-| 名称             | 类型     | 长度  | 必填  | 描述                                                                                                                                                                         |
-|----------------|--------|-----|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| firstName      | String | 64  | Yes | 名 (虚拟商品可不传)                                                                                                                                                                |
-| lastName       | String | 64  | Yes | 姓 (虚拟商品可不传)                                                                                                                                                                |
-| jpFirstName    | String | 64  | No  | （日文片假名）名                                                                                                                                                                   |
-| jpLastName     | String | 64  | No  | （日文片假名）姓                                                                                                                                                                   |
-| phone          | String | 32  | Yes | 电话号码   (虚拟商品的可不传)                                                                                                                                                          |
-| email          | String | 256 | Yes | 电子邮件                                                                                                                                                                       |
-| postalCode     | String | 32  | Yes | 邮政编码  (虚拟商品可不传)                                                                                                                                                            |
-| address        | String | 256 | Yes | 地址    (虚拟商品可不传)                                                                                                                                                            |
-| country        | String | 64  | Yes | 国家。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>   <CMExample data="美国 is US "></CMExample>                                |
-| province       | String | 64  | Yes | 州。 当国家是美国 \(US\) 或加拿大 \(CA\) 时必填。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美属萨摩亚 is AS"></CMExample> |
-| city           | String | 64  | Yes | 城市 (虚拟商品可不传)                                                                                                                                                               |
-| street         | String | 64  | No  | 街道                                                                                                                                                                         |
-| number         | String | 64  | No  | 门牌号                                                                                                                                                                        |
-| identityNumber | String | 64  | No  | 证件号码                                                                                                                                                                       |
-| birthDate      | String | 64  | No  | 出生日期，格式为 `yyyy/MM/dd`                                                                                                                                                      |
-
-</div>
+<!--@include: ./parts/txn-info.md-->
 
 ### LpmsInfo
 
-<div class="custom-table bordered-table">
-
-
-| 名称            | 类型     | 长度  | 必填  | 描述                                                                                                                                                                                                                                                                                                                                                                                           |
-|---------------|--------|-----|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| lpmsType      | String | 64  | Yes | 本地支付方式。 请参阅 <CustomPopover title="LpmsTypeEnum" width="auto" reference="LpmsTypeEnum" link="/apis/enums.html#lpmstypeenum" ></CustomPopover>。                                                                                                                                                                                                                                                |
-| bankName      | String | 128 | No  | 银行名称，某些本地支付方式需要。`lpmsType`为`EFT`时请参阅    <CustomPopover title="EFTBankNameEnum" width="auto" reference="EFTBankNameEnum" link="/apis/enums.html#eftbanknameenum" ></CustomPopover>      。 <br/>`lpmsType`为`Przelewy24`时请参阅    <CustomPopover title="Przelewy24BankNameEnum" width="auto" reference="Przelewy24BankNameEnum" link="/apis/enums.html#przelewy24banknameenum" ></CustomPopover>。 |
-| iBan          | String | 64  | No  | 银行账户，部分地区转账时需要                                                                                                                                                                                                                                                                                                                                                                               |
-| prepaidNumber | String | /   | No  | 预付费卡号，部分支付方式需要                                                                                                                                                                                                                                                                                                                                                                               |
-
-</div>
+<!--@include: ./parts/lpms-info.md-->
 
 ### Subscription
 
-<div class="custom-table bordered-table">
-
-| 名称             | 类型     | 长度  | 必填  | 签名 | 描述                                                     |
-|----------------|--------|-----|-----|----|--------------------------------------------------------|
-| requestType    | String | 1   | Yes | No | 订阅请求类型。<br/>枚举如下：**0 - 首购 1 - 复购**                     |
-| merchantCustId | String | 50  | No  | No | 商户客户id。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| expireDate     | String | 10  | No  | No | 过期日期。<br/><CMNote data="requestType为0时必填。"></CMNote>   |
-| frequencyType  | String | 1   | No  | No | 订阅频率类型。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| frequencyPoint | String | 2   | No  | No | 订阅频率点数。<br/><CMNote data="requestType为0时必填。"></CMNote> |
-| contractId     | String | 20  | No  | No | 订阅合同id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
-| tokenId        | String | 300 | No  | No | 订阅令牌id。<br/><CMNote data="requestType为1时必填。"></CMNote> |
-
-</div>
+<!--@include: ./parts/subscription.md-->
 
 ### MpiInfo
 
- <div class="custom-table bordered-table">
-
-| 名称        | 类型     | 长度  | 必填  | 描述                                              |
-|-----------|--------|-----|-----|-------------------------------------------------|
-| eci       | String | 2   | Yes | 责任转移                                            |
-| cavv      | String | 128 | Yes | 由发卡行创建                                          |
-| xid       | String | 128 | No  | `3D-Secure` v1版本`Mpi`交易`id`（与`dsTransID`任选其一填写） |
-| dsTransID | String | 128 | No  | `3D-Secure` v2版本Mpi交易`id`（与`xid`任选其一填写）         |
-
-</div>
+<!--@include: ./parts/mpi-info.md-->
 
 ## 响应参数
 
- <div class="custom-table bordered-table">
-
-| 名称       | 类型     | 签名 | 描述                         |
-|----------|--------|----|----------------------------|
-| respCode | String | No | 来自 ` Onerway` 的响应码         |
-| respMsg  | String | No | 来自 `Onerway` 的响应信息         |
-| data     | Map    | No | 响应数据。 请参阅对象  [data](#data) |
-
-</div>
+<!--@include: ./parts/response.md-->
 
 ### data
 
@@ -217,7 +104,7 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, PaymentModeEnum, OsTyp
 | contractId    | Yes | String | 订阅合同`id`。首购时返回                                                                                                                                                                                                                             |
 | tokenId       | Yes | String | 订阅令牌`id`。首购时返回                                                                                                                                                                                                                             |
 | eci           | Yes | String | 责任转移                                                                                                                                                                                                                                       |
-| sign          | No  | String | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                    |
+| sign          | No  | String | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                       |
 
 </div>
 

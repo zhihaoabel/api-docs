@@ -1,0 +1,13 @@
+[//]: # (### LpmsInfo)
+
+<div class="custom-table bordered-table">
+
+
+| 名称            | 类型     | 长度  | 必填  | 描述                                                                                                                                                                                                                                                                                                                                                                                |
+|---------------|--------|-----|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| lpmsType      | String | 64  | Yes | 本地支付方式。 请参阅 [LpmsTypeEnum](./enums#lpmstypeenum)。                                                                                                                                                                                                                                                                                                                                 |
+| bankName      | String | 128 | No  | 银行名称，某些本地支付方式需要。`lpmsType`为`EFT`时请参阅    <CustomPopover title="EFTBankNameEnum" width="auto" reference="EFTBankNameEnum" link="/apis/enums.html#eftbanknameenum" >  <CustomTable :data="EFTBankNameEnum.data" :columns="EFTBankNameEnum.columns"></CustomTable> </CustomPopover>      。 <br/>`lpmsType`为`Przelewy24`时请参阅 [Przelewy24BankNameEnum](./enums#przelewy24banknameenum)。 |
+| iBan          | String | 64  | No  | 银行账户，部分地区转账时需要                                                                                                                                                                                                                                                                                                                                                                    |
+| prepaidNumber | String | /   | No  | 预付费卡号，部分支付方式需要                                                                                                                                                                                                                                                                                                                                                                    |
+
+</div>

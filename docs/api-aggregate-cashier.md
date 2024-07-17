@@ -5,7 +5,7 @@ outline: deep
 
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
-import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum as TxnTypeEnumTable} from "./util/constants";
+import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum as TxnTypeEnumTable, EFTBankNameEnum} from "./util/constants";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
 import CustomPopover from './components/element-ui/CustomPopover.vue'; 
@@ -139,9 +139,9 @@ https://www.merchant-store-website.com/?transactionId=1810968449028329472&mercha
 
  <div class="custom-table bordered-table">
 
-| 名称       | 类型     | 长度 | 签名  | 描述                                                                         |
-|----------|--------|----|-----|----------------------------------------------------------------------------|
-| lpmsInfo | String | /  | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象 [LpmsTypeEnum](./enums.html#lpmstypeenum) |
+| 名称                    | 类型     | 长度 | 签名  | 描述                           |
+|-----------------------|--------|----|-----|------------------------------|
+| [lpmsInfo](#lpmsinfo) | String | /  | Yes | 用来指定使用哪个本地支付方式。格式为`json`字符串。 |
 
 </div>
 
@@ -158,6 +158,10 @@ https://www.merchant-store-website.com/?transactionId=1810968449028329472&mercha
 ```
 则收银台上只展示 ` OXXO ` 这一种本地支付，其余的本地支付、信用卡支付都不会展示。 
 :::
+
+### LpmsInfo
+
+<!--@include: ./parts/lpms-info.md-->
 
 ## 以下为指定本地支付样例：
 

@@ -3,7 +3,6 @@ outline: deep
 ---
 <script setup>
 
-  
 import {reactive, ref, watch, onMounted, unref } from 'vue'; 
 import {requestGen, secret} from "./util/utils";
 import {ProductTypeEnum as ProductTypeEnumTable, SubProductTypeEnum as SubProductTypeEnumTable,TxnTypeEnum as TxnTypeEnumTable,SubProductTypeEnum,Subscription,NotifyTypeEnum,TxnTypeEnum,TxnStatusEnum} from "./util/constants";
@@ -14,22 +13,19 @@ import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
 
-
 </script>
 
 # 订阅
 订阅支付是指客户与商家之间建立的一种协议，允许商家根据预先设定的时间表自动收取客户的付款。
 
-
 ## 订阅首购
-
 
 <div class="custom-table bordered-table">
 
-| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
-|-------------|--------|----|-----|-----|--------------------------|
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                 |
+|----------------|--------|----|-----|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅   <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" >  <CustomTable :data="SubProductTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable> </CustomPopover> |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象     <CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/api-Cashier-sub.html#subscription" >   <CustomTable :data="Subscription.data" :columns="Subscription.columns"></CustomTable>  </CustomPopover>                     |
+| subscription   | String | /  | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象 [Subscription](#subscription)                                                                                                                                                                                                   |
 
 </div>
 
@@ -44,39 +40,23 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 代码             | 描述     | 
-|----------------|--------|
-| DIRECT    | 直接支付 | 
-| SUBSCRIBE | 订阅支付 |
-| INSTALLMENT     | 分期支付 |
-| TOKEN  | token支付 |
-| AUTO_DEBIT | 代扣 |
+| 代码          | 描述      | 
+|-------------|---------|
+| DIRECT      | 直接支付    | 
+| SUBSCRIBE   | 订阅支付    |
+| INSTALLMENT | 分期支付    |
+| TOKEN       | token支付 |
+| AUTO_DEBIT  | 代扣      |
 
 </div>
-
 
 #### Subscription
 
-<div class="custom-table bordered-table">
-
-| 名称             | 类型     | 长度 | 必填  | 描述                                         |
-|----------------|--------|----|-----|--------------------------------------------|
-| requestType    | String | 1  | YES | 订阅类型：`0 - 首购`, 收银台仅支持首次购买。                   |
-| merchantCustId | String | 50 | YES | 顾客ID           |
-| expireDate     | String | 10 | YES | 过期日期， 格式为 `yyyy-MM-dd ` |
-| frequencyType  | String | 1  | YES | 订阅频率类型，仅支持按天订阅，所以写死为`D` |
-| frequencyPoint | String | 2  | YES | 订阅频率点数，表示多少天进行一次扣款|
-
-</div>
+<!--@include: ./parts/subscription.md-->
 
 ## 订阅首购请求示例：
 
-
-
 https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
-
-
-
 
 ::: code-group
 
@@ -170,28 +150,25 @@ https://www.merchant-store-website.com/?transactionId=1810970934312833024&mercha
 
 #### 响应参数
 
-
 <div class="custom-table bordered-table">
 
-| 名称	 | 类型     | 签名 | 描述                                                                                                                                                                                              |
-|-------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| notifyType  | String | Yes | 通知类型。请参阅  <CustomPopover title="NotifyTypeEnum" width="auto" reference="NotifyTypeEnum" link="/apis/enums.html#notifytypeenum" > <CustomTable :data="NotifyTypeEnum.data" :columns="NotifyTypeEnum.columns"></CustomTable> </CustomPopover>                                                |                                           |
-| transactionId         | String | Yes | Onerway创建的交易订单号，对应商户订单号                                                                                                                                                                         |
-| txnType       | String | Yes | 交易类型，  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" > <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>                                                            |
-| merchantNo   | String |  Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                     |
-| merchantTxnId | String |  Yes | 顾客每次付款的订单号。                                                                                                                                                                                     |
-| responseTime           | String | Yes | 接口响应时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                               |
-| txnTime        | String | Yes | 交易完成时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                               |
-| txnTimeZone               | String | Yes | 交易完成时区，<br/>例如`+08:00`                                                                                                                                                                          |
-| orderAmount           | String | Yes | 订单金额，以“元”为单位，如有小数，保留两位小数。                                                                                                                                                                       |
-| orderCurrency         | String | Yes | 交易订单的货币。 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                                                                 |
-| status          | String | Yes | 交易处理结果。 请参阅 <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" > <CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable> </CustomPopover>                                                 |
-| contractId               | String | Yes | 订阅合同ID：唯一值，用来区分是哪笔订阅。通常会与tokenId成对保存。订阅首购成功后返回，需要复购中使用 |
-| tokenId           | String | Yes | tokenId：用来完成订阅复购的重要参数。订阅首购成功后返回，需要复购中使用                  |
-| reason              | String | Yes | 交易失败的原因                      |
-| sign    | String | Yes |签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)              |
-| paymentMethod   | String | Yes |    具体支付方式，包括卡和本地支付类型           |
-
-
+| 名称	           | 类型     | 签名  | 描述                                                                                                                                                                                                                                          |
+|---------------|--------|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| notifyType    | String | Yes | 通知类型。请参阅  <CustomPopover title="NotifyTypeEnum" width="auto" reference="NotifyTypeEnum" link="/apis/enums.html#notifytypeenum" > <CustomTable :data="NotifyTypeEnum.data" :columns="NotifyTypeEnum.columns"></CustomTable> </CustomPopover> |                                           |
+| transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号                                                                                                                                                                                                                     |
+| txnType       | String | Yes | 交易类型，  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" > <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>                   |
+| merchantNo    | String | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                                                                 |
+| merchantTxnId | String | Yes | 顾客每次付款的订单号。                                                                                                                                                                                                                                 |
+| responseTime  | String | Yes | 接口响应时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                                                                           |
+| txnTime       | String | Yes | 交易完成时间，格式为`yyyy\-MM\-dd HH:mm:ss`                                                                                                                                                                                                           |
+| txnTimeZone   | String | Yes | 交易完成时区，<br/>例如`+08:00`                                                                                                                                                                                                                      |
+| orderAmount   | String | Yes | 订单金额，以“元”为单位，如有小数，保留两位小数。                                                                                                                                                                                                                   |
+| orderCurrency | String | Yes | 交易订单的货币。 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                                                                                                             |
+| status        | String | Yes | 交易处理结果。 请参阅 <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" > <CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable> </CustomPopover>    |
+| contractId    | String | Yes | 订阅合同ID：唯一值，用来区分是哪笔订阅。通常会与tokenId成对保存。订阅首购成功后返回，需要复购中使用                                                                                                                                                                                      |
+| tokenId       | String | Yes | tokenId：用来完成订阅复购的重要参数。订阅首购成功后返回，需要复购中使用                                                                                                                                                                                                     |
+| reason        | String | Yes | 交易失败的原因                                                                                                                                                                                                                                     |
+| sign          | String | Yes | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                        |
+| paymentMethod | String | Yes | 具体支付方式，包括卡和本地支付类型                                                                                                                                                                                                                           |
 
 </div>
