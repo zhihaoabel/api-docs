@@ -11,6 +11,10 @@ import ElementPlus, {ElCollapseTransition} from 'element-plus'
 import {TopRight} from "@element-plus/icons-vue";
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import CustomTable from "../../components/element-ui/CustomTable.vue";
+import CustomPopover from "../../components/element-ui/CustomPopover.vue";
+import CMExample from "../../components/CMExample.vue";
+import CMNote from "../../components/CMNote.vue";
 
 export default {
     extends: DefaultTheme,
@@ -24,6 +28,10 @@ export default {
         // ...
         app.use(ElementPlus)
         app.component('TopRight', TopRight);
+        app.component('CustomTable', CustomTable)
+        app.component('CustomPopover', CustomPopover)
+        app.component('CMExample', CMExample)
+        app.component('CMNote', CMNote)
     },
     setup() {
         const route = useRoute();

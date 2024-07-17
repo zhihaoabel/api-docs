@@ -9,6 +9,7 @@ export default defineConfig({
     description: "Onerway面向商户开发者的接口文档",
     base: '/apis',
     cleanUrls: true,
+    ignoreDeadLinks: true,
 
     head: [
         ['link', {rel: 'icon', href: '/apis/favicon.ico'}],
