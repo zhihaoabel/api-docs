@@ -2033,6 +2033,72 @@ export const TxnCardInfoCashier = {
         },
     ],
 };
+
+export const TxnCardInfoDirect = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+            width: 130,
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'length',
+            label: '长度',
+        },
+        {
+            prop: 'required',
+            label: '必填',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+            width: 250
+        },
+    ],
+    data: [
+        {
+            name: 'holderName',
+            type: 'String',
+            length: '48',
+            required: 'Yes',
+            desc: `持卡人姓名`,
+        },
+        {
+            name: 'cardNumber',
+            type: 'String',
+            length: '128',
+            required: 'Yes',
+            desc: `持卡人卡号`,
+        },
+        {
+            name: 'month',
+            type: 'String',
+            length: '64',
+            required: 'Yes',
+            desc: `卡号月份,<br/>例如：03`,
+        },
+        {
+            name: 'year',
+            type: 'String',
+            length: '64',
+            required: 'Yes',
+            desc: `卡号年份，<br/>例如：2024`,
+        },
+        {
+            name: 'cvv',
+            type: 'String',
+            length: '64',
+            required: 'Yes',
+            desc: `卡号cvv`,
+        },
+    ],
+};
+
+
 export const Przelewy24BankNameEnum = {
     columns: [
         {
@@ -2233,6 +2299,30 @@ export  const EFTBankNameEnum = {
         },
         {
             bankName: 'nequi',
+        },
+    ],
+};
+
+
+export  const TokenProviderEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'GooglePay',
+            desc: '由GooglePay提供token，一般用于Google Pay场景',
+        },
+        {
+            code: 'ApplePay',
+            desc: '由ApplePay提供token，一般用于Apple Pay场景',
         },
     ],
 };
