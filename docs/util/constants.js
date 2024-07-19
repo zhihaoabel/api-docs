@@ -2412,3 +2412,65 @@ export  const TokenProviderEnum = {
         },
     ],
 };
+
+export  const ActionTypeEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'RedirectURL',
+            desc: '需要使用重定向url。解析时参照字段redirectUrl。',
+        },
+        {
+            code: 'QrCode',
+            desc: '需要使用码信息。解析时参照字段codeForm。',
+        },
+        {
+            code: 'ShowContext',
+            desc: '需要使用文本内容。解析时参照字段presentContext。',
+        },
+    ],
+};
+
+export  const CodeFormEnum = {
+    columns: [
+        {
+            prop: 'name',
+            label: '名称',
+        },
+        {
+            prop: 'type',
+            label: '类型',
+        },
+        {
+            prop: 'sign',
+            label: '签名',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            name: 'expireTime',
+            type:'String',
+            sign:'No',
+            desc: '码的到期时间。 该值遵循ISO 8601标准格式。例如，“2019-11-27T12:01:01+08:30”。',
+        },
+        {
+            name: 'codeDetails',
+            type:'List',
+            sign:'No',
+            desc: '码的详情。请参阅对象 CodeDetail。',
+        },
+    ],
+};
