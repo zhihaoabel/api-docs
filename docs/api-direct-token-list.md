@@ -16,40 +16,18 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 # 获取绑定Token列表
 
-
-
-请求地址、请求方式、请求头 可以参考：
-
-<br>
-
-|   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/v1/txn/queryTokenList  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
-
-<br>
-
-<div class="alertbox3">
-
-::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
-:::
-
-</div>
-
-
 ## 交易订单查询
 
 #### 请求参数
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                         |
-|----------------|--------|----|-----|-----|------------------------------------------------------------------------------------------------------------|
-| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时， `OnerWa `y会为商户创建商户号                                                                            |
-| appId          | String | 20 | No  | Yes | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用 `id `。不传时，默认查询商户号下所有绑定的 `token `信息。传入时，查询指定 `appId `下的绑定的 `toke `n信息。 |
-| merchantCustId | String | 50 | Yes | Yes | 客户在商户的唯一标识                                                                                                 |
-| sign           | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                         |                                   |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                        |
+|----------------|--------|----|-----|-----|-----------------------------------------------------------------------------------------------------------|
+| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时， `OnerWay`会为商户创建商户号                                                                            |
+| appId          | String | 20 | No  | Yes | 商户应用程序 ID。 商户注册网站时，OnerWay会为商户创建一个应用 `id `。不传时，默认查询商户号下所有绑定的 `token `信息。传入时，查询指定 `appId `下的绑定的 `token `信息。 |
+| merchantCustId | String | 50 | Yes | Yes | 客户在商户的唯一标识                                                                                                |
+| sign           | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                        |                                   |
 
 </div>
 
@@ -62,7 +40,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |----------|--------|----|---------------------------|
 | respCode | String | No | 来自 `Onerway `的响应码           |
 | respMsg  | String | No | 来自` Onerway` 的响应信息          |
-| data     | Map    | No | 响应数据。 请参阅对象 BindTokenInfo    <CustomPopover title="BindTokenInfo" width="auto" reference="BindTokenInfo" link="/apis/api-direct-tokenList.html#bindtokeninfo" ></CustomPopover> |
+| data     | Map    | No | 响应数据。 请参阅对象  [BindTokenInfo](./api-direct-token-list#bindtokeninfo)|
 
 </div>
 
@@ -73,7 +51,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | 名称         | 类型     | 必填  | 描述                              |
 |------------|--------|-----|---------------------------------|
 | merchantNo | String | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号     |
-| tokenInfos | List   | Yes | token明细列表。请参阅对象 TokenDetailInfo    <CustomPopover title="TokenDetailInfo" width="auto" reference="TokenDetailInfo" link="/apis/api-direct-tokenList.html#tokendetailinfo" ></CustomPopover> |
+| tokenInfos | List   | Yes | token明细列表。请参阅对象[TokenDetailInfo](./api-direct-token-list#tokendetailinfo)|
 
 </div>
 
@@ -105,10 +83,11 @@ https://sandbox-acq.onerway.com/v1/txn/queryTokenList<Badge type="tip">POST</Bad
 
 ```json [请求参数]
 {
-  "merchantNo": "800102",
-  "merchantCustId": "abc8264",
-  "appId": "1473924727352147968",
-  "sign": "..."
+  "appId": "1739545982264549376",
+  "cardInfo": "{\"cardNumber\":\"4000027891380961\",\"cvv\":\"789\",\"month\":\"12\",\"year\":\"2030\",\"holderName\":\"CL BRW2\"}",
+  "merchantCustId": "1721286614000",
+  "merchantNo": "800209",
+  "sign": "c80cfab1c4237376e7c5c3155744954bc4495be341c793ef958a7c0adebebd4c"
 }
 
 ```
@@ -119,21 +98,18 @@ https://sandbox-acq.onerway.com/v1/txn/queryTokenList<Badge type="tip">POST</Bad
   "respCode": "20000",
   "respMsg": "Success",
   "data": {
-    "merchantNo": "800102",
-    "tokenInfos": [
-      {
-        "id": "1770320739990843396",
-        "tokenId": "e8301b7e44b12f4dca9f4eeb8a8874d16e4125ba8283c30c5cf94ddfefaad3b5",
-        "appId": "1473924727352147968",
-        "cardNumber": "445653******1096",
-        "paymentMethod": "VISA",
-        "year": "2026",
-        "month": "03"
-      }
-    ]
+    "merchantNo": "800209",
+    "tokenInfos": {
+      "id": "1739545982264556788",
+      "tokenId": "1813811878687023104",
+      "appId": "1739545982264549376",
+      "cardNumber": "400002****0961",
+      "paymentMethod": "VISA",
+      "year": "2030",
+      "month": "12"
+    }
   }
 }
-
 
 ```
 
