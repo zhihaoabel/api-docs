@@ -58,7 +58,7 @@ export const SubProductTypeEnum = {
         },
         {
             code: 'TOKEN',
-            desc: 'token支付',
+            desc: `<spam class="p-reference bg-reference text-reference rounded-reference">token</spam> 支付`,
         },
         {
             code: 'AUTO_DEBIT',
@@ -179,19 +179,19 @@ export const Risk3dsStrategyEnum = {
     data: [
         {
             code: 'INNER',
-            desc: '内部 3ds（强制使用 Onerway 提供的 3ds）',
+            desc: '内部 <spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>（强制使用 <spam class="p-reference bg-reference text-reference rounded-reference">Onerway</spam> 提供的 <spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>）',
         },
         {
             code: 'EXTERNAL',
-            desc: '外置3ds（强制使用商家自己的3ds）',
+            desc: '外置<spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>（强制使用商家自己的<spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>）',
         },
         {
             code: 'NONE',
-            desc: '强制不使用 3ds',
+            desc: '强制不使用 <spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>',
         },
         {
             code: 'DEFAULT',
-            desc: '默认（取决于Onerway判断是否需要走3ds）',
+            desc: '默认（取决于<spam class="p-reference bg-reference text-reference rounded-reference">Onerway</spam>判断是否需要走<spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>）',
         },
     ],
 };
@@ -1982,7 +1982,7 @@ export const TxnStatusEnum = {
         },
         {
             code: 'R',
-            desc: '需要3ds验证',
+            desc: '需要<spam class="p-reference bg-reference text-reference rounded-reference">3ds</spam>验证',
         },
         {
             code: 'N',
@@ -2233,6 +2233,92 @@ export  const EFTBankNameEnum = {
         },
         {
             bankName: 'nequi',
+        },
+    ],
+};
+export const LanguageEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'zh-cn',
+            desc: '中文简体',
+        },
+        {
+            code: 'en',
+            desc: '英语',
+        },
+        {
+            code: 'de',
+            desc: '德语',
+        },
+        {
+            code: 'es',
+            desc: '西班牙语',
+        },
+        {
+            code: 'fr',
+            desc: '法语',
+        },
+        {
+            code: 'it',
+            desc: '意大利语',
+        },
+        {
+            code: 'nl',
+            desc: '荷兰语',
+        },
+        {
+            code: 'ko',
+            desc: '韩语',
+        },
+        {
+            code: 'zh-tw',
+            desc: '繁体',
+        },
+        {
+            code: 'ja',
+            desc: '日语',
+        },
+        {
+            code: 'th',
+            desc: '泰语',
+        },
+        {
+            code: 'ar',
+            desc: '阿拉伯语',
+        },
+        {
+            code: 'ru',
+            desc: '俄语',
+        },
+        {
+            code: 'sv',
+            desc: '瑞典语',
+        },
+        {
+            code: 'fi',
+            desc: '芬兰语',
+        },
+        {
+            code: 'pt',
+            desc: '葡萄牙语',
+        },
+        {
+            code: 'pl',
+            desc: '波兰语',
+        },
+        {
+            code: 'no',
+            desc: '挪威语',
         },
     ],
 };
