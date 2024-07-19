@@ -11,7 +11,7 @@ import CustomPopover from './components/element-ui/CustomPopover.vue';
 import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
-import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum as TxnTypeEnumTable, PaymentModeEnum, OsTypeEnum, Risk3dsStrategyEnum, Subscription, MpiInfo, TxnOrderMsg, TxnCardInfoDirect, TokenProviderEnum, StoreProductTypeEnum} from "./util/constants";
+import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum as TxnTypeEnumTable, PaymentModeEnum, OsTypeEnum, Risk3dsStrategyEnum, Subscription, MpiInfo, TxnOrderMsg, TxnCardInfoDirect, TokenProviderEnum, StoreProductTypeEnum, TxnStatusEnum, ActionTypeEnum, CodeFormEnum} from "./util/constants";
 
 
 </script>
@@ -40,7 +40,7 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 
 <div class="alertbox2">
 
-::: tip  对于商家来说，站内支付不仅可以提升整体用户体验。还可以通过站内支付收集用户支付行为数据，用于分析用户习惯、推荐商品，从而更好的服务消费者。两方支付商户必须提供PCI  DSS（支付卡行业数据安全标准）
+::: tip  两方支付商户必须提供PCI  DSS（支付卡行业数据安全标准）
 :::
 
 </div>
@@ -181,24 +181,25 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 必填  | 描述                                          |
-|---------------|--------|-----|---------------------------------------------|
-| transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号                     |
-| responseTime  | String | Yes | 接口响应时间，格式为`yyyy-MM-dd HH:mm:ss`               |
-| txnTime       | String | Yes | 交易完成时间，格式为`yyyy-MM-dd HH:mm:ss`               |
-| txnTimeZone   | String | Yes | 交易完成时区，例如：+08:00                            |
-| orderAmount   | String | Yes | 交易订单金额                                      |
-| orderCurrency | String | Yes | 交易订单币种。 请参阅  [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 货币代码       |
-| txnAmount     | String | Yes | 订单金额转换成结算币种后的金额                             |
-| txnCurrency   | String | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 货币代码                     |
-| status        | String | Yes | 交易处理结果。 请参阅     <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                  |
-| redirectUrl   | String | Yes | 当交易状态为`R`时，商户需要重定向到该URL完成部分交易，包括`3ds`验证、本地支付收银等 |
-| periodValue   | String | No  | 分期付款期数                                      |
-| contractId    | String | Yes | 订阅合同id，首购时返回                                |
-| tokenId       | String | Yes | 订阅令牌id ，首购时返回                               |
-| eci           | String | Yes | 责任转移                                        |
-| codeForm      | Map    | No  | 码的信息。请参阅对象 CodeForm                         |
-| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                          |
+| 名称            | 类型     | 必填  | 描述                                                                                                                                                                                                                                                      |
+|---------------|--------|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| transactionId | String | Yes | Onerway创建的交易订单号，对应商户订单号                                                                                                                                                                                                                                 |
+| responseTime  | String | Yes | 接口响应时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                                                                                                                                                                         |
+| txnTime       | String | Yes | 交易完成时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                                                                                                                                                                         |
+| txnTimeZone   | String | Yes | 交易完成时区，例如：+08:00                                                                                                                                                                                                                                        |
+| orderAmount   | String | Yes | 交易订单金额                                                                                                                                                                                                                                                  |
+| orderCurrency | String | Yes | 交易订单币种。 请参阅  [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 货币代码                                                                                                                                                   |
+| txnAmount     | String | Yes | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                                         |
+| txnCurrency   | String | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 货币代码                                                                                                                                                      |
+| status        | String | Yes | 交易处理结果。 请参阅    <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum"><CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable></CustomPopover>                |
+| redirectUrl   | String | Yes | 当交易状态为`R`时，商户需要重定向到该URL完成部分交易，包括`3ds`验证、本地支付收银等                                                                                                                                                                                                         |
+| periodValue   | String | No  | 分期付款期数                                                                                                                                                                                                                                                  |
+| contractId    | String | Yes | 订阅合同id，首购时返回                                                                                                                                                                                                                                            |
+| tokenId       | String | Yes | 订阅令牌id ，首购时返回                                                                                                                                                                                                                                           |
+| eci           | String | Yes | 责任转移                                                                                                                                                                                                                                                    |
+| actionType    | String | Yes | 执行类型，在status为R时需要关注， 请参阅 <CustomPopover title="ActionTypeEnum" width="auto" reference="ActionTypeEnum" link="/apis/enums.html#actiontypeenum"><CustomTable :data="ActionTypeEnum.data" :columns="ActionTypeEnum.columns"></CustomTable></CustomPopover> |
+| codeForm      | Map    | No  | 码的信息。请参阅<CustomPopover title="CodeFormEnum" width="auto" reference="CodeFormEnum" link="/apis/enums.html#codeformenum"><CustomTable :data="CodeFormEnum.data" :columns="CodeFormEnum.columns"></CustomTable></CustomPopover>                        |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                 |
 
 
 </div>
@@ -213,46 +214,92 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction<Badge type="tip">POST</Badg
 
 ```json [请求参数]
 {
-  "merchantNo": "800037",
-  "merchantTxnId": "1640229747000",
-  "merchantTxnTime": "2021-12-22 15:30:30",
-  "merchantTxnTimeZone": "+08:00",
-  "productType": "CARD",    // [!code error]
+  "merchantNo": "800079",
+  "merchantTxnId": 782600332,
+  "merchantTxnTime": null,
+  "merchantTxnTimeZone": null,
+  "productType": "CARD",
   "subProductType": "DIRECT",
   "txnType": "SALE",
-  "orderAmount": "20",
+  "orderAmount": "200",
   "orderCurrency": "USD",
-  "txnOrderMsg": "{\"returnUrl\":\"https://www.ronhan.com/\",\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":1458672763818790912,\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",
-  "cardInfo": "{\"cardNumber\":\"4000027891380961\",\"cvv\":\"789\",\"month\":\"12\",\"year\":\"2022\",\"holderName\":\"test sandbox\"}",
-  "shippingInformation": "{\"firstName\":\"ShippingFirstName\",\"lastName\":\"ShippingLastName\",\"phone\":\"188888888888\",\"email\":\"shipping@test.com\",\"postalCode\":\"888888\",\"address\":\"ShippingAddress\",\"country\":\"CN\",\"province\":\"SH\",\"city\":\"SH\",\"street\":\"lujiazui\",\"number\":\"1\",\"identityNumber\":\"110000\"}",
-  "billingInformation": "{\"firstName\":\"billingFirstName\",\"lastName\":\"billingLastName\",\"phone\":\"18600000000\",\"email\":\"billing@test.com\",\"postalCode\":\"430000\",\"address\":\"BillingAddress\",\"country\":\"CN\",\"province\":\"HK\",\"city\":\"HK\",\"street\":\"jianshazui\",\"number\":\"2\",\"identityNumber\":\"220000\"}",
-  "sign": "..."  //这里的sign字符串需要通过签名获得    // [!code error]
+  "txnOrderMsg": "{\"returnUrl\":\"https:\/\/www.merchant-store-website.com\/\",\"notifyUrl\":\"https:\/\/www.merchant-store-notify.com\/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":1673591020057956352,\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/avif,image\/webp,image\/apng,*\/*;q=0.8,application\/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/91.0.4472.124 Safari\/537.36\",\"contentLength\":\"340\",\"language\":null}",
+  "cardInfo": "{\"cardNumber\":\"4000020951595032\",\"cvv\":\"456\",\"month\":\"12\",\"year\":\"2025\",\"holderName\":\"CL BRW2\"}",
+  "shippingInformation": "{\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"phone\":\"13976448789\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"35802\",\"address\":\"test\",\"country\":\"US\",\"province\":\"AS\",\"city\":\"city\",\"street\":\"Amsterdam Ave\",\"number\":10,\"identityNumber\":\"717.628.937-97\"}",
+  "billingInformation": "{\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"phone\":\"13976448789\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"35802\",\"address\":\"test\",\"country\":\"US\",\"province\":\"AS\",\"city\":\"city\",\"street\":\"Amsterdam Ave\",\"number\":10,\"identityNumber\":\"717.628.937-97\"}",
+  "sign": "a2099950976f50656eb9be6a7a5de2b82265b0509cadcb359c325cd4f0beb623"
 }
-
 ```
 
 ```json [响应参数]
+// 若未触发3DS挑战，API直接响应
 {
   "respCode": "20000",
   "respMsg": "Success",
   "data": {
-    "transactionId": "1473856517125345280",
-    "responseTime": "2021-12-23 11:22:31",
-    "txnTime": "2021-12-23 11:22:31",
+    "transactionId": "1813408683510865920",
+    "responseTime": "2024-07-17 11:01:39",
+    "txnTime": "2024-07-17 11:01:36",
     "txnTimeZone": "+08:00",
     "orderAmount": "20.00",
     "orderCurrency": "USD",
-    "txnAmount": "20.00",
-    "txnCurrency": "USD",
+    "txnAmount": null,
+    "txnCurrency": null,
     "status": "S",
     "redirectUrl": null,
-    "periodValue": null,
     "contractId": null,
     "tokenId": null,
     "eci": null,
-    "sign": "..."
+    "periodValue": null,
+    "codeForm": null,
+    "presentContext": null,
+    "actionType": null,
+    "sign": "1a6ac563a663e89c90c7a5896804e6a0e7800b9825186808aa7388a9e3032124"
   }
 }
+
+```
+
+```json [3DS响应参数]
+//若触发3DS挑战，API 响应内容
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "transactionId": "1813405705672466432",
+    "responseTime": "2024-07-17 10:49:51",
+    "txnTime": "2024-07-17 10:49:46",
+    "txnTimeZone": "+08:00",
+    "orderAmount": "200.00",
+    "orderCurrency": "USD",
+    "txnAmount": null,
+    "txnCurrency": null,
+    "status": "R",
+    "redirectUrl": "https://sandbox-gw-dmz.onerway.com/3dsSecure/direct/RDT_3DS_P_8000791813405707530285058",
+    "contractId": null,
+    "tokenId": null,
+    "eci": "",
+    "periodValue": null,
+    "codeForm": null,
+    "presentContext": null,
+    "actionType": "RedirectURL",
+    "sign": "937103cd32eead778432bcc04d9c7b835a3fd8402334eb8601fd7d04c44a1ef9"
+  }
+}
+
+```
+
+```json [前端同步响应（returnurl）]
+//若触发3DS挑战，则通过前端returnurl 返回支付结果
+https: //www.merchant-store-website.com/?transactionId=1813405705672466432&merchantTxnId=782600332&merchantNo=800079&responseTime=2024-07-17%2010:55:54&txnTime=2024-07-17%2010:49:46&txnTimeZone=+08:00&orderAmount=200.00&orderCurrency=USD&txnAmount=200.00&txnCurrency=USD&status=S&reason=Payment%20successful&eci=5
+
+```
+
+```json [支付通知（notifyurl）]
+通知地址：https://www.merchant-store-notify.com
+
+通知内容：
+{"notifyType":"TXN","transactionId":"1813405705672466432","txnType":"SALE","merchantNo":"800079","merchantTxnId":"782600332","responseTime":"2024-07-17 10:55:53","txnTime":"2024-07-17 10:49:46","txnTimeZone":"+08:00","orderAmount":"200.00","orderCurrency":"USD","txnAmount":"","status":"S","eci":"5","reason":"{"respCode":"20000","respMsg":"Success"}","sign":"8df1056ddd0f792ced4dace4b0be1ab912fec82a74a3f7713682ecb26092f785","paymentMethod":"VISA"}
 
 ```
 
