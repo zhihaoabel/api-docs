@@ -3,7 +3,7 @@ outline: deep
 ---
 <script setup>
 
-import {reactive, ref, watch, onMounted, unref } from 'vue'; 
+import {reactive, ref, watch, onMounted, unref } from 'vue';  
 import {requestGen, secret} from "./util/utils";
 import CMExample from './components/CMExample.vue';
 import CMNote from './components/CMNote.vue';
@@ -11,6 +11,8 @@ import CustomPopover from './components/element-ui/CustomPopover.vue';
 import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
+import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum as TxnTypeEnumTable, PaymentModeEnum, OsTypeEnum, Risk3dsStrategyEnum, Subscription, MpiInfo, TxnOrderMsg, TxnCardInfoDirect, TokenProviderEnum, StoreProductTypeEnum} from "./util/constants";
+
 
 </script>
 
@@ -48,10 +50,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 <br>
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/v1/txn/doTransaction  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+|----------------|---------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/doTransaction  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                       |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                       |
 
 <br>
 
@@ -70,114 +72,40 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称                    | 类型     | 长度  | 必填  | 签名  | 描述                                                                                           |
-|-----------------------|--------|-----|-----|-----|----------------------------------------------------------------------------------------------|
-| merchantNo            | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                  |
-| merchantTxnId         | String | 64  | Yes | Yes | 商户创建的商户交易订单号，<CMNote data="不同的订单号视为不同的交易"></CMNote>                                             |
-| merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间。 格式为  `yyyy\-MM\-dd HH:mm:ss` <br>  <CMExample data="2024-2-28 15:05:34"></CMExample>                                                      |
-| merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。  <br>  <CMExample data="+08:00"></CMExample>                                                                          |
-| merchantTxnOriginalId | String | 128 | No  | Yes | 商户原始订单号。标记商户网站上唯一订单号，可重复，同一笔订单只能支付成功一次                                                       |
-| productType           | String | 16  | Yes | Yes | 产品类型，请参阅        <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" ></CustomPopover>                                                                |
-| subProductType        | String | 16  | Yes | Yes | 子产品类型，请参阅       <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover>                                                              |
-| txnType               | String | 16  | Yes | Yes | 交易类型，请参阅             <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                                                             |
-| paymentMode           | String | 16  | No  | Yes | 支付模式。 请参阅 PaymentModeEnum  <CustomPopover title="PaymentModeEnum" width="auto" reference="PaymentModeEnum" link="/apis/enums.html#paymentmodeenum" ></CustomPopover>。默认为`WEB`                                                             |
-| osType                | String | 16  | No  | Yes | 操作系统类型。 请参阅 OsTypeEnum <CustomPopover title="OsTypeEnum" width="auto" reference="OsTypeEnum" link="/apis/enums.html#ostypeenum" ></CustomPopover>。`paymentMode`不是`WEB`时必填                                                   |
-| orderAmount           | String | 19  | Yes | Yes | 交易订单金额                                                                                       |
-| orderCurrency         | String | 8   | Yes | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                          |
-| originTransactionId   | String | 20  | No  | Yes | 来源于Onerway的原始交易订单号，常用于退款等反向交易时通过此ID查找对应的交易订单号                                                |
-| risk3dsStrategy       | String | 16  | No  | Yes | `3ds`风险控制策略。 请参阅         <CustomPopover title="Risk3dsStrategyEnum" width="auto" reference="Risk3dsStrategyEnum" link="/apis/enums.html#risk3dsstrategyenum" ></CustomPopover>                                                      |
-| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json`字符串。 请参阅对象  <CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/api-direct-sub.html#subscription" ></CustomPopover>                                                 |
-| mpiInfo               | String | /   | No  | Yes | `mpi`信息，`3ds`验证结果集，`risk3dsStrategy`为`EXTERNAL`时需要。 格式为 `json` 字符串。 请参阅对象     <CustomPopover title="MpiInfo" width="auto" reference="MpiInfo" link="/apis/api-direct.html#mpiinfo" ></CustomPopover>                    |
-| txnOrderMsg           | String | /   | No  | Yes | 交易业务信息，除订阅复购外必填。 格式为 `json` 字符串。 请参阅对象 TxnOrderMsg         <CustomPopover title="TxnOrderMsg" width="auto" reference="TxnOrderMsg" link="/apis/api-direct.html#txnordermsg" ></CustomPopover>                                       |
-| cardInfo              | String | /   | No  | Yes | 交易卡信息，`productType`为`CARD`时，除`订阅复购`、`Token支付`、`Google Pay`、`Apple Pay`外必填。 格式为 `json` 字符串。 请参考对象     <CustomPopover title="cardInfo" width="auto" reference="cardInfo" link="/apis/api-direct.html#txncardinfo" ></CustomPopover>  |
-| billingInformation    | String | /   | No  | Yes | 交易账单信息。 格式为 `json` 字符串。 请参阅对象    <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-direct.html#transactionaddress" ></CustomPopover>                                      |
-| shippingInformation   | String | /   | No  | Yes | 交易邮寄信息。 格式为 `json` 字符串。 请参阅对象    <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-direct.html#transactionaddress" ></CustomPopover>                                         |
-| lpmsInfo              | String | /   | No  | Yes | 本地支付方式信息，`productType`为`LPMS`时，除协议代扣外必填，格式为`json`字符串。 请参阅对象     <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/api-direct-lpms.html#lpmsinfo" ></CustomPopover>                               |
-| tokenInfo             | String | /   | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象        <CustomPopover title="tokenInfo" width="auto" reference="tokenInfo" link="/apis/api-direct-token.html#tokeninfo" ></CustomPopover>                   |
-| sign                  | String | /   | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                           |
+| 名称                    | 类型     | 长度  | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                                                             |
+|-----------------------|--------|-----|-----|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| merchantNo            | String | 20  | Yes | Yes | 商户号。由Onerway分配，在Onerway后台获取。                                                                                                                                                                                                                                                                                   |
+| merchantTxnId         | String | 64  | Yes | Yes | 顾客每次付款的订单号，必须保证单号唯一。                                                                                                                                                                                                                                                                                           |
+| merchantTxnTime       | String | /   | No  | Yes | 商户交易订单发生的时间。 格式为  `yyyy\-MM\-dd HH:mm:ss` <br>  <CMExample data="2024-2-28 15:05:34"></CMExample>                                                                                                                                                                                                              |
+| merchantTxnTimeZone   | String | 64  | No  | Yes | 商户交易订单发生的时区。  <br>  <CMExample data="+08:00"></CMExample>                                                                                                                                                                                                                                                      |
+| merchantTxnOriginalId | String | 128 | No  | Yes | 商家生成的主订单号，单号可以重复，但重复的单号只有一笔可以成功。                                                                                                                                                                                                                                                                               |
+| productType           | String | 16  | Yes | Yes | 产品类型，请参阅 <br/><CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum"><CustomTable :data="ProductTypeEnum.data" :columns="ProductTypeEnum.columns"></CustomTable></CustomPopover>                                                              |
+| subProductType        | String | 16  | Yes | Yes | 子产品类型，请参阅 <br/><CustomPopover title="SubProductType" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum"><CustomTable :data="SubProductTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable></CustomPopover>                                                  |
+| txnType               | String | 16  | Yes | Yes | 交易类型， <br/> <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" > <CustomTable :data="TxnTypeEnumTable.data" :columns="TxnTypeEnumTable.columns"></CustomTable> </CustomPopover>                                                                       |
+| paymentMode           | String | 16  | No  | Yes | 支付模式。 请参阅  <br/> <CustomPopover title="PaymentModeEnum" width="auto" reference="PaymentModeEnum" link="/apis/enums.html#paymentmodeenum" > <CustomTable :data="PaymentModeEnum.data" :columns="PaymentModeEnum.columns"></CustomTable> </CustomPopover>。默认为`WEB`                                               |
+| osType                | String | 16  | No  | Yes | 操作系统类型。 请参阅 <br/> <CustomPopover title="OsTypeEnum" width="auto" reference="OsTypeEnum" link="/apis/enums.html#ostypeenum" > <CustomTable :data="OsTypeEnum.data" :columns="OsTypeEnum.columns"></CustomTable> </CustomPopover>。`paymentMode`不是`WEB`时必填                                                        |
+| orderAmount           | String | 19  | Yes | Yes | 订单金额，以“元”为单位，如有小数，保留两位小数。                                                                                                                                                                                                                                                                                      |
+| orderCurrency         | String | 8   | Yes | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                                                                                                                                                                            |
+| originTransactionId   | String | 20  | No  | Yes | 来源于Onerway的原始交易订单号，常用于退款等反向交易时通过此ID查找对应的交易订单号                                                                                                                                                                                                                                                                  |
+| risk3dsStrategy       | String | 16  | No  | Yes | `3ds`风险控制策略。 请参阅 <br/> <CustomPopover title="Risk3dsStrategyEnum" width="auto" reference="Risk3dsStrategyEnum" link="/apis/enums.html#risk3dsstrategyenum" > <CustomTable :data="Risk3dsStrategyEnum.data" :columns="Risk3dsStrategyEnum.columns"></CustomTable> </CustomPopover>                              |
+| subscription          | String | /   | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json`字符串。 请参阅对象 <br/> <CustomPopover title="Subscription" width="auto" reference="Subscription" link="/apis/api-direct#subscription" > <CustomTable :data="Subscription.data" :columns="Subscription.columns"></CustomTable> </CustomPopover>                                                |
+| mpiInfo               | String | /   | No  | Yes | mpi信息，3ds验证结果集，`risk3dsStrategy`为`EXTERNAL`时需要。 格式为 `json` 字符串。 请参阅对象   <CustomPopover title="MpiInfo" width="auto" reference="MpiInfo" link="/apis/api-direct#mpiinfo" > <CustomTable :data="MpiInfo.data" :columns="MpiInfo.columns"></CustomTable> </CustomPopover>                                         |
+| txnOrderMsg           | String | /   | YES | Yes | 交易业务信息，除订阅复购外必填。 格式为 `json` 字符串。 请参阅对象     <CustomPopover title="TxnOrderMsg" width="auto" reference="TxnOrderMsg" link="/apis/api-direct#txnordermsg" >   <CustomTable :data="TxnOrderMsg.data" :columns="TxnOrderMsg.columns"></CustomTable>   </CustomPopover>                                              |
+| cardInfo              | String | /   | No  | Yes | 交易卡信息。 格式为 `json` 字符串。 请参阅对象           <CustomPopover title="CardInfo" width="auto" reference="CardInfo" link="/apis/apis/api-casher#txncardinfodirect" > <CustomTable :data="TxnCardInfoDirect.data" :columns="TxnCardInfoDirect.columns"></CustomTable>  </CustomPopover>                                    |
+| billingInformation    | String | /   | Yes | Yes | 账单信息格式为 json 字符串。 请参阅对象  <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-direct#transactionaddress" >  <CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable> </CustomPopover>                                |
+| shippingInformation   | String | /   | Yes | Yes | 账单信息格式为 json 字符串。 请参阅对象  <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-direct#transactionaddress" >  <CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable>   </CustomPopover>                              |
+| lpmsInfo              | String | /   | No  | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象  <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/api-cashier.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable>  </CustomPopover>                                                                    |
+| tokenInfo             | String | /   | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象 <CustomPopover title="TokenProviderEnum" width="auto" reference="TokenProviderEnum" link="/apis/enums.html#tokenproviderenum"><CustomTable :data="TokenProviderEnum.data" :columns="TokenProviderEnum.columns"></CustomTable></CustomPopover> |
+| sign                  | String | /   | Yes | No | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                                                                        |
                     
 </div>
 
 #### TxnOrderMsg
-
-
-
-
-<div class="custom-table bordered-table">
-
-| 名称             | 类型      | 长度   | 必填  | 描述                                                                                                                                                                                                                               |
-|----------------|---------|------|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| returnUrl      | String  | 256  | Yes | 商户的回跳地址                                                                                                                                                                                                                          |
-| products       | String  | 1024 | Yes | 产品信息列表|
-| transactionIp  | String  | 64   | Yes | 持卡人交易IP                                                                                                                                                                                                                          |
-| appId          | String  | 20   | Yes | 商户应用程序 `ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                                                                                                                                                                                           |
-| javaEnabled    | Boolean | /    | Yes | 持卡人浏览器是否开启java                                                                                                                                                                                                                   |
-| colorDepth     | String  | 64   | Yes | 持卡人屏幕色深                                                                                                                                                                                                                          |
-| screenHeight   | String  | 64   | Yes | 持卡人的屏幕分辨率                                                                                                                                                                                                                        |
-| screenWidth    | String  | 64   | Yes | 持卡人的屏幕分辨率                                                                                                                                                                                                                        |
-| timeZoneOffset | String  | 64   | Yes | 持卡人浏览器的时区                                                                                                                                                                                                                        |
-| accept         | String  | 2048 | Yes | 持卡人浏览器的 `Accept` 请求头                                                                                                                                                                                                               |
-| userAgent      | String  | 2048 | Yes | 持卡人的浏览器类型                                                                                                                                                                                                                        |
-| contentLength  | String  | 64   | Yes | 持卡人浏览器内容长度头部以外的内容长度                                                                                                                                                                                                              |
-| language       | String  | 64   | Yes | 持卡人浏览器的语言                                                                                                                                                                                                                        |
-| periodValue    | String  | /    | No  | 分期付款期数。对应咨询分期期数接口返回的期数值。当 `subProductType` 为 `INSTALLMENT` 时必填。                                                                                                                                                                      |
-| terminalId     | String  | 64   | No  | 商户分配的唯一标识，用于标识商店终端。当 `productType` 为 `PAYMENT_CODE` 时必填。                                                                                                                                                                             |
-| notifyUrl      | String  | 256  | No  | 通知地址。详见通知                                                                                                                                                                                                                        |                                                                                                                                                                       
-
-</div>
-
-
-<div class="alertbox3">
-
-::: tip products 必须为`JSON`字符串格式 其中`type`字段的枚举如下：<br>`discount`：折扣类型 <br> `shipping_fee`：运费类型 <br>  不传`type` 字段 视为商品本身 
-   <el-tabs v-model="activeName" >
-    <el-tab-pane label="一般情形" name="first" style="font-weight: 700;"> 示例：
-   
-```json 
-[{"name":"iphone11","price":"5300.00","num":"2","currency":"CNY"}]
-
-```
-要注意的是 price * num  = orderAmount (交易订单金额) 
-
-
-</el-tab-pane>
-
-  <el-tab-pane label="有折扣" name="有折扣" style="font-weight: 700;"> 示例：
-   
-```json 
-
- [{"name":"iphone11","price":"5300.00","num":"2","currency":"CNY"}, {"name":"macBook","price":"-1234.00","num":"1","currency":"USD","type":"discount"}]
-
-```
-要注意的是 price * num - price(折扣金额)  = orderAmount  (交易订单金额)  <text style="color:red;"><br>折扣金额需要传负数</text>
-
-
-</el-tab-pane>
-
- <el-tab-pane label="有运费" name="有运费" style="font-weight: 700;"> 示例：
-   
-```json 
-
- [{"name":"iphone11","price":"5300.00","num":"2","currency":"CNY"}, {"name":"yunfei","price":"34.00","num":"1","currency":"USD","type":"shipping_fee"}]
-
-```
-要注意的是 price * num + price(运费金额)  = orderAmount  (交易订单金额)  
-
-</el-tab-pane>
-
-  </el-tabs>
-
-:::
-
-</div>
+<!--@include: ./parts/txn-order-msg.md-->
 
 
 
 ####  TxnCardInfo 
-
-
-
-
 
 <div class="custom-table bordered-table">
 
@@ -218,30 +146,21 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 #### Subscription
 
-<div class="custom-table bordered-table">
-
-| 名称             | 类型     | 长度 | 必填  | 描述                                  |
-|----------------|--------|----|-----|-------------------------------------|
-| requestType    | String | 1  | Yes | 订阅请求类型。 枚举如下：  `0 - 首购 `, 收银台仅支持首次购买。   |
-| merchantCustId | String | 50 | No  | 商户客户 `id `， `requestType `为 `0 `时必填。            |
-| expireDate     | String | 10 | No  | 过期日期， `requestType `为 `0 `时必填，格式为 `yyyy-MM-dd ` |
-| frequencyType  | String | 1  | No  | 订阅频率类型， `requestType `为 `0 `时必填。枚举如下： `D - 天  ` |
-| frequencyPoint | String | 2  | No  | 订阅频率点数， `requestType `为 `0 `时必填。            |
-
-
-</div>
+<!--@include: ./parts/subscription.md-->
 
 
  #### MpiInfo
 
+<!--@include: ./parts/mpi-info.md-->
+
+#### TokenInfo
+
  <div class="custom-table bordered-table">
 
-| 名称        | 类型     | 长度  | 必填  | 描述                                      |
-|-----------|--------|-----|-----|-----------------------------------------|
-| eci       | String | 2   | Yes | 责任转移                                    |
-| cavv      | String | 128 | Yes | 由发卡行创建                                  |
-| xid       | String | 128 | No  | `3D-Secure` v1版本`Mpi`交易`id`（与`dsTransID`任选其一填写） |
-| dsTransID | String | 128 | No  | `3D-Secure` v2版本Mpi交易`id`（与`xid`任选其一填写）       |
+| 名称       | 类型     | 长度  | 必填  | 描述                                                                                                                                                                                                                                                                         |
+|----------|--------|-----|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tokenId  | String | / | No  | 绑定支付方式后获得的令牌id。Google Pay和Apple Pay场景下，需将提供的token内容转成json格式字符串                                                                                                                                                                                                             |
+| provider | String | / | No  | token供应商，值为空时默认为Onerway，一般用于token支付场景；其他场景，请参阅<CustomPopover title="TokenProviderEnum" width="auto" reference="TokenProviderEnum" link="/apisenums.html#tokenproviderenum" > <CustomTable :data="TokenProviderEnum.data" :columns="TokenProviderEnum.columns"></CustomTable> </CustomPopover> |
 
 </div>
 

@@ -130,11 +130,11 @@ export default defineConfig({
                     {
                         text: '两方支付',
                         items: [
-                            {text: '分期', link: '/installment'},
                             {text: '两方支付', link: '/api-direct'},
                             {text: 'Token绑卡', link: '/api-direct-token'},
                             {text: '获取绑定Token列表', link: '/api-direct-token-list'},
                             {text: '订阅', link: '/api-direct-sub'},
+                            {text: '分期', link: '/installment'},
                             {text: '预授权请款/撤销', link: '/api-direct-auth'},
                             {text: '本地支付', link: '/api-direct-lpms'},
                         ],
