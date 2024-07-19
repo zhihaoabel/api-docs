@@ -19,12 +19,12 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </script>
 
-# 预授权请款/撤销
+# 预授权撤销
 
 注意事项：
 1. 此接口需要传入原预授权交易订单号，可以通过JS-SDK收银台的下单接口、收银台支付接口、两方支付接口来获得，其中交易类型需要选择`AUTH`/`PRE_AUTH`中的一个。
 2. 此接口目前仅支持全额请款或撤销。
-3. 此接口的交易类型仅支持`CAPTURE`/`VOID`中的一个。
+3. 此接口的交易类型仅支持`VOID`。
 
 ## 预授权
 
@@ -32,13 +32,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称                  | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                            |
-|---------------------|--------|----|-----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                                                                                                                                                                                                                                 |
-| txnType             | String | 16 | Yes | Yes | 交易类型，请参阅  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" >  <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>  。此接口仅支持`CAPTURE`和`VOID` |
-| merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权请款或撤销的交易订单号，不同的订单号视为不同的交易                                                                                                                                                                                                                             |
-| originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。                                                                                                                                                                                                                                      |
-| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                       |
+| 名称                  | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                             |
+|---------------------|--------|----|-----|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                                                                                                                                                                                                                  |
+| txnType             | String | 16 | Yes | Yes | 交易类型，请参阅  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" >  <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>  。此撤销接口仅支持`VOID` |
+| merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权撤销的交易订单号，不同的订单号视为不同的交易                                                                                                                                                                                                                 |
+| originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。                                                                                                                                                                                                                       |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                        |
 
 
 </div>
