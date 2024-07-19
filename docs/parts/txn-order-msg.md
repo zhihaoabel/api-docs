@@ -7,7 +7,7 @@
 | returnUrl      | String  | 256  | Yes | No | 同步返回地址，顾客付款完成后，`Onerway`的托管页面会通过这个地址重定向回商家的指定页面。                                 |
 | products       | String  | 1024 | Yes | No | 顾客购买的商品信息列表，请参考下方[Products](#products)对象                                         |
 | transactionIp  | String  | 64   | Yes | No | 持卡人交易`IP`                                                                        |
-| appId          | String  | 20   | Yes | No | 店铺`ID`，商家在`Onerway`入驻网站/应用程序时，会生成一个与该网站/应用程序的唯一ID。 该ID在Onerway后台获取。              |
+| appId          | String  | 20   | Yes | No | 店铺`ID`，商家在`Onerway`入驻网站/应用程序时，会生成一个与该网站/应用程序的唯一ID。 该ID在`Onerway`后台获取。            |
 | javaEnabled    | Boolean | /    | Yes | No | 持卡人浏览器是否开启`java`                                                                 |
 | colorDepth     | String  | 64   | Yes | No | 持卡人屏幕色深                                                                          |
 | screenHeight   | String  | 64   | Yes | No | 持卡人的屏幕分辨率                                                                        |

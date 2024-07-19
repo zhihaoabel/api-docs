@@ -5,7 +5,24 @@ module.exports = {
     "./docs/**/*.{js,ts,jsx,tsx,vue}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      // reference —— `` 自定义样式
+      colors: {
+        'reference': 'var(--vp-code-color)',
+      },
+      borderRadius: {
+        'reference': '4px',
+      },
+      padding: {
+        'reference': '3px 6px',
+      },
+      backgroundColor: {
+        'reference': 'var(--vp-code-bg)',
+      },
+      fontSize: {
+        'reference': 'var(--vp-code-font-size)',
+      }
+    },
   },
   plugins: [],
 }

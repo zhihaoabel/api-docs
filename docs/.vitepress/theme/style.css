@@ -161,3 +161,10 @@
     --vp-custom-block-details-bg: var(--custom-block-details-bg);
     --vp-custom-block-details-code-bg: var(--custom-block-details-code-bg);
 }
+
+/**
+ * Component: code-block highlight
+ */
+:root {
+    --vp-code-line-highlight-color: var(--vp-c-default-1);
+}

@@ -122,6 +122,18 @@ Note, Example
     border-bottom: 2px solid var(--vp-c-success-3);
 }
 
+/* a标签样式 */
+.vp-doc a {
+    text-decoration: none;
+}
+
+/* a标签悬浮样式 */
+.vp-doc a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    color: var(--vp-c-brand-3);
+}
+
 a.plain-link {
     font-weight: 500;
     color: var(--vp-c-brand-1);
