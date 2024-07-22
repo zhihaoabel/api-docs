@@ -52,7 +52,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |----------|--------|----|---------------------|
 | respCode | String | No | 来自` Onerway`的响应码     |
 | respMsg  | String | No | 来自 `Onerway` 的响应信息    |
-| data     | Map    | No | 响应数据。 请参阅对象    <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-direct-auth.html#txninfo" ></CustomPopover>  |
+| data     | Map    | No | 响应数据。 请参阅对象    [TxnInfo](./api-direct-auth-capture#txninfo)      |
                                                                              |
 </div>
 
