@@ -53,7 +53,7 @@ const config = {
 ### SDK Apple Pay代码示例
 
 ::: danger 注意
-下单接口中的 `subProductType` 请传 `DIRECT`
+[下单接口](./sdk-do-transaction#sdk下单请求及响应示例)中的 `subProductType` 请传 `DIRECT`
 :::
 
 ```js-vue

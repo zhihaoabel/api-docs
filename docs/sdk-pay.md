@@ -118,9 +118,9 @@ const config = {
 | customCssURL              | string  | No  | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                                                                                            |
 | variables                 | object  | No  | 自定义主题色。详见以下 [variables](#variables) 说明                                                                                       |
 | styles                    | object  | No  | 自定义样式。详见以下 [styles](#styles) 说明。<br><CMNote data="如果需要自定义所有样式，checkoutTheme,customCssURL,variables 都可以不传"></CMNote>          |
-| showPayButton             | boolean | No  | 默认为 `true`。如果设为 `false` 可自定义支付按钮和展示账单信息，请参阅 [补充说明](#补充说明)                                                                    |
+| showPayButton             | boolean | No  | 默认为 `true`。如果设为 `false` 可自定义支付按钮和展示账单信息，请参阅 [自定义支付按钮](#自定义支付按钮)                                                              |
 | buttonSeparation          | boolean | No  | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`：绑卡与支付一步完成                                                                              |
-| displayBillingInformation | boolean | No  | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息                                                                    |
+| displayBillingInformation | boolean | No  | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过[自定义支付按钮](#自定义支付按钮)传入账单信息                                                        |
 
 </div>
 
@@ -177,16 +177,16 @@ const config = {
 
 </div>
 
-##### 补充说明
+#### 自定义支付按钮
 
 ::: tip 注意
-当 `showPayButton` 为 `false` 的时候，在自定义支付按钮处，请调用`submit`方法进行支付
+自定义支付按钮需要将 `showPayButton` 设为 `false` ，并调用 `submit`方法
 
 ```js 
 pacypay.submit();
 ```
 
-如果绑卡时不需要显示账单信息，即 `displayBillingInformation` 为 `false`，则需要在`submit`方法传入账单信息。可在 [config](#config) 中配置 `displayBillingInformation`
+如果绑卡时不需要显示账单信息，请将 `displayBillingInformation` 设为 `false`，并在`submit`方法传入账单信息。
 
 ```js
 pacypay.submit({

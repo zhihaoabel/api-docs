@@ -96,7 +96,7 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 | shippingInformation   | String | /   | Yes | Yes | 账单信息格式为 json 字符串。 请参阅对象  <CustomPopover title="TransactionAddress" width="auto" reference="TransactionAddress" link="/apis/api-direct#transactionaddress" >  <CustomTable :data="TransactionAddress.data" :columns="TransactionAddress.columns"></CustomTable>   </CustomPopover>                              |
 | lpmsInfo              | String | /   | No  | Yes | 用来指定使用哪个本地支付方式。格式为json字符串。 请参阅对象  <CustomPopover title="LpmsInfo" width="auto" reference="LpmsInfo" link="/apis/api-cashier.html#lpmsinfo" ><CustomTable :data="LpmsInfo.data" :columns="LpmsInfo.columns"></CustomTable>  </CustomPopover>                                                                    |
 | tokenInfo             | String | /   | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象 <CustomPopover title="TokenProviderEnum" width="auto" reference="TokenProviderEnum" link="/apis/enums.html#tokenproviderenum"><CustomTable :data="TokenProviderEnum.data" :columns="TokenProviderEnum.columns"></CustomTable></CustomPopover> |
-| sign                  | String | /   | Yes | No | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                                                                        |
+| sign                  | String | /   | Yes | No | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                                                                                       |
                     
 </div>
 
@@ -199,7 +199,7 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 | eci           | String | Yes | 责任转移                                                                                                                                                                                                                                                    |
 | actionType    | String | Yes | 执行类型，在status为R时需要关注， 请参阅 <CustomPopover title="ActionTypeEnum" width="auto" reference="ActionTypeEnum" link="/apis/enums.html#actiontypeenum"><CustomTable :data="ActionTypeEnum.data" :columns="ActionTypeEnum.columns"></CustomTable></CustomPopover> |
 | codeForm      | Map    | No  | 码的信息。请参阅<CustomPopover title="CodeFormEnum" width="auto" reference="CodeFormEnum" link="/apis/enums.html#codeformenum"><CustomTable :data="CodeFormEnum.data" :columns="CodeFormEnum.columns"></CustomTable></CustomPopover>                        |
-| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                                 |
+| sign          | String | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                                |
 
 
 </div>

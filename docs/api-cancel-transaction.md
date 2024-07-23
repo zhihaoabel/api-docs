@@ -52,7 +52,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |---------------------|--------|----|-----|-----|--------------------------------------------|
 | originTransactionId | String | 20 | Yes | Yes | 来源于`Onerway`的原始交易订单号，常用于反向交易时通过此`ID`查找对应的交易订单号 |
 | merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                |
-| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                        |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                       |
 
 
 </div>

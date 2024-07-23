@@ -11,6 +11,16 @@ import "./util/constants";
 # 订阅支付
 
 ::: tip 订阅支付仅需将`config`中的`subProductType`更新为`SUBSCRIBE`，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
+```js
+const options = {
+    // ...
+    config: {
+        "subProductType": "SUBSCRIBE", // DIRECT - 直接支付，TOKEN - 绑卡并支付，SUBSCRIBE - 订阅支付 // [!code warning]
+        // ...
+    }
+    // ...
+}
+```
 :::
 
 ## SDK订阅支付代码示例

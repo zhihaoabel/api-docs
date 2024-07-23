@@ -62,7 +62,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | importTimeStart      | String | /  | No  | Yes | ` onerway` 接收的拒付交易的开始时间，格式为`yyyy-MM-dd HH:mm:ss`              |
 | importTimeEnd        | String | /  | No  | Yes | ` onerway` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
 | current              | String | /  | Yes | Yes | 查询的当前页码                                                 |
-| sign                 | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                     |
+| sign                 | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                    |
                             |
 
 </div>
