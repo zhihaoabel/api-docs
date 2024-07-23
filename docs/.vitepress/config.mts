@@ -65,7 +65,7 @@ export default defineConfig({
             {
                 text: '',
                 items: [
-                    {text: '概述', link: '/index'},
+                    {text: 'Overview', link: '/index'},
                     {text: '签名', link: '/sign'},
                 ],
             },

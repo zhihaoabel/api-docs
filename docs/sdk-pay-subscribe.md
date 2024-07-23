@@ -8,15 +8,15 @@ import "./util/constants";
 
 </script>
 
-# 绑卡支付
+# 订阅支付
 
-::: tip 绑卡支付仅需将`config`中的`subProductType`更新为`TOKEN`，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
+::: tip 订阅支付仅需将`config`中的`subProductType`更新为`SUBSCRIBE`，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
 :::
 
-## SDK绑卡支付代码示例
+## SDK订阅支付代码示例
 
 ::: danger 注意
-`subProductType` 必须与 [下单接口](sdk-bind#请求及响应示例) 的 `subProductType` 保持一致
+`subProductType` 必须与 [下单接口](sdk-subscription#请求及响应示例) 的 `subProductType` 保持一致
 :::
 
 ```js-vue
@@ -26,7 +26,7 @@ const pacypay = new Pacypay(transactionId, {
    environment: 'sandbox', // sandbox、production
    mode: 'CARD',
    config: {
-     subProductType: 'TOKEN', // DIRECT - 直接支付，TOKEN - 绑卡并支付，SUBSCRIBE - 订阅支付 // [!code warning]
+     subProductType: 'SUBSCRIBE', // DIRECT - 直接支付，TOKEN - 绑卡并支付，SUBSCRIBE - 订阅支付 // [!code warning]
      checkoutTheme: 'light', // light、dark
      customCssURL: '', // 自定义样式链接地址，配置该值后，checkoutTheme 则无效
      variables: {

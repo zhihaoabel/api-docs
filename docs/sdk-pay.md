@@ -12,7 +12,7 @@ import {SubProductTypeEnum, LanguageEnum, LocaleEnum} from "./util/constants";
 
 ## 引入 Onerway JavaScript 库
 
-下载链接: [onerway-v1.1.2](https://sandbox-v3-doc.onerway.com/javascripts/onerway-v1.1.2.zip) 
+下载链接: [onerway-1.1.2](https://sandbox-v3-doc.onerway.com/javascripts/onerway-v1.1.2.zip) 
 
 1.引入方式一
 
@@ -63,74 +63,32 @@ const options = {
 
 ```
 
-::: danger 示例中的字段未赋值，请根据下方字段说明填写，完整配置请参考对应场景的示例代码
+::: danger 示例中的字段未赋值，请根据下方字段说明填写，完整配置请参考对应场景的代码示例
 :::
 
 #### options字段说明
 
 <div class="custom-table bordered-table">
 
-| 属性                 | 类型       | 必填  | 说明                                                                                                                                                                                                                                                                                           |
-|--------------------|----------|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| container          | string   | No  | 容器id,默认`pacypay_checkout`                                                                                                                                                                                                                                                                    |
-| locale             | string   | No  | 语言类型<br>1. 收银台集成：详见 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"> </CustomTable></CustomPopover>。<br>2. ApplePay、GooglePay集成：详见以下 [locale](#locale) |
-| environment        | string   | No  | 环境类型，支持`sandbox`、`production`。默认为 `production`                                                                                                                                                                                                                                               |
-| mode               | string   | Yes | 支付方式，支持 `CARD`、`ApplePay`、`GooglePay`                                                                                                                                                                                                                                                        |
-| config             | object   | No  | 配置项，详见以下 [config](#config) 说明                                                                                                                                                                                                                                                                |
-| onPaymentCompleted | function | No  | 请求成功完成回调方法                                                                                                                                                                                                                                                                                   |
-| onError            | function | No  | 请求异常回调方法                                                                                                                                                                                                                                                                                     |
-
-</div>
-
-#### locale
-
-<div class="custom-table bordered-table">
-
-| 语言    | 描述     | 是否支持Apple Pay | 是否支持Google Pay |
-|-------|--------|---------------|----------------|
-| ar    | 阿拉伯语   | 是             | 是              |
-| ca    | 加泰罗尼亚语 | 是             | 是              |
-| cs    | 捷克语    | 是             | 是              |
-| da    | 丹麦语    | 是             | 是              |
-| de    | 德语     | 是             | 是              |
-| el    | 希腊语    | 是             | 是              |
-| en    | 英语     | 是             | 是              |
-| es    | 西班牙语   | 是             | 是              |
-| fi    | 芬兰语    | 是             | 是              |
-| fr    | 法语     | 是             | 是              |
-| hr    | 克罗地亚语  | 是             | 是              |
-| id    | 印度尼西亚语 | 是             | 是              |
-| it    | 意大利语   | 是             | 是              |
-| ja    | 日语     | 是             | 是              |
-| ko    | 韩语     | 是             | 是              |
-| ms    | 马来语    | 是             | 是              |
-| no    | 挪威语    | 是             | 是              |
-| nl    | 荷兰语    | 是             | 是              |
-| pl    | 波兰语    | 是             | 是              |
-| pt    | 葡萄牙语   | 是             | 是              |
-| ru    | 俄语     | 是             | 是              |
-| sk    | 斯洛伐克语  | 是             | 是              |
-| sv    | 瑞典语    | 是             | 是              |
-| th    | 泰语     | 是             | 是              |
-| tr    | 土耳其语   | 是             | 是              |
-| uk    | 乌克兰语   | 是             | 是              |
-| zh    | 简体中文   | 是             | 是              |
-| vi    | 越南语    | 是             | 否              |
-| he    | 希伯来语   | 是             | 否              |
-| hi    | 印地语    | 是             | 否              |
-| hu    | 匈牙利语   | 是             | 否              |
-| ro    | 罗马尼亚语  | 是             | 否              |
-| zh-TW | 繁体中文   | 是             | 否              |
-| bg    | 保加利亚语  | 否             | 是              |
-| et    | 爱沙尼亚语  | 否             | 是              |
-| sr    | 塞尔维亚语  | 否             | 是              |
-| sl    | 斯洛文尼亚语 | 否             | 是              |
+| 属性                 | 类型       | 必填  | 说明                                                                                                                                                                                                                                                                                                                                        |
+|--------------------|----------|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| container          | string   | No  | 容器id,默认`pacypay_checkout`                                                                                                                                                                                                                                                                                                                 |
+| locale             | string   | No  | 语言类型。<br>1. 收银台集成：详见 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"> </CustomTable></CustomPopover>。<br>2. Google Pay 和 Apple Pay 集成详见： [ApplePay](./sdk-pay-apple)、[GooglePay](./sdk-pay-google)。 |
+| environment        | string   | No  | 环境类型，支持`sandbox`、`production`。默认为 `production`                                                                                                                                                                                                                                                                                            |
+| mode               | string   | Yes | 支付方式，支持 `CARD`、`ApplePay`、`GooglePay`                                                                                                                                                                                                                                                                                                     |
+| config             | object   | No  | 配置项。<br>1.收银台集成：详见以下 [config](#config) 说明 <br>2. Google Pay 和 Apple Pay 集成详见： [ApplePay Config](./sdk-pay-apple)、[GooglePay Config](./sdk-pay-google)。                                                                                                                                                                                    |
+| onPaymentCompleted | function | No  | 请求成功完成回调方法                                                                                                                                                                                                                                                                                                                                |
+| onError            | function | No  | 请求异常回调方法                                                                                                                                                                                                                                                                                                                                  |
 
 </div>
 
 #### config
 
 创建config项
+
+::: warning 注意
+以下是SDK收银台配置代码示例，[Apple Pay](./sdk-pay-apple#apple-pay-config字段说明)、[Google Pay](./sdk-pay-google#google-pay-config字段说明) 配置及字段说明请参考对应场景的代码示例
+:::
 
 ```js
 const config = {
@@ -153,16 +111,16 @@ const config = {
 
 <div class="custom-table bordered-table">
 
-| 属性                        | 类型      | 必填  | 说明                                                                                                                  |
-|---------------------------|---------|-----|---------------------------------------------------------------------------------------------------------------------|
-| subProductType            | string  | Yes | 子产品类型。<br>`DIRECT` - 直接支付<br>`TOKEN` - 绑卡支付<br>`SUBSCRIBE` - 订阅支付                                                   |
-| checkoutTheme             | string  | No  | 主题类型。`light`、`dark`                                                                                                 |
-| customCssURL              | string  | No  | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                                                                                   |
-| variables                 | object  | No  | 自定义主题色。详见以下 [variables](#variables) 说明                                                                              |
-| styles                    | object  | No  | 自定义样式。详见以下 [styles](#styles) 说明。<br><CMNote data="如果需要自定义所有样式，checkoutTheme,customCssURL,variables 都可以不传"></CMNote> |
-| showPayButton             | boolean | No  | 默认为 `true`。如果设为 `false` 可自定义支付按钮和展示账单信息，请参阅 [补充说明](#补充说明)                                                           |
-| buttonSeparation          | boolean | No  | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`：绑卡与支付一步完成                                                                     |
-| displayBillingInformation | boolean | No  | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息                                                           |
+| 属性                        | 类型      | 必填  | 说明                                                                                                                           |
+|---------------------------|---------|-----|------------------------------------------------------------------------------------------------------------------------------|
+| subProductType            | string  | Yes | 子产品类型。<br>`DIRECT` - 直接支付<br>`TOKEN` - 绑卡支付<br>`SUBSCRIBE` - 订阅支付 <br> <CMNote data='需要与下单接口的 subProductType 保持一致'></CMNote> |
+| checkoutTheme             | string  | No  | 主题类型。`light`、`dark`                                                                                                          |
+| customCssURL              | string  | No  | 自定义样式链接地址。配置后，`checkoutTheme` 值无效                                                                                            |
+| variables                 | object  | No  | 自定义主题色。详见以下 [variables](#variables) 说明                                                                                       |
+| styles                    | object  | No  | 自定义样式。详见以下 [styles](#styles) 说明。<br><CMNote data="如果需要自定义所有样式，checkoutTheme,customCssURL,variables 都可以不传"></CMNote>          |
+| showPayButton             | boolean | No  | 默认为 `true`。如果设为 `false` 可自定义支付按钮和展示账单信息，请参阅 [补充说明](#补充说明)                                                                    |
+| buttonSeparation          | boolean | No  | 默认为 `true`。`true`：绑卡与支付按钮分开操作；`false`：绑卡与支付一步完成                                                                              |
+| displayBillingInformation | boolean | No  | 默认为 `true`。`true`：显示账单信息；`false` ：隐藏账单信息，需通过自定义支付按钮传入账单信息                                                                    |
 
 </div>
 
@@ -221,14 +179,14 @@ const config = {
 
 ##### 补充说明
 
-::: tip
+::: tip 注意
 当 `showPayButton` 为 `false` 的时候，在自定义支付按钮处，请调用`submit`方法进行支付
 
 ```js 
 pacypay.submit();
 ```
 
-如果绑卡时不需要显示账单信息，即 `displayBillingInformation` 为 `false`，则需要在`submit`方法传入账单信息。可在[config](#config)中配置`displayBillingInformation`
+如果绑卡时不需要显示账单信息，即 `displayBillingInformation` 为 `false`，则需要在`submit`方法传入账单信息。可在 [config](#config) 中配置 `displayBillingInformation`
 
 ```js
 pacypay.submit({
@@ -251,7 +209,65 @@ pacypay.submit({
 
 :::
 
+### SDK直接支付代码示例
 
+::: danger 注意
+`subProductType` 必须与 [下单接口](sdk-do-transaction#sdk下单请求及响应示例) 的 `subProductType` 保持一致
+:::
+
+```js-vue
+const transactionId = '下单接口返回的 transactionId';  // [!code error]
+const pacypay = new Pacypay(transactionId, {
+   locale: 'zh-cn', // en zh-cn ar de es fi fr it ja ko nl no pl pt ru sv th zh-tw
+   environment: 'sandbox', // sandbox、production
+   mode: 'CARD',
+   config: {
+     subProductType: 'DIRECT', // DIRECT-直接支付，TOKEN-token绑卡并支付，SUBSCRIBE - 订阅支付 // [!code warning]
+     checkoutTheme: 'light', // light、dark
+     customCssURL: '', // 自定义样式链接地址，配置该值后，checkoutTheme 则无效
+     variables: {
+       "colorBackground": "black", // 主题背景色
+       "colorPrimary": "red", // 主题色，如输入框高亮、光标颜色
+       "colorText": "white", // 字体颜色
+       "colorDanger": "#FF1493", // 错误提示颜色
+       "borderRadius": "2px", // 输入框角度
+       "fontSizeBase": "16px", // 基础字体大小，会按照该基准进行缩放
+       "fontFamily": "Arial, sans-serif", // 字体样式
+     },
+     // 如果想自定义所有样式则只用配置styles. checkoutTheme,customCssURL,variables都可以不传
+     // 详情请看styles属性说明
+     styles: {
+       ".pacypay-checkout__button--pay": { // 支付按钮样式
+       "background-color": "red",
+     },
+   }
+ },
+ onPaymentCompleted: function (res) {
+   //成功支付后回调方法
+   const txtInfo = res.data; // 返回交易结果详情
+   const respCode = res.respCode; // 响应码
+   const respMsg = res.respMsg; // 响应信息
+   if(respCode === '20000') { // respCode 为 20000 表示交易正常
+     switch (txtInfo.status) { // 交易状态判断
+       case 'S': // status 为 'S' 表示成功
+       // 支付最终状态以异步通知结果为准
+       break;
+       case 'R': // status 为 'R' 表示需要3ds验证
+       // 当交易状态为 R 时，商户需要重定向到该URL完成部分交易，包括3ds验证
+       window.location.href = txtInfo.redirectUrl;
+       break;
+     }
+   } else {
+   // 交易失败
+   }
+ },
+ onError: function (err) {
+   //支付异常回调方法
+   console.log(err);
+   }
+ });
+ 
+```
 
 <style lang="css">
 
