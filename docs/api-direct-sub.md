@@ -32,16 +32,18 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 
 
-<div class="alertbox4">
 
-::: tip   两方支付的本地支付，请求参数可参考两方支付信用卡支付，只需将`subProductType` 值改为` SUBSCRIBE` 即可；
-:::
-
-</div>
 
 #### Subscription
 
 <!--@include: ./parts/subscription.md-->
+
+<div class="alertbox4">
+
+::: tip   订阅支付，在两方支付接口中，设置 `subProductType`：` SUBSCRIBE` 以及`subscription` 参数；
+:::
+
+</div>
 
 ## 以下部分展示了订阅支付的请求示例：
 
