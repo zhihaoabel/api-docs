@@ -8,7 +8,7 @@ export default defineConfig({
     title: 'Onerway API',
     description: "Onerway面向商户开发者的接口文档",
     base: '/apis',
-    cleanUrls: true,
+    cleanUrls: false,
     ignoreDeadLinks: true,
 
     head: [
