@@ -52,7 +52,7 @@ export default defineConfig({
             {
                 text: '参考',
                 items: [
-                    {text: 'Overview', link: 'index.html'},
+                    {text: 'Overview', link: 'overview.html'},
                     {text: '签名', link: 'sign.html'},
                     {text: 'SDK', link: 'js-sdk.html',},
                     {text: '收银台支付', link: 'api-cashier.html'},
@@ -64,7 +64,7 @@ export default defineConfig({
             {
                 text: '',
                 items: [
-                    {text: 'Overview', link: 'index.html'},
+                    {text: 'Overview', link: 'overview.html'},
                     {text: '签名', link: 'sign.html'},
                 ],
             },

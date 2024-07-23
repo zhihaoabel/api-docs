@@ -168,7 +168,7 @@ https://www.merchant-store-website.com/?transactionId=1810970934312833024&mercha
 | contractId    | String | Yes | 订阅合同ID：唯一值，用来区分是哪笔订阅。通常会与tokenId成对保存。订阅首购成功后返回，需要复购中使用                                                                                                                                                                                      |
 | tokenId       | String | Yes | tokenId：用来完成订阅复购的重要参数。订阅首购成功后返回，需要复购中使用                                                                                                                                                                                                     |
 | reason        | String | Yes | 交易失败的原因                                                                                                                                                                                                                                     |
-| sign          | String | Yes | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                        |
+| sign          | String | Yes | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                       |
 | paymentMethod | String | Yes | 具体支付方式，包括卡和本地支付类型                                                                                                                                                                                                                           |
 
 </div>

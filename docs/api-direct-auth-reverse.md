@@ -38,7 +38,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | txnType             | String | 16 | Yes | Yes | 交易类型，请参阅  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" >  <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>  。此撤销接口仅支持`VOID` |
 | merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权撤销的交易订单号，不同的订单号视为不同的交易                                                                                                                                                                                                                 |
 | originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。                                                                                                                                                                                                                       |
-| sign                | String | /  | Yes | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                        |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                       |
 
 
 </div>
@@ -77,7 +77,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | contractId    | String | Yes | 订阅合同id，首购时返回                                                                                                                                                                                                                             |
 | tokenId       | String | Yes | 订阅令牌id ，首购时返回                                                                                                                                                                                                                            |
 | eci           | String | Yes | 责任转移                                                                                                                                                                                                                                     |
-| sign          | String | Yes  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)                                                                                                                                                                                                  |
+| sign          | String | Yes  | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                 |
 
 
 </div>
