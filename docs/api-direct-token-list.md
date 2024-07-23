@@ -16,7 +16,24 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 # 获取绑定Token列表
 
-## 交易订单查询
+请求地址、请求方式、请求头 可以参考：
+
+<br>
+
+|   <div style="text-align: left;">名称</div>| 内容                                                         |
+|----------------|--------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/getCustomsResult  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                      |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                      |
+
+<br>
+
+<div class="alertbox3">
+
+::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确
+:::
+
+</div>
 
 #### 请求参数
 

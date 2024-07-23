@@ -93,7 +93,7 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
         "txnAmount": null,
         "txnCurrency": null,
         "status": "R",
-        "redirectUrl": "https://sandbox-gw-dmz.onerway.com/3dsSecure/direct/RDT_3DS_I_8002091813821934429941761",
+        "redirectUrl": "https://www.merchant-store-website.com",
         "contractId": null,
         "tokenId": null,
         "eci": null,
