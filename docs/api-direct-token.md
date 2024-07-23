@@ -47,7 +47,7 @@ Token绑卡支付：绑卡支付是用户将其信用卡或借记卡的信息与
 |---------------|--------|-----|-----------------|
 | transactionId | String | Yes | Onerway创建的交易订单号 |
 | tokenId       | String | Yes | 绑卡令牌id          |
-| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)              |
+| sign          | String | No  | 签名字符串，请参阅[Sign](./sign)接口             |
 
 </div>
 
