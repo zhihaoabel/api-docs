@@ -22,6 +22,8 @@ Token绑卡支付：绑卡支付是用户将其信用卡或借记卡的信息与
 
 #### 请求参数
 
+<div class="custom-table bordered-table">
+
 | 名称             | 类型     | 长度 | 必填  | 签名  | 描述                           |
 |----------------|--------|----|-----|-----|------------------------------|
 | subProductType | String | 16 | Yes | Yes | TOKEN |
@@ -34,6 +36,7 @@ Token绑卡支付：绑卡支付是用户将其信用卡或借记卡的信息与
 ::: tip   `Token`支付，在两方支付接口中，设置 `subProductType:TOKEN`，以及`tokenInfo `参数
 :::
 
+</div>
 </div>
 
 ##### TokenInfo
@@ -67,8 +70,8 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
     "orderCurrency": "USD",
     "productType": "CARD",
     "shippingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"717.628.937-97\"}",
-    "sign": "e485c5f18ac69af9f3fac7e85017c0b493601c0abefb9c10de588f12ea80ab02",  // [!code error]
-    "subProductType": "TOKEN",
+    "sign": "e485c5f18ac69af9f3fac7e85017c0b493601c0abefb9c10de588f12ea80ab02",  
+    "subProductType": "TOKEN",  // [!code error]
     "tokenInfo": "{\"tokenId\":\"42fbae15a31ec71a1870c7fc859081cbee838cf3da7c76d9c40abe55c20fc0fc\"}",  // [!code error]
     "txnOrderMsg": "{\"returnUrl\":\"https://www.merchant-store-website.com/\",\"appId\":\"1739545982264549376\",\"notifyUrl\":\"https://www.merchant-store-notify.com/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\"}",
     "txnType": "SALE"

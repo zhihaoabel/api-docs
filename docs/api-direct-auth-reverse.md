@@ -98,7 +98,7 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
   "merchantTxnId": "1721288823000",
   "originTransactionId": "1587326740704169984",
   "sign": "ad9c51f5452c7f90c82b847984881e81b91a0444fe109be9413bc8f66ca4325a",
-  "txnType": "VOID"
+  "txnType": "VOID" // [!code error]
 }
 
 

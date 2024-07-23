@@ -67,9 +67,9 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
    "productType": "CARD",
    "shippingInformation": "{\"country\":\"US\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\"}",
    "sign": "93a3289383e3111b37bf3a9d41a5579acdfee43730b3dc5e36e2d0ea0e2fb02f",
-   "subProductType": "SUBSCRIBE",
-   "subscription": "{\"merchantCustId\":\"1721287451000\",\"requestType\":0,\"expireDate\":\"2030-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1,\"tokenId\":\"\",\"contractId\":\"\"}",
-   "txnOrderMsg": "{\"appId\":\"1739545982264549376\",\"returnUrl\":\"https://docs.onerway.com/js-sdk\",\"products\":\"[{\\\"price\\\":\\\"10.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"notifyUrl\":\"https://beta-docs.ronhan.com\",\"transactionIp\":\"127.0.0.1\"}",
+   "subProductType": "SUBSCRIBE",  // [!code error]
+   "subscription": "{\"merchantCustId\":\"1721287451000\",\"requestType\":0,\"expireDate\":\"2030-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":1,\"tokenId\":\"\",\"contractId\":\"\"}", // [!code error]
+   "txnOrderMsg": "{\"returnUrl\":\"https://www.merchant-store-website.com/\",\"appId\":\"1739545982264549376\",\"notifyUrl\":\"https://www.merchant-store-notify.com/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\"}",
    "txnType": "SALE"
 }
 
@@ -88,8 +88,8 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
     "orderCurrency": "USD",
     "productType": "CARD",
     "sign": "f752bdee4e1842787ce4fe1cb1cbb98e6acebfcc5bb199a8a605ae3b1bbc3fef",
-    "subProductType": "SUBSCRIBE",
-    "subscription": "{\"requestType\":\"1\",\"tokenId\":\"822ba14cc565ab56887029673e244c57daf3eb2373a70a6bfd4132f1d8ad059c\",\"contractId\":\"1813837154846384128\",\"merchantCustId\":\"1721287886000\"}",
+    "subProductType": "SUBSCRIBE",  // [!code error]
+    "subscription": "{\"requestType\":\"1\",\"tokenId\":\"822ba14cc565ab56887029673e244c57daf3eb2373a70a6bfd4132f1d8ad059c\",\"contractId\":\"1813837154846384128\",\"merchantCustId\":\"1721287886000\"}",  // [!code error]
     "txnOrderMsg": "{\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"appId\":\"1739545982264549376\"}",
     "txnType": "SALE"
 }
@@ -113,8 +113,8 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
         "txnCurrency": null,
         "status": "S",
         "redirectUrl": null,
-        "contractId": "1813839291387092992",
-        "tokenId": "42e76067938dd5d4250e475f376648cd8274c559c9a3484dffc094a996f4b02e",
+        "contractId": "1813839291387092992",  // [!code error]
+        "tokenId": "42e76067938dd5d4250e475f376648cd8274c559c9a3484dffc094a996f4b02e",  // [!code error]
         "eci": null,
         "periodValue": null,
         "codeForm": null,
@@ -144,8 +144,8 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
         "txnCurrency": null,
         "status": "S",
         "redirectUrl": null,
-        "contractId": "1813837154846384128",
-        "tokenId": "822ba14cc565ab56887029673e244c57daf3eb2373a70a6bfd4132f1d8ad059c",
+        "contractId": "1813837154846384128",// [!code error]
+        "tokenId": "822ba14cc565ab56887029673e244c57daf3eb2373a70a6bfd4132f1d8ad059c",  // [!code error]
         "eci": null,
         "periodValue": null,
         "codeForm": null,
