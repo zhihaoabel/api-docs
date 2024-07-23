@@ -60,7 +60,7 @@ import {TxnCardInfoDirect, TokenProviderEnum} from './util/constants';
 |----------|--------|----|----------------------------------------------------------------------------------------------------------------------------|
 | respCode | String | No | 来自 Onerway 的响应码                                                                                                            |
 | respMsg  | String | No | 来自 Onerway 的响应信息                                                                                                           |
-| data     | Map    | No | 响应数据。 请参阅对象  token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象[TokenInfo](./api-direct-token#tokeninfo) |
+| data     | Map    | No | 响应数据。 请参阅对象  token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象[TokenInfo](./api-direct-bind-card#tokeninfo) |
 
 </div>
 

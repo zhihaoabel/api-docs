@@ -25,7 +25,7 @@ Token绑卡支付：绑卡支付是用户将其信用卡或借记卡的信息与
 | 名称             | 类型     | 长度 | 必填  | 签名  | 描述                           |
 |----------------|--------|----|-----|-----|------------------------------|
 | subProductType | String | 16 | Yes | Yes | TOKEN |
-| tokenInfo      | String | /  | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象  <CustomPopover title="TokenInfo" width="auto" reference="TokenInfo" link="/apis/api-direct-token.html#tokeninfo" ></CustomPopover>    |
+| tokenInfo      | String | /  | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象  [TokenInfo](./api-direct-token#tokeninfo)   |
 
 
 
@@ -36,6 +36,17 @@ Token绑卡支付：绑卡支付是用户将其信用卡或借记卡的信息与
 
 </div>
 
+##### TokenInfo
+
+<div class="custom-table bordered-table">
+
+| 名称            | 类型     | 签名  | 描述              |
+|---------------|--------|-----|-----------------|
+| transactionId | String | Yes | Onerway创建的交易订单号 |
+| tokenId       | String | Yes | 绑卡令牌id          |
+| sign          | String | No  | 签名字符串，请参阅  签名字符串，请参阅[Sign](./sign.html)              |
+
+</div>
 
 ## 以下部分展示了token支付的请求响应示例：
 
