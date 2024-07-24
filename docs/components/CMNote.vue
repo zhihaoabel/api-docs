@@ -1,8 +1,10 @@
 <template>
-  <span class="custom-note">
-    <span class="leading-text" >{{leadingText}}</span>
-    <span v-html="data"></span>
-  </span>
+  <ClientOnly>
+    <span class="custom-note">
+      <span class="leading-text" >{{leadingText}}</span>
+      <span v-html="data"></span>
+    </span>
+  </ClientOnly>
 </template>
 
 <script>

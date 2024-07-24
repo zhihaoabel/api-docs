@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-<script lang="ts" setup>
+<script setup>
 
 import {SubProductTypeEnum} from "./util/constants";
 
