@@ -6,18 +6,15 @@ export default defineConfig({
     lang: 'zh-Hans',
     title: 'Onerway API',
     description: "Onerway面向商户开发者的接口文档",
-    // base: '/apis/',
+    base: '/apis/',
     cleanUrls: false,
     ignoreDeadLinks: true,
 
     head: [
-        ['link', {rel: 'icon', href: '/apis/favicon.ico'}],
-        ['link', {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: ''}],
+        ['link', {rel: 'icon', href: '/favicon.ico'}],
         ['link', {href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet'}],
-        ['meta', {name: 'theme-color', content: '#5f67ee'}],
         ['meta', {name: 'og:type', content: 'website'}],
         ['meta', {name: 'og:locale', content: 'zh-CN'}],
-        ['meta', {name: 'og:site_name', content: 'VitePress'}],
     ],
 
     locales: {
@@ -40,14 +37,12 @@ export default defineConfig({
 
     rewrites: {
       // 将overview.html重定向到index.html
-        '/overview.md': '/index.html',
+        '/overview.md': '/index.md',
     },
 
     themeConfig: {
         logo: '/onerway.png',
         siteTitle: '',
-
-        i18nRouting: true,
 
         // https://vitepress.dev/reference/default-theme-config
         nav: [
@@ -199,10 +194,8 @@ export default defineConfig({
         ],
 
         search: {
-            provider: 'local',
+            // provider: 'local',
         },
-
-        returnToTopLabel: '返回顶部',
 
         externalLinkIcon: true,
     },
