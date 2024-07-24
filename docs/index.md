@@ -1,8 +1,5 @@
 ---
 outline: deep
-next: 
-    text: '签名'
-    link: '/sign'
 ---
 
 <script setup>

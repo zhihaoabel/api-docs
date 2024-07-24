@@ -15,17 +15,19 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <el-table :border="bordered" :data="tableData" :stripe="striped" style="width: 100%; min-width: 650px;">
-    <el-table-column v-for="column in columns" :key="column.label" :label="column.label"
-                     :prop="column.prop" :width="column.width">
-      <template #default="{ row }">
-        <a v-if="row[column.prop].startsWith('http') || row[column.prop].startsWith('https')" :href="row[column.prop]">{{
-            row[column.prop]
-          }}</a>
-        <span v-else v-html="row[column.prop]"></span>
-      </template>
-    </el-table-column>
-  </el-table>
+  <ClientOnly>
+    <el-table :border="bordered" :data="tableData" :stripe="striped" style="width: 100%; min-width: 650px;">
+      <el-table-column v-for="column in columns" :key="column.label" :label="column.label"
+                       :prop="column.prop" :width="column.width">
+        <template #default="{ row }">
+          <a v-if="row[column.prop].startsWith('http') || row[column.prop].startsWith('https')" :href="row[column.prop]">{{
+              row[column.prop]
+            }}</a>
+          <span v-else v-html="row[column.prop]"></span>
+        </template>
+      </el-table-column>
+    </el-table>
+  </ClientOnly>
 </template>
 
 <style lang="scss" scoped>
