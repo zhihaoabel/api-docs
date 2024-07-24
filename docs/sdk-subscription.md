@@ -8,7 +8,7 @@ import {SubProductTypeEnum} from "./util/constants";
 
 </script>
 
-# 订阅支付
+# 订阅下单
 
 订阅支付：客户与商家之间建立的一种协议，允许商家根据预先设定的时间自动从客户账户扣款。
 
