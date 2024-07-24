@@ -57,10 +57,10 @@ import {ChargebackStatusEnum} from "./util/constants";
 |----------------------|--------|----|-----|-----|---------------------------------------------------------|
 | merchantNo           | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                             |
 | merchantTxnIds       | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔，<br> <CMExample data="554815,684541"></CMExample>                |
-| originTransactionIds | String | /  | No  | Yes | 来自` Onerway` 的原交易订单号，可以是多个，以逗号分隔      <br> <CMExample data="1787743316,17877433"></CMExample>                      |
-| chargebackIds        | String | /  | No  | Yes | 来自` Onerway` 的拒付交易单号，可以是多个，以逗号分隔                          |
-| importTimeStart      | String | /  | No  | Yes | ` onerway` 接收的拒付交易的开始时间，格式为`yyyy-MM-dd HH:mm:ss`            |
-| importTimeEnd        | String | /  | No  | Yes | ` onerway` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
+| originTransactionIds | String | /  | No  | Yes | 来自` OnerWay` 的原交易订单号，可以是多个，以逗号分隔      <br> <CMExample data="1787743316,17877433"></CMExample>                      |
+| chargebackIds        | String | /  | No  | Yes | 来自` OnerWay` 的拒付交易单号，可以是多个，以逗号分隔                          |
+| importTimeStart      | String | /  | No  | Yes | ` OnerWay` 接收的拒付交易的开始时间，格式为`yyyy-MM-dd HH:mm:ss`            |
+| importTimeEnd        | String | /  | No  | Yes | ` OnerWay` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
 | current              | String | /  | Yes | Yes | 查询的当前页码，每页10条记录                                                 |
 | sign                 | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                    |
 <div class="alertbox4">
@@ -119,7 +119,7 @@ import {ChargebackStatusEnum} from "./util/constants";
 | txnTime             | String | Yes | 原交易完成时间                                                                                                                                                                                                                                                    |
 | paymentMethod       | String | Yes | 具体支付方式，包括卡和本地支付类型                                                                                                                                                                                                                                          |
 | chargebackId        | String | Yes | ` Onerway` 创建的拒付交易订单号                                                                                                                                                                                                                                      |
-| importTime          | String | Yes | ` onerway`  接收拒付交易的时间                                                                                                                                                                                                                                      |
+| importTime          | String | Yes | ` OnerWay`  接收拒付交易的时间                                                                                                                                                                                                                                      |
 | chargebackAmount    | String | Yes | 发生的拒付金额                                                                                                                                                                                                                                                    |
 | chargebackCurrency  | String | Yes | 拒付金额的币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                       |
 | chargebackDate      | String | Yes | 拒付发生的日期                                                                                                                                                                                                                                                    |
