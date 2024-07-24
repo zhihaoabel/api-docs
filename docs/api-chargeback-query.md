@@ -11,13 +11,13 @@ import CustomPopover from './components/element-ui/CustomPopover.vue';
 import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
-
+import {ChargebackStatusEnum} from "./util/constants";
 
 </script>
 
 # 拒付订单查询
 
-拒付订单查询是一种用于追踪和了解被拒绝支付的订单的过程。当客户或支付机构拒绝支付某个订单时，商家或相关方面可能需要进行拒付订单查询以获取有关该拒付的详细信息。
+拒付是指在信用卡交易完成后，持卡人认为交易存在争议或被认为是欺诈性的，于是向发卡行提出退款要求。该接口可以查询是否存在此类订单。
 
   <el-alert
     title="调用此接口之前，需先联系我们开通查询拒付权限。"
@@ -31,11 +31,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <br>
 
-|   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+|   <div style="text-align: left;">名称</div>| 内容                                                         |
+|----------------|--------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/chargeback/list  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                      |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                      |
 
 <br>
 
@@ -55,15 +55,20 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 | 名称                   | 类型     | 长度 | 必填  | 签名  | 描述                                                      |
 |----------------------|--------|----|-----|-----|---------------------------------------------------------|
-| merchantNo           | String | 20 | Yes | Yes | 商户号。 商户注册时，` OnerWa` y会为商户创建商户号                             |
-| merchantTxnIds       | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔，<br> <CMExample data="554815,684541"></CMExample>                  |
-| originTransactionIds | String | /  | No  | Yes | 来自` Onerway` 的原交易订单号，可以是多个，以逗号分隔      <br> <CMExample data="1787743316,17877433"></CMExample>                        |
-| chargebackIds        | String | /  | No  | Yes | 来自` Onerway` 的拒付交易单号，可以是多个，以逗号分隔                           |
-| importTimeStart      | String | /  | No  | Yes | ` onerway` 接收的拒付交易的开始时间，格式为`yyyy-MM-dd HH:mm:ss`              |
-| importTimeEnd        | String | /  | No  | Yes | ` onerway` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
-| current              | String | /  | Yes | Yes | 查询的当前页码                                                 |
+| merchantNo           | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                             |
+| merchantTxnIds       | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔，<br> <CMExample data="554815,684541"></CMExample>                |
+| originTransactionIds | String | /  | No  | Yes | 来自` OnerWay` 的原交易订单号，可以是多个，以逗号分隔      <br> <CMExample data="1787743316,17877433"></CMExample>                      |
+| chargebackIds        | String | /  | No  | Yes | 来自` OnerWay` 的拒付交易单号，可以是多个，以逗号分隔                          |
+| importTimeStart      | String | /  | No  | Yes | ` OnerWay` 接收的拒付交易的开始时间，格式为`yyyy-MM-dd HH:mm:ss`            |
+| importTimeEnd        | String | /  | No  | Yes | ` OnerWay` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
+| current              | String | /  | Yes | Yes | 查询的当前页码，每页10条记录                                                 |
 | sign                 | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                    |
-                            |
+<div class="alertbox4">
+
+::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
+:::
+
+</div>
 
 </div>
 
@@ -76,7 +81,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 |----------|--------|----|------------------|
 | respCode | String | No | 来自 ` Onerway ` 的响应码  |
 | respMsg  | String | No | 来自` Onerway`  的响应信息 |
-| data     | Map    | No | 响应数据。 请参阅对象 Page   <CustomPopover title="Page" width="auto" reference="Page" link="/apis/api-refusalQuery.html#page" ></CustomPopover>  |
+| data     | Map    | No | 响应数据。 请参阅对象 [Page](./api-chargeback-query#page)  |
 
 </div>
 
@@ -88,7 +93,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 | 名称            | 类型     | 必填  | 描述                   |
 |---------------|--------|-----|----------------------|
-| content       | List   | Yes | 交易信息列表，请参阅对象  <CustomPopover title="ChargebackInfo" width="auto" reference="ChargebackInfo" link="/apis/api-refusalQuery.html#chargebackinfo" ></CustomPopover> |
+| content       | List   | Yes | 交易信息列表，请参阅对象 [ChargebackInfo](./api-chargeback-query#chargebackinfo) |
 | current       | String | Yes  | 当前页码                 |
 | size          | String | Yes  | 当前页大小                |
 | totalPages    | String | Yes  | 总页数                  |
@@ -104,25 +109,25 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称                  | 类型     | 必填 | 描述                                |
-|---------------------|--------|----|-----------------------------------|
-| merchantNo          | String | Yes | 商户号。 商户注册时，` OnerWay` 会为商户创建商户号       |
-| merchantTxnId       | String | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易        |
-| originTransactionId | String | Yes | 来自 ` Onerway`  的原交易订单号。               |
-| txnAmount           | String | Yes | 以结算币种计的原交易金额                      |
-| txnCurrency         | String | Yes | 原交易结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
-| txnTime             | String | Yes | 原交易完成时间                           |
-| paymentMethod       | String | Yes | 具体支付方式，包括卡和本地支付类型                 |
-| chargebackId        | String | Yes | ` Onerway` 创建的拒付交易订单号                 |
-| importTime          | String | Yes | ` onerway`  接收拒付交易的时间                 |
-| chargebackAmount    | String | Yes | 发生的拒付金额                           |
-| chargebackCurrency  | String | Yes | 拒付金额的币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
-| chargebackDate      | String | Yes | 拒付发生的日期                           |
-| chargebackStatus    | String | Yes | 拒付交易状态。 请参阅  <CustomPopover title="ChargebackStatusEnum" width="auto" reference="ChargebackStatusEnum" link="/apis/enums.html#chargebackstatusenum" ></CustomPopover> |
-| chargebackReason    | String | Yes | 拒付原因                              |
-| chargebackArn       | String | Yes | ARN                               |
-| appealDueTime       | String | Yes | 申诉资料提交截止时间，格式为`yyyy-MM-dd HH:mm:ss` |
-| chargebackCode      | String | Yes | 拒付代码                              |
+| 名称                  | 类型     | 必填 | 描述                                                                                                                                                                                                                                                         |
+|---------------------|--------|----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| merchantNo          | String | Yes | 商户号。 商户注册时，` OnerWay` 会为商户创建商户号                                                                                                                                                                                                                            |
+| merchantTxnId       | String | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易                                                                                                                                                                                                                                 |
+| originTransactionId | String | Yes | 来自 ` Onerway`  的原交易订单号。                                                                                                                                                                                                                                    |
+| txnAmount           | String | Yes | 以结算币种计的原交易金额                                                                                                                                                                                                                                               |
+| txnCurrency         | String | Yes | 原交易结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                       |
+| txnTime             | String | Yes | 原交易完成时间                                                                                                                                                                                                                                                    |
+| paymentMethod       | String | Yes | 具体支付方式，包括卡和本地支付类型                                                                                                                                                                                                                                          |
+| chargebackId        | String | Yes | ` Onerway` 创建的拒付交易订单号                                                                                                                                                                                                                                      |
+| importTime          | String | Yes | ` OnerWay`  接收拒付交易的时间                                                                                                                                                                                                                                      |
+| chargebackAmount    | String | Yes | 发生的拒付金额                                                                                                                                                                                                                                                    |
+| chargebackCurrency  | String | Yes | 拒付金额的币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                       |
+| chargebackDate      | String | Yes | 拒付发生的日期                                                                                                                                                                                                                                                    |
+| chargebackStatus    | String | Yes | 拒付交易状态。 请参阅 <CustomPopover title="ChargebackStatusEnum" width="auto" reference="ChargebackStatusEnum" link="/apis/enums.html#chargebackstatusenum"><CustomTable :data="ChargebackStatusEnum.data" :columns="ChargebackStatusEnum.columns"></CustomTable></CustomPopover> |
+| chargebackReason    | String | Yes | 拒付原因                                                                                                                                                                                                                                                       |
+| chargebackArn       | String | Yes | ARN                                                                                                                                                                                                                                                        |
+| appealDueTime       | String | Yes | 申诉资料提交截止时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                                                                                                                                                                        |
+| chargebackCode      | String | Yes | 拒付代码                                                                                                                                                                                                                                                       |
 
 </div>
 
@@ -131,61 +136,135 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-acq.onerway.com/v1/chargeback/list<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/chargeback/list <Badge type="tip">POST</Badge>
 
-
+根据时间查询交易列表：
 ::: code-group
 
 ```json [请求参数]
 {
-  "chargebackIds":"",
-  "current":"1",
-  "importTimeEnd":"",
-  "importTimeStart":"",
-  "merchantNo":"800037",
-  "merchantTxnIds":"",
-  "originTransactionIds":"1535176982304575488",
-  "sign":"…"
+  "chargebackIds": "",
+  "current": "1",
+  "importTimeEnd": "2024-07-24 00:00:00",
+  "importTimeStart": "2024-07-23 00:00:00",
+  "merchantNo": "800209",
+  "merchantTxnIds": "",
+  "originTransactionIds": "",
+  "sign": "a78bfa309daf6c1ae444ad87eed54cc5bd38a822e7360c04a6a11c3e70ca49c0"
 }
 
 ```
 
 
 ```json [响应参数]
-
-
-  "respCode":"20000",
-  "respMsg":"Success",
-  "data":{
-    "content":[
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
       {
-        "merchantNo":"800037",
-        "chargebackId":"1535178069061324800",
-        "importTime":"2022-06-10 16:32:29",
-        "merchantTxnId":"1654849689044",
-        "originTransactionId":"1535176982304575488",
-        "txnAmount":"30.90",
-        "txnCurrency":"EUR",
-        "txnTime":"2022-06-10 16:28:10",
-        "paymentMethod":"VISA",
-        "chargebackAmount":"1.00",
-        "chargebackCurrency":"USD",
-        "chargebackDate":"2022-06-10",
-        "chargebackReason":"chargeback occurs",
-        "chargebackArn":"123",
-        "appealDueTime":"2022-09-10 10:21:55",
-        "chargebackCode":"res1206CODE",
-        "chargebackStatus":"NEW"
+        "merchantNo": "800209",
+        "chargebackId": "1815647844296949760",
+        "importTime": "2024-07-23 15:19:14",
+        "merchantTxnId": "1721712864000",
+        "originTransactionId": "1815621472153370624",
+        "txnAmount": "20.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 13:36:59",
+        "paymentMethod": "MASTERCARD",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "1111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:14",
+        "chargebackStatus": "NEW"
+      },
+      {
+        "merchantNo": "800209",
+        "chargebackId": "1815648032830914560",
+        "importTime": "2024-07-23 15:19:59",
+        "merchantTxnId": "355243001534",
+        "originTransactionId": "1815582133184757760",
+        "txnAmount": "30.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 10:58:25",
+        "paymentMethod": "VISA",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:59",
+        "chargebackStatus": "NEW"
       }
     ],
-    "current":"1",
-    "size":10,
-    "totalPages":1,
-    "totalElements":1
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 2
   }
 }
 
 ```
+:::
+
+根据订单号，勾兑单笔交易
+
+::: code-group
+
+```json [请求参数]
+{
+  "chargebackIds": "",
+  "current": "1",
+  "importTimeEnd": "",
+  "importTimeStart": "",
+  "merchantNo": "800209",
+  "merchantTxnIds": "355243001534",
+  "originTransactionIds": "",
+  "sign": "188e1743854b0343d63181bfcc7ec72769046b4bda7044000f7ed8baf44ba7df"
+}
+
+```
+
+
+```json [响应参数]
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
+      {
+        "merchantNo": "800209",
+        "chargebackId": "1815648032830914560",
+        "importTime": "2024-07-23 15:19:59",
+        "merchantTxnId": "355243001534",
+        "originTransactionId": "1815582133184757760",
+        "txnAmount": "30.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 10:58:25",
+        "paymentMethod": "VISA",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:59",
+        "chargebackStatus": "NEW"
+      }
+    ],
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 1
+  }
+}
+
+```
+:::
 
 <div class="alertbox4">
 

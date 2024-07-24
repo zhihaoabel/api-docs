@@ -25,9 +25,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
  <div class="custom-table bordered-table">
 
 
-| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                |
-|-------------|--------|----|-----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| productType | String | 16 | Yes | Yes | 产品类型，请参阅   <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" > <CustomTable :data="ProductTypeEnum.data" :columns="ProductTypeEnum.columns"></CustomTable> </CustomPopover> |
+| 名称          | 类型     | 长度 | 必填  | 签名  | 描述   |
+|-------------|--------|----|-----|-----|--------|
+| productType | String | 16 | Yes | Yes | 聚合收银台产品类型使用”ALL“ |
 
 
 </div>

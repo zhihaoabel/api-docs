@@ -11,24 +11,23 @@ import CustomPopover from './components/element-ui/CustomPopover.vue';
 import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
+import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from "./util/constants";
 
 </script>
 
 # 交易订单查询
 
-交易订单查询接口，开发者可以编写代码来访问和获取订单数据，以便在自己的应用程序或系统中进行处理和展示。接口的作用是建立起与订单系统的连接，并提供一种标准的方式来请求和获取订单信息。
-
-
+用于获取交易数据，以及查询订单详情用来勾兑交易状态。
 
 请求地址、请求方式、请求头 可以参考：
 
 <br>
 
-|   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+|   <div style="text-align: left;">名称</div>| 内容                                                         |
+|----------------|--------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/list  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                      |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                      |
 
 <br>
 
@@ -53,10 +52,16 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔    <br> <CMExample data="1787743316310622208,1787743316310622208"></CMExample>               |
 | txnTypes       | String | /  | No  | Yes | 交易类型，可以是多个，用逗号分隔                           |
 | startTime      | String | /  | No  | Yes | 交易开始时间，格式为`yyyy-MM-dd HH:mm:ss`              |
-| endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。
-|
+| endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。|
 | current        | String | /  | Yes | Yes | 查询的当前页码                                    |
 | sign           | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                        |
+
+<div class="alertbox4">
+
+::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
+:::
+
+</div>
 
 </div>
 
@@ -65,11 +70,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称       | 类型     | 签名 | 描述               |
-|----------|--------|----|------------------|
-| respCode | String | No | 来自 ` Onerway`  的响应码  |
-| respMsg  | String | No | 来自`  Onerway ` 的响应信息 |
-| data     | Map    | No | 响应数据。 请参阅对象  <CustomPopover title="Page" width="auto" reference="Page" link="/apis/api-orderInquiry.html#page" ></CustomPopover> |
+| 名称       | 类型     | 签名 | 描述                                              |
+|----------|--------|----|-------------------------------------------------|
+| respCode | String | No | 来自 ` Onerway`  的响应码                             |
+| respMsg  | String | No | 来自`  Onerway ` 的响应信息                            |
+| data     | Map    | No | 响应数据。 请参阅对象 [Page](./api-order-inquiry#page) |
 
 </div>
 
@@ -78,13 +83,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 <div class="custom-table bordered-table">
 
 
-| 名称            | 类型     | 必填  | 描述                   |
-|---------------|--------|-----|----------------------|
-| content       | List   | Yes | 交易信息列表，请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-orderInquiry.html#txninfo" ></CustomPopover> |
-| current       | String | Yes  | 当前页码                 |
-| size          | String | Yes  | 当前页大小                |
-| totalPages    | String | Yes  | 总页数                  |
-| totalElements | String | Yes  | 总条数                  |
+| 名称            | 类型     | 必填  | 描述                                                  |
+|---------------|--------|-----|-----------------------------------------------------|
+| content       | List   | Yes | 交易信息列表，请参阅对象 [TxnInfo](./api-order-inquiry#txninfo) |
+| current       | String | Yes  | 查询当前页码，每页10条记录                                                |
+| size          | String | Yes  | 当前页大小                                               |
+| totalPages    | String | Yes  | 总页数                                                 |
+| totalElements | String | Yes  | 总条数                                                 |
 
 </div>
 
@@ -93,34 +98,34 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称                         | 类型     | 必填 | 描述                                                       |
-|----------------------------|--------|----|----------------------------------------------------------|
-| transactionId              | String | Yes | ` Onerway` 创建的交易订单号，对应商户订单号                                  |
-| merchantTxnId              | String | Yes | 商户创建的商户交易订单号， 不同的订单号视为不同的交易|
-| txnTime                    | String | Yes | 交易完成时间                                                   |
-| originTransactionId        | String | Yes | 来自` Onerway`  的原交易订单号。                                      |
-| productType                | String | Yes | 产品类型，请参阅    <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" ></CustomPopover>                              |
-| subProductType             | String | Yes | 子产品类型，请参阅      <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" ></CustomPopover>                        |
-| txnType                    | String | Yes | 交易类型，请参阅           <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ></CustomPopover>                            |
-| status                     | String | Yes | 交易处理结果。 请参阅      <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum" ></CustomPopover>                            |
-| reason                     | String | Yes | 交易失败原因                                                   |
-| paymentMethod              | String | Yes | 具体支付方式，包括卡和本地支付类型                                        |
-| walletTypeName             | String | Yes | 钱包的品牌名称                                                  |
-| orderAmount                | String | Yes | 交易订单金额                                                   |
-| orderCurrency              | String | Yes | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                |
-| txnAmount                  | String | Yes | 订单金额转换成结算币种后的金额                                          |
-| txnCurrency                | String | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                  |
-| settleRate                 | String | Yes | 汇率 (txnAmount = orderAmount * settleRate)。               |
-| customsDeclarationAmount   | String | Yes | 可报关金额                                                    |
-| customsDeclarationCurrency | String | Yes | 可用于报关的金额对应币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                          |
-| arn                        | String | Yes | ARN                                                      |
-| appId                      | String | Yes | 商户应用程序`ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                   |
-| website                    | String | Yes | 交易网站                                                     |
-| cardBinCountry             | String | Yes | 卡`bin`所属国家                                                 |
-| cardNumber                 | String | Yes | 交易卡号                                                     |
-| userPaymentStatus          | String | Yes | 用户支付状态，`true`：已支付，`false`：未支付，<br> <CMNote data="只有 `Sofort` 交易可能关注此字段；空值时忽略此字段"></CMNote>  |
-| holderName                 | String | Yes | 持卡人姓名                                                    |
-| eci                        | String | Yes | 责任转移                                                     |
+| 名称                         | 类型     | 必填 | 描述                                                                                                                                                                                                                                                                |
+|----------------------------|--------|----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| transactionId              | String | Yes | ` Onerway` 创建的交易订单号，对应商户订单号                                                                                                                                                                                                                                       |
+| merchantTxnId              | String | Yes | 商户创建的商户交易订单号， 不同的订单号视为不同的交易                                                                                                                                                                                                                                       |
+| txnTime                    | String | Yes | 交易完成时间                                                                                                                                                                                                                                                            |
+| originTransactionId        | String | Yes | 来自` Onerway`  的原交易订单号。                                                                                                                                                                                                                                            |
+| productType                | String | Yes | 产品类型，请参阅   <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum"><CustomTable :data="ProductTypeEnum.data" :columns="ProductTypeEnum.columns"></CustomTable></CustomPopover>                    |
+| subProductType             | String | Yes | 子产品类型，请参阅      <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum"><CustomTable :data="SubProductTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable></CustomPopover> |
+| txnType                    | String | Yes | 交易类型，请参阅 <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum"><CustomTable :data="TxnTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable></CustomPopover>                                   |
+| status                     | String | Yes | 交易处理结果。 请参阅     <CustomPopover title="TxnStatusEnum" width="auto" reference="TxnStatusEnum" link="/apis/enums.html#txnstatusenum"><CustomTable :data="TxnStatusEnum.data" :columns="TxnStatusEnum.columns"></CustomTable></CustomPopover>                             |
+| reason                     | String | Yes | 交易失败原因                                                                                                                                                                                                                                                            |
+| paymentMethod              | String | Yes | 具体支付方式，包括卡和本地支付类型                                                                                                                                                                                                                                                 |
+| walletTypeName             | String | Yes | 钱包的品牌名称                                                                                                                                                                                                                                                           |
+| orderAmount                | String | Yes | 交易订单金额                                                                                                                                                                                                                                                            |
+| orderCurrency              | String | Yes | 交易订单币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                               |
+| txnAmount                  | String | Yes | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                                                   |
+| txnCurrency                | String | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                                 |
+| settleRate                 | String | Yes | 汇率 (txnAmount = orderAmount * settleRate)。                                                                                                                                                                                                                        |
+| customsDeclarationAmount   | String | Yes | 可报关金额                                                                                                                                                                                                                                                             |
+| customsDeclarationCurrency | String | Yes | 可用于报关的金额对应币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)货币代码                                                                                                                                                          |
+| arn                        | String | Yes | ARN                                                                                                                                                                                                                                                               |
+| appId                      | String | Yes | 商户应用程序`ID`。 商户注册网站时，`OnerWay`会为商户创建一个应用id                                                                                                                                                                                                                         |
+| website                    | String | Yes | 交易网站                                                                                                                                                                                                                                                              |
+| cardBinCountry             | String | Yes | 卡`bin`所属国家                                                                                                                                                                                                                                                        |
+| cardNumber                 | String | Yes | 交易卡号                                                                                                                                                                                                                                                              |
+| userPaymentStatus          | String | Yes | 用户支付状态，`true`：已支付，`false`：未支付，<br> <CMNote data="只有 `Sofort` 交易可能关注此字段；空值时忽略此字段"></CMNote>                                                                                                                                                                        |
+| holderName                 | String | Yes | 持卡人姓名                                                                                                                                                                                                                                                             |
+| eci                        | String | Yes | 责任转移                                                                                                                                                                                                                                                              |
 
 </div>
 
@@ -128,22 +133,25 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-acq.onerway.com/v1/txn/list<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/list <Badge type="tip">POST</Badge>
 
 
+
+
+根据时间查询交易列表：
 
 ::: code-group
 
 ```json [请求参数]
 {
-  "merchantNo": "800037",
-  "merchantTxnIds": "1640244407000,1640244473000",
-  "transactionIds": "",
-  "txnTypes": "",
-  "startTime": "",
-  "endTime": "",
   "current": "1",
-  "sign": "..."  //这里的sign字符串需要通过签名获得
+  "endTime": "2024-07-24 00:00:00",
+  "merchantNo": "800209",
+  "merchantTxnIds": "",
+  "sign": "5af39014bb2145e8e52b60e8a27d08079bedc564336da5f2b108527cc1fc22b9",
+  "startTime": "2024-07-23 00:00:00",
+  "transactionIds": "1815627803950186496,1815621472153370624",
+  "txnTypes": ""
 }
 
 ```
@@ -156,64 +164,198 @@ https://sandbox-acq.onerway.com/v1/txn/list<Badge type="tip">POST</Badge>
   "data": {
     "content": [
       {
-        "transactionId": "1473918047031586816",
-        "merchantTxnId": "1640244407000",
-        "txnTime": "2021-12-23 15:27:01",
+        "transactionId": "1815621472153370624",
+        "merchantTxnId": "1721712864000",
+        "txnTime": "2024-07-23 13:34:26",
         "originTransactionId": null,
         "productType": "CARD",
         "subProductType": "DIRECT",
-        "txnType": "0006",
+        "txnType": "SALE",
         "status": "S",
-        "paymentMethod": "VISA",
+        "userPaymentStatus": null,
+        "cardType": "MASTERCARD",
+        "paymentMethod": "MASTERCARD",
         "orderAmount": "20.00",
+        "settleRate": "1",
         "orderCurrency": "USD",
         "txnAmount": "20.00",
         "txnCurrency": "USD",
-        "settleRate": "1",
+        "customsDeclarationAmount": null,
+        "customsDeclarationCurrency": null,
         "arn": null,
-        "appId": "1458672763818790912",
-        "website": "800037.sc.com",
+        "appId": "1739545982264549376",
+        "website": "https://docs.onerway.com",
         "cardBinCountry": "US",
-        "cardNumber": "400002******0961",
+        "cardNumber": "222100******7736",
+        "walletTypeName": null,
         "reason": null,
-        "userPaymentStatus": "true"
+        "holderName": "aa bbb",
+        "eci": null,
+        "email": "abel.wang@onerway.com"
       },
       {
-        "transactionId": "1473918280901783552",
-        "merchantTxnId": "1640244473000",
-        "txnTime": "2021-12-23 15:27:56",
+        "transactionId": "1815627803950186496",
+        "merchantTxnId": "1721714370000",
+        "txnTime": "2024-07-23 13:59:35",
         "originTransactionId": null,
         "productType": "CARD",
         "subProductType": "DIRECT",
-        "txnType": "0006",
-        "status": "S",
-        "paymentMethod": "VISA",
-        "orderAmount": "20.00",
+        "txnType": "SALE",
+        "status": "N",
+        "userPaymentStatus": null,
+        "cardType": null,
+        "paymentMethod": null,
+        "orderAmount": "100.00",
+        "settleRate": null,
         "orderCurrency": "USD",
-        "txnAmount": "20.00",
-        "txnCurrency": "USD",
-        "settleRate": "1",
+        "txnAmount": null,
+        "txnCurrency": null,
+        "customsDeclarationAmount": null,
+        "customsDeclarationCurrency": null,
         "arn": null,
-        "appId": "1458672763818790912",
-        "website": "800037.sc.com",
-        "cardBinCountry": "US",
-        "cardNumber": "400002******0961",
+        "appId": "1739545982264549376",
+        "website": "https://docs.onerway.com",
+        "cardBinCountry": null,
+        "cardNumber": null,
+        "walletTypeName": null,
         "reason": null,
-        "userPaymentStatus": null
+        "holderName": null,
+        "eci": null,
+        "email": "abel.wang@onerway.com"
       }
     ],
     "current": "1",
-    "size": "10",
-    "totalPages": "1",
-    "totalElements": "2"
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 2
   }
 }
 
 ```
+:::
 
+根据订单号，勾兑单笔交易：
+
+::: code-group
+
+```json [请求参数]
+{
+  "chargebackIds": "",
+  "current": "1",
+  "endTime": "",
+  "startTime": "",
+  "merchantNo": "800209",
+  "merchantTxnIds": "355243001534",
+  "originTransactionIds": "",
+  "sign": "188e1743854b0343d63181bfcc7ec72769046b4bda7044000f7ed8baf44ba7df"
+}
+
+```
+
+
+```json [响应参数]
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
+      {
+        "merchantNo": "800209",
+        "chargebackId": "1815648032830914560",
+        "importTime": "2024-07-23 15:19:59",
+        "merchantTxnId": "355243001534",
+        "originTransactionId": "1815582133184757760",
+        "txnAmount": "30.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 10:58:25",
+        "paymentMethod": "VISA",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:59",
+        "chargebackStatus": "NEW"
+      }
+    ],
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 1
+  }
+}
+
+```
+:::
+根据交易类型，查询退款交易：
+
+::: code-group
+
+```json [请求参数]
+{
+  "current": "1",
+  "endTime": "2024-07-25 00:00:00",
+  "merchantNo": "800209",
+  "merchantTxnIds": "",
+  "sign": "5af39014bb2145e8e52b60e8a27d08079bedc564336da5f2b108527cc1fc22b9",
+  "startTime": "2024-07-24 00:00:00",
+  "transactionIds": "",
+  "txnTypes": "REFUND"
+}
+
+```
+
+
+```json [响应参数]
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
+      {
+        "transactionId": "1816005913119956992",
+        "merchantTxnId": null,
+        "txnTime": "2024-07-24 15:02:04",
+        "originTransactionId": "1816005726079164416",
+        "productType": "CARD",
+        "subProductType": "DIRECT",
+        "txnType": "REFUND",
+        "status": "S",
+        "userPaymentStatus": null,
+        "cardType": "MASTERCARD",
+        "paymentMethod": "MASTERCARD",
+        "orderAmount": "200.00",
+        "settleRate": "1",
+        "orderCurrency": "USD",
+        "txnAmount": "200.00",
+        "txnCurrency": "USD",
+        "customsDeclarationAmount": null,
+        "customsDeclarationCurrency": null,
+        "arn": null,
+        "appId": "1739545982264549376",
+        "website": null,
+        "cardBinCountry": null,
+        "cardNumber": null,
+        "walletTypeName": null,
+        "reason": null,
+        "holderName": null,
+        "eci": null,
+        "email": "abel.wang@onerway.com"
+      }
+    ],
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 1
+  }
+}
+
+```
+:::
 <div class="alertbox4">
 
-::: tip 此示例仅限参考 请勿拿此示例直接请求。
+::: tip 根据交易类型调用订单查询接口时，'endTime'和'startTime'必传。
 :::
 
 </div>

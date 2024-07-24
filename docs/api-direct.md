@@ -169,11 +169,11 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 
 <div class="custom-table bordered-table">
 
-| 名称       | 类型     | 必填 | 描述                  |
-|----------|--------|----|---------------------|
-| respCode | String | Yes | 来自 Onerway 的响应码     |
-| respMsg  | String | Yes | 来自 Onerway 的响应信息    |
-| data     | Map    | Yes | 响应数据。 请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-direct.html#txninfo" ></CustomPopover>      |
+| 名称       | 类型     | 必填 | 描述                               |
+|----------|--------|----|----------------------------------|
+| respCode | String | Yes | 来自 Onerway 的响应码                  |
+| respMsg  | String | Yes | 来自 Onerway 的响应信息                 |
+| data     | Map    | Yes | 响应数据。 请参阅对象 [TxnInfo](./api-direct#txninfo) |
 
 </div>
 
@@ -275,7 +275,7 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction<Badge type="tip">POST</Badg
     "txnAmount": null,
     "txnCurrency": null,
     "status": "R",
-    "redirectUrl": "https://sandbox-gw-dmz.onerway.com/3dsSecure/direct/RDT_3DS_P_8000791813405707530285058",
+    "redirectUrl": "https: //www.merchant-store-website.com/?transactionId=1813405705672466432&merchantTxnId=782600332&merchantNo=800079&responseTime=2024-07-17%2010:55:54&txnTime=2024-07-17%2010:49:46&txnTimeZone=+08:00&orderAmount=200.00&orderCurrency=USD&txnAmount=200.00&txnCurrency=USD&status=S&reason=Payment%20successful&eci=5",
     "contractId": null,
     "tokenId": null,
     "eci": "",
@@ -299,7 +299,24 @@ https: //www.merchant-store-website.com/?transactionId=1813405705672466432&merch
 通知地址：https://www.merchant-store-notify.com
 
 通知内容：
-{"notifyType":"TXN","transactionId":"1813405705672466432","txnType":"SALE","merchantNo":"800079","merchantTxnId":"782600332","responseTime":"2024-07-17 10:55:53","txnTime":"2024-07-17 10:49:46","txnTimeZone":"+08:00","orderAmount":"200.00","orderCurrency":"USD","txnAmount":"","status":"S","eci":"5","reason":"{"respCode":"20000","respMsg":"Success"}","sign":"8df1056ddd0f792ced4dace4b0be1ab912fec82a74a3f7713682ecb26092f785","paymentMethod":"VISA"}
+{
+"notifyType": "TXN",
+"transactionId": "1813405705672466432",
+"txnType": "SALE",
+"merchantNo": "800079",
+"merchantTxnId": "782600332",
+"responseTime": "2024-07-17 10:55:53",
+"txnTime": "2024-07-17 10:49:46",
+"txnTimeZone": "+08:00",
+"orderAmount": "200.00",
+"orderCurrency": "USD",
+"txnAmount": "",
+"status": "S",
+"eci": "5",
+"reason": "{"respCode":"20000","respMsg":"Success"}",
+"sign": "8df1056ddd0f792ced4dace4b0be1ab912fec82a74a3f7713682ecb26092f785",
+"paymentMethod": "VISA"
+}
 
 ```
 

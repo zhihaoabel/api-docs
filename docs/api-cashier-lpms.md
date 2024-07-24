@@ -40,12 +40,12 @@ Content-Type: application/json; charset=UTF-8 错误
 
 | 名称          | 类型     | 长度 | 必填  | 签名  | 描述                       |
 |-------------|--------|----|-----|-----|--------------------------|
-| productType | String | 16 | Yes | Yes | 产品类型，请参阅 ProductTypeEnum |                                       |
+| productType | String | 16 | Yes | Yes | 聚合收银台产品类型使用”LPMS“ |                                       |
     
 </div>
 
 
-::: warning   聚合收银台，请求参数可参考收银台信用卡支付，只需将 `productType：CARD` 改为 `ALL` 即可
+::: warning   本地支付，请求参数可参考收银台信用卡支付，只需将 `productType：CARD` 改为 `LPMS` 即可
 :::
 
 
@@ -63,6 +63,7 @@ Content-Type: application/json; charset=UTF-8 错误
 | prepaidNumber | String | /   | No | 预付费卡号，部分支付方式需要                                                                                   |
 
 </div>
+
 
 ## 以下部分展示了本地支付的请求响应示例：
 
