@@ -6,7 +6,7 @@ export default defineConfig({
     lang: 'zh-Hans',
     title: 'Onerway API',
     description: "Onerway面向商户开发者的接口文档",
-    base: '/apis/',
+    // base: '/apis/',
     cleanUrls: false,
     ignoreDeadLinks: true,
 
@@ -38,6 +38,11 @@ export default defineConfig({
         }
     },
 
+    rewrites: {
+      // 将overview.html重定向到index.html
+        '/overview.md': '/index.html',
+    },
+
     themeConfig: {
         logo: '/onerway.png',
         siteTitle: '',
@@ -49,10 +54,10 @@ export default defineConfig({
             {
                 text: '参考',
                 items: [
-                    {text: 'Overview', link: 'index'},
-                    {text: '签名', link: 'sign'},
-                    {text: 'SDK', link: 'js-sdk',},
-                    {text: '收银台支付', link: 'api-cashier'},
+                    {text: 'Overview', link: '/overview.html'},
+                    {text: '签名', link: '/sign.html'},
+                    {text: 'SDK', link: '/js-sdk.html',},
+                    {text: '收银台支付', link: '/api-cashier.html'},
                 ],
             },
         ],
@@ -61,8 +66,8 @@ export default defineConfig({
             {
                 text: '',
                 items: [
-                    {text: 'Overview', link: '/'},
-                    {text: '签名', link: '/sign'},
+                    {text: 'Overview', link: '/index.html'},
+                    {text: '签名', link: '/sign.html'},
                 ],
             },
             {
@@ -71,16 +76,16 @@ export default defineConfig({
                     {
                         text: '收银台支付',
                         items: [
-                            {text: '收银台', link: '/api-cashier'},
-                            {text: '聚合收银台', link: '/api-aggregate-cashier'},
-                            {text: '订阅', link: '/api-cashier-sub'},
+                            {text: '收银台', link: '/api-cashier.html'},
+                            {text: '聚合收银台', link: '/api-aggregate-cashier.html'},
+                            {text: '订阅', link: '/api-cashier-sub.html'},
                         ],
                         collapsed: true,
                     },
                     {
                         text: 'SDK支付',
                         items: [
-                            {text: '接入流程', link: '/sdk-flow.html'},
+                            {text: '接入流程', link: '/sdk-flow.html.html'},
                             {
                                 text: '下单',
                                 link: '/sdk-do-transaction.html',
@@ -105,7 +110,7 @@ export default defineConfig({
                             },
                             {
                                 text: 'WebSDK',
-                                link: 'sdk-pay',
+                                link: 'sdk-pay.html',
                                 items: [
                                     {
                                         text: '绑卡支付',
