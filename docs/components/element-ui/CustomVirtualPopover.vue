@@ -1,24 +1,26 @@
 <template>
-  <el-popover
-      :placement="placement"
-      :title="title"
-      :width="width"
-      :trigger="trigger"
-      :content="content"
-      :ref="popoverRef"
-      :virtual-ref="virtualRef"
-      virtual-triggering
-  >
-    <template #reference>
-      <span class="reference-text">{{reference}}</span>
-    </template>
-    <div class="reference-link my-3">
-      <a v-if="link" class="plain-link" :href="link">
-        Reference
-      </a>
-    </div>
-    <slot/>
-  </el-popover>
+  <ClientOnly>
+    <el-popover
+        :placement="placement"
+        :title="title"
+        :width="width"
+        :trigger="trigger"
+        :content="content"
+        :ref="popoverRef"
+        :virtual-ref="virtualRef"
+        virtual-triggering
+    >
+      <template #reference>
+        <span class="reference-text">{{reference}}</span>
+      </template>
+      <div class="reference-link my-3">
+        <a v-if="link" class="plain-link" :href="link">
+          Reference
+        </a>
+      </div>
+      <slot/>
+    </el-popover>
+  </ClientOnly>
 </template>
 
 <script>
