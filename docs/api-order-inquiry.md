@@ -17,6 +17,8 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 
 # 交易订单查询
 
+用于获取交易数据，以及查询订单详情用来勾兑交易状态。
+
 请求地址、请求方式、请求头 可以参考：
 
 <br>
@@ -54,6 +56,13 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 | current        | String | /  | Yes | Yes | 查询的当前页码                                    |
 | sign           | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                        |
 
+<div class="alertbox4">
+
+::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
+:::
+
+</div>
+
 </div>
 
 
@@ -77,7 +86,7 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 | 名称            | 类型     | 必填  | 描述                                                  |
 |---------------|--------|-----|-----------------------------------------------------|
 | content       | List   | Yes | 交易信息列表，请参阅对象 [TxnInfo](./api-order-inquiry#txninfo) |
-| current       | String | Yes  | 当前页码                                                |
+| current       | String | Yes  | 查询当前页码，每页10条记录                                                |
 | size          | String | Yes  | 当前页大小                                               |
 | totalPages    | String | Yes  | 总页数                                                 |
 | totalElements | String | Yes  | 总条数                                                 |
@@ -128,18 +137,21 @@ https://sandbox-acq.onerway.com/v1/txn/list <Badge type="tip">POST</Badge>
 
 
 
+
+根据时间查询交易列表：
+
 ::: code-group
 
 ```json [请求参数]
 {
-  "chargebackIds": "",
   "current": "1",
-  "importTimeEnd": "",
-  "importTimeStart": "",
+  "endTime": "2024-07-24 00:00:00",
   "merchantNo": "800209",
   "merchantTxnIds": "",
-  "originTransactionIds": "1815582133184757760,1815621472153370624",
-  "sign": "1b620b8554423f620925adbc29b0bea0a6f190c59c7038837541febc122390e4"
+  "sign": "5af39014bb2145e8e52b60e8a27d08079bedc564336da5f2b108527cc1fc22b9",
+  "startTime": "2024-07-23 00:00:00",
+  "transactionIds": "1815627803950186496,1815621472153370624",
+  "txnTypes": ""
 }
 
 ```
@@ -151,36 +163,6 @@ https://sandbox-acq.onerway.com/v1/txn/list <Badge type="tip">POST</Badge>
   "respMsg": "Success",
   "data": {
     "content": [
-      {
-        "transactionId": "1815582133184757760",
-        "merchantTxnId": "355243001534",
-        "txnTime": "2024-07-23 10:58:07",
-        "originTransactionId": null,
-        "productType": "CARD",
-        "subProductType": "DIRECT",
-        "txnType": "SALE",
-        "status": "S",
-        "userPaymentStatus": null,
-        "cardType": "VISA",
-        "paymentMethod": "VISA",
-        "orderAmount": "30.00",
-        "settleRate": "1",
-        "orderCurrency": "USD",
-        "txnAmount": "30.00",
-        "txnCurrency": "USD",
-        "customsDeclarationAmount": null,
-        "customsDeclarationCurrency": null,
-        "arn": null,
-        "appId": "1739545982264549376",
-        "website": "https://docs.onerway.com",
-        "cardBinCountry": "US",
-        "cardNumber": "400002******5032",
-        "walletTypeName": null,
-        "reason": null,
-        "holderName": "sa sa",
-        "eci": null,
-        "email": "Clint_Frami27@gmail.com"
-      },
       {
         "transactionId": "1815621472153370624",
         "merchantTxnId": "1721712864000",
@@ -210,6 +192,36 @@ https://sandbox-acq.onerway.com/v1/txn/list <Badge type="tip">POST</Badge>
         "holderName": "aa bbb",
         "eci": null,
         "email": "abel.wang@onerway.com"
+      },
+      {
+        "transactionId": "1815627803950186496",
+        "merchantTxnId": "1721714370000",
+        "txnTime": "2024-07-23 13:59:35",
+        "originTransactionId": null,
+        "productType": "CARD",
+        "subProductType": "DIRECT",
+        "txnType": "SALE",
+        "status": "N",
+        "userPaymentStatus": null,
+        "cardType": null,
+        "paymentMethod": null,
+        "orderAmount": "100.00",
+        "settleRate": null,
+        "orderCurrency": "USD",
+        "txnAmount": null,
+        "txnCurrency": null,
+        "customsDeclarationAmount": null,
+        "customsDeclarationCurrency": null,
+        "arn": null,
+        "appId": "1739545982264549376",
+        "website": "https://docs.onerway.com",
+        "cardBinCountry": null,
+        "cardNumber": null,
+        "walletTypeName": null,
+        "reason": null,
+        "holderName": null,
+        "eci": null,
+        "email": "abel.wang@onerway.com"
       }
     ],
     "current": "1",
@@ -220,10 +232,130 @@ https://sandbox-acq.onerway.com/v1/txn/list <Badge type="tip">POST</Badge>
 }
 
 ```
+:::
 
+根据订单号，勾兑单笔交易：
+
+::: code-group
+
+```json [请求参数]
+{
+  "chargebackIds": "",
+  "current": "1",
+  "endTime": "",
+  "startTime": "",
+  "merchantNo": "800209",
+  "merchantTxnIds": "355243001534",
+  "originTransactionIds": "",
+  "sign": "188e1743854b0343d63181bfcc7ec72769046b4bda7044000f7ed8baf44ba7df"
+}
+
+```
+
+
+```json [响应参数]
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
+      {
+        "merchantNo": "800209",
+        "chargebackId": "1815648032830914560",
+        "importTime": "2024-07-23 15:19:59",
+        "merchantTxnId": "355243001534",
+        "originTransactionId": "1815582133184757760",
+        "txnAmount": "30.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 10:58:25",
+        "paymentMethod": "VISA",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:59",
+        "chargebackStatus": "NEW"
+      }
+    ],
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 1
+  }
+}
+
+```
+:::
+根据交易类型，查询退款交易：
+
+::: code-group
+
+```json [请求参数]
+{
+  "current": "1",
+  "endTime": "2024-07-25 00:00:00",
+  "merchantNo": "800209",
+  "merchantTxnIds": "",
+  "sign": "5af39014bb2145e8e52b60e8a27d08079bedc564336da5f2b108527cc1fc22b9",
+  "startTime": "2024-07-24 00:00:00",
+  "transactionIds": "",
+  "txnTypes": "REFUND"
+}
+
+```
+
+
+```json [响应参数]
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
+      {
+        "transactionId": "1816005913119956992",
+        "merchantTxnId": null,
+        "txnTime": "2024-07-24 15:02:04",
+        "originTransactionId": "1816005726079164416",
+        "productType": "CARD",
+        "subProductType": "DIRECT",
+        "txnType": "REFUND",
+        "status": "S",
+        "userPaymentStatus": null,
+        "cardType": "MASTERCARD",
+        "paymentMethod": "MASTERCARD",
+        "orderAmount": "200.00",
+        "settleRate": "1",
+        "orderCurrency": "USD",
+        "txnAmount": "200.00",
+        "txnCurrency": "USD",
+        "customsDeclarationAmount": null,
+        "customsDeclarationCurrency": null,
+        "arn": null,
+        "appId": "1739545982264549376",
+        "website": null,
+        "cardBinCountry": null,
+        "cardNumber": null,
+        "walletTypeName": null,
+        "reason": null,
+        "holderName": null,
+        "eci": null,
+        "email": "abel.wang@onerway.com"
+      }
+    ],
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 1
+  }
+}
+
+```
+:::
 <div class="alertbox4">
 
-::: tip 此示例仅限参考 请勿拿此示例直接请求。
+::: tip 根据交易类型调用订单查询接口时，'endTime'和'startTime'必传。
 :::
 
 </div>

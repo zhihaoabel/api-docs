@@ -24,9 +24,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                           |
-|----------------|--------|----|-----|-----|------------------------------|
-| subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅   <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" >  <CustomTable :data="SubProductTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable> </CustomPopover> |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                |
+|----------------|--------|----|-----|-----|-----------------------------------|
+| subProductType | String | 16 | Yes | Yes | 订阅支付‘subProductType’使用‘SUBSCRIBE‘ |
 
 </div>
 

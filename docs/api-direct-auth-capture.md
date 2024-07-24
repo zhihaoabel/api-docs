@@ -21,24 +21,20 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 # 预授权请款
 
-注意事项：
-1. 此接口需要传入原预授权交易订单号，可以通过JS-SDK收银台的下单接口、收银台支付接口、两方支付接口来获得，其中交易类型需要选择`AUTH`/`PRE_AUTH`中的一个。
-2. 此接口目前仅支持全额请款或撤销。
-3. 此接口的交易类型仅支持`CAPTURE`。
-
-## 预授权
+授权请款接口通过对已授权成功的订单进行请款。
+注意：当前仅支持全额请款
 
 #### 请求参数
 
 <div class="custom-table bordered-table">
 
-| 名称                  | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                |
-|---------------------|--------|----|-----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号                                                                                                                                                                                                                     |
-| txnType             | String | 16 | Yes | Yes | 交易类型，请参阅  <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" >  <CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable> </CustomPopover>  。此接口请款仅支持`CAPTURE` |
-| merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权请款的交易订单号，不同的订单号视为不同的交易                                                                                                                                                                                                                    |
-| originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。                                                                                                                                                                                                                          |
-| sign                | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                          |
+| 名称                  | 类型     | 长度 | 必填  | 签名  | 描述                             |
+|---------------------|--------|----|-----|-----|--------------------------------|
+| merchantNo          | String | 20 | Yes | Yes | 商户号。 商户注册时，`OnerWay`会为商户创建商户号  |
+| txnType             | String | 16 | Yes | Yes | 授权请款交易类型使用`CAPTURE`            |
+| merchantTxnId       | String | 64 | No  | Yes | 商户创建的预授权请款的交易订单号，不同的订单号视为不同的交易 |
+| originTransactionId | String | 20 | Yes | Yes | 来自 `Onerway `的原预授权交易订单号。       |
+| sign                | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口      |
 
 
 </div>

@@ -17,6 +17,8 @@ import {ChargebackStatusEnum} from "./util/constants";
 
 # 拒付订单查询
 
+拒付是指在信用卡交易完成后，持卡人认为交易存在争议或被认为是欺诈性的，于是向发卡行提出退款要求。该接口可以查询是否存在此类订单。
+
   <el-alert
     title="调用此接口之前，需先联系我们开通查询拒付权限。"
     type="warning"
@@ -59,9 +61,14 @@ import {ChargebackStatusEnum} from "./util/constants";
 | chargebackIds        | String | /  | No  | Yes | 来自` Onerway` 的拒付交易单号，可以是多个，以逗号分隔                          |
 | importTimeStart      | String | /  | No  | Yes | ` onerway` 接收的拒付交易的开始时间，格式为`yyyy-MM-dd HH:mm:ss`            |
 | importTimeEnd        | String | /  | No  | Yes | ` onerway` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
-| current              | String | /  | Yes | Yes | 查询的当前页码                                                 |
+| current              | String | /  | Yes | Yes | 查询的当前页码，每页10条记录                                                 |
 | sign                 | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                    |
-                            |
+<div class="alertbox4">
+
+::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
+:::
+
+</div>
 
 </div>
 
@@ -131,19 +138,93 @@ import {ChargebackStatusEnum} from "./util/constants";
 
 https://sandbox-acq.onerway.com/v1/chargeback/list <Badge type="tip">POST</Badge>
 
+根据时间查询交易列表：
+::: code-group
+
+```json [请求参数]
+{
+  "chargebackIds": "",
+  "current": "1",
+  "importTimeEnd": "2024-07-24 00:00:00",
+  "importTimeStart": "2024-07-23 00:00:00",
+  "merchantNo": "800209",
+  "merchantTxnIds": "",
+  "originTransactionIds": "",
+  "sign": "a78bfa309daf6c1ae444ad87eed54cc5bd38a822e7360c04a6a11c3e70ca49c0"
+}
+
+```
+
+
+```json [响应参数]
+{
+  "respCode": "20000",
+  "respMsg": "Success",
+  "data": {
+    "content": [
+      {
+        "merchantNo": "800209",
+        "chargebackId": "1815647844296949760",
+        "importTime": "2024-07-23 15:19:14",
+        "merchantTxnId": "1721712864000",
+        "originTransactionId": "1815621472153370624",
+        "txnAmount": "20.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 13:36:59",
+        "paymentMethod": "MASTERCARD",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "1111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:14",
+        "chargebackStatus": "NEW"
+      },
+      {
+        "merchantNo": "800209",
+        "chargebackId": "1815648032830914560",
+        "importTime": "2024-07-23 15:19:59",
+        "merchantTxnId": "355243001534",
+        "originTransactionId": "1815582133184757760",
+        "txnAmount": "30.00",
+        "txnCurrency": "USD",
+        "txnTime": "2024-07-23 10:58:25",
+        "paymentMethod": "VISA",
+        "chargebackAmount": "10.00",
+        "chargebackCurrency": "USD",
+        "chargebackDate": "2024-07-23",
+        "chargebackReason": "111",
+        "chargebackArn": "1111",
+        "chargebackCode": "111",
+        "appealDueTime": "2024-07-26 15:19:59",
+        "chargebackStatus": "NEW"
+      }
+    ],
+    "current": "1",
+    "size": 10,
+    "totalPages": 1,
+    "totalElements": 2
+  }
+}
+
+```
+:::
+
+根据订单号，勾兑单笔交易
 
 ::: code-group
 
 ```json [请求参数]
 {
-  "chargebackIds":"",
-  "current":"1",
-  "importTimeEnd":"",
-  "importTimeStart":"",
-  "merchantNo":"800037",
-  "merchantTxnIds":"",
-  "originTransactionIds":"1535176982304575488",
-  "sign":"…"
+  "chargebackIds": "",
+  "current": "1",
+  "importTimeEnd": "",
+  "importTimeStart": "",
+  "merchantNo": "800209",
+  "merchantTxnIds": "355243001534",
+  "originTransactionIds": "",
+  "sign": "188e1743854b0343d63181bfcc7ec72769046b4bda7044000f7ed8baf44ba7df"
 }
 
 ```
@@ -173,35 +254,17 @@ https://sandbox-acq.onerway.com/v1/chargeback/list <Badge type="tip">POST</Badge
         "chargebackCode": "111",
         "appealDueTime": "2024-07-26 15:19:59",
         "chargebackStatus": "NEW"
-      },
-      {
-        "merchantNo": "800209",
-        "chargebackId": "1815647844296949760",
-        "importTime": "2024-07-23 15:19:14",
-        "merchantTxnId": "1721712864000",
-        "originTransactionId": "1815621472153370624",
-        "txnAmount": "20.00",
-        "txnCurrency": "USD",
-        "txnTime": "2024-07-23 13:36:59",
-        "paymentMethod": "MASTERCARD",
-        "chargebackAmount": "10.00",
-        "chargebackCurrency": "USD",
-        "chargebackDate": "2024-07-23",
-        "chargebackReason": "1111",
-        "chargebackArn": "1111",
-        "chargebackCode": "111",
-        "appealDueTime": "2024-07-26 15:19:14",
-        "chargebackStatus": "NEW"
       }
     ],
     "current": "1",
     "size": 10,
     "totalPages": 1,
-    "totalElements": 2
+    "totalElements": 1
   }
 }
 
 ```
+:::
 
 <div class="alertbox4">
 

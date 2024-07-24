@@ -169,11 +169,11 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 
 <div class="custom-table bordered-table">
 
-| 名称       | 类型     | 必填 | 描述                  |
-|----------|--------|----|---------------------|
-| respCode | String | Yes | 来自 Onerway 的响应码     |
-| respMsg  | String | Yes | 来自 Onerway 的响应信息    |
-| data     | Map    | Yes | 响应数据。 请参阅对象   <CustomPopover title="TxnInfo" width="auto" reference="TxnInfo" link="/apis/api-direct.html#txninfo" ></CustomPopover>      |
+| 名称       | 类型     | 必填 | 描述                               |
+|----------|--------|----|----------------------------------|
+| respCode | String | Yes | 来自 Onerway 的响应码                  |
+| respMsg  | String | Yes | 来自 Onerway 的响应信息                 |
+| data     | Map    | Yes | 响应数据。 请参阅对象 [TxnInfo](./api-direct#txninfo) |
 
 </div>
 

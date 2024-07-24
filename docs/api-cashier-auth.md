@@ -15,44 +15,27 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </script>
 
-# 订阅
-订阅支付是指客户与商家之间建立的一种协议，允许商家根据预先设定的时间表自动收取客户的付款。
+# 预授权
+预授权是一种金融交易方式，主要用于信用卡支付。在某些情况下，商家需要确保顾客的信用卡有足够的信用额度来支付即将发生的交易。这时，商家会向银行发起预授权请求，银行会暂时冻结顾客信用卡上的一定金额，直到交易完成或取消。
 
-## 订阅首购
+## 授权支付
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                 |
-|----------------|--------|----|-----|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| subProductType | String | 16 | Yes | Yes | 子产品类型，请参阅   <CustomPopover title="SubProductTypeEnum" width="auto" reference="SubProductTypeEnum" link="/apis/enums.html#subproducttypeenum" >  <CustomTable :data="SubProductTypeEnum.data" :columns="SubProductTypeEnum.columns"></CustomTable> </CustomPopover> |
-| subscription   | String | /  | No  | Yes | 订阅付款所需的订阅信息。 格式为 `json` 字符串。 请参阅对象 [Subscription](#subscription)                                                                                                                                                                                                   |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述           |
+|----------------|--------|----|-----|-----|--------------|
+| txnType | String | 16 | Yes | Yes | 授权支付使用"AUTH" |
 
 </div>
 
 <div class="alertbox4">
 
-::: tip 基于收银台支付接口，订阅首购需要设置以下参数： `subProductType` 、 `subscription`
+::: tip 基于收银台支付接口，授权需要设置以下参数： `txnType`：`AUTH`
 :::
 
 </div>
 
-#### SubProductType
 
-<div class="custom-table bordered-table">
-
-| 代码          | 描述      | 
-|-------------|---------|
-| DIRECT      | 直接支付    | 
-| SUBSCRIBE   | 订阅支付    |
-| INSTALLMENT | 分期支付    |
-| TOKEN       | token支付 |
-| AUTO_DEBIT  | 代扣      |
-
-</div>
-
-#### Subscription
-
-<!--@include: ./parts/subscription.md-->
 
 
 
@@ -81,7 +64,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </div>
 
-## 订阅首购请求示例：
+## 授权支付请求示例：
 
 https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
@@ -90,20 +73,20 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 ```json [请求参数]
 
 {
-  "merchantNo": "800079",
-  "merchantTxnId": 860499906,
-  "merchantTxnTime": null,
-  "merchantTxnTimeZone": null,
-  "productType": "CARD",
-  "subProductType": "SUBSCRIBE",
-  "txnType": "SALE",
-  "orderAmount": "200",
+  "billingInformation": "{\"country\":\"DE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"şş\",\"lastName\":\"café\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Akşehir\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\",\"province\":\"Akşehir\"}",
+  "merchantCustId": "1721788143000",
+  "merchantNo": "800209",
+  "merchantTxnId": "1721788143000",
+  "merchantTxnTime": "2024-07-24 10:29:03",
+  "merchantTxnTimeZone": "+08:00",
+  "orderAmount": "100",
   "orderCurrency": "USD",
-  "subscription": "{\"merchantCustId\":\"1720507855183939880.4680922699\",\"requestType\":\"0\",\"expireDate\":\"2030-11-11\",\"frequencyType\":\"D\",\"frequencyPoint\":\"1\"}",
-  "txnOrderMsg": "{\"returnUrl\":\"https:\/\/www.merchant-store-website.com\/\",\"notifyUrl\":\"https:\/\/www.merchant-store-notify.com\/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":1673591020057956352}",
-  "shippingInformation": "{\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"phone\":\"13976448789\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"35802\",\"address\":\"test\",\"country\":\"US\",\"province\":\"AS\",\"city\":\"city\",\"street\":\"Amsterdam Ave\",\"number\":10,\"identityNumber\":\"717.628.937-97\"}",
-  "billingInformation": "{\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"phone\":\"13976448789\",\"email\":\"taoyun15@gmail.com\",\"postalCode\":\"35802\",\"address\":\"test\",\"country\":\"US\",\"province\":\"AS\",\"city\":\"city\",\"street\":\"Amsterdam Ave\",\"number\":10,\"identityNumber\":\"717.628.937-97\"}",
-  "sign": "07043e0c11d755b3103281fb20a4cfb122a7d109db2b49b3ede7b289410a6e8c"
+  "productType": "CARD",
+  "shippingInformation": "{\"country\":\"DE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"şş\",\"lastName\":\"café\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Akşehir\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\",\"province\":\"Akşehir\"}",
+  "sign": "efdca32780a8a58918c9fa333cb8aba72586a77eb87b4b0961d4556ed210928a",
+  "subProductType": "DIRECT",
+  "txnOrderMsg": "{\"returnUrl\":\"https://docs.onerway.com/\",\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"1739545982264549376\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",
+  "txnType": "AUTH"   // [!code error]
 }
 
 ```
@@ -111,22 +94,31 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 ```json [响应参数]
 
 {
+  "respCode": "20000",
+  "respMsg": "Success",
   "data": {
-    "transactionId": "1810970934312833024",
-    "merchantTxnId": "860499906",
-    "merchantNo": "800079",
+    "transactionId": "1815937211611619328",
+    "merchantTxnId": "1721788143000",
+    "merchantNo": "800209",
     "responseTime": "",
     "txnTime": "",
-    "orderAmount": "200.00",
+    "orderAmount": "100.00",
     "orderCurrency": "USD",
     "txnAmount": "",
+    "txnCurrency": null,
+    "txnTimeZone": null,
     "status": "U",
-    "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=b04656a9fb52448ab437a47a5933588c",
-    "sign": "",
-    "contractId": ""
-  },
-  "respCode": "20000",
-  "respMsg": "Success"
+    "reason": null,
+    "redirectUrl": "https://sandbox-checkout.onerway.com/checkout?key=be2093ebb79241e1b0f28296ef8f28f7",
+    "sign": "4b059cbfbc3a7b748f15ea0a56bdd77faf26d8cb06e3cedd99fae3ced3df8f9a",
+    "contractId": "",
+    "tokenId": null,
+    "eci": null,
+    "transactionOrderNo": null,
+    "periodValue": null,
+    "lpmsType": null,
+    "qrCode": null
+  }
 }
 
 ```
@@ -139,13 +131,13 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 </div>
 
-## 订阅首购成功示例
+## 授权支付成功示例
 
 ::: code-group
 
 ```json [同步返回（returnurl）]
 
-https://www.merchant-store-website.com/?transactionId=1810970934312833024&merchantTxnId=860499906&merchantNo=800079&responseTime=2024-07-10%2017:35:43&txnTime=2024-07-10%2017:35:22&txnTimeZone=+08:00&orderAmount=200.00&orderCurrency=USD&txnAmount=200.00&txnCurrency=USD&status=S&reason=Payment%20successful&contractId=1810970934409302016&tokenId=cfcc0dae0138d6644a2d39d074d9832557f3ba194664a4a7355a1cccac7c3776&eci=5
+https://www.merchant-store-website.com/?transactionId=1815937211611619328&merchantTxnId=1721788143000&merchantNo=800209&responseTime=2024-07-10%2017:35:43&txnTime=2024-07-10%2017:35:22&txnTimeZone=+08:00&orderAmount=100.00&orderCurrency=USD&txnAmount=100.00&txnCurrency=USD&status=S&reason=Payment%20successful&eci=5
 
 ```
 
@@ -153,22 +145,22 @@ https://www.merchant-store-website.com/?transactionId=1810970934312833024&mercha
 
 {
     "notifyType": "TXN",
-    "transactionId": "1810970934312833024",
-    "txnType": "SALE",
-    "merchantNo": "800079",
-    "merchantTxnId": "860499906",
+    "transactionId": "1815937211611619328",
+    "txnType": "AUTH",
+    "merchantNo": "800209",
+    "merchantTxnId": "1721788143000",
     "responseTime": "2024-07-10 17:35:42",
     "txnTime": "2024-07-10 17:35:22",
     "txnTimeZone": "+08:00",
-    "orderAmount": "200.00",
+    "orderAmount": "100.00",
     "orderCurrency": "USD",
     "txnAmount": "",
     "status": "S",
-    "contractId": "1810970934409302016",
-    "tokenId": "cfcc0dae0138d6644a2d39d074d9832557f3ba194664a4a7355a1cccac7c3776",
+    "contractId": "",
+    "tokenId": "",
     "eci": "5",
     "reason": "{"respCode":"20000","respMsg":"Success"}",
-    "sign": "975a88f47b29c948386f5d4de038bc4751cf37b4a956698ab9c18e8eaff85b72",
+    "sign": "4b059cbfbc3a7b748f15ea0a56bdd77faf26d8cb06e3cedd99fae3ced3df8f9a",
     "paymentMethod": "VISA"
 }
 

@@ -154,7 +154,7 @@ let activeName = ref('first');
 
 ## 收银台接口请求、响应示例：
 
-https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 
 ::: code-group
 

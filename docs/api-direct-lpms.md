@@ -19,7 +19,6 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 </script>
 
 # 本地支付
-本地支付：两方支付的本地支付接口 无需通过第三方方收银台跳转，将通过直连的方式跳转到对应的本地支付。
 
 
 ## 本地支付
@@ -28,10 +27,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                       |
-|-------------|--------|----|-----|-----|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| productType | String | 16 | Yes | Yes | 产品类型，本地支付填写‘LPMS’。请参阅 <br/><CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum"><CustomTable :data="ProductTypeEnumTable.data" :columns="ProductTypeEnumTable.columns"></CustomTable></CustomPopover> |
-| lpmsInfo | String | / | No | Yes | 本地支付方式信息，`productType`为`LPMS`时，除协议代扣外必填，格式为`json`字符串。 请参阅对象 [LpmsInfo](./api-direct-lpms#lpmsinfo)                                                                                                                                                                       |
+| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                      |
+|-------------|--------|----|-----|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| productType | String | 16 | Yes | Yes | 本地支付产品类型填写‘LPMS’|
+| lpmsInfo | String | / | No | Yes | 本地支付方式信息，`productType`为`LPMS`时，除协议代扣外必填，格式为`json`字符串。 请参阅对象 [LpmsInfo](./api-direct-lpms#lpmsinfo)                                                                                                                                                                      |
 
 
 </div>
@@ -59,6 +58,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 | prepaidNumber | String | /   | No  | No | 预付费卡号，部分支付方式需要                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 </div>
+
 ## 以下部分展示了本地支付的请求响应示例：
 
 ### Request
@@ -70,14 +70,14 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
 ```json [请求参数]
 {
   "billingInformation": "{\"country\":\"BR\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"8522847035\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"86258406122\"}",
-  "lpmsInfo": "{\"lpmsType\":\"Boleto\",\"bankName\":\"\",\"iban\":\"\"}",
+  "lpmsInfo": "{\"lpmsType\":\"Boleto\",\"bankName\":\"\",\"iban\":\"\"}", // [!code error]
   "merchantNo": "800209",
   "merchantTxnId": "1721291898000",
   "merchantTxnTime": "2024-07-18 16:38:18",
   "merchantTxnTimeZone": "+08:00",
   "orderAmount": "20.00",
   "orderCurrency": "BRL",
-  "productType": "LPMS",
+  "productType": "LPMS", // [!code error]
   "shippingInformation": "{\"country\":\"BR\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"CL\",\"lastName\":\"BRW2\",\"phone\":\"8522847035\",\"address\":\"Apt. 870\",\"city\":\"Hayward\",\"postalCode\":\"66977\",\"identityNumber\":\"86258406122\"}",
   "sign": "d342edbc884fb6821c50ff84ce5f8042a9462772c0556f8aea23ae523006e2b8",
   "subProductType": "DIRECT",

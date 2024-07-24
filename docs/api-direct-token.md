@@ -24,10 +24,10 @@ Token绑卡支付：绑卡支付是用户将其信用卡或借记卡的信息与
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                           |
-|----------------|--------|----|-----|-----|------------------------------|
-| subProductType | String | 16 | Yes | Yes | TOKEN |
-| tokenInfo      | String | /  | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象  [TokenInfo](./api-direct-token#tokeninfo)   |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                              |
+|----------------|--------|----|-----|-----|-----------------------------------------------------------------------------------------------------------------|
+| subProductType | String | 16 | Yes | Yes | TOKEN支付’subProductType‘使用’TOKEN‘                                                                                     |
+| tokenInfo      | String | /  | No  | Yes | token信息，`subProductType`为`TOKEN`或`AUTO_DEBIT`时必填，格式为`json`字符串。 请参阅对象  [TokenInfo](./api-direct-token#tokeninfo) |
 
 
 
