@@ -1,5 +1,4 @@
 <template>
-  <CLientOnly>
     <div class="custom-table my-0 mx-auto">
       <table class="table-auto">
         <thead>
@@ -20,7 +19,6 @@
         </tbody>
       </table>
     </div>
-  </CLientOnly>
 </template>
 
 <script>
