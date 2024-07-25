@@ -142,7 +142,7 @@ a.plain-link {
 }
 
 a.plain-link:after {
-    content: '↗';
+    /*content: ' ↗';*/
 }
 
 a.plain-link:hover {
@@ -190,24 +190,4 @@ a.plain-link:hover {
 
 .custom-block.details {
     border-left: 6px solid var(--custom-block-details-border);
-}
-
-.alertbox1 .custom-block.tip {
-    border-left: 6px solid #e6a23c;
-    background-color: #fdf6ec;
-}
-
-.alertbox2 .custom-block.tip {
-    border-left: 6px solid #50bfff;
-    background-color: #ecf8ff;
-}
-
-.alertbox3 .custom-block.tip {
-    border-left: 6px solid #fe6c6f;
-    background-color: #fef0f0;
-}
-
-.alertbox4 .custom-block.tip {
-    border-left: 6px solid #e6a23c;
-    background-color: #fdf6ec;
 }

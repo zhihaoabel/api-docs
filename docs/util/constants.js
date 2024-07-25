@@ -1936,7 +1936,7 @@ export const LpmsInfo = {
             length: '128',
             required: 'No',
             sign: 'No',
-            desc: '银行名称。某些本地支付方式需要。</br> lpmsType为`EFT`时</br>请参阅 EFTBankNameEnum。</br> lpmsType为Przelewy24时</br>请参阅 Przelewy24BankNameEnum',
+            desc: `银行名称。某些本地支付方式需要。</br> lpmsType为 <spam class="p-reference bg-reference text-reference rounded-reference">EFT</spam> </br>请参阅 <a class="plain-link" href="./enums#eftbanknameenum">EFTBankNameEnum</a>。</br> lpmsType为 <spam class="p-reference bg-reference text-reference rounded-reference">Przelewy24</spam> 时</br>请参阅 <a class="plain-link" href="./enums#przelewy24banknameenum">Przelewy24BankNameEnum</a>`,
         },
         {
             name: 'iBan',

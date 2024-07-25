@@ -38,12 +38,8 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 # 两方支付
 两方支付，也常被称为站内支付，通常指的是在同一个平台或应用内部完成的支付流程，不需要用户跳转到外部的第三方页面或应用进行支付。
 
-<div class="alertbox2">
-
 ::: tip  两方支付商户必须提供PCI  DSS（支付卡行业数据安全标准）
 :::
-
-</div>
 
 请求地址、请求方式、请求头 可以参考：
 
