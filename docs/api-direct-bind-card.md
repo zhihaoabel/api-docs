@@ -102,16 +102,14 @@ https://sandbox-acq.onerway.com/v1/txn/bindCard <Badge type="tip">POST</Badge>
   "respCode": "20000",
   "respMsg": "Success",
   "data": {
-    "transactionId": "1813811878687023104",
-    "tokenId": "42fbae15a31ec71a1870c7fc859081cbee838cf3da7c76d9c40abe55c20fc0fc",
-    "sign": "a8102449f8395d7181c68868ae0ad397f6b0d8993fc7dd8a306b63d5e39f107b"
+    "transactionId": "1813811878687023104",    // [!code error]
+    "tokenId": "42fbae15a31ec71a1870c7fc859081cbee838cf3da7c76d9c40abe55c20fc0fc",  // [!code error]
+    "sign": "a8102449f8395d7181c68868ae0ad397f6b0d8993fc7dd8a306b63d5e39f107b" 
   }
 }
 
 ```
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>

@@ -24,19 +24,17 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 <br>
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+|----------------|---------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/onlineRefund  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                       |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                       |
 
 <br>
 
-<div class="alertbox3">
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
-</div>
 
 
 ## 申请退款
@@ -73,7 +71,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-acq.onerway.com//v1/txn/onlineRefund<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com//v1/txn/onlineRefund <Badge type="tip">POST</Badge>
 
 
 ::: code-group
@@ -101,10 +99,8 @@ https://sandbox-acq.onerway.com//v1/txn/onlineRefund<Badge type="tip">POST</Badg
 
 ```
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 

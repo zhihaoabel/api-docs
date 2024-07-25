@@ -25,9 +25,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
  <div class="custom-table bordered-table">
 
 
-| 名称          | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                                                                                                                                                                |
-|-------------|--------|----|-----|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| productType | String | 16 | Yes | Yes | 产品类型，请参阅   <CustomPopover title="ProductTypeEnum" width="auto" reference="ProductTypeEnum" link="/apis/enums.html#producttypeenum" > <CustomTable :data="ProductTypeEnum.data" :columns="ProductTypeEnum.columns"></CustomTable> </CustomPopover> |
+| 名称          | 类型     | 长度 | 必填  | 签名  | 描述   |
+|-------------|--------|----|-----|-----|--------|
+| productType | String | 16 | Yes | Yes | 聚合收银台产品类型使用”ALL“ |
 
 
 </div>
@@ -127,12 +127,9 @@ https://www.merchant-store-website.com/?transactionId=1810968449028329472&mercha
 ```
 :::
 
-<div class="alertbox4">
-
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 
 
 ## 指定本地支付方式
@@ -221,9 +218,6 @@ https://www.merchant-store-website.com/?transactionId=1810968449028329472&mercha
 ```
 :::
 
-<div class="alertbox4">
 
 ::: tip 若请求成功，商家需要获取响应参数中的redirectUrl，然后进行重定向打开。
 :::
-
-</div>

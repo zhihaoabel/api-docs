@@ -25,13 +25,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 
 
-<div class="alertbox3">
-
 ::: tip  特别注意：验签通知时将接收到通知中的所有非空参数，剔除文档上为`NO`的参数。剩下的所有参数，先按参数`Key`做`ASCII`码排序，然后将`Value`拼接成字符串，再在字符串的末尾加上商户秘钥，最后`sha256`签名，验签无误之后将 `transactionId`   返回，只需要返回 `transactionId` 的值。
 
 :::
 
-</div>
 
 
 
@@ -93,12 +90,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </div>
 
-<div class="alertbox4">
 
 ::: tip 只需返回 transactionId 的值 ! <br>  返回值 ： <br>  "1798262509925699584"  错误  <br>   1798262509925699584  正确
 :::
 
-</div>
 
 
 
@@ -261,13 +256,11 @@ function ASCII_HASH($params , $PrivateKey){
 :::
 
 
-<div class="alertbox3">
 
 ::: tip  特别注意  以下字段为不参与签名需要剔除：`originTransactionId`、`originMerchantTxnId`、`customsDeclarationAmount`、`customsDeclarationCurrency`、`paymentMethod`、`walletTypeName`、`periodValue`、`tokenExpireTime`、`sign`
             
 :::
 
-</div>
 
 
 
@@ -441,9 +434,5 @@ function ASCII_HASH($params , $PrivateKey){
 ```
 
 
-<div class="alertbox4">
-
 ::: tip 您的订单需要通过异步通知来判断是否成功，并以此为依据修改您后台的订单状态。必须以异步通知通知为准。 需要注意的是  退款审核通知 只会在退款审核失败的情况下才会发送异步通知。
 :::
-
-</div>

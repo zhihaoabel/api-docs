@@ -16,7 +16,24 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 # 获取绑定Token列表
 
-## 交易订单查询
+用于TOKEN支付。商家可以通过这个接口，展示顾客绑过的卡。
+
+请求地址、请求方式、请求头 可以参考：
+
+<br>
+
+|   <div style="text-align: left;">名称</div>| 内容                                                         |
+|----------------|--------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/getCustomsResult  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                      |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                      |
+
+<br>
+
+
+
+::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确
+:::
 
 #### 请求参数
 
@@ -75,7 +92,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-acq.onerway.com/v1/txn/queryTokenList<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/queryTokenList <Badge type="tip">POST</Badge>
 
 
 
@@ -84,10 +101,9 @@ https://sandbox-acq.onerway.com/v1/txn/queryTokenList<Badge type="tip">POST</Bad
 ```json [请求参数]
 {
   "appId": "1739545982264549376",
-  "cardInfo": "{\"cardNumber\":\"4000027891380961\",\"cvv\":\"789\",\"month\":\"12\",\"year\":\"2030\",\"holderName\":\"CL BRW2\"}",
-  "merchantCustId": "1721286614000",
+  "merchantCustId": "1721809480000",
   "merchantNo": "800209",
-  "sign": "c80cfab1c4237376e7c5c3155744954bc4495be341c793ef958a7c0adebebd4c"
+  "sign": "a7f8c70af27ac80bbca08b21c0fa1382bcf5d6759e229842d687d4ec1971ab0c"
 }
 
 ```
@@ -99,23 +115,22 @@ https://sandbox-acq.onerway.com/v1/txn/queryTokenList<Badge type="tip">POST</Bad
   "respMsg": "Success",
   "data": {
     "merchantNo": "800209",
-    "tokenInfos": {
-      "id": "1739545982264556788",
-      "tokenId": "1813811878687023104",
-      "appId": "1739545982264549376",
-      "cardNumber": "400002****0961",
-      "paymentMethod": "VISA",
-      "year": "2030",
-      "month": "12"
-    }
+    "tokenInfos": [
+      {
+        "id": "1816026699615260674",
+        "tokenId": "da417a30dee1a4527ae044bf82d35e3f6beef6eda47417679217ed7f35d8cb34",
+        "appId": "1739545982264549376",
+        "cardNumber": "400002******0961",
+        "paymentMethod": "VISA",
+        "year": "2031",
+        "month": "12"
+      }
+    ]
   }
 }
 
 ```
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
-
-</div>

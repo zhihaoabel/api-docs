@@ -2474,3 +2474,67 @@ export  const CodeFormEnum = {
         },
     ],
 };
+
+export  const ChargebackStatusEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: 'NEW',
+            desc:'表示发生新的拒付',
+        },
+        {
+            code: 'FA',
+            desc:'在第一次申诉中',
+        },
+        {
+            code: 'FAF',
+            desc:'第一次申诉失败',
+        },
+        {
+            code: 'FAS',
+            desc:'第一次申诉成功',
+        },
+        {
+            code: 'FAT',
+            desc:'第一次申诉超时',
+        },
+        {
+            code: 'SA',
+            desc:'在第二次申诉中',
+        },
+        {
+            code: 'SAF',
+            desc:'第二次申诉失败',
+        },
+        {
+            code: 'SAS',
+            desc:'第二次申诉成功',
+        },
+        {
+            code: 'SAT',
+            desc:'第二次申诉超时',
+        },
+        {
+            code: 'ACCEPT',
+            desc:'接受拒付',
+        },
+        {
+            code: 'REVOKE',
+            desc:'拒付被撤销',
+        },
+        {
+            code: 'DELETE',
+            desc:'被删除（仅用于拒付通知）',
+        },
+
+    ],
+};
