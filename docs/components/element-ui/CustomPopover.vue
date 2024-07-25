@@ -1,21 +1,23 @@
 <template>
   <ClientOnly>
-    <el-popover
-        :placement="placement"
-        :title="title"
-        :width="width"
-        :trigger="trigger"
-    >
-      <template #reference>
-        <span class="reference-text">{{reference}}</span>
-      </template>
-      <div class="reference-link my-3">
-        <a v-if="link" class="plain-link" :href="link">
-          Reference
-        </a>
-      </div>
-      <slot/>
-    </el-popover>
+    <div class="popover-container">
+      <el-popover
+          :placement="placement"
+          :title="title"
+          :width="width"
+          :trigger="trigger"
+      >
+        <template #reference>
+          <span class="reference-text">{{reference}}</span>
+        </template>
+        <div class="reference-link my-3">
+          <a v-if="link" class="plain-link" :href="link">
+            Reference
+          </a>
+        </div>
+        <slot/>
+      </el-popover>
+    </div>
   </ClientOnly>
 </template>
 
