@@ -23,10 +23,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 <br>
 
 |   <div style="text-align: left;">名称</div>| 内容                                                          |
-|----------------:|:---------------------------------------------------------------|
-| Request URL :    | https://sandbox-acq.onerway.com/txn/payment  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                        |
-| Content-Type :  | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                        |
+|----------------|---------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/sub/cancel  |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                       |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                       |
 
 <br>
 
@@ -85,7 +85,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ### Request
 
-https://sandbox-acq.onerway.com/v1/txn/sub/cancel<Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/sub/cancel <Badge type="tip">POST</Badge>
 
 ::: code-group
 
