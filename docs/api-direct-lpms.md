@@ -36,12 +36,8 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 </div>
 
 
-<div class="alertbox4">
-
 ::: tip   两方支付的本地支付，请求参数可参考两方支付信用卡支付，需将 `productType：CARD` 改为 `productType：LPMS` ,`lpmsInfo` 传需要对接的本地支付。
 :::
-
-</div>
 
 
 ##### LpmsInfo
@@ -117,12 +113,11 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
 
 ```
 
-<div class="alertbox4">
+
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 
 
 

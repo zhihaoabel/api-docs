@@ -31,12 +31,9 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 
 <br>
 
-<div class="alertbox3">
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
-
-</div>
 
 
 ## 交易订单查询
@@ -56,12 +53,10 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 | current        | String | /  | Yes | Yes | 查询的当前页码                                    |
 | sign           | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                        |
 
-<div class="alertbox4">
 
 ::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
 :::
 
-</div>
 
 </div>
 
@@ -353,9 +348,7 @@ https://sandbox-acq.onerway.com/v1/txn/list <Badge type="tip">POST</Badge>
 
 ```
 :::
-<div class="alertbox4">
 
 ::: tip 根据交易类型调用订单查询接口时，'endTime'和'startTime'必传。
 :::
 
-</div>

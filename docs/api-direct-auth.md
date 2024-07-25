@@ -28,12 +28,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </div>
 
-<div class="alertbox4">
-
 ::: tip 基于两方支付接口，授权需要设置以下参数： `txnType`：`AUTH`
 :::
 
-</div>
 
 
 #### 响应参数

@@ -38,12 +38,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <!--@include: ./parts/subscription.md-->
 
-<div class="alertbox4">
 
 ::: tip   订阅支付，在两方支付接口中，设置 `subProductType`：` SUBSCRIBE` 以及`subscription` 参数；
 :::
-
-</div>
 
 ## 以下部分展示了订阅支付的请求示例：
 
@@ -159,11 +156,9 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
 
 ```
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 
 

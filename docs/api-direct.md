@@ -57,12 +57,9 @@ import {TransactionAddress, LpmsInfo, ProductTypeEnum, SubProductTypeEnum, TxnTy
 
 <br>
 
-<div class="alertbox3">
-
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
-</div>
 
 
 ## 两方支付
@@ -320,11 +317,10 @@ https: //www.merchant-store-website.com/?transactionId=1813405705672466432&merch
 
 ```
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
+
 
 

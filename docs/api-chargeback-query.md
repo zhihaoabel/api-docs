@@ -39,12 +39,9 @@ import {ChargebackStatusEnum} from "./util/constants";
 
 <br>
 
-<div class="alertbox3">
-
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
-</div>
 
 
 ## 拒付订单查询
@@ -63,12 +60,11 @@ import {ChargebackStatusEnum} from "./util/constants";
 | importTimeEnd        | String | /  | No  | Yes | ` OnerWay` 接收的拒付交易的结束时间，格式为`yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。 |
 | current              | String | /  | Yes | Yes | 查询的当前页码，每页10条记录                                                 |
 | sign                 | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                    |
-<div class="alertbox4">
+
 
 ::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
 :::
 
-</div>
 
 </div>
 
@@ -266,10 +262,8 @@ https://sandbox-acq.onerway.com/v1/chargeback/list <Badge type="tip">POST</Badge
 ```
 :::
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 

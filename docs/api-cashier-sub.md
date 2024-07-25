@@ -29,12 +29,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 </div>
 
-<div class="alertbox4">
 
 ::: tip 基于收银台支付接口，订阅首购需要设置以下参数： `subProductType` 、 `subscription`
 :::
 
-</div>
 
 #### SubProductType
 
@@ -132,12 +130,9 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 ```
 :::
 
-<div class="alertbox4">
-
 ::: tip 若请求成功，商家需要获取响应参数中的redirectUrl，然后进行重定向打开。
 :::
 
-</div>
 
 ## 订阅首购成功示例
 

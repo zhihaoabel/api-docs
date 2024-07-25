@@ -30,12 +30,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <br>
 
-<div class="alertbox3">
+
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确
 :::
-
-</div>
 
 #### 请求参数
 
@@ -133,9 +131,6 @@ https://sandbox-acq.onerway.com/v1/txn/queryTokenList <Badge type="tip">POST</Ba
 
 ```
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
-
-</div>
