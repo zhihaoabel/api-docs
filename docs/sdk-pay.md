@@ -1,5 +1,11 @@
 ---
 outline: deep
+prev:
+    text: 更新订单
+    link: ./sdk-update-order
+next:
+    text: 绑卡支付
+    link: ./sdk-pay-bind
 ---
 
 <script lang="ts" setup>

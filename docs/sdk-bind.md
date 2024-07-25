@@ -22,7 +22,7 @@ import {SubProductTypeEnum} from "./util/constants";
 
 </div>
 
-::: tip 绑卡支付请求参数请参考[下单请求中的信用卡支付](./sdk-do-transaction#sdk下单请求及响应示例)，只需将`subProductType` 由 `CARD` 改为 `TOKEN`即可
+::: tip 绑卡支付请求参数请参考[下单请求中的信用卡支付](./sdk-do-transaction#sdk下单请求及响应示例)，只需将`subProductType` 由 `DIRECT` 改为 `TOKEN`即可
 
 ```json lines
 {
