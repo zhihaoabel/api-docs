@@ -43,12 +43,10 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <br>
 
-<div class="alertbox3">
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
-</div>
 
 
 ## 下载文件
@@ -208,10 +206,7 @@ public void downLoad(@RequestParam("localFileName") String localFileName,HttpSer
 ```
 
 
-<div class="alertbox4">
-
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 

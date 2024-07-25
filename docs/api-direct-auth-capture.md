@@ -130,12 +130,11 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
 ```
 
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
+
 
 
 

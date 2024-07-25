@@ -34,12 +34,10 @@ let activeName = ref('first');
 
 </div>
 
-<div class="alertbox3">
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确
 :::
 
-</div>
 
 ####  接入流程 <br><br>
 
@@ -108,12 +106,10 @@ let activeName = ref('first');
 
 <!--@include: ./parts/txn-info.md-->
 
-<div class="alertbox3">
 
 ::: tip 销售虚拟商品的商户 必须提前与我们沟通。
 :::
 
-</div>
 
 
 
@@ -238,12 +234,10 @@ https://www.merchant-store-website.com/?transactionId=1810961729430360064&mercha
 ```
 :::
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 
 <style lang="css">
 

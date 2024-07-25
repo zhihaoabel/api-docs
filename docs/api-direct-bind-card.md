@@ -109,9 +109,7 @@ https://sandbox-acq.onerway.com/v1/txn/bindCard <Badge type="tip">POST</Badge>
 }
 
 ```
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>

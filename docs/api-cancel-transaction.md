@@ -34,12 +34,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <br>
 
-<div class="alertbox3">
+
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
 
-</div>
 
 
 ## 申请取消交易
@@ -114,9 +113,7 @@ https://sandbox-acq.onerway.com/v1/txn/cancelTxn <Badge type="tip">POST</Badge>
 ```
 
 
-<div class="alertbox4">
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>

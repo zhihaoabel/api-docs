@@ -127,12 +127,9 @@ https://www.merchant-store-website.com/?transactionId=1810968449028329472&mercha
 ```
 :::
 
-<div class="alertbox4">
-
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::
 
-</div>
 
 
 ## 指定本地支付方式
@@ -221,9 +218,6 @@ https://www.merchant-store-website.com/?transactionId=1810968449028329472&mercha
 ```
 :::
 
-<div class="alertbox4">
 
 ::: tip 若请求成功，商家需要获取响应参数中的redirectUrl，然后进行重定向打开。
 :::
-
-</div>
