@@ -93,7 +93,7 @@ export default defineConfig({
                             },
                             {
                                 text: 'WebSDK',
-                                link: 'sdk-pay',
+                                link: '/sdk-pay',
                                 items: [
                                     {
                                         text: '绑卡支付',
@@ -102,6 +102,10 @@ export default defineConfig({
                                     {
                                         text: '订阅支付',
                                         link: '/sdk-pay-subscribe'
+                                    },
+                                    {
+                                        text: '预授权扣款',
+                                        link: '/sdk-pay-auth'
                                     },
                                     {
                                         text: 'ApplePay',
@@ -127,10 +131,10 @@ export default defineConfig({
                             {text: 'Token支付', link: '/api-direct-token'},
                             {text: '订阅支付', link: '/api-direct-sub'},
                             // {text: '分期付款', link: '/installment'},
-                            {text: '授权支付', link: 'api-direct-auth'},
-                            {text: '授权请款', link: 'api-direct-auth-capture'},
-                            {text: '授权撤销', link: 'api-direct-auth-reverse'},
-                            {text: '本地支付', link: 'api-direct-lpms'},
+                            {text: '授权支付', link: '/api-direct-auth'},
+                            {text: '授权请款', link: '/api-direct-auth-capture'},
+                            {text: '授权撤销', link: '/api-direct-auth-reverse'},
+                            {text: '本地支付', link: '/api-direct-lpms'},
                         ],
                         collapsed: true,
                     },

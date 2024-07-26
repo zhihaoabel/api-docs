@@ -24,17 +24,13 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                |
-|----------------|--------|----|-----|-----|-----------------------------------|
-| subProductType | String | 16 | Yes | Yes | 订阅支付‘subProductType’使用‘SUBSCRIBE‘ |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                   |
+|----------------|--------|----|-----|-----|--------------------------------------|
+| subProductType | String | 16 | Yes | Yes | 订阅支付 `subProductType` 使用 `SUBSCRIBE` |
 
 </div>
 
-
-
-
-
-#### Subscription
+### Subscription
 
 <!--@include: ./parts/subscription.md-->
 
@@ -42,12 +38,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 ::: tip   订阅支付，在两方支付接口中，设置 `subProductType`：` SUBSCRIBE` 以及`subscription` 参数；
 :::
 
-## 以下部分展示了订阅支付的请求示例：
-
-### Request
+## 订阅支付请求示例
 
 https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
 
+### 订阅首购
 
 ::: code-group
 
@@ -71,29 +66,6 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
    "txnOrderMsg": "{\"returnUrl\":\"https://www.merchant-store-website.com/\",\"appId\":\"1739545982264549376\",\"notifyUrl\":\"https://www.merchant-store-notify.com/\",\"products\":\"[{\\\"name\\\":\\\"Pro1\\\",\\\"price\\\":\\\"50.00\\\",\\\"num\\\":\\\"2\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"Pro2\\\",\\\"price\\\":\\\"100\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\"},{\\\"name\\\":\\\"shipping fee\\\",\\\"price\\\":\\\"10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"shipping_fee\\\"},{\\\"name\\\":\\\"discount\\\",\\\"price\\\":\\\"-10\\\",\\\"num\\\":\\\"1\\\",\\\"currency\\\":\\\"USD\\\",\\\"type\\\":\\\"discount\\\"}]\",\"transactionIp\":\"127.0.0.1\"}",
    "txnType": "SALE"
 }
-
-
-```
-
-```json[订阅复购请求]
-{
-    "//": "订阅复购",
-    "merchantCustId": "1721287886000",
-    "merchantNo": "800209",
-    "merchantTxnId": "1721287886000",
-    "merchantTxnTime": "2024-07-18 15:31:26",
-    "merchantTxnTimeZone": "+08:00",
-    "orderAmount": "10",
-    "orderCurrency": "USD",
-    "productType": "CARD",
-    "sign": "f752bdee4e1842787ce4fe1cb1cbb98e6acebfcc5bb199a8a605ae3b1bbc3fef",
-    "subProductType": "SUBSCRIBE",  // [!code error]
-    "subscription": "{\"requestType\":\"1\",\"tokenId\":\"822ba14cc565ab56887029673e244c57daf3eb2373a70a6bfd4132f1d8ad059c\",\"contractId\":\"1813837154846384128\",\"merchantCustId\":\"1721287886000\"}",  // [!code error]
-    "txnOrderMsg": "{\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"appId\":\"1739545982264549376\"}",
-    "txnType": "SALE"
-}
-
-
 ```
 
 ```json[订阅首购响应]
@@ -122,10 +94,32 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
         "sign": "b6194118ac1f707cf4a6138b22c58296501a8ac0d011ae0d33e9e12265393471"
     }
 }
-
 ```
 
+:::
 
+### 订阅复购
+
+::: code-group
+
+```json[订阅复购请求]
+{
+    "//": "订阅复购",
+    "merchantCustId": "1721287886000",
+    "merchantNo": "800209",
+    "merchantTxnId": "1721287886000",
+    "merchantTxnTime": "2024-07-18 15:31:26",
+    "merchantTxnTimeZone": "+08:00",
+    "orderAmount": "10",
+    "orderCurrency": "USD",
+    "productType": "CARD",
+    "sign": "f752bdee4e1842787ce4fe1cb1cbb98e6acebfcc5bb199a8a605ae3b1bbc3fef",
+    "subProductType": "SUBSCRIBE",  // [!code error]
+    "subscription": "{\"requestType\":\"1\",\"tokenId\":\"822ba14cc565ab56887029673e244c57daf3eb2373a70a6bfd4132f1d8ad059c\",\"contractId\":\"1813837154846384128\",\"merchantCustId\":\"1721287886000\"}",  // [!code error]
+    "txnOrderMsg": "{\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"appId\":\"1739545982264549376\"}",
+    "txnType": "SALE"
+}
+```
 
 ```json[订阅复购响应]
 {
@@ -153,9 +147,9 @@ https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Bad
         "sign": "2a07b1cd9fc2e8f52ab648fd398407f305fd2f4e67088641e9b51cf517ce1e74"
     }
 }
-
 ```
 
+:::
 
 ::: tip 此示例仅限参考 请勿拿此示例直接请求。
 :::

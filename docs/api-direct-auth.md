@@ -22,9 +22,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述           |
-|----------------|--------|----|-----|-----|--------------|
-| txnType | String | 16 | Yes | Yes | 授权支付使用"AUTH" |
+| 名称      | 类型     | 长度 | 必填  | 签名  | 描述            |
+|---------|--------|----|-----|-----|---------------|
+| txnType | String | 16 | Yes | Yes | 授权支付使用 `AUTH` |
 
 </div>
 
@@ -38,8 +38,8 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <div class="custom-table bordered-table">
 
-| 名称       | 类型     | 必填 | 描述                                               |
-|----------|--------|----|--------------------------------------------------|
+| 名称       | 类型     | 必填  | 描述                                               |
+|----------|--------|-----|--------------------------------------------------|
 | respCode | String | Yes | 来自 Onerway 的响应码                                  |
 | respMsg  | String | Yes | 来自 Onerway 的响应信息                                 |
 | data     | Map    | Yes | 响应数据。 请参阅对象 [TxnInfo](./api-direct-auth#txninfo) |

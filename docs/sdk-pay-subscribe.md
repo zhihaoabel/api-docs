@@ -23,7 +23,7 @@ const options = {
 ```
 :::
 
-## SDK订阅支付代码示例
+### SDK订阅支付代码示例
 
 ::: danger 注意
 `subProductType` 必须与 [下单接口](sdk-subscription#请求及响应示例) 的 `subProductType` 保持一致
@@ -82,6 +82,10 @@ const pacypay = new Pacypay(transactionId, {
  });
  
 ```
+
+### 订阅复购
+
+订阅复购请参考两方支付[复购](api-direct-sub)接口
 
 <style lang="css">
 
