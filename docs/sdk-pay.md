@@ -14,6 +14,8 @@ import {SubProductTypeEnum, LanguageEnum, LocaleEnum} from "./util/constants";
 
 </script>
 
+[[toc]]
+
 # WebSDK支付
 
 ## 引入 Onerway JavaScript 库
@@ -48,7 +50,7 @@ const pacypay = new pacypay(transactionId, options)
 
 ### options
 
-创建options对象
+#### 创建options对象
 
 ```js
 const options = {
@@ -76,21 +78,21 @@ const options = {
 
 <div class="custom-table bordered-table">
 
-| 属性                 | 类型       | 必填  | 说明                                                                                                                                                                                                                                                                                                                                        |
-|--------------------|----------|-----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| container          | string   | No  | 容器id,默认`pacypay_checkout`                                                                                                                                                                                                                                                                                                                 |
-| locale             | string   | No  | 语言类型。<br>1. 收银台集成：详见 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"> </CustomTable></CustomPopover>。<br>2. Google Pay 和 Apple Pay 集成详见： [ApplePay](./sdk-pay-apple)、[GooglePay](./sdk-pay-google)。 |
-| environment        | string   | No  | 环境类型，支持`sandbox`、`production`。默认为 `production`                                                                                                                                                                                                                                                                                            |
-| mode               | string   | Yes | 支付方式，支持 `CARD`、`ApplePay`、`GooglePay`                                                                                                                                                                                                                                                                                                     |
-| config             | object   | No  | 配置项。<br>1.收银台集成：详见以下 [config](#config) 说明 <br>2. Google Pay 和 Apple Pay 集成详见： [ApplePay Config](./sdk-pay-apple)、[GooglePay Config](./sdk-pay-google)。                                                                                                                                                                                    |
-| onPaymentCompleted | function | No  | 请求成功完成回调方法                                                                                                                                                                                                                                                                                                                                |
-| onError            | function | No  | 请求异常回调方法                                                                                                                                                                                                                                                                                                                                  |
+| 属性                 | 类型       | 必填  | 说明                                                                                                                                                                                                                                                                                                                                                                          |
+|--------------------|----------|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| container          | string   | No  | 容器id,默认`pacypay_checkout`                                                                                                                                                                                                                                                                                                                                                   |
+| locale             | string   | No  | 语言类型。<br>1. 收银台集成：详见 <CustomPopover title="LanguageEnum" width="auto" reference="LanguageEnum" link="/apis/enums.html#languageenum"><CustomTable :data="LanguageEnum.data" :columns="LanguageEnum.columns"> </CustomTable></CustomPopover><br>2. Google Pay 和 Apple Pay 集成详见： [ApplePay](./sdk-pay-apple#apple-pay-locale)、[GooglePay](./sdk-pay-google#google-pay-locale)。 |
+| environment        | string   | No  | 环境类型，支持`sandbox`、`production`。默认为 `production`                                                                                                                                                                                                                                                                                                                              |
+| mode               | string   | Yes | 支付方式，支持 `CARD`、`ApplePay`、`GooglePay`                                                                                                                                                                                                                                                                                                                                       |
+| config             | object   | No  | 配置项。<br>1.收银台集成：详见以下 [config](#config) 说明 <br>2. Google Pay 和 Apple Pay 集成详见： [ApplePay Config](./sdk-pay-apple)、[GooglePay Config](./sdk-pay-google)。                                                                                                                                                                                                                      |
+| onPaymentCompleted | function | No  | 请求成功完成回调方法                                                                                                                                                                                                                                                                                                                                                                  |
+| onError            | function | No  | 请求异常回调方法                                                                                                                                                                                                                                                                                                                                                                    |
 
 </div>
 
 #### config
 
-创建config项
+##### 创建config项
 
 ::: warning 注意
 以下是SDK收银台配置代码示例，[Apple Pay](./sdk-pay-apple#apple-pay-config字段说明)、[Google Pay](./sdk-pay-google#google-pay-config字段说明) 配置及字段说明请参考对应场景的代码示例
