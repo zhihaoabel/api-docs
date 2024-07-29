@@ -155,7 +155,7 @@ https://www.merchant-store-website.com/?transactionId=1815937211611619328&mercha
     "contractId": "",
     "tokenId": "",
     "eci": "5",
-    "reason": "{"respCode":"20000","respMsg":"Success"}",
+    "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",
     "sign": "4b059cbfbc3a7b748f15ea0a56bdd77faf26d8cb06e3cedd99fae3ced3df8f9a",
     "paymentMethod": "VISA"
 }

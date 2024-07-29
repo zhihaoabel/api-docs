@@ -162,7 +162,7 @@ https://www.merchant-store-website.com/?transactionId=1810970934312833024&mercha
     "contractId": "1810970934409302016",
     "tokenId": "cfcc0dae0138d6644a2d39d074d9832557f3ba194664a4a7355a1cccac7c3776",
     "eci": "5",
-    "reason": "{"respCode":"20000","respMsg":"Success"}",
+    "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",
     "sign": "975a88f47b29c948386f5d4de038bc4751cf37b4a956698ab9c18e8eaff85b72",
     "paymentMethod": "VISA"
 }

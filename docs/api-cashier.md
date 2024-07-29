@@ -226,7 +226,7 @@ https://www.merchant-store-website.com/?transactionId=1810961729430360064&mercha
   "txnAmount": "",
   "status": "S",
   "eci": "5",
-  "reason": "{"respCode":"20000","respMsg":"Success"}",
+  "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",
   "sign": "2abc7bf9e3274a040bb4b946823673e6dabade4589a5ed5dde5fcfe4dfb400f4",
   "paymentMethod": "VISA"
 }
