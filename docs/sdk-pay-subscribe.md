@@ -10,7 +10,7 @@ import "./util/constants";
 
 # 订阅支付
 
-::: tip 订阅支付UI与直接直接支付共用同一个UI，所以保持 `subProductType`为`DIRECT`，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
+::: tip 订阅支付UI与直接支付共用同一个UI，所以保持 `subProductType`为`DIRECT`，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
 ```js
 const options = {
     // ...
