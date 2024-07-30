@@ -21,7 +21,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ::: warning 注意
 1. 当前仅支持全额请款
-2. 请在预授权成功后的 <span class="text-red-400 font-medium"> 4 </span> 天内发起请款
+2. 请在预授权成功后的 <span class="text-red-400 font-medium"> 3 </span> 天内发起请款
 :::
 
 ### 请求参数
