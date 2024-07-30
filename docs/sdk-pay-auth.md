@@ -8,12 +8,12 @@ outline: deep
 
 # 预授权扣款
 
-::: tip 预授权扣款保持 `config` 中的 `subProductType` 为 `DIRECT` 不变，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
+::: tip 订阅支付UI与直接直接支付共用同一个UI，所以保持 `subProductType`为`DIRECT`，其他配置请参考[SDK直接支付config字段说明](./sdk-pay#config)
 ```js
 const options = {
     // ...
     config: {
-        "subProductType": "DIRECT", // DIRECT - 直接支付，TOKEN - 绑卡并支付，SUBSCRIBE - 订阅支付 // [!code warning]
+        "subProductType": "DIRECT", // DIRECT - 直接支付，TOKEN - 绑卡并支付 // [!code warning]
         // ...
     }
     // ...
