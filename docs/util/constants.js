@@ -2538,3 +2538,33 @@ export  const ChargebackStatusEnum = {
 
     ],
 };
+export  const ContractStatusEnum = {
+    columns: [
+        {
+            prop: 'code',
+            label: '代码',
+        },
+        {
+            prop: 'desc',
+            label: '描述',
+        },
+    ],
+    data: [
+        {
+            code: '0',
+            desc:'处理中',
+        },
+        {
+            code: '1',
+            desc:'生效',
+        },
+        {
+            code: '2',
+            desc:'不生效',
+        },
+        {
+            code: '3',
+            desc:'被取消',
+        },
+    ],
+};
