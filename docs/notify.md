@@ -12,81 +12,91 @@ import CustomPopover from './components/element-ui/CustomPopover.vue';
 import CustomTable from "./components/element-ui/CustomTable.vue";
 import {TopRight, View} from "@element-plus/icons-vue";
 import { ClickOutside as vClickOutside } from 'element-plus';
+import { NotifyTypeEnum, TxnTypeEnum, ChargebackStatusEnum} from './util/constants';
 
 </script>
 
 # 通知
 
-注意事项：
-1. 通知地址可以通过两种方式给到我们，一种是由商户在Onerway注册时提供，另一种是通过交易接口中的字段传输。
-2. 优先找交易接口中的字段作为通知地址，如果没有则会找后台配置的，如果还是找不到则不会发送通知。
-3. 商户需要根据以下参数开发并响应接收结果。
-4. 支付结果以异步通知为准！
+## 注意事项
+1. 通知地址可以通过两种方式给到我们，一种是由商户在`Onerway`注册时提供，另一种是通过交易接口中的`notifyUrl`指定。
+2. 优先使用`notifyUrl`作为通知地址，如果没有传则会找后台配置的，如果还是找不到则不会发送通知。
+3. 支付结果以异步通知为准，**同步响应中的`status`字段不能用来判断支付结果**！
 
-::: tip  特别注意：验签通知时将接收到通知中的所有非空参数，剔除文档上为`NO`的参数。剩下的所有参数，先按参数`Key`做`ASCII`码排序，然后将`Value`拼接成字符串，再在字符串的末尾加上商户秘钥，最后`sha256`签名，验签无误之后将 `transactionId`   返回，只需要返回 `transactionId` 的值。
-
+::: tip  验签步骤
+1. 将通知中的所有非空参数，剔除下方[通知参数](#通知参数)签名列为`NO`的参数，参考[不参与验签的字段](#不参与验签的字段)。
+2. 剩下的所有参数，先对参数 `Key` 做 `ASCII` 码排序，然后将 `Value` 拼接成字符串，再在字符串的末尾加上商户秘钥
+3. 进行 `sha256` 签名
+4. 验签无误之后将 `transactionId` 返回，只需要返回 `transactionId` 的值。
 :::
 
-#### 通知参数
-
+### 通知参数
 
 <div class="custom-table bordered-table">
 
-| 名称                         | 类型     | 长度   | 签名  | 描述                                                                                                       |
-|----------------------------|--------|------|-----|----------------------------------------------------------------------------------------------------------|
-| notifyType                 | String | /    | Yes | 通知类型。请参阅 NotifyTypeEnum                                                                                  |
-| txnType                    | String | /    | Yes | 交易类型。请参阅 TxnTypeEnum。 当 `notifyType` 为 `TXN` 时返回，用于区分支付和退款                                               |
-| transactionId              | String | 20   | Yes | Onerway创建的交易订单号，对应商户订单号                                                                                  |
-| originTransactionId        | String | 20   | No  | 来源于Onerway的原始交易订单号。在退款等反向交易的通知中返回对应的正向交易的Onerway交易订单号                                                    |
-| merchantTxnId              | String | 64   | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易                                                                               |
-| originMerchantTxnId        | String | 64   | No  | 商户原交易订单号，在退款等反向交易的通知中返回对应的正向交易的商户交易订单号                                                                   |
-| merchantNo                 | String | 20   | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                              |
-| responseTime               | String | /    | Yes | 接口响应时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                          |
-| txnTime                    | String | /    | Yes | 交易完成时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                          |
-| txnTimeZone                | String | /    | Yes | 交易完成时区，例如：`+08:00   `                                                                                    |
-| orderAmount                | String | 19   | Yes | 交易订单金额                                                                                                   |
-| orderCurrency              | String | 8    | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)   货币代码   |
-| txnAmount                  | String | 19   | Yes | 订单金额转换成结算币种后的金额                                                                                          |
-| txnCurrency                | String | 8    | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码        |
-| settleRate                 | String | 19   | Yes | 汇率`（txnAmount = orderAmount * settleRate）`。                                                              |
-| customsDeclarationAmount   | String | 19   | No  | 可报关金额                                                                                                    |
-| customsDeclarationCurrency | String | 8    | No  | 可用于报关的金额对应币种。请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码 |
-| paymentMethod              | String | 64   | No  | 具体支付方式，包括`卡`和`本地支付` 类型                                                                                   |
-| walletTypeName             | String | 128  | No  | 钱包的品牌名称                                                                                                  |
-| status                     | String | 1    | Yes | 交易处理结果。 枚举如下：` S` - 交易成功/取消交易成功 `F` - 交易失败/审批不通过/取消交易失败                                                  |
-| reason                     | String | 512  | Yes | 交易失败的原因                                                                                                  |
-| periodValue                | String | /    | No  | 分期付款期数                                                                                                   |
-| contractId                 | String | 20   | Yes | 订阅合同`id`，在订阅首购时会返回                                                                                       |
-| tokenId                    | String | 300  | Yes | token `id`，在订阅首购、协议代扣申请token时会返回                                                                         |
-| tokenExpireTime            | String | /    | No  | token过期时间，在协议代扣申请`token`时会返回                                                                             |
-| eci                        | String | 2    | Yes | 责任转移                                                                                                     |
-| chargebackDate             | String | /    | Yes | 发生拒付的日期，格式为`yyyy-MM-dd`                                                                                  |
-| importTime                 | String | /    | Yes | Onerway接收拒付交易的时间，格式为`yyyy-MM-dd HH:mm:ss `                                                               |
-| appealDueTime              | String | /    | Yes | 申诉资料提交截止时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                      |
-| chargebackAmount           | String | 19   | Yes | 拒付金额                                                                                                     |
-| chargebackCurrency         | String | 8    | Yes | 拒付金额对应币种。  请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码   |
-| chargebackStatus           | String | 16   | Yes | 拒付状态。请参阅 ChargebackStatusEnum                                                                            |
-| chargebackArn              | String | 128  | Yes | 拒付ARN                                                                                                    |
-| chargebackCode             | String | 32   | Yes | 拒付代码                                                                                                     |
-| chargebackReason           | String | 1024 | Yes | 拒付原因                                                                                                     |
-| sign                       | String | /    | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                |
+| 名称                         | 类型     | 长度   | 签名  | 描述                                                                                                                                                                                                                                                                     |
+|----------------------------|--------|------|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| notifyType                 | String | /    | Yes | 通知类型。请参阅 <CustomPopover title="NotifyTypeEnum" width="auto" reference="NotifyTypeEnum" link="/apis/enums.html#notifytypeenum" ><CustomTable :data="NotifyTypeEnum.data" :columns="NotifyTypeEnum.columns"></CustomTable></CustomPopover>                               |
+| txnType                    | String | /    | Yes | 交易类型。请参阅 <CustomPopover title="TxnTypeEnum" width="auto" reference="TxnTypeEnum" link="/apis/enums.html#txntypeenum" ><CustomTable :data="TxnTypeEnum.data" :columns="TxnTypeEnum.columns"></CustomTable></CustomPopover> 当 `notifyType` 为 `TXN` 时返回，用于区分支付和退款         |
+| transactionId              | String | 20   | Yes | `Onerway` 创建的交易订单号，对应商户订单号                                                                                                                                                                                                                                             |
+| originTransactionId        | String | 20   | No  | 来源于 `Onerway` 的原始交易订单号。在退款等反向交易的通知中返回对应的正向交易的Onerway交易订单号                                                                                                                                                                                                              |
+| merchantTxnId              | String | 64   | Yes | 商户创建的商户交易订单号，不同的订单号视为不同的交易                                                                                                                                                                                                                                             |
+| originMerchantTxnId        | String | 64   | No  | 商户原交易订单号，在退款等反向交易的通知中返回对应的正向交易的商户交易订单号                                                                                                                                                                                                                                 |
+| merchantNo                 | String | 20   | Yes | 商户号。 商户注册时，`OnerWay` 会为商户创建商户号                                                                                                                                                                                                                                         |
+| responseTime               | String | /    | Yes | 接口响应时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                                                                                                                                                                                        |
+| txnTime                    | String | /    | Yes | 交易完成时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                                                                                                                                                                                        |
+| txnTimeZone                | String | /    | Yes | 交易完成时区，例如：`+08:00`                                                                                                                                                                                                                                                     |
+| orderAmount                | String | 19   | Yes | 交易订单金额                                                                                                                                                                                                                                                                 |
+| orderCurrency              | String | 8    | Yes | 交易订单的货币。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)   货币代码                                                                                                                                                                 |
+| txnAmount                  | String | 19   | Yes | 订单金额转换成结算币种后的金额                                                                                                                                                                                                                                                        |
+| txnCurrency                | String | 8    | Yes | 结算币种。 请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                                      |
+| settleRate                 | String | 19   | Yes | 汇率`（txnAmount = orderAmount * settleRate）`。                                                                                                                                                                                                                            |
+| customsDeclarationAmount   | String | 19   | No  | 可报关金额                                                                                                                                                                                                                                                                  |
+| customsDeclarationCurrency | String | 8    | No  | 可用于报关的金额对应币种。请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                               |
+| paymentMethod              | String | 64   | No  | 具体支付方式，包括`卡`和`本地支付` 类型                                                                                                                                                                                                                                                 |
+| walletTypeName             | String | 128  | No  | 钱包的品牌名称                                                                                                                                                                                                                                                                |
+| status                     | String | 1    | Yes | 交易处理结果。 枚举如下：` S` - 交易成功/取消交易成功 `F` - 交易失败/审批不通过/取消交易失败                                                                                                                                                                                                                |
+| reason                     | String | 512  | Yes | 交易失败的原因                                                                                                                                                                                                                                                                |
+| periodValue                | String | /    | No  | 分期付款期数                                                                                                                                                                                                                                                                 |
+| contractId                 | String | 20   | Yes | 订阅合同`id`，在订阅首购时会返回                                                                                                                                                                                                                                                     |
+| tokenId                    | String | 300  | Yes | token `id`，在订阅首购、协议代扣申请 `token` 时会返回                                                                                                                                                                                                                                   |
+| tokenExpireTime            | String | /    | No  | `token` 过期时间，在协议代扣申请`token`时会返回                                                                                                                                                                                                                                        |
+| eci                        | String | 2    | Yes | 责任转移                                                                                                                                                                                                                                                                   |
+| chargebackDate             | String | /    | Yes | 发生拒付的日期，格式为`yyyy-MM-dd`                                                                                                                                                                                                                                                |
+| importTime                 | String | /    | Yes | `Onerway` 接收拒付交易的时间，格式为`yyyy-MM-dd HH:mm:ss `                                                                                                                                                                                                                          |
+| appealDueTime              | String | /    | Yes | 申诉资料提交截止时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                                                                                                                                                                                    |
+| chargebackAmount           | String | 19   | Yes | 拒付金额                                                                                                                                                                                                                                                                   |
+| chargebackCurrency         | String | 8    | Yes | 拒付金额对应币种。  请参阅 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes) 货币代码                                                                                                                                                                 |
+| chargebackStatus           | String | 16   | Yes | 拒付状态。请参阅 <CustomPopover title="ChargebackStatusEnum" width="auto" reference="ChargebackStatusEnum" link="/apis/enums.html#chargebackstatusenum" ><CustomTable :data="ChargebackStatusEnum.data" :columns="ChargebackStatusEnum.columns"></CustomTable></CustomPopover> |
+| chargebackArn              | String | 128  | Yes | 拒付 `ARN`                                                                                                                                                                                                                                                               |
+| chargebackCode             | String | 32   | Yes | 拒付代码                                                                                                                                                                                                                                                                   |
+| chargebackReason           | String | 1024 | Yes | 拒付原因                                                                                                                                                                                                                                                                   |
+| sign                       | String | /    | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                                                              |
 
 </div>
 
-#### 响应参数
+#### 不参与验签的字段
+
+::: warning `originTransactionId`, `originMerchantTxnId`, `customsDeclarationAmount`, `customsDeclarationCurrency`, `paymentMethod`, `walletTypeName`, `periodValue`, `tokenExpireTime`, `sign`
+:::
+
+### 响应参数
 
 <div class="custom-table bordered-table">
 
-| 名称            | 类型     | 签名 | 描述                      |
-|---------------|--------|----|-------------------------|
-| transactionId | String | No | Onerway创建的交易订单号，对应商户订单号 |
+| 名称            | 类型     | 签名 | 描述                         |
+|---------------|--------|----|----------------------------|
+| transactionId | String | No | `Onerway` 创建的交易订单号，对应商户订单号 |
 
 </div>
 
-::: tip 只需返回 transactionId 的值 ! <br>  返回值 ： <br>  "1798262509925699584"  错误  <br>   1798262509925699584  正确
+::: tip 只需返回 transactionId 的值
+
+"1798262509925699584"  :x:  
+1798262509925699584  :white_check_mark:
 :::
 
-#### 参考示例
+### 剔除参数代码示例
 
 ::: code-group
 
@@ -173,7 +183,7 @@ function ASCII_HASH($params , $PrivateKey){
 
         //无论成功失败  都需要返回 transactionId
 
-        return transactionId;   // [!code --]
+        return transactionId;   // [!code warning]
     }
 
     private static String strcatValueSign(TreeMap treeMap) {
@@ -237,10 +247,6 @@ function ASCII_HASH($params , $PrivateKey){
 
 :::
 
-::: tip  特别注意  以下字段为不参与签名需要剔除：`originTransactionId`、`originMerchantTxnId`、`customsDeclarationAmount`、`customsDeclarationCurrency`、`paymentMethod`、`walletTypeName`、`periodValue`、`tokenExpireTime`、`sign`
-            
-:::
-
 #### 通知示例
 
 ::: code-group
@@ -251,7 +257,7 @@ function ASCII_HASH($params , $PrivateKey){
   "//": "支付通知",
   "notifyType": "TXN",   
   "transactionId": "1599953668994019328",
-  "txnType": "SALE",  // [!code --]
+  "txnType": "SALE",  // [!code warning]
   "merchantNo": "800096",
   "merchantTxnId": "1670293654000",
   "originMerchantTxnId": null,
@@ -264,12 +270,12 @@ function ASCII_HASH($params , $PrivateKey){
   "txnCurrency": "USD",
   "customsDeclarationAmount": null,
   "customsDeclarationCurrency": null,
-  "status": "S",    // [!code ++]
+  "status": "S",    // [!code warning]
   "contractId": null,
   "tokenId": null,
   "tokenExpireTime": null,
   "eci": null,
-  "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",  // [!code highlight]
+  "reason": "{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",  // [!code warning]
   "periodValue": null,
   "paymentMethod": "VISA",
   "walletTypeName": null,
@@ -284,7 +290,7 @@ function ASCII_HASH($params , $PrivateKey){
   "//": "退款通知",
   "notifyType":"TXN",  
   "transactionId":"1600000893212209152",
-  "txnType":"REFUND",   // [!code --]
+  "txnType":"REFUND",   // [!code warning]
   "merchantNo":"800096",
   "merchantTxnId":"1670304250000",
   "originMerchantTxnId":"1670304250000",
@@ -303,7 +309,7 @@ function ASCII_HASH($params , $PrivateKey){
   "tokenId":null,
   "tokenExpireTime":null,
   "eci":null,
-  "reason":"{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",// [!code highlight]
+  "reason":"{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",// [!code warning]
   "periodValue":null,
   "paymentMethod":"VISA",
   "walletTypeName":null,
@@ -316,7 +322,7 @@ function ASCII_HASH($params , $PrivateKey){
 
 {
   "//": "交易取消通知",
-  "notifyType":"CANCEL",  // [!code --]
+  "notifyType":"CANCEL",  // [!code warning]
   "transactionId":"1600013917075582976",
   "txnType":"SALE",
   "merchantNo":"800058",
@@ -337,7 +343,7 @@ function ASCII_HASH($params , $PrivateKey){
   "tokenId":null,
   "tokenExpireTime":null,
   "eci":null,
-  "reason":"{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",// [!code highlight]
+  "reason":"{\"respCode\":\"20000\",\"respMsg\":\"Success\"}",// [!code warning]
   "periodValue":null,
   "paymentMethod":null,
   "walletTypeName":null,
@@ -350,7 +356,7 @@ function ASCII_HASH($params , $PrivateKey){
 
 {
   "//": "退款审核结果通知",
-  "notifyType":"REFUND_AUDIT",  // [!code --]
+  "notifyType":"REFUND_AUDIT",  // [!code warning]
   "transactionId":"1605750169942548480",
   "txnType":null,
   "merchantNo":"800058",
@@ -365,7 +371,7 @@ function ASCII_HASH($params , $PrivateKey){
   "txnCurrency":null,
   "customsDeclarationAmount":null,
   "customsDeclarationCurrency":null,
-  "status":"F",  // [!code highlight]
+  "status":"F",  // [!code warning]
   "contractId":null,
   "tokenId":null,
   "tokenExpireTime":null,
@@ -383,7 +389,7 @@ function ASCII_HASH($params , $PrivateKey){
 
 {
   "//": "拒付通知",
-  "notifyType": "CHARGEBACK",   // [!code --]
+  "notifyType": "CHARGEBACK",   // [!code warning]
   "merchantNo": "800096",
   "transactionId": "1599959226371321856",
   "originTransactionId": "1599953668994019328",
