@@ -22,16 +22,16 @@ import {TxnCardInfoDirect, TokenProviderEnum} from './util/constants';
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度  | 必填  | 签名  | 描述                                     |
-|----------------|--------|-----|-----|-----|----------------------------------------|
-| merchantNo     | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号            |
-| appId          | String | 20  | Yes | Yes | 商户应用程序 `ID`。 商户注册网站时，OnerWay会为商户创建一个应用`id` |
-| merchantCustId | String | 50  | Yes | Yes | 客户在商户的唯一标识                             |
-| cardInfo       | String | /   | Yes | Yes |交易卡信息。 格式为 `json` 字符串。 请参阅对象           <CustomPopover title="CardInfo" width="auto" reference="CardInfo" link="/apis/apis/api-casher#txncardinfodirect" > <CustomTable :data="TxnCardInfoDirect.data" :columns="TxnCardInfoDirect.columns"></CustomTable>  </CustomPopover>                                    |
-| email          | String | 256 | Yes | Yes | 商户客户的邮箱                                |
-| country        | String | 64  | Yes | Yes | 商户客户的国家。请参考 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes)。 <br>  <CMExample data="美国 is US     "></CMExample>      |
-| transactionIp  | String | 64  | Yes | Yes | 商户客户的交易`IP  `                            |
-| sign           | String | /   | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                   |                 |
+| 名称             | 类型     | 长度  | 必填  | 签名  | 描述                                                                                                                                                                                                                                                                          |
+|----------------|--------|-----|-----|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| merchantNo     | String | 20  | Yes | Yes | 商户号。 商户注册时，OnerWay会为商户创建商户号                                                                                                                                                                                                                                                 |
+| appId          | String | 20  | Yes | Yes | 商户应用程序 `ID`。 商户注册网站时，OnerWay会为商户创建一个应用`id`                                                                                                                                                                                                                                  |
+| merchantCustId | String | 50  | Yes | Yes | 客户在商户的唯一标识                                                                                                                                                                                                                                                                  |
+| cardInfo       | String | /   | Yes | Yes | 交易卡信息。 格式为 `json` 字符串。 请参阅对象           <CustomPopover title="CardInfo" width="auto" reference="CardInfo" link="/apis/apis/api-casher#txncardinfodirect" > <CustomTable :data="TxnCardInfoDirect.data" :columns="TxnCardInfoDirect.columns"></CustomTable>  </CustomPopover> |
+| email          | String | 256 | Yes | Yes | 商户客户的邮箱                                                                                                                                                                                                                                                                     |
+| country        | String | 64  | Yes | Yes | 商户客户的国家。请参考 [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes#Current_ISO_3166_country_codes)。 <br>  <CMExample data="美国 is US     "></CMExample>                                                                                                     |
+| transactionIp  | String | 64  | Yes | Yes | 商户客户的交易`IP  `                                                                                                                                                                                                                                                               |
+| sign           | String | /   | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                                                                                                                                                                                   |                 |
 
 </div>
 

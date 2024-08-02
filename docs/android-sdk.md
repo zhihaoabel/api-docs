@@ -73,7 +73,7 @@ PaymentHandler handler = new PaymentHandler() {
 PacypayCheckout checkout = new PacypayCheckout(componentActivity, config, handler);
 ```
 
-#### 4. 调用[下单接口](./js-sdk.md#调用下单接口)
+#### 4. 调用[下单接口](sdk-do-transaction)
 
 
 #### 5. 调用收银台支付方法
