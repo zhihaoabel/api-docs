@@ -21,16 +21,15 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 
 请求地址、请求方式、请求头 可以参考：
 
-<br>
+<div class="custom-table bordered-table">
 
-|   <div style="text-align: left;">名称</div>| 内容                                                         |
-|----------------|--------------------------------------------------------------|
-| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/list  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                      |
-| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                      |
+| 名称             | 内容                                                                                   |
+|----------------|--------------------------------------------------------------------------------------|
+| Request URL    | https://sandbox-acq.onerway.com/v1/txn/list                                          |
+| Request Method | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                |
+| Content-Type   | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div> |
 
-<br>
-
+</div>
 
 ::: tip  Content-Type: application/json; charset=UTF-8 错误   <br>Content-Type: application/json 正确 
 :::
@@ -42,19 +41,19 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 
 <div class="custom-table bordered-table">
 
-| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                         |
-|----------------|--------|----|-----|-----|--------------------------------------------|
-| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时，` OnerWay`会为商户创建商户号                |
-| merchantTxnIds | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔， <br> <CMExample data="554815,684541"></CMExample>  |
-| transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔    <br> <CMExample data="1787743316310622208,1787743316310622208"></CMExample>               |
-| txnTypes       | String | /  | No  | Yes | 交易类型，可以是多个，用逗号分隔                           |
-| startTime      | String | /  | No  | Yes | 交易开始时间，格式为`yyyy-MM-dd HH:mm:ss`              |
-| endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。|
-| current        | String | /  | Yes | Yes | 查询的当前页码                                    |
-| sign           | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                        |
+| 名称             | 类型     | 长度 | 必填  | 签名  | 描述                                                                                                       |
+|----------------|--------|----|-----|-----|----------------------------------------------------------------------------------------------------------|
+| merchantNo     | String | 20 | Yes | Yes | 商户号。 商户注册时，` OnerWay`会为商户创建商户号                                                                           |
+| merchantTxnIds | String | /  | No  | Yes | 商户交易订单号，可以是多个，以逗号分隔， <br> <CMExample data="554815, 684541"></CMExample>                                  |
+| transactionIds | String | /  | No  | Yes | Onerway交易订单号，可以是多个，以逗号分隔    <br> <CMExample data="1787743316310622208, 1787743316310622208"></CMExample> |
+| txnTypes       | String | /  | No  | Yes | 交易类型，可以是多个，用逗号分隔                                                                                         |
+| startTime      | String | /  | No  | Yes | 交易开始时间，格式为`yyyy-MM-dd HH:mm:ss`                                                                          |
+| endTime        | String | /  | No  | Yes | 交易结束时间，格式为 `yyyy-MM-dd HH:mm:ss`。 最长间隔为 `90` 天。                                                          |
+| current        | String | /  | Yes | Yes | 查询的当前页码                                                                                                  |
+| sign           | String | /  | Yes | No  | 签名字符串，请参阅[Sign](./sign)接口                                                                                |
 
 
-::: tip   请求参数中，'merchantTxnIds' 、'transactionIds' 、'startTime' 、'endTime' 必须上送一个。
+::: tip   请求参数中，`merchantTxnIds` 、`transactionIds` 、`startTime`和`endTime` 三者必须上送一个。
 :::
 
 
@@ -81,7 +80,7 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, TxnStatusEnum} from ".
 | 名称            | 类型     | 必填  | 描述                                                  |
 |---------------|--------|-----|-----------------------------------------------------|
 | content       | List   | Yes | 交易信息列表，请参阅对象 [TxnInfo](./api-order-inquiry#txninfo) |
-| current       | String | Yes  | 查询当前页码，每页10条记录                                                |
+| current       | String | Yes  | 查询当前页码，每页`10`条记录                                                |
 | size          | String | Yes  | 当前页大小                                               |
 | totalPages    | String | Yes  | 总页数                                                 |
 | totalElements | String | Yes  | 总条数                                                 |

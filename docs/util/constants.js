@@ -1840,7 +1840,7 @@ export const TransactionInformation =  {
             length: '64',
             required: 'Yes',
             sign: 'No',
-            desc: '国家。 请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美国是 US</span></span>',
+            desc: '国家。 请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes#Current_ISO_3166_country_codes">ISO 3166</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美国是 US</span></span>',
         },
         {
             name: 'province',
@@ -1848,7 +1848,7 @@ export const TransactionInformation =  {
             length: '64',
             required: 'No',
             sign: 'No',
-            desc: '州。 当国家是美国 (US)，</br>中国 (CN) 或加拿大 (CA) 时必填。</br>请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美属萨摩亚是 AS</span></span>',
+            desc: '州。 当国家是美国 (US)，</br>中国 (CN) 或加拿大 (CA) 时必填。</br>请参考 <a class="plain-link" href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes#Current_ISO_3166_country_codes">ISO 3166</a> </br> <span class="custom-example"><span class="leading-text" >例如</span><span class="custom-example">美属萨摩亚是 AS</span></span>',
         },
         {
             name: 'city',
