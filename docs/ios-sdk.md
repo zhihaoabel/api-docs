@@ -23,7 +23,7 @@ outline: deep
 
 ### 初始化SDK
 
-#### 1. 调用[下单接口](./js-sdk.md#调用下单接口)
+#### 1. 调用[下单接口](./sdk-do-transaction) 
 
 #### 2. 收银台配置
 
