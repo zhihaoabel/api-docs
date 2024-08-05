@@ -118,7 +118,14 @@ export default defineConfig({
                                 ]
                             },
                             // {text: 'JS', link: '/js-sdk'},
-                            {text: 'Android', link: '/android-sdk'},
+                            {
+                                text: 'Android', link: '/android-sdk', items: [
+                                    {
+                                        text: 'GooglePay',
+                                        link: '/android-google-pay'
+                                    }
+                                ]
+                            },
                             {text: 'IOS', link: '/ios-sdk'},
                         ],
                         collapsed: true,
