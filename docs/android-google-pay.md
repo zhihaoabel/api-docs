@@ -19,7 +19,7 @@ outline: deep
 
 ## 接入流程
 
-1. 引入 `Google Pay` 依赖
+1. 引入 `Google Pay` [SDK-v1.0.0](./assets/sdk/v1.0.0.zip)
 2. 创建 `GooglePayLauncher` 实例，添加 `Google Pay` 支付回调
 3. 初始化 `Google Pay` 配置信息，确定是否支持 `Google Pay` 付款
 4. 调用[下单接口](./sdk-do-transaction)
