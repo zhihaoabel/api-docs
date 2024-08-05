@@ -19,7 +19,7 @@ outline: deep
 
 ## 接入流程
 
-1. 引入 `Google Pay` 依赖
+1. 引入 `Google Pay` [SDK-v1.0.0](./assets/sdk/v1.0.0.zip)
 2. 创建 `GooglePayLauncher` 实例，添加 `Google Pay` 支付回调
 3. 初始化 `Google Pay` 配置信息，确定是否支持 `Google Pay` 付款
 4. 调用[下单接口](./sdk-do-transaction)
@@ -90,7 +90,7 @@ launcher = new GooglePayLauncher(this, environment, new PaymentHandler() {
 创建配置信息，具体参数可参考 [GooglePay文档](https://developers.google.com/pay/api/android/reference/request-objects#PaymentDataRequest)
 
 ```java
-String gatewayMerchantId = "800096"; // 请替换成商户自己的 gatewayMerchantId
+String gatewayMerchantId = "800096"; // 生产环境请替换成商户自己的 gatewayMerchantId
 // 初始化配置信息
 GooglePayConfig config = new GooglePayConfig.Builder()
                 .setGooglePayEnvironment(GooglePayEnvironment.TEST)
@@ -112,7 +112,7 @@ btn.initialize(config, new GooglePayReadyCallback() {
 创建配置信息，具体参数可参考 [GooglePay文档](https://developers.google.com/pay/api/android/reference/request-objects#PaymentDataRequest)
 
 ```java
-String gatewayMerchantId = "800096"; // 请替换成商户自己的 gatewayMerchantId
+String gatewayMerchantId = "800096"; // 生产环境请替换成商户自己的 gatewayMerchantId
 // 初始化配置信息
 GooglePayConfig config = new GooglePayConfig.Builder()
                 .setGooglePayEnvironment(GooglePayEnvironment.TEST)
@@ -126,6 +126,9 @@ launcher.initialize(config, new GooglePayReadyCallback() {
             }
         });
 ```
+
+::: warning 自定按钮样式请遵循 [Google Pay品牌指南](https://developers.google.com/pay/api/android/guides/brand-guidelines?hl=zh-cn#payment-buttons)
+:::
 
 #### 3. 调用[下单接口](./sdk-do-transaction)
 <br/>
