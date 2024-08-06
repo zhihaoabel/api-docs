@@ -29,7 +29,7 @@ outline: deep
 
 在 app/build.gradle 文件的 dependencies 块中添加
 
-```gradle
+```groovy
 dependencies {
   implementation files('libs/onerway-core-v1.0.2.aar')
   implementation files('libs/onerway-googlepay-v1.0.0.aar')

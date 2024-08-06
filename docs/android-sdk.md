@@ -22,7 +22,7 @@ a. 将[SDK](https://v3-doc.pacypay.com/android/pacypay-v1.0.1.aar)添加到您�
 
 b. 在 app/build.gradle 文件的 dependencies 块中添加
 
-```txt
+```groovy
 dependencies {
   implementation files('libs/pacypay-v1.0.1.aar')
 } 
