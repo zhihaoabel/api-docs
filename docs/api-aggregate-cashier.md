@@ -25,9 +25,9 @@ import { ClickOutside as vClickOutside } from 'element-plus';
  <div class="custom-table bordered-table">
 
 
-| 名称          | 类型     | 长度 | 必填  | 签名  | 描述   |
-|-------------|--------|----|-----|-----|--------|
-| productType | String | 16 | Yes | Yes | 聚合收银台产品类型使用”ALL“ |
+| 名称          | 类型     | 长度 | 必填  | 签名  | 描述               |
+|-------------|--------|----|-----|-----|------------------|
+| productType | String | 16 | Yes | Yes | 聚合收银台产品类型使用`ALL` |
 
 
 </div>

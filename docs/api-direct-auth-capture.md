@@ -76,7 +76,7 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 ## 预授权请求响应示例
 
-https://sandbox-acq.onerway.com/v1/txn/doTransaction <Badge type="tip">POST</Badge>
+https://sandbox-acq.onerway.com/v1/txn/authPayment <Badge type="tip">POST</Badge>
 
 ::: code-group
 
