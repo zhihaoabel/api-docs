@@ -52,9 +52,9 @@ const columns = [
 
 ## 签名过程
 
-1. 获取商户秘钥 ：登入Onerway后台 >> 点击"账户中心" >> "账户信息" >> 获取页面上Secret key 的值
+1. 获取商户秘钥 ：登入[Onerway后台](https://sandbox-portal.onerway.com/index) >> 点击"账户中心" >> "账户信息" >> 获取页面上 Secret key 的值
 
-2. 需要签名的数据：**首先获取请求参数中“签名”列为“YES”的参数**
+2. 需要签名的数据：**首先获取请求参数中`签名`列为`YES`的参数**
    。所有非空请求参数，根据参数名称的`ASCII`码排序，然后以`vaule1vaule2vaule3...`的方式将值拼接起来，再在字符串末尾加上`商户秘钥`；
 
 3. 将字符串进行 `sha256` 签名 ；
@@ -85,7 +85,7 @@ const columns = [
 
 ```text
 {
-  "test2": "test2value", // [!code --]
+  "test2": "test2value", // 签名列为NO，不参与签名 // [!code --]  
   "test1": "0",
   "test3": "test3value",
   "test5": "", // [!code --]
@@ -99,7 +99,7 @@ const columns = [
 ```text
 {
   "test1": "0",
-  "test2": "test2value", // [!code --]
+  "test2": "test2value", // 签名列为NO，不参与签名 // [!code --]  
   "test3": "test3value",
   "test4": "test4value",
   "test5": "", // [!code --]
@@ -122,6 +122,33 @@ const columns = [
 `836831ae68fce5e61d4a64363bb72c636efe6e94b62ecaa8d1c95fc58cc9cbed`
 
 ## 加签代码示例
+
+::: tip 签名注意事项 
+1. 进行签名时，所有key对应的value都应该是字符串。
+2. 如果value是 `object`，请先将 `object` 转换成**字符串**。参考下方 `billingInformation`、`shippingInformation` 字段
+3. 如果value是 `object`且 `object` 嵌套有 `object`，请先将**内层** `object` 转换成**字符串**，再转换**外层** `object`。参考下方 `txnOrderMsg` 字段，其中 `products` 字段的值是一个由**数组**转换成字符串再赋值的**字符串**
+
+以[收银台支付](api-cashier)请求参数为例:  
+
+```json
+{
+    "billingInformation": "{\"country\":\"DE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"şş\",\"lastName\":\"café\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Akşehir\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\",\"province\":\"Akşehir\"}", // [!code warning]
+    "merchantCustId": "1723097638000",
+    "merchantNo": "800209",
+    "merchantTxnId": "1723097638000",
+    "merchantTxnTime": "2024-08-08 14:13:58",
+    "merchantTxnTimeZone": "+08:00",
+    "orderAmount": "100",
+    "orderCurrency": "USD",
+    "productType": "CARD",
+    "shippingInformation": "{\"country\":\"DE\",\"email\":\"abel.wang@onerway.com\",\"firstName\":\"şş\",\"lastName\":\"café\",\"phone\":\"17700492982\",\"address\":\"Apt. 870\",\"city\":\"Akşehir\",\"postalCode\":\"66977\",\"identityNumber\":\"12345678\",\"province\":\"Akşehir\"}", // [!code warning]
+    "sign": "d23532edf2d8d4c6cb21b622bfbef4f067ef9ac2796e89117578037d11b04e98",
+    "subProductType": "DIRECT",
+    "txnOrderMsg": "{\"products\":\"[{\\\"price\\\":\\\"110.00\\\",\\\"num\\\":\\\"1\\\",\\\"name\\\":\\\"iphone11\\\",\\\"currency\\\":\\\"USD\\\"}]\",\"returnUrl\":\"https://docs.onerway.com/\",\"transactionIp\":\"127.0.0.1\",\"appId\":\"1739545982264549376\",\"javaEnabled\":false,\"colorDepth\":\"24\",\"screenHeight\":\"1080\",\"screenWidth\":\"1920\",\"timeZoneOffset\":\"-480\",\"accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\",\"contentLength\":\"340\",\"language\":\"zh-CN\"}",  // [!code warning]
+    "txnType": "SALE"
+}
+```
+:::
 
 ::: code-group
 

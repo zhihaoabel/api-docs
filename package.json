@@ -7,9 +7,11 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "@css-render/vue3-ssr": "^0.15.14",
     "autoprefixer": "^10.4.17",
     "diff2html": "^3.4.48",
     "less": "^4.2.0",
+    "naive-ui": "^2.39.0",
     "postcss": "^8.4.35",
     "postcss-nesting": "^12.1.5",
     "sass": "^1.71.0",
@@ -17,6 +19,7 @@
     "tailwindcss": "^3.4.1",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
+    "vfonts": "^0.0.3",
     "vitepress": "^1.0.0-rc.43"
   },
   "dependencies": {

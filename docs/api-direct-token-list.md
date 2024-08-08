@@ -22,11 +22,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 <br>
 
-|   <div style="text-align: left;">名称</div>| 内容                                                         |
-|----------------|--------------------------------------------------------------|
-| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/getCustomsResult  |
-| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                                                      |
-| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div>                                      |
+|   <div style="text-align: left;">名称</div>| 内容                                                                                   |
+|----------------|--------------------------------------------------------------------------------------|
+| Request URL :   | https://sandbox-acq.onerway.com/v1/txn/queryTokenList                                |
+| Request Method : | <div style="color:var(--vp-c-brand-1);font-weight:500;"> POST  </div>                |
+| Content-Type : | <div style="color:var(--vp-c-brand-1);font-weight:500;">application/json      </div> |
 
 <br>
 

@@ -155,7 +155,6 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 ::: code-group
 
 ```json [Request]
-
 {
   "merchantNo": "800079",
   "merchantTxnId": 2099220674,
@@ -175,7 +174,6 @@ https://sandbox-acq.onerway.com/txn/payment <Badge type="tip">POST</Badge>
 ```
 
 ```json [Response]
-
 {
   "data": {
     "transactionId": "1810961729430360064",
