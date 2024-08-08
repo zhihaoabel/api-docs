@@ -1,6 +1,8 @@
 import {defineConfig} from 'vitepress'
 import Components from 'unplugin-vue-components/vite'
 
+const fileAndStyles: Record<string, string> = {}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     lang: 'zh-Hans',
