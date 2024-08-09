@@ -15,19 +15,20 @@ import CustomTable from "../../components/element-ui/CustomTable.vue";
 import CustomPopover from "../../components/element-ui/CustomPopover.vue";
 import CMExample from "../../components/CMExample.vue";
 import CMNote from "../../components/CMNote.vue";
-import { NConfigProvider } from 'naive-ui'
-import { setup } from '@css-render/vue3-ssr'
+import {NConfigProvider} from 'naive-ui'
+import {setup} from '@css-render/vue3-ssr'
+import { NEllipsis } from 'naive-ui'
 
-const { Layout } = DefaultTheme
+const {Layout} = DefaultTheme
 
 const CssRenderStyle = defineComponent({
-    setup () {
+    setup() {
         const collect = inject('css-render-collect')
         return {
             style: collect()
         }
     },
-    render () {
+    render() {
         return h('css-render-style', {
             innerHTML: this.style
         })
@@ -35,7 +36,7 @@ const CssRenderStyle = defineComponent({
 })
 
 const VitepressPath = defineComponent({
-    setup () {
+    setup() {
         const route = useRoute()
         return () => {
             return h('vitepress-path', null, [route.path])
@@ -44,13 +45,13 @@ const VitepressPath = defineComponent({
 })
 
 const NaiveUIProvider = defineComponent({
-    render () {
+    render() {
         return h(
             NConfigProvider,
-            { abstract: true, inlineThemeDisabled: true },
+            {abstract: true, inlineThemeDisabled: true},
             {
                 default: () => [
-                    h(Layout, null, { default: this.$slots.default?.() }),
+                    h(Layout, null, {default: this.$slots.default?.()}),
                     import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null
                 ]
             }
@@ -78,8 +79,9 @@ export default {
         app.component('CustomPopover', CustomPopover)
         app.component('CMExample', CMExample)
         app.component('CMNote', CMNote)
+        app.component('NEllipsis', NEllipsis)
         if (import.meta.env.SSR) {
-            const { collect } = setup(app)
+            const {collect} = setup(app)
             app.provide('css-render-collect', collect)
         }
     },

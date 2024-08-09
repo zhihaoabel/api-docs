@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <span class="custom-example">
+    <span class="custom-example ">
       <span class="leading-text" v-if="leadingText">{{leadingText}}</span>
       <span v-html="data"></span>
     </span>

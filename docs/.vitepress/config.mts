@@ -1,5 +1,6 @@
 import {defineConfig} from 'vitepress'
 import Components from 'unplugin-vue-components/vite'
+import {NaiveUiResolver} from "unplugin-vue-components/resolvers";
 
 const fileAndStyles: Record<string, string> = {}
 
@@ -198,8 +199,23 @@ export default defineConfig({
         externalLinkIcon: true,
     },
 
+    vue: {
+      template: {
+        compilerOptions: {
+          // isCustomElement: tag => tag.startsWith('N')
+        }
+      }
+    },
+
     vite: {
-        plugins: [Components()],
+        plugins: [Components(
+            {
+                dirs: ['../components'],
+                extensions: ['vue'],
+                dts: true,
+                resolvers: [NaiveUiResolver()],
+            }
+        )],
         ssr: {
             noExternal: ['naive-ui', 'date-fns', 'vueuc']
         }

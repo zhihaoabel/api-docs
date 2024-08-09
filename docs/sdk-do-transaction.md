@@ -16,8 +16,6 @@ import {ProductTypeEnum, SubProductTypeEnum, TxnTypeEnum, PaymentModeEnum, OsTyp
 
 # 下单
 
-请求地址、请求方式、请求头 可以参考：
-
 <div class="custom-table bordered-table">
 
 | 名称             | 内容                                                                                   |
